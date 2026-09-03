@@ -16,8 +16,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # Fully audited Endgame v1.2 Korean source baseline.
-  LOCALIZATION_AUDIT_BASE: ad1385b258707d95ccef45d4ea5d6c853fed7dd2
+  # Endgame v1.2 upstream sync baseline audited against this Korean overlay.
+  LOCALIZATION_AUDIT_BASE: 8b30fce6eab6bf9e47dbc8901a6ea8289ed2cc4a
 
 jobs:
   deploy:

@@ -4,256 +4,257 @@
     "introducedBy": "0000000000000000000000000000000000000000",
     "reason": "공개 배포 초기 스냅샷 이전의 내부 작업 이력은 포함하지 않음"
   },
-  "historicalProtectedTokenDiff": {},
-  "activeProtectedTokenAllowances": {
-    "src/components/modals/InformationModal.vue": {
-      "beforeContentSha256": "2bbd21a805364d93aae1250fe7de2b31cf704cce1bb61ed79bfe3818a00e737a",
-      "afterContentSha256": "c56c15d5a4ffa4180359602ed9802780654229e32c91a7fe857a662764c54287",
-      "reason": "게임 정보에 현재 한국어판 기준 Endgame patch 버전을 표시하며 게임 동작·외부 링크는 유지",
-      "removeAfter": "게임 내 버전 표기 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/modals/prestige/EnterCelestialsRaPet.vue": {
-      "beforeContentSha256": "cbbe5d49de098fa4b7290714ce02d8b389dae36be265890123e2d78846c7fa9a",
-      "afterContentSha256": "9bc34cefc4e2a8d694a0fc661ab0c086dfdb70d4570f817f426bdba4001ac9e5",
-      "reason": "셀레스티얼 이름의 종성과 무관하게 자연스럽게 표시되도록 이름과 기억 획득 설명을 콜론으로 분리하며 펫 수치·조건은 유지",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/tabs/alchemy/AlchemyResourceInfo.vue": {
-      "beforeContentSha256": "6428b023d7a49accbf22eb29de5a6af22a4d4ef8bd0a960f5c25e54554de27d0",
-      "afterContentSha256": "a69e606e89a151ba75b2e0d860de0c1b13a96a09eb7fd7572f4df6a18291a843",
-      "reason": "연금술의 영문 name은 저장 키로 복원하고 화면 제목에는 별도 한국어 displayName만 표시",
-      "removeAfter": "이 연금술 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/tabs/celestial-ra/RaPetLevelBar.vue": {
-      "beforeContentSha256": "bd938d92829e48d6e06ccbe607f7fb20ae0b70ad8b232e255a9f7349e1373bce",
-      "afterContentSha256": "3dcac7f5ddfcb6799d4a626615007c11eaa936338bbbc93cf5e1830106143392",
-      "reason": "Effarig 연금술의 영문 내부 name 대신 한국어 displayName을 레벨업 툴팁에만 표시",
-      "removeAfter": "이 연금술 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/ui-modes/Prologue.vue": {
-      "beforeContentSha256": "aa130fe02913765f74795d46f59c0d6548320e0380d04e485e84bb241999e083",
-      "afterContentSha256": "a44108741380229d99b6aee8f77330d951a2eaa2f1aace1b425ad599d28e1d67",
-      "reason": "인트로 날짜와 시간 경과 문구를 자연스러운 숫자 표기인 2113년 5월 2일·5년 후로 교정하고 연출 의미는 유지",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/core/format.js": {
-      "beforeContentSha256": "9627436f1eeeb333408a2e8d7db248eb88cc459114beacd9ee341e662affe49c",
-      "afterContentSha256": "e4be926baaa0c30c636fdc38974c17bba5de924481dfdb04476c871e4741bdcf",
-      "reason": "개·회·번·줄·초로 시작하는 한국어 수량 단위만 숫자에 붙이고 일반 자원명과 영문 복수형 출력은 유지",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/core/player.js": {
-      "beforeContentSha256": "284796d378aa97c07b72418deea2bd0a01f41d92317622266b04e6586decd361",
-      "afterContentSha256": "6bc3764a156bde34ef657ad37c1f6f34f314dada2ad62aff71d4cf4049971d81",
-      "reason": "번역으로 바뀐 기본 연금술 저장 키를 영문 정본으로 변환하는 105.3 패치를 실행하도록 저장 버전만 갱신",
-      "removeAfter": "이 연금술 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/core/secret-formula/celestials/quotes/elemental.js": {
-      "beforeContentSha256": "1a24664acaa43937984d000fa97b6784aca23a0fa35c102db4a16617c9fafb66",
-      "afterContentSha256": "18dccc85b89c6a93ce7fca573ca67cbc24a3bd08b832f29d634a8aec730e695d",
-      "reason": "The Elemental 초반 인트로 대사 네 곳의 five years를 오 년이 아닌 5년으로 통일하며 대사 순서·ID·연출은 유지",
-      "removeAfter": "이번 인트로 표기 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/core/secret-formula/news.js": {
-      "beforeContentSha256": "3edab489f537c11113ae5c3e2fe37df534e88fec16c43a40bca21e6ea7b7d5fb",
-      "afterContentSha256": "8422cc53f4b252f655f27c0cf1aed95a3b5a51810b30836ce8bf01f7ac477106",
-      "reason": "뉴스 날짜의 고유어 월명을 숫자 월로 교정하고 Elementals의 수량 표현을 자연화하며 원문 날짜·ID·조건·동적 표현은 유지",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/core/storage/migrations.js": {
-      "beforeContentSha256": "3f32c28fd3b9df1bafde74457099a32abe455a3f40209c9551337b8a81c4923b",
-      "afterContentSha256": "c01ea1213532f574f9cee05d9b6a072760abc3c78ae912d41b2e4e8c57c4c840",
-      "reason": "번역된 연금술 정제 키를 영문 정본에 안전 병합하는 105.3 패치와 번역 가능한 업적명에 의존하지 않는 EndGame 동등 구세이브 변환 맵을 추가",
-      "removeAfter": "이 저장 키 호환성 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/core/time.js": {
-      "beforeContentSha256": "c1a01b810a739b9bd6372891b2d61e6a6f97698be6b02dc4548612601937a05a",
-      "afterContentSha256": "662e4e7f9379071a767dc104dd2b930c164738a2e051cb0bdc629f1c84c78b1f",
-      "reason": "저장·스피드런·이벤트 로그의 날짜 표시를 로컬 시간대의 한국어 숫자 날짜 형식으로 교정",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/core/secret-formula/celestials/singularity-milestones.js": {
-      "beforeContentSha256": "ea7b7b44c6659191fbb39c832fc5addb6d9c4a7a26c7854c10957c576455c61d",
-      "afterContentSha256": "0b0863d334e9c6f32c145abf3e7ea57ec5c75ed05f8304a1d5140440d6d9fcde",
-      "reason": "Endgame v1.1-patch-5의 공식 수정과 동일하게 팽창 시간 기반 암흑 물질 생산 효과의 지수 수치만 동기화",
-      "removeAfter": "Endgame v1.1-patch-5 동기화 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    }
+  "historicalProtectedTokenDiff": {
+    "src/components/modals/InformationModal.vue": "게임 정보에 현재 한국어판 기준 Endgame patch 버전을 표시하며 게임 동작·외부 링크는 유지 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/modals/prestige/EnterCelestialsRaPet.vue": "셀레스티얼 이름의 종성과 무관하게 자연스럽게 표시되도록 이름과 기억 획득 설명을 콜론으로 분리하며 펫 수치·조건은 유지 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/tabs/alchemy/AlchemyResourceInfo.vue": "연금술의 영문 name은 저장 키로 복원하고 화면 제목에는 별도 한국어 displayName만 표시 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/tabs/celestial-ra/RaPetLevelBar.vue": "Effarig 연금술의 영문 내부 name 대신 한국어 displayName을 레벨업 툴팁에만 표시 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/ui-modes/Prologue.vue": "인트로 날짜와 시간 경과 문구를 자연스러운 숫자 표기인 2113년 5월 2일·5년 후로 교정하고 연출 의미는 유지 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/format.js": "개·회·번·줄·초로 시작하는 한국어 수량 단위만 숫자에 붙이고 일반 자원명과 영문 복수형 출력은 유지 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/player.js": "번역으로 바뀐 기본 연금술 저장 키를 영문 정본으로 변환하는 105.3 패치를 실행하도록 저장 버전만 갱신 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/secret-formula/celestials/quotes/elemental.js": "The Elemental 초반 인트로 대사 네 곳의 five years를 오 년이 아닌 5년으로 통일하며 대사 순서·ID·연출은 유지 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/secret-formula/celestials/singularity-milestones.js": "Endgame v1.1-patch-5의 공식 수정과 동일하게 팽창 시간 기반 암흑 물질 생산 효과의 지수 수치만 동기화 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/secret-formula/news.js": "뉴스 날짜의 고유어 월명을 숫자 월로 교정하고 Elementals의 수량 표현을 자연화하며 원문 날짜·ID·조건·동적 표현은 유지 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/storage/migrations.js": "번역된 연금술 정제 키를 영문 정본에 안전 병합하는 105.3 패치와 번역 가능한 업적명에 의존하지 않는 EndGame 동등 구세이브 변환 맵을 추가 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/time.js": "저장·스피드런·이벤트 로그의 날짜 표시를 로컬 시간대의 한국어 숫자 날짜 형식으로 교정 (Endgame v1.2 영문 동기화 기준선에 포함됨)"
   },
-  "historicalStructureDiff": {},
-  "activeStructureAllowances": {
+  "activeProtectedTokenAllowances": {
+    "public/stylesheets/styles.css": {
+      "beforeContentSha256": "8efaf5d873ade8047b70c8762e26076c73aa6d5334aab4be79d461d775792157",
+      "afterContentSha256": "70def0a7e6db0ef0560ed7ecd30e9d607c707d3983d23eeb1fb10789945e2c88",
+      "reason": "한글 글리프 대체 글꼴과 긴 한국어 문장의 표시 높이만 조정하며 게임 로직은 포함하지 않음",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
     "src/components/modals/InformationModal.vue": {
-      "beforeCanonicalSha256": "de05965caada3cf0c503e7729b0bec1daa590c28d9fdc28c093d240fc00a3564",
-      "afterCanonicalSha256": "4e14fe3e7aa338c40f32331ef6586a2e679047dd7f1f1cde60675983849045b8",
-      "reason": "기존 모달 동작과 버튼 계약은 유지하고 게임 정보 본문 첫 줄에 굵은 버전 표기만 추가",
-      "removeAfter": "게임 내 버전 표기 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+      "beforeContentSha256": "c56c15d5a4ffa4180359602ed9802780654229e32c91a7fe857a662764c54287",
+      "afterContentSha256": "17cdba24a2fadbb8467edddaf9b0aa39b44d10d6deb27252d621a2c6d1b5bb5c",
+      "reason": "정보 모달의 한국어판 기준 버전만 Endgame v1.2.0으로 갱신하며 링크와 동작은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
-    "src/components/BackgroundAnimations.vue": {
-      "beforeCanonicalSha256": "392da0b43be48fa14e3fcc50456a8e8bb261f82bbd656634d164ea272ccc059e",
-      "afterCanonicalSha256": "600f949ac87e5f9de8b3c21387e3f7a395a0c56cca4edcbca18ca6a893ba2274",
-      "reason": "번역 가능한 하위 탭 이름 대신 collider·ethereal·dilation 안정 key로 동일한 배경 애니메이션을 판정",
-      "removeAfter": "이 의미 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+    "src/components/tabs/celestial-dimensions/ModernCelestialDimensionTab.vue": {
+      "beforeContentSha256": "da710da376bdc073ec1614b520714019285225360b8ef5caeaa212ad9fee0711",
+      "afterContentSha256": "73caf8f9f1814331f62ef8c232e6856e4ed5c1c1051e2d2b4e4d25f00d40659d",
+      "reason": "한국어 어순과 무복수형 표시에 맞춰 문장을 재배치하며 수치·조건·구매 로직은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
-    "src/components/modals/catchup/CatchupEntry.vue": {
-      "beforeCanonicalSha256": "2feed844ed37e3b7e0987ddd26e4dd287aa1b303b6f072df0877fabf11812376",
-      "afterCanonicalSha256": "f70a7effcde0f3cd3d21879d193d6f257c7e7ae93a8815323f31b24c0b866170",
-      "reason": "콘텐츠 따라잡기의 전용 도움말 링크만 번역 가능한 alias 대신 안정 key로 조회하고 일반 링크 동작은 유지",
-      "removeAfter": "이 의미 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+    "src/components/tabs/endgame/ExpansionPacksContainer.vue": {
+      "beforeContentSha256": "27f1a2253566d34cb3c24db12a5628824bd1d67f090385ff051a0513756c9cc6",
+      "afterContentSha256": "60342273a6d721eb208d460fbf6095c2849b648c902e1e3dc5995016cf1ee179",
+      "reason": "긴 한국어 확장팩 설명의 폭과 줄바꿈만 조정하며 팩 ID·비용·구매 계약은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
-    "src/components/modals/glyph-management/RefineGlyphModal.vue": {
-      "beforeCanonicalSha256": "9d77d5cab6c1d55c53ade13c8744efd45095aa43572e299085b506ae1fa00396",
-      "afterCanonicalSha256": "be9348cf4b9914ea873a69efe5706b78ee2074f4cb5abf0a49645d292ee3171b",
-      "reason": "연금술 정제 계산과 내부 name은 유지하고 확인 모달에는 한국어 displayName만 표시",
-      "removeAfter": "이 연금술 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/modals/prestige/EnterCelestialsRaPet.vue": {
-      "beforeCanonicalSha256": "25fee3102f4731e623ba19d24b6005b54dd0b13c5aa6b81126a3d128842aa60f",
-      "afterCanonicalSha256": "58b134727ce7b8ae3ab271a2d99e77de0d1ce39cf5b44b51d2d67e107fe28924",
-      "reason": "펫 해금·레벨·획득량 계산은 유지하고 이름 뒤 고정 조사를 없애는 표시 전용 문장 구조로 교체",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/tabs/alchemy/AlchemyResourceInfo.vue": {
-      "beforeCanonicalSha256": "68b03d5dac62e7b2c93bf4c7d2c1d42f1d597bf80b50bdc5bea789212bc6202e",
-      "afterCanonicalSha256": "32ae2e62ff091fad696091f4a4ccefc0e3e9058826a362d64db792be9009fa19",
-      "reason": "연금술 수치·효과는 유지하고 제목에 저장 키인 name 대신 한국어 displayName을 표시",
-      "removeAfter": "이 연금술 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/tabs/alchemy/AlchemyTab.vue": {
-      "beforeCanonicalSha256": "97af999787fb0b6f29e3a835f80a83b5367fa9c084f5a73bcad98fe4577bf3c2",
-      "afterCanonicalSha256": "510a3c302c0b45156ff2ff6e0c95f4a784c7496e1d6dbe52b60c04cce1533376",
-      "reason": "번역 가능한 H2P 제목이나 화면에 노출되는 별칭 대신 안정적인 reality/alchemy 탭 경로로 도움말 항목을 조회해 링크 동작을 복구",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/tabs/celestial-laitela/LaitelaTab.vue": {
-      "beforeCanonicalSha256": "f2e38963c843fd728c0c98d366c7ad37119eb42a5c3d6d5a427b15398c12cc1f",
-      "afterCanonicalSha256": "18a8aeb8b845d55b91ddfac3127fe845034cf8d75f005d2753265ed8e4c2f350",
-      "reason": "번역 가능한 H2P 제목 대신 안정적인 Lai'tela 별칭으로 도움말 항목을 조회해 링크 동작을 복구",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/tabs/celestial-ra/RaPetLevelBar.vue": {
-      "beforeCanonicalSha256": "5c7dd6c12da8bc1aacc5783fbab2138a8c7346913d1db6e080579ba3d7ffa7bd",
-      "afterCanonicalSha256": "1aba7bb528068997ffeb5db4455cf11c993c0f5d78551638d03a6fdd24b232c7",
-      "reason": "Effarig 연금술의 내부 name은 유지하고 레벨업 툴팁에만 한국어 displayName을 사용",
-      "removeAfter": "이 연금술 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/tabs/glyphs/CurrentGlyphEffects.vue": {
-      "beforeCanonicalSha256": "e9f65b9840aeeba42ac1d20d461febbef734564884a33685b9ed8782706424e8",
-      "afterCanonicalSha256": "84776deb90dee1a5cdb1a33b84d25efd715629f81355b617003dd583d95f8bbd",
-      "reason": "효과 계산과 색상은 유지하고 사용자 정책에 따라 셀레스티얼 고유명 Effarig만 영문 정식명으로 표시",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/tabs/glyphs/sidebar/GlyphFilterPanel.vue": {
-      "beforeCanonicalSha256": "13daf02082f1c95c656274d459c6e9e73212dcc53b48cdc04456cb8ea5615c8a",
-      "afterCanonicalSha256": "e3bdffff242809f1761d67b4b23f25d96413844c72b0ef704e354663fd7d1445",
-      "reason": "번역 가능한 H2P 제목이나 화면에 노출되는 별칭 대신 안정적인 celestials/glyphfilter 탭 경로로 도움말 항목을 조회해 링크 동작을 복구",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/tabs/past-prestige-runs/PastPrestigeRunsContainer.vue": {
-      "beforeCanonicalSha256": "ee2281450655be5b2fc390a273d1d2b3cbbadac9ac73388d4922c7dba0e496a8",
-      "afterCanonicalSha256": "018ad4440783665a7e427523d3cbe5c33ebec1c0c18d24847fad6f2e5830d982",
-      "reason": "한국어 단수 표시는 유지하고 player.shownRuns의 접기 상태만 Reality·Eternity·Infinity 정본 layer.name 키로 복구",
-      "removeAfter": "이 의미 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/tabs/perks/PerksTab.vue": {
-      "beforeCanonicalSha256": "3f7ceb6c6d9b4d153a48271b07b67ac571a9defcc9a4e368ab7791b38b93d0ee",
-      "afterCanonicalSha256": "95d93983b942c99640d7f29ef31c53b192582ac8a7735dd4b51336985c8f88db",
-      "reason": "시작 퍼크 크기 특례를 번역 가능한 START 라벨 대신 정본 퍼크 ID로 동일하게 판정",
-      "removeAfter": "이 의미 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/components/ui-modes/classic/ClassicSubtabBar.vue": {
-      "beforeCanonicalSha256": "50928487be041f910286fb3515d6811f90227d8bbb77f7fef0ebe6a06d2d496f",
-      "afterCanonicalSha256": "2c1663dda55e3e91e62e2a130b903a67217481778bf155fff5105cb9ad6c8e12",
-      "reason": "클래식 하위 탭의 색상 판정을 위해 번역 가능한 부모 name 대신 안정적인 부모 key를 전달",
-      "removeAfter": "이 의미 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+    "src/components/tabs/statistics/StoredTimeTab.vue": {
+      "beforeContentSha256": "cbeb307f1811630772cb06b13339c957c5c0fd9dcda5a99fc5c1cd2e014dcc8f",
+      "afterContentSha256": "a61c8ec16f92bb64c9c6fc9fc76b773101c725ae42f000c89509def43cc3a5cf",
+      "reason": "한국어 시간 문장과 버튼 배치만 조정하며 클릭 메서드·자원 산술·조건은 유지하고 브라우저 상호작용으로 검증",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
     "src/components/ui-modes/classic/ClassicSubtabButton.vue": {
-      "beforeCanonicalSha256": "205479eb77e1a55b32490db3ee4e25a1145923316359cdf858f56391f087df4f",
-      "afterCanonicalSha256": "e758cdcefea7324e3d095ad36937a6553f6367ef6f9d1cb963b34c83482cf2db",
-      "reason": "클래식 하위 탭 CSS 여덟 분기를 번역 가능한 부모 이름 대신 동일 탭의 안정 key에 정확히 연결",
-      "removeAfter": "이 의미 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+      "beforeContentSha256": "eef57239890f10c766c7d845e95f78cd7710ce468a9aaf421b9079483d42b6c2",
+      "afterContentSha256": "24fd882c1675d843c94ad35a5a38c2a78e9c3efc813a24469cc31b7948e9b937",
+      "reason": "번역 가능한 부모명 대신 호출부가 전달하는 안정 parentKey로 탭 색상만 판정하며 탭 동작은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
-    "src/components/ui-modes/NewsTicker.vue": {
-      "beforeCanonicalSha256": "9edd3f97b3d265a448e80eca671be0fa2cad7d02ad40bb2ff80f81c48dceb395",
-      "afterCanonicalSha256": "eaa188925302d21e9ea1b9ecd3797bc1f93cafac144a6c1e70cfba8da8222235",
-      "reason": "ae570 역방향 연출을 번역 가능한 뉴스 본문 대신 뉴스 객체의 isReversed 상태로 판정",
-      "removeAfter": "이 의미 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+    "src/components/ui-modes/HeaderPrestigeGroup.vue": {
+      "beforeContentSha256": "9f82f7ba6e950334c51e4b8ed2b5b7f81790e15d0b2aa7b37f7f7ab80cd07b3d",
+      "afterContentSha256": "30c2c842f29c6140cff2be2282a47395c7896e5e820cbe6046aac1994a632e23",
+      "reason": "프레스티지 표시 문구와 긴 한국어 레이아웃만 조정하며 생산식·시간팽창 계산은 upstream 구조로 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
-    "src/core/automator/automator-backend.js": {
-      "beforeCanonicalSha256": "e26189ad26df567846c446938b4c82ce0a357bf3b46710a1a65301d5a6173b77",
-      "afterCanonicalSha256": "d64a90e670c17192bc40eee108a4e58beedcbde041f35d281f0f283b77bc11fc",
-      "reason": "Automator 실행·파서·편집 기록은 유지하고 undo·redo의 현재 탭 판정만 번역 name에서 automator key로 복구",
-      "removeAfter": "이 의미 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/core/automator/compiler.js": {
-      "beforeCanonicalSha256": "95e8ca325b2a75ac6b169830b88b9e19444f88ce90c6a56650bc177b5b972bec",
-      "afterCanonicalSha256": "4cdc322c16f6fb85313a6420f4e20f092949830879701a5e82c64997b8e1acbd",
-      "reason": "Automator 파서·컴파일·분기 로직은 유지하고 오류 메시지에서 괄호 조사 표기만 제거",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/core/celestials/ra/alchemy.js": {
-      "beforeCanonicalSha256": "cd96359b7781e9c8caeed251d58aea9de0d01e37bb9f83e884a142aa07ad8754",
-      "afterCanonicalSha256": "26fa0fd54be9e22f516151df7212567d153853aad4cc5fdb5d3f4fd360e863ce",
-      "reason": "name을 소문자 저장 키로 쓰는 원본 계약은 유지하고 UI 전용 displayName 접근자만 분리",
-      "removeAfter": "이 연금술 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+    "src/core/endgame.js": {
+      "beforeContentSha256": "13d2e4a762fdf4ebc4e7afc6a2cf60d05c80b9826ea267c0c52d8c4be110aca7",
+      "afterContentSha256": "7493f2c31a89f49be16759e1db986a29d897abfa5d53ec2b0742f83eaaec59f7",
+      "reason": "v1.2의 여덟 필드 최근 현실 기록 스키마와 reset 초기값을 일치시키며 나머지 reset 계약은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
     "src/core/format.js": {
-      "beforeCanonicalSha256": "5ee9ff2f7f8b61a20b1ebfb07b4bd52c879abe2c08d7366bafc915143b5ae273",
-      "afterCanonicalSha256": "c4d1994b51ad891fba0938a0614f2e2a41a5aedf59261346f0b72696b00a6f8e",
-      "reason": "한국어 카운터형 단위만 숫자에 붙이는 표시 전용 결합 helper를 추가하고 기존 수치 포맷과 영문 복수형은 유지",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+      "beforeContentSha256": "602a43a081625ce5f1d36188d0c373010d5305d75c6229c02cf2d694833cf4e9",
+      "afterContentSha256": "cd199ad899f2b483bbb49b1efaca097a18c94b66be9d9fdeaca37eb7ed8634b6",
+      "reason": "한글 수량사·열거 표시 helper만 추가하며 영문 fallback과 숫자 포맷은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
-    "src/core/glyphs/glyph-purge-handler.js": {
-      "beforeCanonicalSha256": "6c2aaaf3c95933cd16880e4b80eb92c505bd831a05f5ef56892d01d524292185",
-      "afterCanonicalSha256": "ea451b50deaa42dfb9f4cfc97a01d8abcf281361fe490bf43807f194ba60ae52",
-      "reason": "글리프 정제량·상한·자원 ID는 유지하고 모달 payload의 자원명만 한국어 displayName으로 전달",
-      "removeAfter": "이 연금술 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+    "src/core/secret-formula/achievements/normal-achievements.js": {
+      "beforeContentSha256": "5a16880c001c465d9bc214688923ce5b2c112017f262fa2e251214f465c115ca",
+      "afterContentSha256": "6473f5e503e45deb1e4e973e15d2034db3331bea8fa1fdae7151eb094e65dd72",
+      "reason": "업적 제목·설명의 한국어 수사와 밈 표현만 현지화하며 ID·조건·효과는 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
-    "src/core/player.js": {
-      "beforeCanonicalSha256": "fa877df932d370da743aaa8b37af92b2ebb66fb9f2d72ec35100986212e00e72",
-      "afterCanonicalSha256": "d2855bc030e859cd42d55466328c5a9fa9eec2c9747683360902b9cf0fa945a7",
-      "reason": "번역된 기본 연금술 저장 키 호환 패치를 실행하도록 기본 저장 버전만 105.3으로 갱신",
-      "removeAfter": "이 연금술 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+    "src/core/secret-formula/celestials/v.js": {
+      "beforeContentSha256": "087bb7b533ca2f60329c93e874b13046ebc5fd2aac86f90ec34099329dad0695",
+      "afterContentSha256": "683289a382ef39c66f8015ea27d3c7e7665b4eff575f90f8872b59b354e7db10",
+      "reason": "V 업적의 한국어 수사와 도전 표기만 현지화하며 조건·목표·검사 이벤트는 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
-    "src/core/secret-formula/celestials/alchemy.js": {
-      "beforeCanonicalSha256": "40984819997a01e75c2ed1392c29c2ec432853e93956781ab57b5cdeb101bc1d",
-      "afterCanonicalSha256": "6ec3e94f028567af9c53ad04f6a1f7843902f690a3ba69ca720cdd21d8da05c3",
-      "reason": "기본 연금술 다섯 종류의 name을 정본 영문 저장 키로 복원하고 한국어 표시명은 displayName으로 분리",
-      "removeAfter": "이 연금술 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+    "src/core/secret-formula/credits.js": {
+      "beforeContentSha256": "54b14870b21823b349e251fcb216ac032ee1c4a34c17c909765eb6e156a09cf9",
+      "afterContentSha256": "0f21042b343f102e3d46b490513947dc19e164bc395a7138e8f6a1b38ec7d963",
+      "reason": "크레딧 역할을 번역하고 한국어 기여자 역할과 명단을 추가하며 기존 역할 ID와 인물 데이터는 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
-    "src/core/secret-formula/celestials/quotes/elemental.js": {
-      "beforeCanonicalSha256": "b68c1bc9aa37fdfa060703800d43a1fb660fb2587cd78aceb5389adf443c747e",
-      "afterCanonicalSha256": "1647eefbe799c1d71f99b09a669a6856d0c104579e3d13996104d51f0513a4f8",
-      "reason": "origin/main에서 번역된 celestialName 화자 ID 27개를 Pelle과 Laitela 내부 값으로 복원",
-      "removeAfter": "복원 커밋이 main에 병합되어 origin/main 대비 canonical delta가 사라진 뒤"
-    },
-    "src/core/secret-formula/h2p.js": {
-      "beforeCanonicalSha256": "c4a4c992f4f1bf231aaa26c929906de6f5a2eeb7af4f3c163e916e5861091b65",
-      "afterCanonicalSha256": "827c0e1e32ceb3d59b76d0f73c09e84f14e5947b25d0333ba6c5f028ec16cc30",
-      "reason": "도움말 제목·본문·탭 경로는 유지하고 콘텐츠 따라잡기 직접 링크용 안정 key 열두 개만 추가",
-      "removeAfter": "이 의미 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
-    },
-    "src/core/secret-formula/news.js": {
-      "beforeCanonicalSha256": "7666e7eb13c7dfc3b44630cae295c83b0e5c4516e3b95590c8db85396c3ad218",
-      "afterCanonicalSha256": "40d19237b35c0777b4a0ea5ffdf9ddcc3e4d6fc12e46ff972b60ff8614c80a43",
-      "reason": "ae570의 기존 클릭 closure 상태를 읽는 isReversed getter만 추가하고 본문·클릭·reset 연출은 유지",
-      "removeAfter": "이 의미 키 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+    "src/core/storage/endgame-migrations.js": {
+      "beforeContentSha256": "e34f4de9b039c38ad7cc6dcdc0ab0512ff2b16bdd69bf595e191dd3abad7d18e",
+      "afterContentSha256": "4a773046eead1bde477f2d07e2783bb94de007c74a119118cc328d297cf8af70",
+      "reason": "dmCap→jMCap·업적 비트·여덟 필드 최근 현실·인용문·CEP 상한·은하 생성기 자동구매기를 멱등적으로 보존·정규화",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
     "src/core/storage/migrations.js": {
-      "beforeCanonicalSha256": "3bec8e78dc5e73fd1b80a8c876d9d397770d03fdc865dc48fe205b26d6da6952",
-      "afterCanonicalSha256": "a77fd7308d6aa2e18f85a976c87265977ec8ce5fac2fcfa67cdb4bd196f0a604",
-      "reason": "정상 구형 연금술 키를 최댓값 병합하고 EndGame 현행 영문 업적명 변환을 번역 DB와 분리하며 기존 rNN·sNN·bit 전환은 유지",
-      "removeAfter": "이 저장 키 호환성 복구 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+      "beforeContentSha256": "f7b1c96f60de5d9417670bf1ba044939fc1675cd717d8745b8b4464729c11969",
+      "afterContentSha256": "e14304b79a7ab4fb53ff135ed2f6a9e0bf148c8f14abc2be265be531f89ef716",
+      "reason": "번역 DB와 저장 키를 분리하고 구 한국어 저장을 보존한 채 v106 호환 마이그레이션을 한 번 실행",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    }
+  },
+  "historicalStructureDiff": {
+    "src/components/BackgroundAnimations.vue": "번역 가능한 하위 탭 이름 대신 collider·ethereal·dilation 안정 key로 동일한 배경 애니메이션을 판정 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/modals/catchup/CatchupEntry.vue": "콘텐츠 따라잡기의 전용 도움말 링크만 번역 가능한 alias 대신 안정 key로 조회하고 일반 링크 동작은 유지 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/modals/glyph-management/RefineGlyphModal.vue": "연금술 정제 계산과 내부 name은 유지하고 확인 모달에는 한국어 displayName만 표시 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/modals/InformationModal.vue": "기존 모달 동작과 버튼 계약은 유지하고 게임 정보 본문 첫 줄에 굵은 버전 표기만 추가 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/modals/prestige/EnterCelestialsRaPet.vue": "펫 해금·레벨·획득량 계산은 유지하고 이름 뒤 고정 조사를 없애는 표시 전용 문장 구조로 교체 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/tabs/alchemy/AlchemyResourceInfo.vue": "연금술 수치·효과는 유지하고 제목에 저장 키인 name 대신 한국어 displayName을 표시 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/tabs/alchemy/AlchemyTab.vue": "번역 가능한 H2P 제목이나 화면에 노출되는 별칭 대신 안정적인 reality/alchemy 탭 경로로 도움말 항목을 조회해 링크 동작을 복구 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/tabs/celestial-laitela/LaitelaTab.vue": "번역 가능한 H2P 제목 대신 안정적인 Lai'tela 별칭으로 도움말 항목을 조회해 링크 동작을 복구 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/tabs/celestial-ra/RaPetLevelBar.vue": "Effarig 연금술의 내부 name은 유지하고 레벨업 툴팁에만 한국어 displayName을 사용 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/tabs/glyphs/CurrentGlyphEffects.vue": "효과 계산과 색상은 유지하고 사용자 정책에 따라 셀레스티얼 고유명 Effarig만 영문 정식명으로 표시 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/tabs/glyphs/sidebar/GlyphFilterPanel.vue": "번역 가능한 H2P 제목이나 화면에 노출되는 별칭 대신 안정적인 celestials/glyphfilter 탭 경로로 도움말 항목을 조회해 링크 동작을 복구 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/tabs/past-prestige-runs/PastPrestigeRunsContainer.vue": "한국어 단수 표시는 유지하고 player.shownRuns의 접기 상태만 Reality·Eternity·Infinity 정본 layer.name 키로 복구 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/tabs/perks/PerksTab.vue": "시작 퍼크 크기 특례를 번역 가능한 START 라벨 대신 정본 퍼크 ID로 동일하게 판정 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/ui-modes/classic/ClassicSubtabBar.vue": "클래식 하위 탭의 색상 판정을 위해 번역 가능한 부모 name 대신 안정적인 부모 key를 전달 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/ui-modes/classic/ClassicSubtabButton.vue": "클래식 하위 탭 CSS 여덟 분기를 번역 가능한 부모 이름 대신 동일 탭의 안정 key에 정확히 연결 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/components/ui-modes/NewsTicker.vue": "ae570 역방향 연출을 번역 가능한 뉴스 본문 대신 뉴스 객체의 isReversed 상태로 판정 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/automator/automator-backend.js": "Automator 실행·파서·편집 기록은 유지하고 undo·redo의 현재 탭 판정만 번역 name에서 automator key로 복구 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/automator/compiler.js": "Automator 파서·컴파일·분기 로직은 유지하고 오류 메시지에서 괄호 조사 표기만 제거 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/celestials/ra/alchemy.js": "name을 소문자 저장 키로 쓰는 원본 계약은 유지하고 UI 전용 displayName 접근자만 분리 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/format.js": "한국어 카운터형 단위만 숫자에 붙이는 표시 전용 결합 helper를 추가하고 기존 수치 포맷과 영문 복수형은 유지 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/glyphs/glyph-purge-handler.js": "글리프 정제량·상한·자원 ID는 유지하고 모달 payload의 자원명만 한국어 displayName으로 전달 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/player.js": "번역된 기본 연금술 저장 키 호환 패치를 실행하도록 기본 저장 버전만 105.3으로 갱신 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/secret-formula/celestials/alchemy.js": "기본 연금술 다섯 종류의 name을 정본 영문 저장 키로 복원하고 한국어 표시명은 displayName으로 분리 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/secret-formula/celestials/quotes/elemental.js": "origin/main에서 번역된 celestialName 화자 ID 27개를 Pelle과 Laitela 내부 값으로 복원 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/secret-formula/celestials/singularity-milestones.js": "Endgame v1.1-patch-5의 공식 수정과 동일하게 팽창 시간 기반 암흑 물질 생산 효과의 min·max 및 지수 계산을 동기화 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/secret-formula/h2p.js": "도움말 제목·본문·탭 경로는 유지하고 콘텐츠 따라잡기 직접 링크용 안정 key 열두 개만 추가 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/secret-formula/news.js": "ae570의 기존 클릭 closure 상태를 읽는 isReversed getter만 추가하고 본문·클릭·reset 연출은 유지 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/storage/migrations.js": "정상 구형 연금술 키를 최댓값 병합하고 EndGame 현행 영문 업적명 변환을 번역 DB와 분리하며 기존 rNN·sNN·bit 전환은 유지 (Endgame v1.2 영문 동기화 기준선에 포함됨)",
+    "src/core/time.js": "timestamp 값과 로컬 시간대는 유지하고 사용자 노출 날짜 문자열만 한국어 숫자 날짜 형식으로 조립 (Endgame v1.2 영문 동기화 기준선에 포함됨)"
+  },
+  "activeStructureAllowances": {
+    "src/components/tabs/alchemy/AlchemyTab.vue": {
+      "beforeCanonicalSha256": "153969bf447c63baa9909ddd8e0e4f0d6c0edce6a304ce3e1dea2d0d94988d3e",
+      "afterCanonicalSha256": "8b58e47426bd6d347ab913164924daca13d34f51a329963f7cdb2063144d3c30",
+      "reason": "번역 가능한 도움말 제목 대신 안정적인 reality/alchemy 경로로 항목을 조회하며 연금술 동작은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
-    "src/core/time.js": {
-      "beforeCanonicalSha256": "17ef8a951486d6e66b445d5b216d045baffdfbfc3100b8cf38dfa0da2b2264b6",
-      "afterCanonicalSha256": "1c08c0ce752bc8c9e01dac5254a653dd2751ea9c5ec5818a1c9d58311472ef87",
-      "reason": "timestamp 값과 로컬 시간대는 유지하고 사용자 노출 날짜 문자열만 한국어 숫자 날짜 형식으로 조립",
-      "removeAfter": "이번 현지화 품질 교정 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+    "src/components/tabs/celestial-dimensions/ModernCelestialDimensionTab.vue": {
+      "beforeCanonicalSha256": "74ed6c18f3925f8f7b6746961e1b4f591528bd474135d12afc904c8aa8c25503",
+      "afterCanonicalSha256": "5ca6d6a7b8ab9d725b7dacb075656843f026b31d49907623a98db8c0b534f5f6",
+      "reason": "한국어 어순과 무복수형 표시에 필요한 템플릿 재배치만 적용하며 계산과 구매 로직은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
-    "src/core/secret-formula/celestials/singularity-milestones.js": {
-      "beforeCanonicalSha256": "5e45e3ecb953ef06fb72f1a7994456bf2a49bbc15d2fbca3f4ea636060a87bfb",
-      "afterCanonicalSha256": "af22cb4a2077fb497f4371bed8dfc6a28abe4c9886c6d0526f43b3240f5fe7df",
-      "reason": "Endgame v1.1-patch-5의 공식 수정과 동일하게 팽창 시간 기반 암흑 물질 생산 효과의 min·max 및 지수 계산을 동기화",
-      "removeAfter": "Endgame v1.1-patch-5 동기화 커밋이 LOCALIZATION_AUDIT_BASE에 포함되도록 감사 기준을 갱신한 뒤"
+    "src/components/tabs/celestial-laitela/LaitelaTab.vue": {
+      "beforeCanonicalSha256": "4d55f28921c111c760eef574ec222ad4d4d255aabb03d033f4cc56981bdcae41",
+      "afterCanonicalSha256": "f671d4887bbe8c94e760b5eabad7782c4cd604a2c4bc2f1555d86f555e669a0c",
+      "reason": "번역 가능한 도움말 제목 대신 안정적인 Lai'tela 별칭으로 항목을 조회",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/components/tabs/endgame/ExpansionPacksContainer.vue": {
+      "beforeCanonicalSha256": "1315f3727a767d0d83f2cd80202d43faf71456a2db0185520c4a657167979836",
+      "afterCanonicalSha256": "abe9fe887fa2732e8c34fccd8c30dd59f4e82f873827a40a7b29eabf9a7e5efe",
+      "reason": "긴 한국어 설명의 자동 높이·폭만 조정하며 팩 ID·비용·구매 계약은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/components/tabs/ethereal/EtherealTab.vue": {
+      "beforeCanonicalSha256": "fa0c5cfef6508a9b2eab0660f4ca2132f2f1630dae3c1abaa0fede6bd1ce2275",
+      "afterCanonicalSha256": "8338a2abca7eeeabd995dd1522143d60c97b896bace2c63eb847da5403a0d18c",
+      "reason": "별 생성 설명의 색상별 표시명과 한국어 어순만 번역하며 인덱스와 생성식은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/components/tabs/past-prestige-runs/PastPrestigeRunsContainer.vue": {
+      "beforeCanonicalSha256": "ad17f32974c1cbef1bd49ef16613e773d4fa70642c397bff57dbd59192f090f6",
+      "afterCanonicalSha256": "e720104c1968cddbfed8469cb31719473ede8c7e41d05c0199a10751d392a7ab",
+      "reason": "접기 저장 키는 Reality·Eternity·Infinity 정본을 유지하고 화면 라벨만 한국어화",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/components/tabs/statistics/StoredTimeTab.vue": {
+      "beforeCanonicalSha256": "03bd0ab265ce10d7b8f1afcbc88984a8583d7005ca08d86cd2526c469d6c5704",
+      "afterCanonicalSha256": "db5b16a911ada5408b67043616c09391e2bcad08499759f903b635f5813a9935",
+      "reason": "긴 한국어 버튼과 Flux 문장의 배치·표시만 조정하며 메서드·산술은 유지하고 브라우저에서 검증",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/components/ui-modes/classic/ClassicSubtabButton.vue": {
+      "beforeCanonicalSha256": "85a3c765423ec33b0a88572391575d463569dd660d895d5e40b6258349f47345",
+      "afterCanonicalSha256": "288a3da8b2d93d0a1e58887675439ae129c5696035424b87bf8fbfda9096be73",
+      "reason": "호출부 parent-key와 일치하는 안정 key로 색상만 판정하며 탭 가용성과 열기 로직은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/components/ui-modes/HeaderPrestigeGroup.vue": {
+      "beforeCanonicalSha256": "925a57b96bbef243e76519a6cc9b1b628699af39b80b412a6d3a40ca07803f0f",
+      "afterCanonicalSha256": "ec8aa6a3e498f9f4f876ade1ee0d3a220457f96c098ebd19b02262cc48bc58c2",
+      "reason": "프레스티지 한국어 표시와 반응형 레이아웃만 조정하며 생산식·시간팽창 계산은 upstream 구조로 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/core/autobuyers/autobuyer.js": {
+      "beforeCanonicalSha256": "91f082d7888f7005d3d393b13d4413d7730b4094fd2b584d8fcf340cbd022c3a",
+      "afterCanonicalSha256": "163c9312d1438157dc9ebfd388e48a06ff6d2bf8942a591e9d041293c66b3b20",
+      "reason": "v1.2 Endgame Upgrade 자동구매기의 내부 className은 유지하고 표시 맵만 한국어화",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/core/dimensions/celestial-dimension.js": {
+      "beforeCanonicalSha256": "019d91e63912bbce0b8241150939fa53eda06e78df848f1abd31c950c48de023",
+      "afterCanonicalSha256": "c7c662088f22659da847bc85c6932648c5aa9a457c01f1e7bc9829117292244b",
+      "reason": "잠금 문구를 번역하고 실제 구독자가 참조하는 CELESTIAL_ETERNITY_AFTER 이벤트를 발행하며 reset 산술은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/core/endgame.js": {
+      "beforeCanonicalSha256": "587eecd32facfa1eb64de4863e265dc56c865e12eb8f5e49bfd9c3a11a316cc4",
+      "afterCanonicalSha256": "624c4dbfbf98f6d17728d325d71e1f485e90ff8457f1519ec00c38b4a4955870",
+      "reason": "v1.2 최근 현실 기록의 여덟 필드 Decimal tuple에 reset 초기값을 맞춤",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/core/event-hub.js": {
+      "beforeCanonicalSha256": "0fbc11478df270ea17d3a629b6003fbb7ba3e43284d8f3ccd5f47e4073c1f52d",
+      "afterCanonicalSha256": "ad7f2b7039c38d5a5f5e9d1fa094589be119e1927efc73a78912aa6394103a48",
+      "reason": "v1.2 소비자가 실제 참조하는 누락 이벤트 상수만 추가하며 기존 이벤트 값은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/core/format.js": {
+      "beforeCanonicalSha256": "b8478c7e7cf91cb886f0ae7e731e9f5b30301b27a905702cdefc274c13e622aa",
+      "afterCanonicalSha256": "d741b720550ae0586f885b3b1af2c370dc4b472c95a0b5ca8860f9ea47e879ba",
+      "reason": "한국어 수량사·열거 표시 helper만 추가하며 기존 수치 포맷과 영문 fallback은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/core/large-hadron-collider.js": {
+      "beforeCanonicalSha256": "aed327441824025cfb31c64dd4730eda4ce45e8bf20f264d808a44213ff900b1",
+      "afterCanonicalSha256": "c7899ff05f7ad06e13443ca58e95a0344478212bf3244adbd451fded3110bc8d",
+      "reason": "번역 가능한 표시명 대신 안정 config.key로 Pelle 차단 대상을 판정하며 동작 의미는 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/core/secret-formula/credits.js": {
+      "beforeCanonicalSha256": "623812080ad55f11b5a03a717135c68bf7a07e31690014b1e292a6bb02b0cca7",
+      "afterCanonicalSha256": "bf4cb80aa9348c802b537fcf04a31d9738546f5cae3ae2c7a9fdeab675306a63",
+      "reason": "크레딧 역할 번역과 한국어 기여자 역할·명단만 추가",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/core/secret-formula/discord-rich-presence.js": {
+      "beforeCanonicalSha256": "7157509df8076d1b4d5aa52e1d80e0bd83b6f5474742448ec33ecd165b872eb8",
+      "afterCanonicalSha256": "f710439898f86f01359420e8005ed38558e85da070fc7d5ccb8a1aad0a10f7e5",
+      "reason": "Rich Presence의 표시명과 자원 문구만 한국어화하며 진행 조건과 자원 계산은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/core/storage/endgame-migrations.js": {
+      "beforeCanonicalSha256": "e0f1da65339756708052a644c96cd9f3f63d1372d04c958b08fa435fb3361fcb",
+      "afterCanonicalSha256": "c6628498abc8a151cb20baf80fa87c1f4676ce9d814bf694627525bc6465e2e8",
+      "reason": "v1.2 구 세이브를 위한 dmCap·업적 비트·최근 현실·인용문·자동구매기 호환 마이그레이션만 추가",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/core/storage/migrations.js": {
+      "beforeCanonicalSha256": "436065d1cb74e5962284f45d25385233d187e6fe94f22cd00fea746c8f8a24e3",
+      "afterCanonicalSha256": "87707990bb03d7b5cd03ed1ad9fbcd9da0d50ce75ef5072fd6b03d5a6d490e7b",
+      "reason": "legacy 영문 업적 맵과 한국어 저장 키 105.1~105.3 및 v106 호출을 추가해 구 세이브를 보존",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/game.js": {
+      "beforeCanonicalSha256": "27724b177488b52dc579be1d02b21abf6b062cf4d8ccc7df8e44b1585cba0df2",
+      "afterCanonicalSha256": "89d2a37b17ae8d18365d92bf7c2a91b1ea89baf239dae8f98a73cf7e6e1c8ea8",
+      "reason": "오프라인·완료·최근 기록·진단의 사용자 표시 문자열만 한국어화하며 게임 루프와 수식은 유지",
+      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     }
   }
 }
