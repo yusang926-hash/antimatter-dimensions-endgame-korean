@@ -149,7 +149,7 @@ export default {
 .o-tab-btn--divinity::before {
   background-color: var(--color-pelle--base);
 }
-
+  
 .o-tab-btn--universes::before {
   animation: a-universes-glow-hover 10s infinite;
 }
