@@ -200,11 +200,11 @@ export class EternityChallengeState extends GameMechanicState {
     if (!this.isUnlocked) return false;
     const maxInversion = player.requirementChecks.reality.slowestBH <= 1e-300;
     if (this.id === 12 && ImaginaryUpgrade(24).isLockingMechanics && Ra.isRunning && maxInversion) {
-      if (!auto) ImaginaryUpgrade(24).tryShowWarningModal("enter Eternity Challenge 12");
+      if (!auto) ImaginaryUpgrade(24).tryShowWarningModal("영원 도전 12에 진입");
       return false;
     }
     if (this.id === 7 && ImaginaryUpgrade(15).isLockingMechanics && TimeDimension(1).amount.gt(0)) {
-      if (!auto) ImaginaryUpgrade(15).tryShowWarningModal("enter Eternity Challenge 7");
+      if (!auto) ImaginaryUpgrade(15).tryShowWarningModal("영원 도전 7에 진입");
       return false;
     }
 
@@ -256,25 +256,25 @@ export class EternityChallengeState extends GameMechanicState {
     let reason;
     if (auto) {
       if (this.id === 4) {
-        reason = restriction => `Auto Eternity Challenge completion completed ` +
-        `Eternity Challenge ${this.id} and made the next tier ` +
-        `require having less Infinities (${quantifyInt("Infinity", restriction)} ` +
-        `or less) than you had`;
+        reason = restriction => `자동 완료로 ` +
+        `영원 도전 ${this.id} 완료 후, 다음 단계는 ` +
+        `현재 보유량보다 적은 무한 횟수(${quantifyInt("회", restriction)} ` +
+        `이하)를 요구하게 되었습니다`;
       } else if (this.id === 12) {
-        reason = restriction => `Auto Eternity Challenge completion completed ` +
-        `Eternity Challenge ${this.id} and made the next tier ` +
-        `require spending less time in it (${quantify("in-game second", restriction, 0, 1)} ` +
-        `or less) than you had spent`;
+        reason = restriction => `자동 완료로 ` +
+        `영원 도전 ${this.id} 완료 후, 다음 단계는 ` +
+        `현재 소요 시간보다 짧은 제한 시간(${quantify("초", restriction, 0, 1)} ` +
+        `이하)을 요구하게 되었습니다`;
       }
     } else if (this.id === 4) {
-      reason = restriction => `You failed Eternity Challenge ${this.id} due to ` +
-      `having more than ${quantifyInt("Infinity", restriction)}`;
+      reason = restriction => `영원 도전 ${this.id}에 실패했습니다. 원인: ` +
+      `무한 횟수가 ${quantifyInt("회", restriction)}를 초과함`;
     } else if (this.id === 12) {
-      reason = restriction => `You failed Eternity Challenge ${this.id} due to ` +
-      `spending more than ${quantify("in-game second", restriction, 0, 1)} in it`;
+      reason = restriction => `영원 도전 ${this.id}에 실패했습니다. 원인: ` +
+      `도전 내 시간이 ${quantify("초", restriction, 0, 1)}를 초과함`;
     }
-    Modal.message.show(`${reason(this.config.restriction(this.completions))}, ` +
-    `which has caused you to exit it.`,
+    Modal.message.show(`${reason(this.config.restriction(this.completions))} ` +
+    `이로 인해 도전에서 나왔습니다.`,
     { closeEvent: GAME_EVENT.REALITY_RESET_AFTER }, 1);
     EventHub.dispatch(GAME_EVENT.CHALLENGE_FAILED);
   }

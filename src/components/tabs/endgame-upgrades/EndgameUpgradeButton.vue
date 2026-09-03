@@ -100,7 +100,7 @@ export default {
           <br>
           <DescriptionDisplay
             :config="requirementConfig"
-            label="Requirement:"
+            label="요구 조건:"
             class="c-endgame-upgrade-btn__requirement"
           />
         </template>
@@ -113,7 +113,7 @@ export default {
             v-if="!isBought"
             :config="config"
             br
-            name="Celestial Point"
+            name="셀레스티얼 포인트"
           />
         </template>
       </span>
@@ -134,7 +134,7 @@ export default {
     <PrimaryToggleButton
       v-if="isRebuyable && isAutoUnlocked"
       v-model="isAutobuyerOn"
-      label="Auto:"
+      label="자동:"
       class="l--spoon-btn-group__little-spoon-endgame-btn o-primary-btn--endgame-upgrade-toggle"
     />
   </div>

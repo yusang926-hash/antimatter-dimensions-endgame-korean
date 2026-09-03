@@ -21,7 +21,10 @@ export default {
   },
   computed: {
     descriptionLines() {
-      return this.pack.config.description.split("\n").map(x => x.trim());
+      const description = typeof this.pack.config.description === "function"
+        ? this.pack.config.description()
+        : this.pack.config.description;
+      return String(description).split("\n").map(line => line.trim()).filter(Boolean);
     },
     isLarge() {
       return this.descriptionLines.length >= 10;
@@ -52,7 +55,7 @@ export default {
         "o-expansion-pack-text": true,
         "o-expansion-pack-text__small": this.isLarge
       };
-    }
+    },
   },
   methods: {
     update() {
@@ -75,7 +78,7 @@ export default {
         <div class="o-symbol">
           {{ symbol }}
         </div>
-        <div>
+        <div class="c-expansion-pack-description">
           <div
             v-for="(description, descriptionKey) in descriptionLines"
             :key="descriptionKey"
@@ -87,7 +90,7 @@ export default {
             v-if="!isBought"
             br
             :config="pack.config"
-            name="Antimatter"
+            name="반물질"
           />
         </div>
       </div>
@@ -99,6 +102,7 @@ export default {
 .c-expansion-packs-container {
   display: flex;
   flex-direction: row;
+  width: 100%;
   justify-content: center;
   align-items: flex-start;
   align-self: center;
@@ -111,9 +115,14 @@ export default {
   font-weight: bold;
 }
 
-.o-expansion-pack-text {
+.c-expansion-pack-description {
+  width: calc(100% - 20rem);
   margin-left: 18rem;
+}
+
+.o-expansion-pack-text {
   font-size: 1.4rem;
+  line-height: 1.35;
 }
 
 .o-expansion-pack-text__small {

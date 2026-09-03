@@ -1,5 +1,194 @@
-import { endgameMigration } from "./endgame-migrations";
+import { endgameMigration, endgameMigration106 } from "./endgame-migrations";
 import { deepmergeAll } from "@/utility/deepmerge";
+
+// Frozen from the EndGame reference so legacy save parsing remains identical after translating display names.
+// These are the current pre-bit-migration IDs; convertAchievementsToBits applies the original swaps afterwards.
+const LEGACY_ACHIEVEMENT_NAME_IDS = Object.freeze({
+  "You gotta start somewhere": 11,
+  "100 antimatter is a lot": 12,
+  "Half life 3 CONFIRMED": 13,
+  "L4D: Left 4 Dimensions": 14,
+  "5 Dimension Antimatter Punch": 15,
+  "We couldn't afford 9": 16,
+  "Not a luck related achievement": 17,
+  "90 degrees to infinity": 18,
+  "To infinity!": 21,
+  "FAKE NEWS!": 22,
+  "The 9th Dimension is a lie": 23,
+  "Antimatter Apocalypse": 24,
+  "Boosting to the max": 25,
+  "You got past The Big Wall": 26,
+  "Double Galaxy": 27,
+  "There's no point in doing that...": 28,
+  "I forgot to nerf that": 31,
+  "The Gods are pleased": 32,
+  "That's a lot of infinites": 33,
+  "You didn't need it anyway": 34,
+  "Don't you dare sleep": 35,
+  "Claustrophobic": 36,
+  "That's FAST!": 37,
+  "I don't believe in Gods": 38,
+  "No DLC required": 41,
+  "Super Sanic": 42,
+  "How the antitables have turned..": 43,
+  "Over in 30 Seconds": 44,
+  "Faster than a potato": 45,
+  "Multidimensional": 46,
+  "Daredevil": 47,
+  "Antichallenged": 48,
+  "Limit Break": 51,
+  "Age of Automation": 52,
+  "Definitely not worth it": 53,
+  "That's FASTER!": 54,
+  "Forever isn't that long": 55,
+  "Many Deaths": 56,
+  "Gift from the Gods": 57,
+  "This is fine.": 58,
+  "Bulked Up": 61,
+  "Oh, hey... You're still here?": 62,
+  "A new beginning": 63,
+  "Zero Deaths": 64,
+  "Not-so-challenging": 65,
+  "Faster than a squared potato": 66,
+  "Infinitely Challenging": 67,
+  "You did this again just for the achievement right?": 68,
+  "ERROR 909: Dimension not found": 71,
+  "Can't hold all these infinities": 72,
+  "THIS ACHIEVEMENT DOESN'T EXIST": 73,
+  "Not a second lost": 74,
+  "NEW DIMENSIONS???": 75,
+  "One for each dimension": 76,
+  "1 Million is a lot": 77,
+  "Blink of an eye": 78,
+  "Game Design Is My Passion": 81,
+  "Anti-antichallenged": 82,
+  "YOU CAN GET 50 GALAXIES?!?!": 83,
+  "I got a few to spare": 84,
+  "ALL YOUR IP ARE BELONG TO US": 85,
+  "Do you even bend time bro?": 86,
+  "2 MILLION INFINITIES": 87,
+  "Yet another infinity reference": 88,
+  "Ludicrous Speed": 91,
+  "I brake for NOBODY!": 92,
+  "MAXIMUM OVERDRIVE": 93,
+  "4.3333 minutes of Infinity": 94,
+  "Is this safe?": 95,
+  "Time is relative": 96,
+  "Like jumping on a lego": 97,
+  "0 degrees from Infinity": 98,
+  "8 nobody got time for that": 101,
+  "This mile took an eternity": 102,
+  "Tätä saavutusta ei ole olemassa II": 103,
+  "That wasn't an eternity": 104,
+  "Infinite Time": 105,
+  "The swarm": 106,
+  "Do you really need a guide for this?": 107,
+  "We COULD afford 9": 108,
+  "Yo dawg, I heard you liked infinities...": 111,
+  "Never again": 112,
+  "Eternities are the new infinity": 113,
+  "You're a mistake": 114,
+  "I wish I had gotten 7 eternities": 115,
+  "Do I really need to infinity": 116,
+  "Costco sells Dimboosts now!": 117,
+  "IT'S OVER 9000": 118,
+  "Can you get infinite IP?": 121,
+  "You're already dead.": 122,
+  "5 more eternities until the update": 123,
+  "Long lasting relationship": 124,
+  "Like feasting on a behind": 125,
+  "Popular music": 126,
+  "But I wanted another prestige layer...": 127,
+  "What do I have to do to get rid of you": 128,
+  "No ethical consumption": 131,
+  "Unique snowflakes": 132,
+  "I never liked this infinity stuff anyway": 133,
+  "When will it be enough?": 134,
+  "Faster than a potato^286078": 135,
+  "I told you already, time is relative": 136,
+  "Now you're thinking with dilation!": 137,
+  "This is what I have to do to get rid of you.": 138,
+  "Snap back to reality": 141,
+  "How does this work?": 142,
+  "Yo dawg, I heard you liked reskins...": 143,
+  "Is this an Interstellar reference?": 144,
+  "Are you sure these are the right way around?": 145,
+  "Perks of living": 146,
+  "Master of Reality": 147,
+  "Royal flush": 148,
+  "You really didn't need it anyway": 151,
+  "Y'all got any more of them Glyphs?": 152,
+  "More like \"reallydoesn'tmatter\"": 153,
+  "I am speed": 154,
+  "Achievement #15983": 155,
+  "College Dropout": 156,
+  "It's super effective!": 157,
+  "Bruh, are you like, inside the hole?": 158,
+  "that's where you're wrong kiddo": 161,
+  "Reinstalled the game and rejoined the server": 162,
+  "Actually, super easy! Barely an inconvenience!": 163,
+  "Infinity times two": 164,
+  "Perfectly balanced": 165,
+  "Nicenice.": 166,
+  "Mr. Layer? Sorry, you're not on the list": 167,
+  "Woah, we're halfway there": 168,
+  "The god is delighted": 171,
+  "Hitchhiker's Guide to Reality": 172,
+  "Cet accomplissement n'existe pas III": 173,
+  "Don't you already have two of these?": 174,
+  "The First Antihistorian": 175,
+  "Mom counted to 3": 176,
+  "This mile took a celestial": 177,
+  "Destroyer of Worlds": 178,
+  "Antimatter Dimensions Eternal": 181,
+  "One more time": 182,
+  "Déjà vOoM": 183,
+  "You're out!": 184,
+  "Four score and seven years ago": 185,
+  "An unhealthy obsession": 186,
+  "The One with Dilated Time": 187,
+  "The End...": 188,
+  "...For Now": 191,
+  "Destiny": 192,
+  "Unstoppable": 193,
+  "TIME. IS. RELATIVE.": 194,
+  "System Error": 195,
+  "At Long Last": 196,
+  "Wait. That's illegal.": 197,
+  "...eons stacked on eons stacked on...": 198,
+  "A Newer Beginning": 201,
+  "Reinstalled the game and rejoined the server... again": 202,
+  "Faster than a dilated potato": 203,
+  "Hard Reset": 204,
+  "Look to the Stars": 205,
+  "Full Control of the Dark": 206,
+  "Gone...": 207,
+  "...But Not Forgotten": 208,
+  "Mistake?": 211,
+  "The Dark Crunch": 212,
+  "Never Gonna Stop": 213,
+  "IT WILL NEVER BE ENOUGH.": 214,
+  "Domain Error": 215,
+  "Este logro no existe IV": 216,
+  "Why are we still here...": 217,
+  "...just to suffer?": 218,
+  "Light": 221,
+  "Time is absolute": 222,
+  "Power! Unlimited Power!": 223,
+  "Destroyer of Universes": 224,
+  "299792458m/s": 225,
+  "Thirty thousand degrees": 226,
+  "How do these work???": 227,
+  "Look how far we've come": 228,
+  "Grandmastery": 231,
+  "Millenium of peace": 232,
+  "End of an era": 233,
+  "The One with Celestial Time": 234,
+  "Never-ending Darkness": 235,
+  "Supernova": 236,
+  "Hypernova": 237,
+  "Limits of Reality": 238,
+});
 
 // WARNING: Don't use state accessors and functions from global scope here, that's not safe in long-term
 export const migrations = {
@@ -421,7 +610,7 @@ export const migrations = {
       // This update has a rebalance that assumes the 3rd dilation repeatable is unpurchasable in cel7
       if (player.celestials.pelle.doomed) player.dilation.rebuyables[3] = 0;
     },
-    //Start with 100 since Endgame is a "new era"
+    // Start with 100 since Endgame is a "new era"
     100: player => {
       endgameMigration(player);
     },
@@ -440,8 +629,45 @@ export const migrations = {
     105: player => {
       endgameMigration(player);
     },
+    105.1: player => {
+      const legacyPetNames = {
+        테레사: "Teresa",
+        에파리그: "Effarig",
+        "이름없는 자들": "The Nameless Ones",
+        "이름 없는 자들": "The Nameless Ones"
+      };
+      const currentPet = player.celestials.ra.petWithRemembrance;
+      player.celestials.ra.petWithRemembrance = legacyPetNames[currentPet] ?? currentPet;
+    },
+    105.2: player => {
+      const refinementValues = player.celestials.ra.highestRefinementValue;
+      const legacyEffarigValue = refinementValues?.["에파리그"];
+      if (legacyEffarigValue !== undefined) {
+        refinementValues.effarig = Math.max(refinementValues.effarig ?? 0, legacyEffarigValue);
+        delete refinementValues["에파리그"];
+      }
+    },
+    105.3: player => {
+      const refinementValues = player.celestials.ra.highestRefinementValue;
+      const legacyRefinementKeys = {
+        power: "힘",
+        infinity: "무한",
+        time: "시간",
+        replication: "복제",
+        dilation: "팽창",
+        effarig: "에파리그"
+      };
+      for (const [canonicalKey, legacyKey] of Object.entries(legacyRefinementKeys)) {
+        const canonicalValue = Number(refinementValues[canonicalKey]);
+        const legacyValue = Number(refinementValues[legacyKey]);
+        const validCanonical = Number.isFinite(canonicalValue) ? canonicalValue : 0;
+        const validLegacy = Number.isFinite(legacyValue) ? legacyValue : 0;
+        refinementValues[canonicalKey] = Math.max(validCanonical, validLegacy);
+        delete refinementValues[legacyKey];
+      }
+    },
     106: player => {
-      endgameMigration(player);
+      endgameMigration106(player);
     }
   },
 
@@ -534,10 +760,10 @@ export const migrations = {
     player.achievements = new Set();
     player.secretAchievements = new Set();
     for (const oldId of old) {
-      const achByName = GameDatabase.achievements.normal.find(a => a.name === oldId);
-      if (achByName !== undefined) {
+      const legacyNameId = LEGACY_ACHIEVEMENT_NAME_IDS[oldId];
+      if (Number.isInteger(legacyNameId)) {
         // Legacy format
-        player.achievements.add(achByName.id);
+        player.achievements.add(legacyNameId);
         continue;
       }
       const newId = parseInt(oldId.slice(1), 10);

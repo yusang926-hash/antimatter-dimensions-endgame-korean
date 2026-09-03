@@ -306,7 +306,7 @@ body {
   width: 100%;
   height: 100%;
   text-align: center;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.1rem;
   font-weight: 300;
   line-height: 1.5;
@@ -325,7 +325,7 @@ body {
 }
 
 @font-face {
-  font-family: "Open Sans Condensed";
+  font-family: "Open Sans Condensed", "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
   font-style: normal;
   font-weight: 300;
   src:
@@ -350,7 +350,7 @@ body {
 }
 
 @font-face {
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   src: url("BlobEmoji-Bold.ttf"), url("MonospaceTypewriter.ttf");
 }
 
@@ -484,7 +484,7 @@ button:focus {
   bottom: 0;
   z-index: 2;
   align-items: flex-end;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: var(--color-text);
   pointer-events: all;
 }
@@ -496,7 +496,7 @@ button:focus {
 }
 
 .c-tt-buy-button {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.35rem;
   font-weight: bold;
   border: 0.1rem solid #691fa5;
@@ -584,7 +584,7 @@ button:focus {
 
 .c-tt-save-load-btn__menu {
   text-align: left;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.4rem;
   font-weight: bold;
   color: white;
@@ -609,7 +609,7 @@ button:focus {
 
 .c-tt-save-load-btn__menu-rename {
   text-align: left;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.4rem;
   font-weight: bold;
   border: none;
@@ -688,7 +688,7 @@ button:focus {
   bottom: 0;
   z-index: 2;
   align-items: flex-end;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: var(--color-text);
   pointer-events: all;
 }
@@ -700,7 +700,7 @@ button:focus {
 }
 
 .c-es-buy-button {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.35rem;
   font-weight: bold;
   border: 0.1rem solid var(--color-endgame);
@@ -788,7 +788,7 @@ button:focus {
 
 .c-es-save-load-btn__menu {
   text-align: left;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.4rem;
   font-weight: bold;
   color: white;
@@ -813,7 +813,7 @@ button:focus {
 
 .c-es-save-load-btn__menu-rename {
   text-align: left;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.4rem;
   font-weight: bold;
   border: none;
@@ -893,7 +893,7 @@ button:focus {
   width: 20rem;
   height: 6rem;
   position: relative;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.65rem;
   font-weight: bold;
   background-color: black;
@@ -919,7 +919,7 @@ button:focus {
   width: 20rem;
   height: 6rem;
   position: relative;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.65rem;
   font-weight: bold;
   background-color: black;
@@ -933,7 +933,7 @@ button:focus {
 
 .o-tab-btn {
   white-space: nowrap;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.8rem;
   font-weight: bold;
   color: var(--color-text);
@@ -1152,7 +1152,7 @@ button:focus {
 .c-reality-button {
   width: 100%;
   height: 100%;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   font-weight: bold;
   background: var(--color-background);
@@ -1172,10 +1172,6 @@ button:focus {
 
 .c-reality-button--warp {
   animation: a-warp-glow 3s infinite;
-}
-
-.c-reality-button--escape {
-  animation: a-escape-glow 3s infinite;
 }
 
 .c-reality-reminder {
@@ -1240,6 +1236,7 @@ button:focus {
 .c-reality-button--escape {
   color: var(--color-reality-dark);
   border-color: var(--color-reality-dark);
+  animation: a-escape-glow 3s infinite;
   cursor: pointer;
 }
 
@@ -1279,7 +1276,7 @@ button:focus {
 }
 
 .c-reset-reality-button {
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   font-weight: bold;
   color: var(--color-bad);
@@ -1318,7 +1315,7 @@ button:focus {
 }
 
 .l-reality-amplify-button {
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   background-color: #fdd3b0;
   border: var(--var-border-width, 0.2rem) solid sandybrown;
   border-radius: var(--var-border-radius, 0.5rem);
@@ -1354,7 +1351,7 @@ button:focus {
 .c-endgame-button {
   width: 100%;
   height: 100%;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   font-weight: bold;
   background: var(--color-background);
@@ -1425,7 +1422,7 @@ button:focus {
 }
 
 .c-reset-endgame-button {
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   font-weight: bold;
   color: var(--color-bad);
@@ -2105,7 +2102,7 @@ br {
 
 .o-primary-btn {
   height: 2.5rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.3rem;
   font-weight: bold;
   color: var(--color-text);
@@ -2556,7 +2553,7 @@ br {
 .o-prestige-button {
   width: 22rem;
   height: 7rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.1rem;
   border: var(--var-border-width, 0.2rem) solid;
   border-radius: var(--var-border-radius, 0.4rem);
@@ -2961,7 +2958,7 @@ br {
 /* #region IP Amount */
 
 .c-game-header__tesseract-available {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: #2ebce6;
   background: #111117;
   border-width: var(--var-border-width, 0.2rem) solid;
@@ -3077,7 +3074,7 @@ br {
 /* #region EP Amount */
 
 .c-game-header__penteract-available {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: #c000e0;
   background: #401060;
   border-width: var(--var-border-width, 0.2rem) solid;
@@ -3487,7 +3484,7 @@ br {
 }
 
 .c-infinity-dim-tab__tesseract-button {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: #2ebce6;
   background: #111117;
   border: var(--var-border-width, 0.2rem) solid;
@@ -4053,7 +4050,7 @@ br {
   height: 10.6rem;
   position: relative;
   text-align: center;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 0.8rem;
   color: black;
   border: var(--var-border-width, 0.2rem) solid;
@@ -4469,7 +4466,7 @@ br {
 }
 
 .c-challenge-box--normal {
-  height: 18rem;
+  height: 20rem;
   font-size: 1.05rem;
   color: var(--color-text);
   background-color: var(--color-base);
@@ -4546,7 +4543,7 @@ br {
 .o-challenge-btn {
   width: 15rem;
   height: 3rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   font-weight: bold;
   border: var(--var-border-width, 0.3rem) solid #127a20;
@@ -4803,7 +4800,7 @@ br {
 .o-infinity-upgrade-btn {
   width: 19rem;
   height: 9rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   color: white;
@@ -5117,7 +5114,7 @@ br {
 
 .o-autobuyer-input {
   height: 3rem;
-  font-family: typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.3rem;
   border: 0.1rem solid #c2c2c2;
   border-radius: var(--var-border-radius, 0.4rem);
@@ -5253,7 +5250,7 @@ br {
 .o-autobuyer-btn {
   width: 17.5rem;
   height: 3.5rem;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 0.9rem;
   font-weight: bold;
   color: var(--color-text);
@@ -5380,7 +5377,7 @@ br {
   align-items: center;
   text-align: center;
   text-align-last: center;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   color: black;
   border-radius: var(--var-border-radius, 0.4rem);
@@ -5759,7 +5756,7 @@ properly on certain themes. */
 .o-eternity-upgrade {
   width: 20rem;
   height: 9rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   border: 0.1rem solid var(--color-eternity);
@@ -5962,7 +5959,7 @@ properly on certain themes. */
 .o-eternity-milestone__reward {
   width: 25rem;
   height: 8rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   font-weight: bold;
   color: black;
@@ -6104,7 +6101,7 @@ properly on certain themes. */
 .o-dilation-btn {
   width: 19rem;
   height: 9rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.12rem;
   font-weight: bold;
   border: var(--var-border-width, 0.2rem) solid var(--color-dilation);
@@ -6418,7 +6415,7 @@ properly on certain themes. */
 .o-break-eternity-upgrade-btn {
   width: 19rem;
   height: 9rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   color: white;
@@ -6538,7 +6535,7 @@ properly on certain themes. */
 .o-break-eternity-upgrade {
   width: 20rem;
   height: 9rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   border: 0.1rem solid var(--color-eternity);
@@ -6718,7 +6715,7 @@ properly on certain themes. */
 .o-null-upgrade {
   width: 20rem;
   height: 9rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   border: 0.1rem solid white;
@@ -6886,7 +6883,7 @@ properly on certain themes. */
 .o-endgame-milestone__reward {
   width: 25rem;
   height: 8rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   font-weight: bold;
   color: black;
@@ -6956,7 +6953,7 @@ properly on certain themes. */
 .o-star__container {
   width: 36rem;
   height: 12rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   font-weight: bold;
   color: black;
@@ -7071,7 +7068,7 @@ properly on certain themes. */
 .o-break-celestial-infinity-upgrade-btn {
   width: 19rem;
   height: 9rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   color: white;
@@ -7191,7 +7188,7 @@ properly on certain themes. */
 .o-break-celestial-infinity-upgrade {
   width: 20rem;
   height: 9rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   border: 0.1rem solid var(--color-celestials);
@@ -7350,7 +7347,7 @@ properly on certain themes. */
 .o-divinity-milestone__reward {
   width: 98rem;
   padding: 4rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   font-weight: bold;
   color: black;
@@ -7448,7 +7445,7 @@ properly on certain themes. */
 
 .c-modal {
   text-align: center;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.4rem;
   color: var(--color-text);
   background-color: var(--color-base);
@@ -7878,7 +7875,7 @@ properly on certain themes. */
 .o-modal-store-label {
   min-width: 10rem;
   text-align: right;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 2rem;
   margin-right: 1.5rem;
 }
@@ -7888,7 +7885,7 @@ properly on certain themes. */
   min-width: 12rem;
   justify-content: center;
   align-items: center;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 2rem;
   background: burlywood;
   border: none;
@@ -7958,7 +7955,7 @@ kbd {
 
 .o-notification {
   white-space: nowrap;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.3rem;
   font-weight: bold;
   color: black;
@@ -8289,7 +8286,7 @@ kbd {
 }
 
 .o-teresa-shop-button {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   color: black;
@@ -8353,7 +8350,7 @@ kbd {
   width: 35rem;
   justify-content: center;
   align-items: center;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.4rem;
   line-height: 1.5;
   color: black;
@@ -8722,7 +8719,7 @@ kbd {
 .o-enslaved-mechanic-button {
   min-width: 18rem;
   min-height: 9rem;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   background-color: #fdd3b0;
   border: var(--var-border-width, 0.2rem) solid sandybrown;
   border-radius: var(--var-border-radius, 0.5rem);
@@ -8760,7 +8757,7 @@ kbd {
 .o-enslaved-shop-button {
   width: 30rem;
   height: 12rem;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: var(--color-text-inverted);
   background-color: var(--color-disabled);
   border: var(--var-border-width, 0.2rem) solid var(--color-bad);
@@ -8796,7 +8793,7 @@ kbd {
   flex-direction: column;
   width: 34rem;
   align-items: center;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   background: none;
   border: var(--var-border-width, 0.2rem) solid #cd945c;
@@ -9031,7 +9028,7 @@ kbd {
   justify-content: space-around;
   width: 25rem;
   height: 10rem;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   color: black;
   background: #6b5f2e;
@@ -9095,7 +9092,7 @@ kbd {
 }
 
 .c-v-run-button {
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.3rem;
   color: black;
   background: var(--color-v--base);
@@ -9393,7 +9390,7 @@ kbd {
   height: 36rem;
   justify-content: center;
   align-items: center;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: #9575cd;
   background: black;
   border: var(--var-border-width, 0.2rem) solid #9575cd;
@@ -9493,7 +9490,7 @@ kbd {
   width: 13rem;
   height: 6.5rem;
   text-align: center;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   border: 0.1rem solid #222222;
   border-radius: var(--var-border-radius, 1rem);
@@ -9516,7 +9513,7 @@ kbd {
   height: 33rem;
   justify-content: center;
   align-items: center;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: black;
   border-radius: var(--var-border-radius, 2rem);
   margin: 2rem;
@@ -10086,7 +10083,7 @@ kbd {
 .o-laitela-run-button {
   width: 24rem;
   height: 84rem;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.1rem;
   color: var(--color-laitela--accent);
   background: var(--color-laitela--base);
@@ -10137,7 +10134,7 @@ kbd {
 .o-dark-matter-dimension-button {
   width: 15rem;
   height: 5rem;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   color: var(--color-laitela--accent);
   background: var(--color-laitela--base);
@@ -10312,7 +10309,7 @@ kbd {
 }
 
 .c-laitela-singularity h2 {
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.5rem;
   margin: 0;
 }
@@ -10329,7 +10326,7 @@ kbd {
 
 .c-laitela-singularity__cap-control {
   width: 20rem;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.1rem;
   font-weight: bold;
   color: var(--color-laitela--accent);
@@ -10399,7 +10396,7 @@ kbd {
 .c-singularity-milestone-modal-sort-button {
   width: 26.5rem;
   height: 6rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.3rem;
   font-weight: bold;
   color: var(--color-laitela--accent);
@@ -10495,7 +10492,7 @@ kbd {
 .l-laitela-annihilation-container {
   width: 51rem;
   height: 20rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.2rem;
   color: var(--color-laitela--accent);
   background: var(--color-laitela--base);
@@ -10511,7 +10508,7 @@ kbd {
 .l-laitela-annihilation-button {
   width: 35rem;
   height: 3rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: var(--color-laitela--accent);
   background: var(--color-laitela--base);
   border: var(--var-border-width, 0.2rem) solid var(--color-laitela--accent);
@@ -10544,7 +10541,7 @@ kbd {
 .c-laitela-automation-toggle {
   width: 22rem;
   height: 3rem;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.1rem;
   font-weight: bold;
   color: var(--color-laitela--accent);
@@ -10568,7 +10565,7 @@ kbd {
 .l-laitela-hadronize-button {
   width: 20rem;
   height: 3rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.1rem;
   color: var(--color-laitela--accent);
   background: linear-gradient(var(--color-laitela--base), var(--color-laitela--accent));
@@ -10619,7 +10616,7 @@ kbd {
 
 .c-laitela-hadrons-assign {
   width: 20rem;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.1rem;
   font-weight: bold;
   color: var(--color-laitela--accent);
@@ -11187,7 +11184,7 @@ kbd {
 
 .c-glyph-levels-and-weights__auto-btn {
   height: 2.5rem;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   color: var(--color-reality);
@@ -11279,7 +11276,7 @@ kbd {
 
 .c-reality-upgrade-btn {
   text-align: center;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   color: var(--color-reality-dark);
   background-color: var(--color-background);
@@ -11487,7 +11484,7 @@ kbd {
 
 .c-endgame-upgrade-btn {
   text-align: center;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   color: #5151ec;
   background-color: black;
@@ -11625,7 +11622,7 @@ kbd {
 
 .c-divinity-upgrade-btn {
   text-align: center;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   color: var(--color-pelle--base);
   background-color: black;
@@ -11723,7 +11720,7 @@ kbd {
 
 .c-resurgence-upgrade-btn {
   text-align: center;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   color: var(--color-antimatter);
   background-color: black;
@@ -11940,13 +11937,14 @@ kbd {
 }
 
 .o-expansion-pack {
-  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  font-family: Typewriter, serif;
   width: 98rem;
-  height: 25rem;
+  height: auto;
+  min-height: 25rem;
+  position: relative;
+  align-items: center;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   margin: 1rem;
   padding: 1rem;
 }
@@ -12128,7 +12126,7 @@ kbd {
 }
 
 .o-ethereal-button {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   color: black;
@@ -12159,7 +12157,7 @@ kbd {
 }
 
 .o-cool-ethereal-button {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   color: black;
@@ -12191,7 +12189,7 @@ kbd {
 }
 
 .c-penteract-button {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: #c000e0;
   background: #401060;
   border: var(--var-border-width, 0.2rem) solid;
@@ -12258,7 +12256,7 @@ kbd {
 }
 
 .c-hexeract-button {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: #808080;
   background: black;
   border: var(--var-border-width, 0.2rem) solid;
@@ -12325,7 +12323,7 @@ kbd {
 }
 
 .c-hepteract-button {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: #a0a0e0;
   background: #101060;
   border: var(--var-border-width, 0.2rem) solid;
@@ -12392,7 +12390,7 @@ kbd {
 }
 
 .c-octeract-button {
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: #ff3050;
   background: #801010;
   border: var(--var-border-width, 0.2rem) solid;
@@ -12461,7 +12459,7 @@ kbd {
 .o-celestial-infinity-upgrade {
   width: 20rem;
   height: 9rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   border: 0.1rem solid var(--color-celestials);
@@ -12588,7 +12586,7 @@ kbd {
 .o-celestial-eternity-upgrade {
   width: 20rem;
   height: 9rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   border: 0.1rem solid var(--color-celestials);
@@ -12727,7 +12725,7 @@ kbd {
 .o-power-core-upgrade {
   width: 20rem;
   height: 9rem;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1rem;
   font-weight: bold;
   border: 0.1rem solid white;
@@ -12762,23 +12760,28 @@ kbd {
 @keyframes a-ascension-shift {
   0% {
     background-position: 0% 50%;
-    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white) drop-shadow(-0.3rem -0.3rem 0.1rem white);
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white)
+      drop-shadow(-0.3rem -0.3rem 0.1rem white);
   }
   25% {
     background-position: 25% 50%;
-    filter: drop-shadow(0 0 0.1rem white) drop-shadow(-0.3rem 0.3rem 0.1rem white) drop-shadow(0.3rem -0.3rem 0.1rem white);
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(-0.3rem 0.3rem 0.1rem white)
+      drop-shadow(0.3rem -0.3rem 0.1rem white);
   }
   50% {
     background-position: 50% 50%;
-    filter: drop-shadow(0 0 0.1rem white) drop-shadow(-0.3rem -0.3rem 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white);
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(-0.3rem -0.3rem 0.1rem white)
+      drop-shadow(0.3rem 0.3rem 0.1rem white);
   }
   75% {
     background-position: 75% 50%;
-    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem -0.3rem 0.1rem white) drop-shadow(-0.3rem 0.3rem 0.1rem white);
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem -0.3rem 0.1rem white)
+      drop-shadow(-0.3rem 0.3rem 0.1rem white);
   }
   100% {
     background-position: 100% 50%;
-    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white) drop-shadow(-0.3rem -0.3rem 0.1rem white);
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white)
+      drop-shadow(-0.3rem -0.3rem 0.1rem white);
   }
 }
 
@@ -13232,7 +13235,7 @@ kbd {
 .o-automator-block-input {
   display: inline-block;
   width: fit-content;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 1.1rem;
   background: var(--color-blockmator-block-background);
   border: 0.1rem solid var(--color-blockmator-block-border);

@@ -571,8 +571,8 @@ ${formatX(10)}씩 늘어나며, 틱스피드 업그레이드 비용에도 비슷
     .join(", ")}
 <br>
 <br>
-1번째 무한 차원은 반물질 대신 무한 동력을 생산합니다. 무한 동력은 모든 반물질 차원에
-(동력<sup>${formatInt(7)}</sup>)만큼의 배율을 제공합니다. 무한 차원은 틱스피드 업그레이드의 영향을
+1번째 무한 차원은 반물질 대신 무한력을 생산합니다. 무한력은 모든 반물질 차원에
+(무한력<sup>${formatInt(7)}</sup>)만큼의 배율을 제공합니다. 무한 차원은 틱스피드 업그레이드의 영향을
 받지 않습니다.
 `,
       isUnlocked: () => Autobuyer.bigCrunch.hasMaxedInterval || PlayerProgress.eternityUnlocked(),

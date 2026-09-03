@@ -212,12 +212,12 @@ export const pelleRifts = {
       {
         resource: "paradox",
         requirement: 0.5,
-        description: "반복 구매 시간 팽창 업그레이드의 구매 횟수가 무한 동력 변환율을 향상시킵니다",
+        description: "반복 구매 시간 팽창 업그레이드의 구매 횟수가 무한력 변환율을 향상시킵니다",
         effect: () => Math.min(
           1.1075 ** (Object.values(player.dilation.rebuyables).sum() - 60),
           712
         ),
-        formatEffect: x => `무한 동력 변환율 ${formatX(x, 2, 2)}`
+        formatEffect: x => `무한력 변환율 ${formatX(x, 2, 2)}`
       },
     ],
     galaxyGeneratorText: "더 만들 수 있어야 하지만 Pelle가 제한했습니다. $value 균열을 무시하세요"

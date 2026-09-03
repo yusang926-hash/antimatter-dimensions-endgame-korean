@@ -24,7 +24,7 @@ export default {
       selectedMilestoneResourceText: "",
       selectedMilestoneDescriptionText: "",
       selectedMilestoneEffectText: "",
-      showEffect: false
+      showEffect: false,
     };
   },
   computed: {
@@ -151,7 +151,7 @@ export default {
     </div>
     <div class="o-accelerator-bar-percentage">
       {{ formatPercents(percentage, 3) }}
-      <span v-if="!isMaxed">({{ isActive ? "Filling" : "Idle" }})</span>
+      <span v-if="!isMaxed">({{ isActive ? "충전 중" : "대기 중" }})</span>
     </div>
     <CustomizeableTooltip
       class="o-accelerator-bar-milestone-hover-container"
@@ -167,7 +167,7 @@ export default {
         {{ selectedMilestoneDescriptionText }}
         <div v-if="showEffect">
           <br>
-          Currently: {{ selectedMilestoneEffectText }}
+          현재: {{ selectedMilestoneEffectText }}
         </div>
       </template>
     </CustomizeableTooltip>

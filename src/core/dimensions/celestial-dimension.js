@@ -481,11 +481,11 @@ export class CelestialDimBoost {
   static get unlockedByBoost() {
     if (CelestialDimBoost.lockText !== null) return CelestialDimBoost.lockText;
 
-    const boostEffects = `give a ${formatX(CelestialDimBoost.power, 2, 1)} multiplier to all Dimensions`;
+    const boostEffects = `모든 차원에 ${formatX(CelestialDimBoost.power, 2, 1)} 배율을 부여합니다`;
 
     const areDimensionsKept = false;
     if (areDimensionsKept) return boostEffects[0].toUpperCase() + boostEffects.substring(1);
-    return `Reset your Dimensions to ${boostEffects}`;
+    return `차원을 초기화하고 ${boostEffects}`;
   }
 
   static get purchasedBoosts() {
@@ -1076,6 +1076,7 @@ export function celestialEternity(force, auto, specialConditions = {}) {
   player.records.thisCelestialEternity.maxCM = DC.D0;
 
   EventHub.dispatch(GAME_EVENT.CELESTIAL_ETERNITY_RESET_AFTER);
+  EventHub.dispatch(GAME_EVENT.CELESTIAL_ETERNITY_AFTER);
   return true;
 }
 

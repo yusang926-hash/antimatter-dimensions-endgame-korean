@@ -86,7 +86,7 @@ class ImaginaryUpgradeState extends BitPurchasableMechanicState {
   tryUnlock() {
     if (!MachineHandler.isIMUnlocked || this.isAvailableForPurchase || !this.config.checkRequirement()) return;
     player.reality.imaginaryUpgReqs |= (1 << this.id);
-    GameUI.notify.reality(`You've unlocked an Imaginary Upgrade: ${this.config.name}`);
+    GameUI.notify.reality(`허수 업그레이드를 해금했습니다: ${this.config.name}`);
     this.hasPlayerLock = false;
   }
 

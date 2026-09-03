@@ -232,7 +232,7 @@ export const AD = {
     icon: MultiplierTabIcons.BREAK_INFINITY,
   },
   infinityPower: {
-    name: "무한 동력 배율",
+    name: "무한력 배율",
     fakeValue: () => Currency.infinityPower.value.pow(InfinityDimensions.powerConversionRate),
     multValue: dim => {
       const mult = Currency.infinityPower.value.pow(InfinityDimensions.powerConversionRate).max(1);

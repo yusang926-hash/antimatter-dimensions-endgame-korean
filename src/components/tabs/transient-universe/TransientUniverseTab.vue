@@ -1,5 +1,4 @@
 <script>
-
 export default {
   name: "TransientUniverseTab"
 };
@@ -10,9 +9,9 @@ export default {
     <div class="universe-text">
       <br>
       <div>
-      <b>
-        The Universes will reveal their contents no earlier than v2.0.
-      </b>
+        <b>
+          우주는 v2.0 이전에는 내용을 드러내지 않습니다.
+        </b>
       </div>
     </div>
   </div>

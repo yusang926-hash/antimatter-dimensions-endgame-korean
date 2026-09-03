@@ -306,7 +306,7 @@ export function getDilationTimeEstimate(goal) {
     const drain = Pelle.riftDrainPercent;
     const goalNetRate = rawDTGain.minus(Decimal.multiply(goal, drain));
     const currNetRate = rawDTGain.minus(currentDT.times(drain));
-    if (goalNetRate.lt(0)) return "Never affordable due to Rift drain";
+    if (goalNetRate.lt(0)) return "균열 소모 때문에 구매할 수 없음";
     return TimeSpan.fromSeconds(currNetRate.div(goalNetRate).ln().div(drain)).toTimeEstimate();
   }
   return TimeSpan.fromSeconds(Decimal.sub(goal, currentDT)

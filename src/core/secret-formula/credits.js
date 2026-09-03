@@ -1,28 +1,30 @@
 export const credits = {
   // Must be placed in the order it is desired they appear in the credits
   roles: {
-    1: "Creator",
-    2: "Creator (Endgame)",
-    3: "Technical Architect",
-    4: "Lead Developer",
-    5: "Mobile Developer",
-    6: "Steam Developer",
-    7: "Library Developer",
-    8: "Developer",
-    9: "Endgame Developer",
-    10: "Lead Design Consultant",
-    11: "Design Consultant",
-    12: "Writer",
-    13: "Achievement Artist",
-    14: "Visual Artist",
-    15: "Modal Maker, Lady Taker, Pie Baker",
-    16: "Lurker Tester",
-    17: "Web Tester",
-    18: "Endgame Web Tester",
-    19: "Android Tester",
-    20: "iOS Tester",
-    21: "Endgame Mobile Tester",
-    22: "Other Contributor",
+    1: "원작자",
+    2: "엔드게임 제작자",
+    3: "기술 설계자",
+    4: "수석 개발자",
+    5: "모바일 개발자",
+    6: "Steam 개발자",
+    7: "라이브러리 개발자",
+    8: "개발자",
+    9: "엔드게임 개발자",
+    10: "수석 디자인 자문",
+    11: "디자인 자문",
+    12: "작가",
+    13: "도전과제 아티스트",
+    14: "비주얼 아티스트",
+    15: "모달 제작자, 숙녀 납치범, 파이 제빵사",
+    16: "잠복 테스터",
+    17: "웹 테스터",
+    18: "엔드게임 웹 테스터",
+    19: "Android 테스터",
+    20: "iOS 테스터",
+    21: "엔드게임 모바일 테스터",
+    22: "기타 기여자",
+    23: "기존 한국어 번역 일부 재사용·용어 참고",
+    24: "한국어 번역 및 유지보수",
   },
 
   // Each person must have a name and at least one role (the index of the desired role in roles). They can also have a
@@ -823,6 +825,13 @@ export const credits = {
     }, {
       name: "Tojo",
       roles: 22
+    }, {
+      name: "Seonjisoup621",
+      name2: "Jihuu621 / ADKorean",
+      roles: 23
+    }, {
+      name: "SameMa",
+      roles: 24
     }
   ]
 };

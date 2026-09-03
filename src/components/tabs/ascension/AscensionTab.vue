@@ -41,13 +41,13 @@ export default {
       const first = this.nextAscension?.id === 0;
       const next = this.nextAscension;
 
-      if (first) return `You will reach the first Ascension in ${TimeSpan.fromMilliseconds(this.timeToNextAscension)}.`;
+      if (first) return `${TimeSpan.fromMilliseconds(this.timeToNextAscension)} 후 첫 승천에 도달합니다.`;
       return next === undefined
-        ? "There are no more Ascensions to be reached!"
-        : `You will reach the next Ascension in ${TimeSpan.fromMilliseconds(this.timeToNextAscension)}.`;
+        ? "더 이상 도달할 승천이 없습니다!"
+        : `${TimeSpan.fromMilliseconds(this.timeToNextAscension)} 후 다음 승천에 도달합니다.`;
     },
     nextHintDisplay() {
-      return `The next Ascension is the ${this.nextAscension?.config.name}.`;
+      return `다음 승천은 ${this.nextAscension?.config.name}입니다.`;
     },
     runButtonOuterClass() {
       return {
@@ -72,8 +72,8 @@ export default {
     },
     symbol() {
       return this.isRunning
-        ? `Exit the Overcharge Gain ${formatInt(this.pending)} ${this.currEnergyName} (Next at ${format(this.nextAt, 2)} Eternity Points)`
-        : "Enter the Overcharge";
+        ? `과충전 종료: ${this.currEnergyName} ${formatInt(this.pending)} 획득 (다음: 영원 포인트 ${format(this.nextAt, 2)})`
+        : "과충전 진입";
     },
     currEnergy() {
       if (this.currentLevel === 4) return this.temporalEnergy;
@@ -82,10 +82,10 @@ export default {
       return this.infiniteEnergy;
     },
     currEnergyName() {
-      if (this.currentLevel === 4) return "Temporal Energy";
-      if (this.currentLevel === 3) return "Complex Energy";
-      if (this.currentLevel === 2) return "Eternal Energy";
-      return "Infinite Energy";
+      if (this.currentLevel === 4) return "시간 에너지";
+      if (this.currentLevel === 3) return "복합 에너지";
+      if (this.currentLevel === 2) return "영원 에너지";
+      return "무한 에너지";
     }
   },
   methods: {
@@ -117,7 +117,7 @@ export default {
       if (this.isDoomed) return;
       if (this.isRunning) {
         exitOvercharge();
-        let pendEnergy = [null, "bi", "eter", "chall", "ts"][this.currentLevel];
+        const pendEnergy = [null, "bi", "eter", "chall", "ts"][this.currentLevel];
         player.endgame.overcharge.completions[pendEnergy] += this.pending;
         return;
       }
@@ -140,17 +140,17 @@ export default {
     <div class="l-endgame-milestone-grid">
       <div>
         <span class="c-ascension-description-text">
-          You have {{ format(divineEnergy, 2, 2) }} Divine Energy. +{{ format(divineEnergyPerSecond, 2, 2) }}/s
+          신성 에너지 {{ format(divineEnergy, 2, 2) }} 보유 중. +{{ format(divineEnergyPerSecond, 2, 2) }}/초
         </span>
       </div>
       <div>
         <span class="c-ascension-description-text">
-          The time to reach the next Ascension will lower based on your Divine Energy amount.
+          다음 승천에 도달하는 시간은 신성 에너지의 양에 따라 감소합니다.
         </span>
       </div>
       <div>
         <span class="c-ascension-description-text">
-          Your current Ascension is {{ formatInt(ascension) }}.
+          현재 승천 단계는 {{ formatInt(ascension) }}입니다.
         </span>
       </div>
       <div
@@ -174,8 +174,8 @@ export default {
     <br>
     <br>
     <div
-      class="c-overcharge-position"
       v-if="hasOvercharge"
+      class="c-overcharge-position"
     >
       <div
         :class="runButtonOuterClass"
@@ -193,8 +193,8 @@ export default {
     </div>
     <br>
     <div
-      class="c-subtab-option-container"
       v-if="hasOvercharge"
+      class="c-subtab-option-container"
     >
       <PrimaryButton
         class="o-primary-btn--subtab-option"
@@ -212,16 +212,16 @@ export default {
     </div>
     <br>
     <div v-if="highestUnlockedLevel >= 1">
-      <span class="c-ascension-description-text">You have {{ infiniteEnergy }} Infinite Energy.</span>
+      <span class="c-ascension-description-text">무한 에너지 {{ infiniteEnergy }} 보유 중.</span>
     </div>
     <div v-if="highestUnlockedLevel >= 2">
-      <span class="c-ascension-description-text">You have {{ eternalEnergy }} Eternal Energy.</span>
+      <span class="c-ascension-description-text">영원 에너지 {{ eternalEnergy }} 보유 중.</span>
     </div>
     <div v-if="highestUnlockedLevel >= 3">
-      <span class="c-ascension-description-text">You have {{ complexEnergy }} Complex Energy.</span>
+      <span class="c-ascension-description-text">복합 에너지 {{ complexEnergy }} 보유 중.</span>
     </div>
     <div v-if="highestUnlockedLevel >= 4">
-      <span class="c-ascension-description-text">You have {{ temporalEnergy }} Temporal Energy.</span>
+      <span class="c-ascension-description-text">시간 에너지 {{ temporalEnergy }} 보유 중.</span>
     </div>
   </div>
 </template>
@@ -240,7 +240,6 @@ export default {
   background-size: 300% 100%;
   background-clip: text;
   animation: a-ascension-description-cycle 5s linear infinite;
-
   -webkit-text-fill-color: transparent;
 }
 

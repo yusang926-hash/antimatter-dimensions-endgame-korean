@@ -16,7 +16,7 @@ export default {
       isAvailable: false,
       hasNotification: false,
       tabName: "",
-      uiClass: ""
+      uiClass: "",
     };
   },
   computed: {
@@ -28,7 +28,9 @@ export default {
     update() {
       this.isAvailable = this.tab.isAvailable;
       this.hasNotification = this.tab.hasNotification;
-      this.uiClass = (typeof this.tab.config.UIClass === "function") ? this.tab.config.UIClass() : this.tab.config.UIClass;
+      this.uiClass = typeof this.tab.config.UIClass === "function"
+        ? this.tab.config.UIClass()
+        : this.tab.config.UIClass;
       if (this.tabPosition < Pelle.endTabNames.length) {
         this.tabName = Pelle.transitionText(
           this.tab.name,

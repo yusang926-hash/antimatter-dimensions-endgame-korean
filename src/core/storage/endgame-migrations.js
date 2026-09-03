@@ -1,4 +1,4 @@
-//Time for spaghetti code
+// Time for spaghetti code
 export function endgameMigration(player) {
   player.dimensionBoosts = new Decimal(player.dimensionBoosts);
   player.galaxies = new Decimal(player.galaxies);
@@ -122,24 +122,24 @@ export function endgameMigration(player) {
   player.records.bestCelestialEternity.realTime = player.records.bestCelestialEternity.realTime === 0
         ? 999999999999
         : player.records.bestCelestialEternity.realTime;
-  player.auto.galaxyGenerator = {
-    all: Array.range(0, 10).map(() => ({
-      isActive: false,
-      lastTick: 0,
-    })),
-    isActive: true,
+  player.auto.galaxyGenerator ??= { all: [], isActive: true };
+  const galaxyGenerator = player.auto.galaxyGenerator;
+  galaxyGenerator.all ??= [];
+  while (galaxyGenerator.all.length < 10) {
+    galaxyGenerator.all.push({ isActive: false, lastTick: 0 });
   }
-  let s1 = player.reality.glyphs.active;
+  galaxyGenerator.isActive ??= true;
+  const s1 = player.reality.glyphs.active;
   for (let g1 = 0; g1 < s1.length; g1++) {
     if (s1[g1].level) s1[g1].level = new Decimal(s1[g1].level);
   }
   player.reality.glyphs.active = s1;
-  let s2 = player.reality.glyphs.inventory;
+  const s2 = player.reality.glyphs.inventory;
   for (let g2 = 0; g2 < s2.length; g2++) {
     if (s2[g2].level) s2[g2].level = new Decimal(s2[g2].level);
   }
   player.reality.glyphs.inventory = s2;
-  let s3 = player.reality.glyphs.sets;
+  const s3 = player.reality.glyphs.sets;
   for (let a3 = 0; a3 < s3.length; a3++) {
     if (s3[a3].glyphs) {
       for (let g3 = 0; g3 < s3[a3].glyphs.length; g3++) {
@@ -148,12 +148,12 @@ export function endgameMigration(player) {
     }
   }
   player.reality.glyphs.sets = s3;
-  let s4 = player.celestials.teresa.bestAMSet;
+  const s4 = player.celestials.teresa.bestAMSet;
   for (let g4 = 0; g4 < s4.length; g4++) {
     if (s4[g4].level) s4[g4].level = new Decimal(s4[g4].level);
   }
   player.celestials.teresa.bestAMSet = s4;
-  let s5 = player.celestials.v.runGlyphs;
+  const s5 = player.celestials.v.runGlyphs;
   for (let a5 = 0; a5 < s5.length; a5++) {
     if (s5[a5]) {
       for (let g5 = 0; g5 < s5[a5].length; g5++) {
@@ -162,126 +162,90 @@ export function endgameMigration(player) {
     }
   }
   player.celestials.v.runGlyphs = s5;
-  let s6 = player.records.bestReality.RMSet;
+  const s6 = player.records.bestReality.RMSet;
   for (let g6 = 0; g6 < s6.length; g6++) {
     if (s6[g6].level) s6[g6].level = new Decimal(s6[g6].level);
   }
   player.records.bestReality.RMSet = s6;
-  let s7 = player.records.bestReality.RMminSet;
+  const s7 = player.records.bestReality.RMminSet;
   for (let g7 = 0; g7 < s7.length; g7++) {
     if (s7[g7].level) s7[g7].level = new Decimal(s7[g7].level);
   }
   player.records.bestReality.RMminSet = s7;
-  let s8 = player.records.bestReality.glyphLevelSet;
+  const s8 = player.records.bestReality.glyphLevelSet;
   for (let g8 = 0; g8 < s8.length; g8++) {
     if (s8[g8].level) s8[g8].level = new Decimal(s8[g8].level);
   }
   player.records.bestReality.glyphLevelSet = s8;
-  let s9 = player.records.bestReality.bestEPSet;
+  const s9 = player.records.bestReality.bestEPSet;
   for (let g9 = 0; g9 < s9.length; g9++) {
     if (s9[g9].level) s9[g9].level = new Decimal(s9[g9].level);
   }
   player.records.bestReality.bestEPSet = s9;
-  let s10 = player.records.bestReality.speedSet;
+  const s10 = player.records.bestReality.speedSet;
   for (let g10 = 0; g10 < s10.length; g10++) {
     if (s10[g10].level) s10[g10].level = new Decimal(s10[g10].level);
   }
   player.records.bestReality.speedSet = s10;
-  let s11 = player.records.bestReality.iMCapSet;
+  const s11 = player.records.bestReality.iMCapSet;
   for (let g11 = 0; g11 < s11.length; g11++) {
     if (s11[g11].level) s11[g11].level = new Decimal(s11[g11].level);
   }
   player.records.bestReality.iMCapSet = s11;
-  let s12 = player.records.bestReality.laitelaSet;
+  const s12 = player.records.bestReality.laitelaSet;
   for (let g12 = 0; g12 < s12.length; g12++) {
     if (s12[g12].level) s12[g12].level = new Decimal(s12[g12].level);
   }
   player.records.bestReality.laitelaSet = s12;
-  if (player.reality.dmCap) player.reality.jMCap = new Decimal(player.reality.dmCap);
-  else player.reality.jMCap = DC.D0;
-  delete player.reality.dmCap;
-  if (player.celestials.teresa.quotes.length >= 100) {
-    let terq = [];
-    for (let terqid = 0; terqid < 100; terqid++) {
-      if (player.celestials.teresa.quotes.includes(terqid)) {
-        terq.push(terqid);
-      }
-    }
-    player.celestials.teresa.quotes = terq;
+}
+
+export function endgameMigration106(player) {
+  // Deepmerge adds the new jMCap default before patches run, so a saved legacy dmCap is the authoritative value.
+  const legacyDMCap = player.reality.dmCap;
+  if (legacyDMCap === undefined) {
+    player.reality.jMCap = new Decimal(player.reality.jMCap ?? 0);
+  } else {
+    player.reality.jMCap = new Decimal(legacyDMCap);
+    delete player.reality.dmCap;
   }
-  if (player.celestials.effarig.quotes.length >= 100) {
-    let effq = [];
-    for (let effqid = 0; effqid < 100; effqid++) {
-      if (player.celestials.effarig.quotes.includes(effqid)) {
-        effq.push(effqid);
-      }
-    }
-    player.celestials.effarig.quotes = effq;
+
+  // Achievements 237 and 238 moved to 244 and 248. Move their bits so the newly assigned IDs remain locked.
+  const oldRow = player.achievementBits[22] ?? 0;
+  player.achievementBits[23] ??= 0;
+  if ((oldRow & (1 << 6)) !== 0) {
+    player.achievementBits[22] &= ~(1 << 6);
+    player.achievementBits[23] |= 1 << 3;
   }
-  if (player.celestials.enslaved.quotes.length >= 100) {
-    let ensq = [];
-    for (let ensqid = 0; ensqid < 100; ensqid++) {
-      if (player.celestials.enslaved.quotes.includes(ensqid)) {
-        ensq.push(ensqid);
-      }
-    }
-    player.celestials.enslaved.quotes = ensq;
+  if ((oldRow & (1 << 7)) !== 0) {
+    player.achievementBits[22] &= ~(1 << 7);
+    player.achievementBits[23] |= 1 << 7;
   }
-  if (player.celestials.v.quotes.length >= 100) {
-    let vq = [];
-    for (let vqid = 0; vqid < 100; vqid++) {
-      if (player.celestials.v.quotes.includes(vqid)) {
-        vq.push(vqid);
-      }
-    }
-    player.celestials.v.quotes = vq;
+
+  // Version 1.2 records projected iM as an eighth field. Old or partially migrated records need a stable tuple shape.
+  for (const run of player.records.recentRealities) {
+    while (run.length < 8) run.push(DC.D0);
+    run[7] = new Decimal(run[7] ?? 0);
   }
-  if (player.celestials.ra.quotes.length >= 100) {
-    let raq = [];
-    for (let raqid = 0; raqid < 100; raqid++) {
-      if (player.celestials.ra.quotes.includes(raqid)) {
-        raq.push(raqid);
-      }
-    }
-    player.celestials.ra.quotes = raq;
+
+  // Remove quote-array corruption without repeatedly rebuilding valid short arrays on every historical migration.
+  const quoteArrays = [
+    player.celestials.teresa.quotes,
+    player.celestials.effarig.quotes,
+    player.celestials.enslaved.quotes,
+    player.celestials.v.quotes,
+    player.celestials.ra.quotes,
+    player.celestials.laitela.quotes,
+    player.celestials.pelle.quotes,
+    player.celestials.alpha.quotes,
+    player.expanse.elemental.quotes
+  ];
+  for (const quotes of quoteArrays) {
+    if (quotes.length < 100) continue;
+    const cleaned = Array.range(0, 100).filter(id => quotes.includes(id));
+    quotes.splice(0, quotes.length, ...cleaned);
   }
-  if (player.celestials.laitela.quotes.length >= 100) {
-    let laiq = [];
-    for (let laiqid = 0; laiqid < 100; laiqid++) {
-      if (player.celestials.laitela.quotes.includes(laiqid)) {
-        laiq.push(laiqid);
-      }
-    }
-    player.celestials.laitela.quotes = laiq;
-  }
-  if (player.celestials.pelle.quotes.length >= 100) {
-    let pelq = [];
-    for (let pelqid = 0; pelqid < 100; pelqid++) {
-      if (player.celestials.pelle.quotes.includes(pelqid)) {
-        pelq.push(pelqid);
-      }
-    }
-    player.celestials.pelle.quotes = pelq;
-  }
-  if (player.celestials.alpha.quotes.length >= 100) {
-    let alpq = [];
-    for (let alpqid = 0; alpqid < 100; alpqid++) {
-      if (player.celestials.alpha.quotes.includes(alpqid)) {
-        alpq.push(alpqid);
-      }
-    }
-    player.celestials.alpha.quotes = alpq;
-  }
-  if (player.expanse.elemental.quotes.length >= 100) {
-    let eleq = [];
-    for (let eleqid = 0; eleqid < 100; eleqid++) {
-      if (player.expanse.elemental.quotes.includes(eleqid)) {
-        eleq.push(eleqid);
-      }
-    }
-    player.expanse.elemental.quotes = eleq;
-  }
-  //remove next update
+
+  // Temporary balance cap from the v1.2 release migration.
   if (player.endgame.celDimExpansion.celestialEternityPoints.gt(DC.E4000)) {
     player.endgame.celDimExpansion.celestialEternityPoints = DC.E4000;
   }

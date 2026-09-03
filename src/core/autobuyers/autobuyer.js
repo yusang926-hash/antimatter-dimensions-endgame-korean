@@ -19,6 +19,7 @@ const AUTOBUYER_DISPLAY_NAMES = {
   "Divine Dimension": "신성 차원",
   "Duality Upgrade": "이중성 업그레이드",
   "Endgame": "엔드게임",
+  "Endgame Upgrade": "엔드게임 업그레이드",
   "Eternity": "영원",
   "Base Galaxy Multiplier": "기본 은하 배율",
   "Multiplicative Galaxy Multiplier": "곱연산 은하 배율",

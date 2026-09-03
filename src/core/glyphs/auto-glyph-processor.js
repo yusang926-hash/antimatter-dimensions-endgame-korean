@@ -171,33 +171,33 @@ export const AutoGlyphProcessor = {
   filterModeName(id) {
     switch (id) {
       case AUTO_GLYPH_SCORE.LOWEST_SACRIFICE:
-        return "Lowest Total Glyph Sacrifice";
+        return "총 글리프 희생량이 가장 낮음";
       case AUTO_GLYPH_SCORE.EFFECT_COUNT:
-        return "Number of Effects";
+        return "효과 개수";
       case AUTO_GLYPH_SCORE.RARITY_THRESHOLD:
-        return "Rarity Threshold";
+        return "희귀도 기준치";
       case AUTO_GLYPH_SCORE.SPECIFIED_EFFECT:
-        return "Specified Effect";
+        return "지정 효과";
       case AUTO_GLYPH_SCORE.EFFECT_SCORE:
-        return "Effect Score";
+        return "효과 점수";
       case AUTO_GLYPH_SCORE.LOWEST_ALCHEMY:
-        return "Lowest Alchemy Resource";
+        return "가장 낮은 연금술 자원";
       case AUTO_GLYPH_SCORE.ALCHEMY_VALUE:
-        return "Refinement Value";
+        return "정제 가치";
       default:
-        return "Invalid Glyph filter mode";
+        return "올바르지 않은 글리프 필터 모드";
     }
   },
   trashModeDesc(id) {
     switch (id) {
       case AUTO_GLYPH_REJECT.SACRIFICE:
-        return "Always sacrifice";
+        return "항상 희생";
       case AUTO_GLYPH_REJECT.REFINE:
-        return "Always refine";
+        return "항상 정제";
       case AUTO_GLYPH_REJECT.REFINE_TO_CAP:
-        return "Refine to cap, then sacrifice";
+        return "상한까지 정제한 뒤 희생";
       default:
-        return "Invalid Glyph trash mode";
+        return "올바르지 않은 글리프 처리 모드";
     }
   }
 };
@@ -254,7 +254,7 @@ function getGlyphLevelSources() {
       exp: new Decimal(0.5),
     },
     repl: {
-      name: "Replicanti",
+      name: "복제자",
       value: replBase,
       coeff: replCoeff,
       exp: replPow,
@@ -266,7 +266,7 @@ function getGlyphLevelSources() {
       exp: dtPow,
     },
     eternities: {
-      name: "Eternities",
+      name: "영원",
       value: eterBase,
       // These are copied from Reality Upgrade 18's gameDB entry
       coeff: new Decimal(0.45),

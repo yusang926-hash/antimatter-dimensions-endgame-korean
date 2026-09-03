@@ -58,17 +58,17 @@ export default {
       const boostList = [];
 
       const dimMultList = [];
-      dimMultList.push("Antimatter");
-      if (this.achMultToIDS) dimMultList.push("Infinity");
-      if (this.achMultToTDS) dimMultList.push("Time");
-      boostList.push(`${makeEnumeration(dimMultList)} Dimensions: ${achievementPower}`);
-      if (this.achMultToCDS) boostList.push(`Celestial Dimensions: ${achCDEffect}`);
-      if (this.achMultToVDS) boostList.push(`Divine Dimensions: ${achVDEffect}`);
+      dimMultList.push("반물질");
+      if (this.achMultToIDS) dimMultList.push("무한");
+      if (this.achMultToTDS) dimMultList.push("시간");
+      boostList.push(`${makeEnumeration(dimMultList)} 차원: ${achievementPower}`);
+      if (this.achMultToCDS) boostList.push(`셀레스티얼 차원: ${achCDEffect}`);
+      if (this.achMultToVDS) boostList.push(`신성 차원: ${achVDEffect}`);
 
-      if (this.achMultToTP) boostList.push(`Tachyon Particles: ${achTPEffect}`);
-      if (this.achMultToBH) boostList.push(`Black Hole Power: ${achievementPower}`);
-      if (this.achMultToTT) boostList.push(`Time Theorem production: ${achievementPower}`);
-      if (this.achMultToEnt) boostList.push(`Entropy Generation: ${achEnEffect}`);
+      if (this.achMultToTP) boostList.push(`타키온 입자: ${achTPEffect}`);
+      if (this.achMultToBH) boostList.push(`블랙홀 파워: ${achievementPower}`);
+      if (this.achMultToTT) boostList.push(`시간 정리 생산: ${achievementPower}`);
+      if (this.achMultToEnt) boostList.push(`엔트로피 생성: ${achEnEffect}`);
       return `${boostList.join("<br>")}`;
     },
     megaBoostText() {
@@ -81,17 +81,17 @@ export default {
       const powersList = [];
 
       const dimPowList = [];
-      dimPowList.push("Antimatter");
-      if (this.achMultToIDS) dimPowList.push("Infinity");
-      if (this.achMultToTDS) dimPowList.push("Time");
-      powersList.push(`${makeEnumeration(dimPowList)} Dimensions: ${achievementPowers}`);
-      if (this.achMultToCDS) powersList.push(`Celestial Dimensions: ${achCDPow}`);
-      if (this.achMultToVDS) powersList.push(`Divine Dimensions: ${achVDPow}`);
+      dimPowList.push("반물질");
+      if (this.achMultToIDS) dimPowList.push("무한");
+      if (this.achMultToTDS) dimPowList.push("시간");
+      powersList.push(`${makeEnumeration(dimPowList)} 차원: ${achievementPowers}`);
+      if (this.achMultToCDS) powersList.push(`셀레스티얼 차원: ${achCDPow}`);
+      if (this.achMultToVDS) powersList.push(`신성 차원: ${achVDPow}`);
 
-      if (this.achMultToTP) powersList.push(`Tachyon Particles: ${achTPPow}`);
-      if (this.achMultToBH) powersList.push(`Black Hole Power: ${achievementPowers}`);
-      if (this.achMultToTT) powersList.push(`Time Theorem production: ${achievementPowers}`);
-      if (this.achMultToEnt) powersList.push(`Entropy Generation: ${achEnPow}`);
+      if (this.achMultToTP) powersList.push(`타키온 입자: ${achTPPow}`);
+      if (this.achMultToBH) powersList.push(`블랙홀 파워: ${achievementPowers}`);
+      if (this.achMultToTT) powersList.push(`시간 정리 생산: ${achievementPowers}`);
+      if (this.achMultToEnt) powersList.push(`엔트로피 생성: ${achEnPow}`);
       return `${powersList.join("<br>")}`;
     },
   },
@@ -199,47 +199,46 @@ export default {
       <PrimaryToggleButton
         v-model="hideCompletedRows"
         class="o-primary-btn--subtab-option"
-        label="Hide completed rows:"
+        label="완료한 행 숨기기:"
       />
       <PrimaryToggleButton
         v-if="showAutoAchieve"
         v-model="isAutoAchieveActive"
         class="o-primary-btn--subtab-option"
-        label="Auto Achievements:"
+        label="자동 도전과제 달성:"
       />
     </div>
     <div class="c-achievements-tab__header c-achievements-tab__header--multipliers">
       <span v-if="isDoomed && !isDestroyed">
-        All Achievement multipliers have been disabled<SwapAchievementImagesButton />
+        모든 도전과제 배율이 비활성화되었습니다.<SwapAchievementImagesButton />
       </span>
       <span v-else>
-        Achievements provide a multiplier to<SwapAchievementImagesButton />
+        도전과제 배율<SwapAchievementImagesButton />
         <div v-html="boostText" />
       </span>
       <span v-if="showPowers">
-        Achievements also provide powers to<SwapAchievementImagesButton />
+        도전과제 지수 효과<SwapAchievementImagesButton />
         <div v-html="megaBoostText" />
       </span>
     </div>
     <div class="c-achievements-tab__header">
-      Achievements with a <i class="fas fa-star" /> icon also give an additional reward.
+      추가 보상을 제공하는 도전과제에는 <i class="fas fa-star" /> 아이콘이 있습니다.
     </div>
     <div
       v-if="showAutoAchieve"
       class="c-achievements-tab__header"
     >
       <div v-if="achCountdown.gt(0)">
-        Automatically gain the next missing Achievement in
-        {{ timeDisplayNoDecimals(achCountdown) }}<span v-if="!isAutoAchieveActive"> once Auto is turned on</span>.
-        (left-to-right, top-to-bottom)
+        다음 미달성 도전과제를 {{ timeDisplayNoDecimals(achCountdown) }} 후 자동으로 달성합니다<span v-if="!isAutoAchieveActive"> (자동 기능을 켠 뒤부터)</span>.
+        (왼쪽에서 오른쪽, 위에서 아래 순)
       </div>
       <div v-else-if="missingAchievements !== 0">
-        Automatically gain the next missing Achievement as soon as you enable Auto Achievements.
-        (left-to-right, top-to-bottom)
+        자동 도전과제 달성을 켜는 즉시 다음 미달성 도전과제를 달성합니다.
+        (왼쪽에서 오른쪽, 위에서 아래 순)
       </div>
       <div v-if="totalCountdown.gt(0)">
-        You will regain all remaining achievements after {{ timeDisplayNoDecimals(totalCountdown) }} if Auto
-        Achievement <span v-if="isAutoAchieveActive">stays enabled</span><span v-else>is turned on</span>.
+        {{ timeDisplayNoDecimals(totalCountdown) }} 후 남은 모든 도전과제를 다시 획득하려면 자동 도전과제 달성을
+        <span v-if="isAutoAchieveActive">계속 켜 두어야 합니다</span><span v-else>켜야 합니다</span>.
       </div>
       <br>
     </div>

@@ -5,6 +5,16 @@ const vm = require("vm");
 
 const root = path.resolve(__dirname, "..");
 
+function sourceFiles(directory) {
+  const files = [];
+  for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+    const absolutePath = path.join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...sourceFiles(absolutePath));
+    else if (/\.(?:js|vue)$/u.test(entry.name)) files.push(absolutePath);
+  }
+  return files;
+}
+
 function loadFormatRuntime() {
   const file = path.join(root, "src", "core", "format.js");
   const context = {};
@@ -71,5 +81,13 @@ assert.equal(elementalQuotes.match(/5년/gu)?.length, 4,
   "The Elemental intro must use the natural numeric form 5년 in all four five-year lines");
 assert.ok(!/오\s?년|다섯 해/u.test(elementalQuotes),
   "The Elemental intro must not restore a spelled-out five-year expression");
+
+const legacyInfinityPowerTerms = sourceFiles(path.join(root, "src"))
+  .flatMap(file => {
+    const source = fs.readFileSync(file, "utf8");
+    return /무한\s*동력/u.test(source) ? [path.relative(root, file)] : [];
+  });
+assert.deepEqual(legacyInfinityPowerTerms, [],
+  `Infinity Power must consistently use 무한력: ${legacyInfinityPowerTerms.join(", ")}`);
 
 console.log("Korean quantity and date formatting regression checks passed.");

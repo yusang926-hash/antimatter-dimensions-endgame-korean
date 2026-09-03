@@ -15,13 +15,13 @@ export function buySingleTimeDimension(tier, auto = false) {
   if (Enslaved.isRunning && dim.bought.gt(0)) return false;
   if (ImaginaryUpgrade(15).isLockingMechanics && EternityChallenge(7).completions > 0) {
     if (!auto) {
-      ImaginaryUpgrade(15).tryShowWarningModal(`purchase a Time Dimension,
-        which will produce Infinity Dimensions through EC7`);
+      ImaginaryUpgrade(15).tryShowWarningModal(`해당 영원 도전의 효과로 무한 차원을 생성하는
+        시간 차원을 구매`);
     }
     return false;
   }
   if (DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "purchase a Time Dimension";
+    const lockString = "시간 차원을 구매";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }
@@ -121,13 +121,13 @@ export function buyMaxTimeDimension(tier, portionToSpend = 1, isMaxAll = false) 
   }
   if (ImaginaryUpgrade(15).isLockingMechanics && EternityChallenge(7).completions > 0) {
     if (!isMaxAll) {
-      ImaginaryUpgrade(15).tryShowWarningModal(`purchase a Time Dimension,
-        which will produce Infinity Dimensions through EC7`);
+      ImaginaryUpgrade(15).tryShowWarningModal(`해당 영원 도전의 효과로 무한 차원을 생성하는
+        시간 차원을 구매`);
     }
     return false;
   }
   if (DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "purchase a Time Dimension";
+    const lockString = "시간 차원을 구매";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }

@@ -188,6 +188,11 @@ const pluralDatabase = new Map([
 window.pluralize = function pluralize(word, amount, plural) {
   if (word === undefined || amount === undefined) throw "Arguments must be defined";
 
+  // Korean nouns do not change form based on quantity. Keeping this check local to
+  // Hangul text preserves the original pluralization behavior for intentional English
+  // strings and internal fallback messages.
+  if (/[가-힣]/u.test(word)) return word;
+
   if (isSingular(amount)) return word;
   const existingPlural = plural ?? pluralDatabase.get(word);
   if (existingPlural !== undefined) return existingPlural;
@@ -210,6 +215,13 @@ window.generatePlural = function generatePlural(word) {
   return word;
 };
 
+// Korean counters attach directly to the preceding number. This deliberately only handles counter-first names which
+// are already passed to the quantify helpers; resource names such as "무한 포인트" retain their existing spacing.
+const KOREAN_COUNTER_NAME = /^(?:개(?:의)?|회|번|줄|초)(?:$|\s)/u;
+function joinQuantityName(number, name) {
+  return KOREAN_COUNTER_NAME.test(name) ? `${number}${name}` : `${number} ${name}`;
+}
+
 /**
  * Returns the formatted value followed by a name, pluralized based on the value input.
  * @param  {string} name                  - name to pluralize and display after {value}
@@ -225,7 +237,7 @@ window.quantify = function quantify(name, value, places, placesUnder1000, format
 
   const number = formatType(value, places, placesUnder1000);
   const plural = pluralize(name, value);
-  return `${number} ${plural}`;
+  return joinQuantityName(number, plural);
 };
 
 /**
@@ -239,7 +251,7 @@ window.quantifyInt = function quantifyInt(name, value) {
 
   const number = formatInt(value);
   const plural = pluralize(name, value);
-  return `${number} ${plural}`;
+  return joinQuantityName(number, plural);
 };
 
 /**
@@ -253,7 +265,7 @@ window.quantifyHybridSmall = function quantifyHybridSmall(name, value) {
 
   const number = formatHybridSmall(value, 3);
   const plural = pluralize(name, value);
-  return `${number} ${plural}`;
+  return joinQuantityName(number, plural);
 };
 
 /**
@@ -267,7 +279,7 @@ window.quantifyHybridLarge = function quantifyHybridLarge(name, value) {
 
   const number = formatHybridLarge(value, 3);
   const plural = pluralize(name, value);
-  return `${number} ${plural}`;
+  return joinQuantityName(number, plural);
 };
 
 /**
@@ -278,8 +290,9 @@ window.quantifyHybridLarge = function quantifyHybridLarge(name, value) {
 window.makeEnumeration = function makeEnumeration(items) {
   if (items.length === 0) return "";
   if (items.length === 1) return items[0];
-  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  const isKorean = items.some(item => /[가-힣]/u.test(item));
+  if (items.length === 2) return `${items[0]}${isKorean ? " 그리고 " : " and "}${items[1]}`;
   const commaSeparated = items.slice(0, items.length - 1).join(", ");
   const last = items[items.length - 1];
-  return `${commaSeparated}, and ${last}`;
+  return `${commaSeparated}${isKorean ? ", 그리고 " : ", and "}${last}`;
 };

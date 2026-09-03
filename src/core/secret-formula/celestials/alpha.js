@@ -51,7 +51,7 @@ export const alphaUnlocks = {
   breakInfinity: {
     id: 5,
     requirement: 6,
-    nerfDescription: () => `무한 돌파 업그레이드 비용 ${formatX(1000)}, 돌파 후 틱스피드/반물질 차원 비용 스케일링 시작점 ${formatX(20)}, 무한 동력 변환율 /${format(Decimal.max(DC.D8.div(Decimal.log10(Decimal.log10(Currency.infinityPoints.value.add(1)).add(1)).pow(2).clampMin(0.001)), 1).toNumber(), 2, 2)}(무한 포인트 기반)이 적용되지만 은하의 위력은 두 배가 됩니다`,
+    nerfDescription: () => `무한 돌파 업그레이드 비용 ${formatX(1000)}, 돌파 후 틱스피드/반물질 차원 비용 스케일링 시작점 ${formatX(20)}, 무한력 변환율 /${format(Decimal.max(DC.D8.div(Decimal.log10(Decimal.log10(Currency.infinityPoints.value.add(1)).add(1)).pow(2).clampMin(0.001)), 1).toNumber(), 2, 2)}(무한 포인트 기반)이 적용되지만 은하의 위력은 두 배가 됩니다`,
     buffDescription: () => `돌파 후 틱스피드 비용 스케일링을 ${format(0.15, 2, 2)}, 돌파 후 차원 비용 스케일링을 ${format(0.25, 2, 2)}만큼 낮춥니다`,
     effects: {
       nerfA: 1000,

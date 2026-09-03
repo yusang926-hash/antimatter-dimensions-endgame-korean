@@ -44,7 +44,7 @@ export const pelleUpgrades = {
   }),
   infConversion: rebuyable({
     id: "infConversion",
-    description: "무한 동력 변환율을 증가시킵니다",
+    description: "무한력 변환율을 증가시킵니다",
     cost: [40, 1e3, 20, 1e18],
     effect: x => (x * 3.5) ** 0.37,
     formatEffect: x => `+${format(x, 2, 2)}`,

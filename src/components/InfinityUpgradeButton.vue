@@ -95,7 +95,7 @@ export default {
         player.challenge.normal.bestTimes.reduce(Decimal.sumReducer).lt(DC.BEMAX) && !upgrade.isCharged && !this.showChargedEffect;
       const worstChallengeTime = GameCache.worstChallengeTime.value;
       const worstChallengeIndex = 2 + player.challenge.normal.bestTimes.decimalIndexOf(worstChallengeTime);
-      this.worstChallengeString = `(Challenge ${worstChallengeIndex}: ${timeDisplayShort(new Decimal(worstChallengeTime))})`;
+      this.worstChallengeString = `(도전 ${worstChallengeIndex}: ${timeDisplayShort(new Decimal(worstChallengeTime))})`;
     }
   }
 };
@@ -123,14 +123,14 @@ export default {
       />
       <template v-if="!isDisabled && isImprovedByTS31">
         <br>
-        After TS31: {{ formatX(ts31Effect, 2, 2) }}
+        TS31 적용 후: {{ formatX(ts31Effect, 2, 2) }}
       </template>
     </span>
     <CostDisplay
       v-if="!isBought"
       br
       :config="config"
-      name="Infinity Point"
+      name="무한 포인트"
     />
     <slot />
   </button>

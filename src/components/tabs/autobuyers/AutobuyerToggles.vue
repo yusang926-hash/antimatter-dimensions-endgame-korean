@@ -55,7 +55,7 @@ export default {
         autobuyer.mode = this.antimatterAutobuyersBuyMax ? AUTOBUYER_MODE.BUY_SINGLE : AUTOBUYER_MODE.BUY_10;
       }
     }
-  },
+  }
 };
 </script>
 
@@ -63,36 +63,36 @@ export default {
   <div class="c-subtab-option-container">
     <PrimaryToggleButton
       v-model="autobuyersOn"
-      on="Pause autobuyers"
-      off="Resume autobuyers"
+      on="자동 구매기 일시 정지"
+      off="자동 구매기 재개"
       class="o-primary-btn--subtab-option"
     />
     <PrimaryButton
       class="o-primary-btn--subtab-option"
       @click="toggleAllAutobuyers()"
     >
-      {{ allAutobuyersDisabled ? "Enable" : "Disable" }} all autobuyers
+      모든 자동 구매기 {{ allAutobuyersDisabled ? "활성화" : "비활성화" }}
     </PrimaryButton>
     <PrimaryButton
       class="o-primary-btn--subtab-option"
       @click="toggleAntimatterSingles()"
     >
-      Set AD autobuyers to buy {{ antimatterAutobuyersBuyMax ? "singles" : "max" }}
+      반물질 차원 자동 구매기를 {{ antimatterAutobuyersBuyMax ? "1개씩" : "최대" }} 구매로 설정
     </PrimaryButton>
     <span v-if="false">
       <PrimaryButton
         v-if="showContinuum"
         class="o-primary-btn--subtab-option"
       >
-        Continuum is disabled
+        연속체가 비활성화됨
       </PrimaryButton>
     </span>
     <span v-else>
       <PrimaryToggleButton
         v-if="showContinuum"
         v-model="disableContinuum"
-        on="Enable Continuum"
-        off="Disable Continuum"
+        on="연속체 활성화"
+        off="연속체 비활성화"
         class="o-primary-btn--subtab-option"
       />
     </span>

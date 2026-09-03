@@ -23,41 +23,41 @@ export default {
       return TimeSpan.fromSeconds(new Decimal(this.fluxTime)).toStringShort();
     },
     oneMinuteDisp() {
-      return `Spend ${TimeSpan.fromMinutes(1).toStringShort()} of Stored Time`;
+      return `저장된 시간 ${TimeSpan.fromMinutes(1).toStringShort()} 사용`;
     },
     tenMinutesDisp() {
-      return `Spend ${TimeSpan.fromMinutes(10).toStringShort()} of Stored Time`;
+      return `저장된 시간 ${TimeSpan.fromMinutes(10).toStringShort()} 사용`;
     },
     oneHourDisp() {
-      return `Spend ${TimeSpan.fromHours(1).toStringShort()} of Stored Time`;
+      return `저장된 시간 ${TimeSpan.fromHours(1).toStringShort()} 사용`;
     },
     fiveHoursDisp() {
-      return `Spend ${TimeSpan.fromHours(5).toStringShort()} of Stored Time`;
+      return `저장된 시간 ${TimeSpan.fromHours(5).toStringShort()} 사용`;
     },
     allDisp() {
-      return `Spend all Stored Time`;
+      return `저장된 시간 모두 사용`;
     },
     fluxUnlockDisp() {
-      return `Spend ${TimeSpan.fromHours(5).toStringShort()} of Stored Time to unlock Flux`;
+      return `저장된 시간 ${TimeSpan.fromHours(5).toStringShort()}을 사용해 플럭스 해금`;
     },
     fluxIncrementDisp() {
-      return `Spend ${TimeSpan.fromHours(5).toStringShort()} of Stored Time to increase
-        the maximum Flux Level to ${format(Math.ceil(this.maxFlux * 1.1))}.`;
+      return `저장된 시간 ${TimeSpan.fromHours(5).toStringShort()}을 사용해 최대 플럭스 레벨을
+        ${format(Math.ceil(this.maxFlux * 1.1))}(으)로 증가`;
     },
     oneMinuteFlux() {
-      return `Pour ${TimeSpan.fromMinutes(1).toStringShort()} of Stored Time into Flux`;
+      return `저장된 시간 ${TimeSpan.fromMinutes(1).toStringShort()}을 플럭스에 주입`;
     },
     tenMinutesFlux() {
-      return `Pour ${TimeSpan.fromMinutes(10).toStringShort()} of Stored Time into Flux`;
+      return `저장된 시간 ${TimeSpan.fromMinutes(10).toStringShort()}을 플럭스에 주입`;
     },
     oneHourFlux() {
-      return `Pour ${TimeSpan.fromHours(1).toStringShort()} of Stored Time into Flux`;
+      return `저장된 시간 ${TimeSpan.fromHours(1).toStringShort()}을 플럭스에 주입`;
     },
     fiveHoursFlux() {
-      return `Pour ${TimeSpan.fromHours(5).toStringShort()} of Stored Time into Flux`;
+      return `저장된 시간 ${TimeSpan.fromHours(5).toStringShort()}을 플럭스에 주입`;
     },
     allFlux() {
-      return `Pour all Stored Time into Flux`;
+      return `저장된 시간을 모두 플럭스에 주입`;
     },
     classObj1() {
       return {
@@ -243,35 +243,40 @@ export default {
   <div>
     <div class="normal-text">
       <br>
-      <span>You have </span><span class="special-text">{{ timeDisplay }}</span><span> of Stored Time.</span>
+      <span>저장된 시간: </span><span class="special-text">{{ timeDisplay }}</span><span> 보유</span>
     </div>
     <div class="c-subtab-option-container">
       <PrimaryButton
         :class="classObj1"
+        class="c-stored-time-action"
         @click="spendOneMin"
       >
         {{ oneMinuteDisp }}
       </PrimaryButton>
       <PrimaryButton
         :class="classObj2"
+        class="c-stored-time-action"
         @click="spendTenMins"
       >
         {{ tenMinutesDisp }}
       </PrimaryButton>
       <PrimaryButton
         :class="classObj3"
+        class="c-stored-time-action"
         @click="spendOneHour"
       >
         {{ oneHourDisp }}
       </PrimaryButton>
       <PrimaryButton
         :class="classObj4"
+        class="c-stored-time-action"
         @click="spendFiveHours"
       >
         {{ fiveHoursDisp }}
       </PrimaryButton>
       <PrimaryButton
         :class="classObj5"
+        class="c-stored-time-action"
         @click="spendAll"
       >
         {{ allDisp }}
@@ -282,6 +287,7 @@ export default {
     <div v-if="!fluxUnlocked">
       <PrimaryButton
         :class="classObj4"
+        class="c-stored-time-action"
         @click="unlockFlux"
       >
         {{ fluxUnlockDisp }}
@@ -290,6 +296,7 @@ export default {
     <div v-if="fluxUnlocked">
       <PrimaryButton
         :class="classObj4"
+        class="c-stored-time-action c-stored-time-action--wide"
         @click="incrementMaxFlux"
       >
         {{ fluxIncrementDisp }}
@@ -301,105 +308,116 @@ export default {
       v-if="fluxUnlocked"
       class="normal-text"
     >
-      <span>Your current Flux level is </span><span class="special-text">{{ fluxLevel }}</span><span>.</span>
+      <span>현재 플럭스 레벨: </span><span class="special-text">{{ fluxLevel }}</span>
       <br>
-      <span>You have </span><span class="special-text">{{ fluxTimeDisplay }}</span><span> of Flux Time.</span>
+      <span>플럭스 시간: </span><span class="special-text">{{ fluxTimeDisplay }}</span><span> 보유</span>
       <br>
       <span v-if="fluxLevel === 1">
-        You cannot spend Flux Time at Flux level {{ formatInt(1) }}.
+        플럭스 레벨 {{ formatInt(1) }}에서는 플럭스 시간을 사용할 수 없습니다.
       </span>
       <span v-if="fluxLevel !== 1">
-        Flux will consume
-        <span class="special-text">{{ format(fluxLevel - 1) }}</span>
-        {{ pluralize("second", fluxLevel - 1) }} of Flux Time per real second to provide a
-        <span class="special-text">{{ formatX(fluxLevel) }}</span>
-        multiplier to real time.
+        현실 시간 1초마다 플럭스 시간
+        <span class="special-text">{{ format(fluxLevel - 1) }}</span>초를 소모하여 현실 시간에
+        <span class="special-text">{{ formatX(fluxLevel) }}</span> 배율을 적용합니다.
       </span>
       <br>
       <br>
-      <div class="c-subtab-option-container">
+      <div class="c-subtab-option-container c-flux-control-container">
         <PrimaryButton
           :class="classObj6"
+          class="c-stored-time-action"
           @click="minimizeFlux"
         >
-          Minimize Flux Level
+          플럭스 레벨 최소화
         </PrimaryButton>
         <PrimaryButton
           v-if="maxFlux > 200"
           :class="classObj10"
+          class="c-stored-time-action"
           @click="decreaseFlux100"
         >
-          Decrease Flux Level by {{ formatInt(100) }}
+          플럭스 레벨 {{ formatInt(100) }} 감소
         </PrimaryButton>
         <PrimaryButton
           v-if="maxFlux > 20"
           :class="classObj8"
+          class="c-stored-time-action"
           @click="decreaseFlux10"
         >
-          Decrease Flux Level by {{ formatInt(10) }}
+          플럭스 레벨 {{ formatInt(10) }} 감소
         </PrimaryButton>
         <PrimaryButton
           :class="classObj6"
+          class="c-stored-time-action"
           @click="decreaseFlux"
         >
-          Decrease Flux Level
+          플럭스 레벨 감소
         </PrimaryButton>
         <PrimaryButton
           :class="classObj7"
+          class="c-stored-time-action"
           @click="increaseFlux"
         >
-          Increase Flux Level
+          플럭스 레벨 증가
         </PrimaryButton>
         <PrimaryButton
           v-if="maxFlux > 20"
           :class="classObj9"
+          class="c-stored-time-action"
           @click="increaseFlux10"
         >
-          Increase Flux Level by {{ formatInt(10) }}
+          플럭스 레벨 {{ formatInt(10) }} 증가
         </PrimaryButton>
         <PrimaryButton
           v-if="maxFlux > 200"
           :class="classObj11"
+          class="c-stored-time-action"
           @click="increaseFlux100"
         >
-          Increase Flux Level by {{ formatInt(100) }}
+          플럭스 레벨 {{ formatInt(100) }} 증가
         </PrimaryButton>
         <PrimaryButton
           :class="classObj7"
+          class="c-stored-time-action"
           @click="maximizeFlux"
         >
-          Maximize Flux Level
+          플럭스 레벨 최대화
         </PrimaryButton>
       </div>
       <br>
       <br>
-      <div class="c-subtab-option-container">
+      <div class="c-subtab-option-container c-flux-control-container">
         <PrimaryButton
           :class="classObj1"
+          class="c-stored-time-action"
           @click="fluxOneMin"
         >
           {{ oneMinuteFlux }}
         </PrimaryButton>
         <PrimaryButton
           :class="classObj2"
+          class="c-stored-time-action"
           @click="fluxTenMins"
         >
           {{ tenMinutesFlux }}
         </PrimaryButton>
         <PrimaryButton
           :class="classObj3"
+          class="c-stored-time-action"
           @click="fluxOneHour"
         >
           {{ oneHourFlux }}
         </PrimaryButton>
         <PrimaryButton
           :class="classObj4"
+          class="c-stored-time-action"
           @click="fluxFiveHours"
         >
           {{ fiveHoursFlux }}
         </PrimaryButton>
         <PrimaryButton
           :class="classObj5"
+          class="c-stored-time-action"
           @click="fluxAll"
         >
           {{ allFlux }}
@@ -418,5 +436,23 @@ export default {
 .special-text {
   font-size: 2.5rem;
   color: var(--color-dilation);
+}
+
+.c-stored-time-action {
+  white-space: normal;
+  min-width: 18rem;
+  min-height: 4.8rem;
+  line-height: 1.35;
+}
+
+.c-stored-time-action--wide {
+  min-width: 34rem;
+}
+
+.c-flux-control-container {
+  max-width: 100rem;
+  margin: 0 auto;
+
+  gap: 0.6rem;
 }
 </style>

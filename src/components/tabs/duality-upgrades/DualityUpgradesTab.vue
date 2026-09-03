@@ -16,8 +16,8 @@ export default {
   },
   computed: {
     upgrades: () => DualityUpgrades.all,
-    lockTooltip: () => `Requirement locks only prevent manual and automated actions. Any related upgrades
-      will not be disabled and may still cause requirements to be failed.`,
+    lockTooltip: () => `요구 조건 잠금은 수동 및 자동 동작만 막습니다. 관련 업그레이드는 비활성화되지 않으므로
+      요구 조건 달성에 실패할 수도 있습니다.`,
   },
   methods: {
     update() {
@@ -36,25 +36,22 @@ export default {
 <template>
   <div class="l-reality-upgrade-grid">
     <div class="c-cap-text">
-      Your Machine cap is <span class="c-reality-tab__reality-machines">{{ capStr }}</span>.
+      기계 보유 상한은 <span class="c-reality-tab__reality-machines">{{ capStr }}</span>입니다.
     </div>
     <div class="c-info-text">
-      You have reached the limits of Reality and cannot hold more than {{ format(capIM) }} Imaginary Machines.
+      현실의 한계에 도달하여 허수 머신을 {{ format(capIM) }}개보다 많이 보유할 수 없습니다.
       <br>
-      Machines gained in excess of {{ format(baseIMCap) }} will raise the maximum amount of Dual Machines
-      you can have.
+      {{ format(baseIMCap) }}개를 초과하여 얻은 기계는 이중성 기계의 최대 보유량을 늘립니다.
       <br>
-      Dual Machines are gained passively over time up to the cap, but gain slows down exponentially
-      as you approach the cap.
+      이중성 기계는 시간이 지나면 상한까지 자동으로 생성되지만, 상한에 가까워질수록
+      생성 속도가 지수적으로 느려집니다.
       <br>
-      Every {{ formatInt(scaleTime) }} seconds the difference in jM between your current amount and the cap
-      will be cut in half.
+      {{ formatInt(scaleTime) }}초마다 현재 보유량과 상한 사이의 jM 차이가 절반으로 줄어듭니다.
       <br>
       <br>
-      The first two rows of upgrades can be purchased endlessly and the rest of the upgrades are one-time upgrades
-      with requirements.
+      첫 두 줄의 업그레이드는 무한히 구매할 수 있으며, 나머지는 요구 조건이 있는 일회성 업그레이드입니다.
       <br>
-      Upgrades here have the same gameplay and visual behavior as Imaginary Upgrades, but cost Dual Machines instead.
+      이곳의 업그레이드는 상상 업그레이드와 게임 및 시각적 동작은 같지만, 이중성 기계를 비용으로 사용합니다.
       <span :ach-tooltip="lockTooltip">
         <i class="fas fa-question-circle" />
       </span>

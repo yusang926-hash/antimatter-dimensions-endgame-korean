@@ -127,45 +127,45 @@ export default {
 <template>
   <ModalWrapperOptions class="c-modal-options__large">
     <template #header>
-      Animation Options
+      애니메이션 설정
     </template>
     <div class="c-modal-options__button-container">
       <ModalOptionsToggleButton
         v-if="infinityUnlocked"
         v-model="bigCrunch"
-        text="Big Crunch:"
+        text="빅 크런치:"
       />
       <ModalOptionsToggleButton
         v-if="eternityUnlocked"
         v-model="eternity"
-        text="Eternity:"
+        text="영원:"
       />
       <ModalOptionsToggleButton
         v-if="dilationUnlocked"
         v-model="dilation"
-        text="Dilation:"
+        text="시간 팽창:"
       />
       <ModalOptionsToggleButton
         v-if="tachyonsUnlocked"
         v-model="tachyonParticles"
-        text="Tachyon particles:"
+        text="타키온 입자:"
       />
       <ModalOptionsToggleButton
         v-if="realityUnlocked"
         v-model="reality"
-        text="Reality:"
+        text="현실:"
       />
       <ModalOptionsToggleButton
         v-if="isS11Unlocked && isBlackHoleUnlocked"
         v-model="blobHole"
-        text="Always use Blobhole:"
+        text="블롭홀 항상 사용:"
       />
       <div v-if="!isS11Active">
         <ModalOptionsToggleButton
           v-if="animatedThemeUnlocked"
           v-model="background"
           onclick="Themes.find(Theme.currentName()).set();"
-          text="Background:"
+          text="배경:"
         />
       </div>
       <div v-else>
@@ -173,14 +173,14 @@ export default {
           v-if="animatedThemeUnlocked"
           v-model="background"
           onclick="Themes.find(Theme.currentName()).set();"
-          text="Blobsnow:"
+          text="블롭 눈:"
         />
       </div>
       <div
         v-if="isS11Active"
         class="c-blobflake-slider o-primary-btn o-primary-btn--modal-option o-primary-btn--slider"
       >
-        <b>{{ quantifyInt("Blobflake", parseInt(blobSnowflakes)) }}</b>
+        <b>{{ quantifyInt("블롭 눈송이", parseInt(blobSnowflakes)) }}</b>
         <SliderComponent
           class="o-primary-btn--slider__slider"
           v-bind="sliderProps"
@@ -191,17 +191,17 @@ export default {
       <ModalOptionsToggleButton
         v-if="alphaUnlocked"
         v-model="alpha"
-        text="Brighter Alpha:"
+        text="알파 밝게 표시:"
       />
       <ModalOptionsToggleButton
         v-if="etherealExtended"
         v-model="stars"
-        text="Stars:"
+        text="별:"
       />
       <ModalOptionsToggleButton
         v-if="lhcUnlocked"
         v-model="hadrons"
-        text="Hadrons:"
+        text="강입자:"
       />
     </div>
   </ModalWrapperOptions>

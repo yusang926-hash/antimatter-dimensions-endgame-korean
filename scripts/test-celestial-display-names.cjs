@@ -268,8 +268,8 @@ walk(parseModule("src/core/player.js"), node => {
 });
 assert.equal(playerVersionProperties.length, 1, "the default player must define exactly one save version");
 assert.equal(playerVersionProperties[0].value.type, "NumericLiteral", "the default player version must be numeric");
-assert.equal(playerVersionProperties[0].value.value, 105.3,
-  "the default player version must include the alchemy localization repair migration");
+assert.equal(playerVersionProperties[0].value.value, 106,
+  "the default player version must include v106 after the alchemy localization repair migrations");
 
 const legacyNameFiles = new Set([
   "src/core/storage/migrations.js",
@@ -287,7 +287,10 @@ for (const oldName of [
   assert.ok(!visibleSource.includes(oldName), `legacy Celestial transliteration remains: ${oldName}`);
 }
 
-visibleSource = visibleSource.replaceAll("알파벳", "").replaceAll("알파 센타우리", "");
+visibleSource = visibleSource
+  .replaceAll("알파벳", "")
+  .replaceAll("알파 센타우리", "")
+  .replaceAll('text="알파 밝게 표시:"', "");
 assert.ok(!visibleSource.includes("알파"), "legacy Alpha transliteration remains outside allowed non-name words");
 
 const sourceWithoutUnrelatedRaga = visibleSource.replaceAll("라가 - 777년", "");

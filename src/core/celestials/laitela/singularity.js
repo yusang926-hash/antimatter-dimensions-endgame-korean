@@ -289,12 +289,6 @@ export const Singularity = {
     if (!DivinityMilestone.hadronEmpowerment.isReached) Currency.darkEnergy.reset();
     Currency.singularities.add(this.singularitiesGained);
 
-    /*for (const quote of Laitela.quotes.all) {
-      if (quote.requirement) {
-        quote.show();
-      }
-    }*/
-
     EventHub.dispatch(GAME_EVENT.SINGULARITY_RESET_AFTER);
   }
 };
@@ -304,8 +298,8 @@ EventHub.logic.on(GAME_EVENT.GAME_LOAD, () => SingularityMilestones.lastNotified
 EventHub.logic.on(GAME_EVENT.SINGULARITY_RESET_AFTER, () => {
   const newMilestones = SingularityMilestones.unnotifiedMilestones.length;
   if (newMilestones === 0) return;
-  if (newMilestones === 1) GameUI.notify.blackHole(`You reached a Singularity milestone!`);
-  else if (newMilestones > 100) GameUI.notify.blackHole(`You reached over 100 Singularity milestones!`);
-  else GameUI.notify.blackHole(`You reached ${formatInt(newMilestones)} Singularity milestones!`);
+  if (newMilestones === 1) GameUI.notify.blackHole(`특이점 마일스톤에 도달했습니다!`);
+  else if (newMilestones > 100) GameUI.notify.blackHole(`특이점 마일스톤을 100개 넘게 달성했습니다!`);
+  else GameUI.notify.blackHole(`특이점 마일스톤 ${formatInt(newMilestones)}개에 도달했습니다!`);
   SingularityMilestones.lastNotified = Currency.singularities.value;
 });

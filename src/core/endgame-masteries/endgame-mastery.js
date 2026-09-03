@@ -3,14 +3,14 @@ import { EndgameMasteriesState } from "./endgame-masteries";
 export const EndgameMasteries = {};
 
 EndgameMasteries.pathList = [
-  { path: ENDGAME_MASTERY_PATH.ANTIMATTER_DIM_COMPRESSION, masteries: [81, 91, 101], name: "AD Compression" },
-  { path: ENDGAME_MASTERY_PATH.INFINITY_DIM_COMPRESSION, masteries: [82, 92, 102], name: "ID Compression" },
-  { path: ENDGAME_MASTERY_PATH.TIME_DIM_COMPRESSION, masteries: [83, 93, 103], name: "TD Compression" },
-  { path: ENDGAME_MASTERY_PATH.CELESTIAL_DIM_COMPRESSION, masteries: [84, 94, 104], name: "CD Compression" },
-  { path: ENDGAME_MASTERY_PATH.INFINITY_POINTS, masteries: [141, 151], name: "IP" },
-  { path: ENDGAME_MASTERY_PATH.ETERNITY_POINTS, masteries: [142, 152], name: "EP" },
-  { path: ENDGAME_MASTERY_PATH.REALITY_MACHINES, masteries: [143, 153], name: "RM" },
-  { path: ENDGAME_MASTERY_PATH.IMAGINARY_MACHINES, masteries: [144, 154], name: "iM" },
+  { path: ENDGAME_MASTERY_PATH.ANTIMATTER_DIM_COMPRESSION, masteries: [81, 91, 101], name: "반물질 차원 압축" },
+  { path: ENDGAME_MASTERY_PATH.INFINITY_DIM_COMPRESSION, masteries: [82, 92, 102], name: "무한 차원 압축" },
+  { path: ENDGAME_MASTERY_PATH.TIME_DIM_COMPRESSION, masteries: [83, 93, 103], name: "시간 차원 압축" },
+  { path: ENDGAME_MASTERY_PATH.CELESTIAL_DIM_COMPRESSION, masteries: [84, 94, 104], name: "셀레스티얼 차원 압축" },
+  { path: ENDGAME_MASTERY_PATH.INFINITY_POINTS, masteries: [141, 151], name: "무한 포인트" },
+  { path: ENDGAME_MASTERY_PATH.ETERNITY_POINTS, masteries: [142, 152], name: "영원 포인트" },
+  { path: ENDGAME_MASTERY_PATH.REALITY_MACHINES, masteries: [143, 153], name: "리얼리티 머신" },
+  { path: ENDGAME_MASTERY_PATH.IMAGINARY_MACHINES, masteries: [144, 154], name: "허수 머신" },
 ];
 
 EndgameMasteries.paths = EndgameMasteries.pathList.mapToObject(e => e.path, e => e.masteries);

@@ -195,11 +195,11 @@ export class DimBoost {
     if (!allNDUnlocked && boosts.lt(DimBoost.maxDimensionsUnlockable - 4)) {
       newUnlock = `unlock the ${formatInt(boosts.add(5))}th Dimension`;
     } else if (boosts.eq(4) && !NormalChallenge(10).isRunning && !EternityChallenge(3).isRunning) {
-      newUnlock = "unlock Sacrifice";
+      newUnlock = "차원 희생 해금";
     }
 
     const formattedMultText = `give a ${formatX(DimBoost.power, 2, 2)} multiplier `;
-    let dimensionRange = `to the 1st Dimension`;
+    let dimensionRange = `제1 반물질 차원 `;
     if (boosts.gt(0)) dimensionRange = `to Dimensions 1-${Decimal.min(boosts.add(1), 8)}`;
     if (boosts.gte(DimBoost.maxDimensionsUnlockable - 1)) dimensionRange = `to all Dimensions`;
     const formattedPowText = Ascensions.dbA.isUnlocked ? `and a +${formatPow(DimBoost.exponentialPower, 2, 3)} power to all Dimensions` : "";
@@ -214,7 +214,7 @@ export class DimBoost {
       (!player.disablePostReality || (LHC.voidRunning && player.endgame.largeHadronCollider.void.nullified) || (Alpha.isRunning && Alpha.currentStage >= 12) || (LHC.voidRunning && NullUpgrade.limerick1.isBought)) &&
       ((!Pelle.isDoomed || PelleAchievementUpgrade.achievement111.canBeApplied) || PelleUpgrade.dimBoostResetsNothing.isBought);
     if (areDimensionsKept) return boostEffects[0].toUpperCase() + boostEffects.substring(1);
-    return `Reset your Dimensions to ${boostEffects}`;
+    return `차원을 가속하여 ${boostEffects}`;
   }
 
   static get purchasedBoosts() {

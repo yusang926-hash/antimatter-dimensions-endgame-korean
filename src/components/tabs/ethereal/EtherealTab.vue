@@ -37,7 +37,7 @@ export default {
       return `${formatHybridLarge(this.etherealPower, 3)}`;
     },
     extraPowerDisplay() {
-      return `It is also based on Galactic Power amounts above ${format(DC.NUMMAX, 2, 2)}.`;
+      return `또한 ${format(DC.NUMMAX, 2, 2)}를 초과한 은하력 보유량에도 영향을 받습니다.`;
     },
     etherealClassObject() {
       return {
@@ -62,30 +62,30 @@ export default {
       return Math.ceil(this.stars.length / 3);
     },
     nextStarText() {
-      if (this.allStarsUnlocked) return `All stars have been unlocked`;
-      return `The next star unlocks at ${format(this.nextStarReq, 2, 2)} Dual Machines`;
+      if (this.allStarsUnlocked) return `모든 별이 해금되었습니다`;
+      return `이중성 기계 ${format(this.nextStarReq, 2, 2)}개에서 다음 별이 해금됩니다`;
     },
     etherealPowerTimeEstimate() {
       return TimeSpan.fromSeconds(Decimal.sub(this.nextSectorAt, this.etherealPower)
         .div(this.etherealPowerPerSecond)).toTimeEstimate();
     },
     starPowerReqText() {
-      return `Reach a Stellar Product of ${format(DC.NUMMAX, 2, 2)} to unlock Star Power.`;
+      return `항성 곱 ${format(DC.NUMMAX, 2, 2)}에 도달하면 별 파워가 해금됩니다.`;
     },
     starPowerDisplay() {
       if (this.starPower.lt(1000)) return `${format(this.starPower, 2, 2)}`;
       return `${formatHybridLarge(this.starPower, 3)}`;
     },
     nextGenerationText() {
-      if (this.allGenerationsUnlocked) return `All Star Power rewards have been unlocked`;
-      return `You will get a new Star Power reward at ${format(this.nextGeneration, 2, 2)} Star Power`;
+      if (this.allGenerationsUnlocked) return `모든 별 파워 보상이 해금되었습니다`;
+      return `별 파워 ${format(this.nextGeneration, 2, 2)}에서 새로운 별 파워 보상을 얻습니다`;
     },
     starTexts() {
-      let arr = [];
-      let starName = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple", "White", "Black", "Gray"];
+      const arr = [];
+      const starName = ["붉은", "주황", "노란", "초록", "파란", "보라", "흰", "검은", "회색"];
       for (let t = 0; t < 9; t++) {
         if (Ethereal.starGeneration(t).neq(0)) {
-          arr.push(`Star Power is currently generating ${formatDecimalPercents(this.starGen[t], 2)} of pending ${starName[t]} Stars per second`);
+          arr.push(`별 파워가 현재 초당 ${formatDecimalPercents(this.starGen[t], 2)}만큼의 대기 중인 ${starName[t]} 별을 생성하고 있습니다`);
         }
       }
       return arr;
@@ -109,7 +109,7 @@ export default {
       this.starPower.copyFrom(Ethereal.starPower);
       this.starPowerPerSecond.copyFrom(getStarPowerGainPerSecond());
       this.starBoost.copyFrom(Ethereal.allStarBoost);
-      this.nextGeneration.copyFrom(!Ethereal.nextGeneration ? new Decimal(Infinity) : Ethereal.nextGeneration);
+      this.nextGeneration.copyFrom(Ethereal.nextGeneration ?? new Decimal(Infinity));
       this.allGenerationsUnlocked = this.nextGeneration.eq(Infinity);
       this.starGen = [];
       for (let t = 0; t < 9; t++) {
@@ -133,14 +133,14 @@ export default {
   <div class="l-ethereal-tab">
     <div>
       <div>
-        <span class="c-normal-ethereal-text">You have </span>
+        <span class="c-normal-ethereal-text">에테리얼 파워 보유량: </span>
         <span class="c-really-cool-ethereal-text">{{ etherealPowerDisplay }}</span>
-        <span class="c-normal-ethereal-text"> Ethereal Power. </span>
+        <span class="c-normal-ethereal-text">. </span>
         <span class="c-really-cool-ethereal-text">+{{ format(etherealPowerPerSecond, 3, 3) }}/s</span>
       </div>
       <div>
         <span class="c-normal-ethereal-text">
-          Ethereal Power income is based on Celestial Points, Singularities, and Reality Machine amounts.
+          에테리얼 파워 획득량은 셀레스티얼 포인트, 특이점, 리얼리티 머신 보유량을 기반으로 합니다.
         </span>
         <span
           v-if="isBetter"
@@ -150,19 +150,21 @@ export default {
         </span>
       </div>
       <div>
-        <span class="c-normal-ethereal-text">Your Cosmic Sector is </span>
+        <span class="c-normal-ethereal-text">현재 우주 구역: </span>
         <span class="c-really-cool-ethereal-text">{{ formatInt(cosmicSector) }}</span>
-        <span class="c-normal-ethereal-text">, which is currently multiplying all Celestial Dimensions and delaying
-        the Celestial Matter Softcap by </span>
-        <span class="c-really-cool-ethereal-text">{{ formatX(sectorBoost, 3) }}</span><span class="c-normal-ethereal-text">.</span>
+        <span class="c-normal-ethereal-text">
+          . 모든 셀레스티얼 차원에 배수를 적용하고 셀레스티얼 물질 소프트캡을 다음만큼 늦춥니다:
+        </span>
+        <span class="c-really-cool-ethereal-text">{{ formatX(sectorBoost, 3) }}</span>
+        <span class="c-normal-ethereal-text">.</span>
       </div>
       <div>
-        <span class="c-normal-ethereal-text">You will ascend into the next Cosmic Sector at </span>
+        <span class="c-normal-ethereal-text">에테리얼 파워가 </span>
         <span
           class="c-really-cool-ethereal-text"
           :ach-tooltip="etherealPowerTimeEstimate"
         >{{ formatHybridLarge(nextSectorAt, 3) }}</span>
-        <span class="c-normal-ethereal-text"> Ethereal Power.</span>
+        <span class="c-normal-ethereal-text">에 도달하면 다음 우주 구역으로 승천합니다.</span>
       </div>
     </div>
     <br>
@@ -171,14 +173,14 @@ export default {
       class="l-ethereal-extension-unlock"
     >
       <div v-if="!canExtend">
-        <span class="c-normal-ethereal-text">Reach {{ format(1e25, 2, 2) }} Ethereal Power to Extend the Ethereal.</span>
+        <span class="c-normal-ethereal-text">에테리얼 파워 {{ format(1e25, 2, 2) }}에 도달하면 에테리얼을 확장할 수 있습니다.</span>
       </div>
       <div v-if="canExtend">
         <button
           :class="etherealClassObject"
           @click="extendEthereal"
         >
-          Extend the Ethereal
+          에테리얼 확장
         </button>
       </div>
     </div>
@@ -187,7 +189,7 @@ export default {
       class="l-star-grid"
     >
       <div>
-        <span class="c-stellar-glow">Your Stellar Product is </span>
+        <span class="c-stellar-glow">현재 항성 곱: </span>
         <span class="c-cooler-stellar-glow">{{ format(stellarProd, 2, 2) }}</span><span class="c-stellar-glow">.</span>
       </div>
       <br>
@@ -221,7 +223,7 @@ export default {
           :class="etherealCoolClassObject"
           @click="unlockStarPower"
         >
-          Unlock Star Power
+          별 파워 해금
         </button>
       </div>
     </div>
@@ -230,13 +232,13 @@ export default {
       class="l-star-grid"
     >
       <div>
-        <span class="c-stellar-glow">You have </span>
+        <span class="c-stellar-glow">별 파워 보유량: </span>
         <span class="c-cooler-stellar-glow">{{ starPowerDisplay }}</span>
-        <span class="c-stellar-glow"> Star Power. </span>
+        <span class="c-stellar-glow">. </span>
         <span class="c-cooler-stellar-glow">+{{ format(starPowerPerSecond, 3, 3) }}/s</span>
       </div>
       <div>
-        <span class="c-stellar-glow">Your Star Power is currently multiplying the gain of all Star types by </span>
+        <span class="c-stellar-glow">별 파워가 현재 모든 별의 획득량에 적용하는 배수: </span>
         <span class="c-cooler-stellar-glow">{{ formatX(starBoost, 3, 3) }}</span><span class="c-stellar-glow">.</span>
       </div>
       <br>
@@ -279,9 +281,9 @@ export default {
   font-size: 3rem;
   font-weight: bold;
   background: linear-gradient(90deg, cyan, blue, cyan, blue, cyan, blue, cyan);
-  background-size: 300% 100%;
-  background-clip: text;
   text-shadow: 0 0 1.5rem #0000ff;
+  background-clip: text;
+  background-size: 300% 100%;
   animation: a-ethereal-gradient-cycle 5s linear infinite;
 
   -webkit-text-fill-color: transparent;
@@ -292,15 +294,9 @@ export default {
 }
 
 @keyframes a-ethereal-gradient-cycle {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 50% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 50% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
 @keyframes a-ethereal-text-glow {

@@ -1,5 +1,5 @@
 @font-face {
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   src: url("MonospaceTypewriter.ttf");
 }
 
@@ -67,7 +67,7 @@ body.t-s12 {
   height: 100%;
   justify-content: flex-start;
   align-items: stretch;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   background: none;
   margin: auto;
 }
@@ -418,7 +418,7 @@ body.t-s12 {
   width: 25rem;
   height: 4.4rem;
   position: relative;
-  font-family: Typewriter, serif;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   color: var(--color-text);
   background-color: var(--color-base);
   border: 0.1rem solid var(--color-good);
@@ -518,7 +518,7 @@ body.t-s12 {
 
 .btn-big-crunch {
   z-index: 1;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 5rem;
   color: var(--color-infinity);
   background-color: black;
@@ -543,7 +543,7 @@ body.t-s12 {
 
 .btn-celestial-crunch {
   z-index: 1;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 5rem;
   color: var(--color-celestials);
   background-color: black;
@@ -561,7 +561,7 @@ body.t-s12 {
 
 .btn-divinity {
   z-index: 1;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 5rem;
   color: var(--color-pelle--base);
   background-color: black;
@@ -579,7 +579,7 @@ body.t-s12 {
 
 .btn-nullify {
   z-index: 1;
-  font-family: Typewriter;
+  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
   font-size: 5rem;
   color: white;
   background-color: black;

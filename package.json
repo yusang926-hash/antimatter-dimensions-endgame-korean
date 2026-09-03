@@ -11,7 +11,7 @@
     "check:ko:structure": "node scripts/check-localization-structure.cjs",
     "report:ko": "node scripts/report-untranslated.cjs",
     "test:report:ko": "node scripts/test-report-untranslated.cjs",
-    "test:localization:ko": "node scripts/test-report-untranslated.cjs && node scripts/test-localization-git-diff.cjs && node scripts/test-celestial-quote-ids.cjs && node scripts/test-pelle-end-tab-names.cjs && node scripts/test-automator-template-localization.cjs && node scripts/test-large-hadron-collider.cjs && node scripts/test-korean-formatting.cjs && node scripts/test-celestial-display-names.cjs && node scripts/test-localization-semantic-keys.cjs",
+    "test:localization:ko": "node scripts/test-report-untranslated.cjs && node scripts/test-localization-git-diff.cjs && node scripts/test-celestial-quote-ids.cjs && node scripts/test-pelle-end-tab-names.cjs && node scripts/test-automator-template-localization.cjs && node scripts/test-large-hadron-collider.cjs && node scripts/test-korean-formatting.cjs && node scripts/test-celestial-display-names.cjs && node scripts/test-localization-semantic-keys.cjs && node scripts/test-endgame-v12-regressions.cjs",
     "test:celestial-quotes": "node scripts/test-celestial-quote-ids.cjs",
     "test:pelle-end-tabs": "node scripts/test-pelle-end-tab-names.cjs",
     "test:automator-templates:ko": "node scripts/test-automator-template-localization.cjs",
@@ -20,6 +20,7 @@
     "test:celestial-display-names": "node scripts/test-celestial-display-names.cjs",
     "test:localization-semantic-keys": "node scripts/test-localization-semantic-keys.cjs",
     "test:release-safety": "node scripts/test-release-safety.cjs",
+    "test:v12-regressions": "node scripts/test-endgame-v12-regressions.cjs",
     "lint": "vue-cli-service lint --no-fix",
     "lint:fix": "vue-cli-service lint --fix"
   },

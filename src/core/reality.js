@@ -145,7 +145,7 @@ export function requestManualReality() {
     return;
   }
   if (GameCache.glyphInventorySpace.value === 0) {
-    Modal.message.show("No available inventory space; free up space by shift-clicking Glyphs to get rid of them.",
+    Modal.message.show("인벤토리에 빈 공간이 없습니다. 글리프를 Shift+클릭해 제거하여 공간을 확보하세요.",
       { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
     return;
   }
@@ -332,11 +332,11 @@ function giveRealityRewards(realityProps) {
     const current = Teresa.runRewardMultiplier;
     const newMultiplier = Teresa.rewardMultiplier(player.antimatter);
     const isHigher = newMultiplier.gt(current);
-    const modalText = `You have completed Teresa's Reality! ${isHigher
-      ? `Since you gained more Antimatter, you increased your
-      Glyph Sacrifice multiplier from ${format(current, 2, 2)} to ${format(newMultiplier, 2, 2)}`
-      : `You did not gain more Antimatter during this run, so the Glyph Sacrifice multiplier
-      from Teresa did not increase`}.`;
+    const modalText = `Teresa의 현실을 완료했습니다! ${isHigher
+      ? `더 많은 반물질을 획득하여 글리프 희생 배수가
+      ${format(current, 2, 2)}에서 ${format(newMultiplier, 2, 2)}로 증가했습니다`
+      : `이번 진행에서 더 많은 반물질을 획득하지 못했으므로
+      Teresa의 글리프 희생 배수가 증가하지 않았습니다`}`;
     Modal.message.show(modalText, {}, 2);
     if (Currency.antimatter.gt(player.celestials.teresa.bestRunAM)) {
       player.celestials.teresa.bestRunAM = Currency.antimatter.value;
@@ -485,20 +485,19 @@ export function beginProcessReality(realityProps) {
       asyncEntry: doneSoFar => {
         GameIntervals.stop();
         ui.$viewModel.modal.progressBar = {
-          label: "Simulating Amplified Reality",
-          info: () => `The game is currently calculating all the resources you would gain from repeating the
-            Reality you just completed ${formatInt(glyphsToProcess)} more times. Pressing "Quick Glyphs" with
-            more than ${formatInt(glyphsToSample)} Glyphs remaining will speed up the calculation by automatically
-            sacrificing all the remaining Glyphs you would get. Pressing "Skip Glyphs" will ignore all resources
-            related to Glyphs and stop the simulation after giving all other resources.
-            ${Ra.unlocks.unlockGlyphAlchemy.canBeApplied ? `Pressing either button to speed up
-            simulation will not update any resources within Glyph Alchemy.` : ""}`,
-          progressName: "Realities",
+          label: "증폭된 현실 시뮬레이션",
+          info: () => `게임이 방금 완료한 현실을 ${formatInt(glyphsToProcess)}회 더 반복했을 때 얻을 모든 자원을
+            계산하고 있습니다. 남은 글리프가 ${formatInt(glyphsToSample)}개보다 많을 때 "빠른 글리프 처리"를
+            누르면 남은 글리프를 모두 자동 희생하여 계산 속도가 빨라집니다. "글리프 건너뛰기"를 누르면
+            글리프 관련 자원을 모두 무시하고 다른 자원을 지급한 뒤 시뮬레이션을 종료합니다.
+            ${Ra.unlocks.unlockGlyphAlchemy.canBeApplied ? `두 버튼 중 하나를 눌러 시뮬레이션을 가속하면
+            글리프 연금술의 자원은 갱신되지 않습니다.` : ""}`,
+          progressName: "현실",
           current: doneSoFar,
           max: glyphsToProcess,
           startTime: Date.now(),
           buttons: [{
-            text: "Quick Glyphs",
+            text: "빠른 글리프 처리",
             condition: (current, max) => max - current > glyphsToSample,
             click: () => {
               // This changes the simulating function to one that just takes a representative sample of 10000 random
@@ -514,7 +513,7 @@ export function beginProcessReality(realityProps) {
             }
           },
           {
-            text: "Skip Glyphs",
+            text: "글리프 건너뛰기",
             condition: () => true,
             click: () => {
               // Shortcut to the end since we're ignoring all glyph-related resources

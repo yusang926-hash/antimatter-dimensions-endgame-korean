@@ -119,7 +119,7 @@ I was not expecting a content release on my birthday but ¯|_(ツ)_|¯
     name: "Celebrate iOS Version Release",
     info: `
 Celebrating the official iOS launch! It's finally time to perform a Big Crunch right in your pocket.
-A massive thank you to all the contributors who helped expand our dimensions to iOS! 
+A massive thank you to all the contributors who helped expand our dimensions to iOS!
 <br>
 <br>
 <b>Added things:</b><br>

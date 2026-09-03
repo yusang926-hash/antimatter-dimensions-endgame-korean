@@ -17,17 +17,17 @@ export default {
   },
   computed: {
     topLabel() {
-      if (!this.isDoomed) return `You are about to Doom your Reality`;
-      return `You are about to perform an Armageddon reset`;
+      if (!this.isDoomed) return `현실을 파멸시키려 합니다`;
+      return `아마겟돈 초기화를 진행하려 합니다`;
     },
     message() {
       const isFirstReset = (Currency.remnants.eq(0))
-        ? `which will produce ${format(this.nextRealityShardGain, 2, 2)} Reality Shards/s`
-        : `which will increase your Reality Shards gain from ${format(this.realityShardGain, 2, 2)}/s
-          to ${format(this.nextRealityShardGain, 2, 2)}/s`;
+        ? `초당 ${format(this.nextRealityShardGain, 2, 2)}개의 현실 파편을 생산하게 됩니다`
+        : `초당 현실 파편 획득량이 ${format(this.realityShardGain, 2, 2)}에서
+          ${format(this.nextRealityShardGain, 2, 2)}로 증가합니다`;
 
-      return `Armageddon will start a new Doomed Reality. You will gain
-      ${quantify("Remnant", this.remnantsGain, 2, 0)} ${isFirstReset}`;
+      return `아마겟돈은 새로운 파멸한 현실을 시작합니다. ${quantify("잔재", this.remnantsGain, 2, 0)}를 얻으며,
+      ${isFirstReset}.`;
     }
   },
   methods: {
@@ -57,13 +57,12 @@ export default {
       v-if="!isDoomed"
       class="c-modal-message__text"
     >
-      Dooming your Reality will reset everything except Challenge records, Celestial progress and anything under
-      the General and Reality header on the Statistics tab. You will not gain any rewards from your progress
-      in your current Reality. Dooming your Reality will also purge most of your unprotected Glyphs and disable
-      certain game mechanics.
+      현실을 파멸시키면 도전 기록, 셀레스티얼 진행도, 통계 탭의 일반 및 현실 항목을 제외한 모든 것이
+      초기화됩니다. 현재 현실의 진행도에서는 어떤 보상도 얻지 못합니다. 또한 보호하지 않은 글리프
+      대부분을 정리하고 일부 게임 요소를 비활성화합니다.
       <br>
       <br>
-      Are you sure you want to do this?
+      정말로 진행하시겠습니까?
     </div>
     <div
       v-else

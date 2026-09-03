@@ -274,7 +274,7 @@ export function buyOneDimension(tier) {
   const cost = dimension.cost;
 
   if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "purchase an 8th Antimatter Dimension";
+    const lockString = "제8 반물질 차원을 구매";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }
@@ -305,7 +305,7 @@ export function buyManyDimension(tier) {
   const cost = dimension.costUntil10;
 
   if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "purchase an 8th Antimatter Dimension";
+    const lockString = "제8 반물질 차원을 구매";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }
@@ -329,7 +329,7 @@ export function buyAsManyAsYouCanBuy(tier) {
   const cost = dimension.cost.times(howMany);
 
   if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "purchase an 8th Antimatter Dimension";
+    const lockString = "제8 반물질 차원을 구매";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }
@@ -379,7 +379,7 @@ export function buyMaxDimension(tier, bulk = Infinity) {
   if (dimension.cost.gt(goal) && Player.isInAntimatterChallenge) return;
 
   if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "purchase an 8th Antimatter Dimension";
+    const lockString = "제8 반물질 차원을 구매";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }

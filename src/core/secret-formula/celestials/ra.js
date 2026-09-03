@@ -34,7 +34,7 @@ export const ra = {
       id: "v",
       name: "V",
       color: "#ead584",
-      chunkGain: "무한 동력",
+      chunkGain: "무한력",
       memoryGain: "총 기억 레벨",
       requiredUnlock: () => Ra.unlocks.vUnlock,
       rawMemoryChunksPerSecond: () => Decimal.pow(Currency.infinityPower.value.add(1).pLog10().div(1e6), ResurgenceUpgrade.memSurge.isBought ? 3.5 : 1.875).times(4),
@@ -515,7 +515,7 @@ export const ra = {
     },
     spaceTheoremIPowConversion: {
       id: 52,
-      reward: "공간 정리가 무한 동력 변환율을 강화합니다",
+      reward: "공간 정리가 무한력 변환율을 강화합니다",
       effect: () => player.disablePostReality ? 1 : Math.pow(V.spaceTheorems + 1, 0.05),
       pet: "v",
       level: 65,

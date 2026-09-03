@@ -15,11 +15,11 @@ export default {
           currency: "RM",
           condition: () => PlayerProgress.realityUnlocked(),
           getRuns: () => player.records.recentRealities,
-          extra: ["Glyph Level", "Relic Shards"],
+          extra: ["글리프 레벨", "유물 파편"],
           showExtra: [() => true, () => TeresaUnlocks.effarig.canBeApplied],
           formatExtra: [x => formatHybridLarge(x, 3), x => format(x, 2)],
           allowRate: [false, true],
-          rateString: ["", "Relic Shard Rate"],
+          rateString: ["", "유물 파편 획득 속도"],
         },
         eternity: {
           name: "Eternity",
@@ -27,7 +27,7 @@ export default {
           currency: "EP",
           condition: () => PlayerProgress.eternityUnlocked(),
           getRuns: () => player.records.recentEternities,
-          extra: ["Tachyon Particles"],
+          extra: ["타키온 입자"],
           showExtra: [() => PlayerProgress.dilationUnlocked()],
           formatExtra: [x => format(x, 2)],
           allowRate: [false],
@@ -47,13 +47,13 @@ export default {
     resourceText() {
       switch (this.resourceType) {
         case RECENT_PRESTIGE_RESOURCE.ABSOLUTE_GAIN:
-          return "total resource gain";
+          return "총 자원 획득량";
         case RECENT_PRESTIGE_RESOURCE.RATE:
-          return "resource gain rate";
+          return "자원 획득 속도";
         case RECENT_PRESTIGE_RESOURCE.CURRENCY:
-          return "prestige currency";
+          return "프레스티지 화폐";
         case RECENT_PRESTIGE_RESOURCE.PRESTIGE_COUNT:
-          return "prestige count";
+          return "프레스티지 횟수";
         default:
           throw new Error("Unrecognized Statistics tab resource type");
       }
@@ -78,7 +78,7 @@ export default {
         class="o-primary-btn o-primary-btn--subtab-option"
         @click="cycleButton()"
       >
-        Showing {{ resourceText }}
+        표시 항목: {{ resourceText }}
       </button>
     </div>
     <PastPrestigeRunsContainer

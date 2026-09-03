@@ -32,7 +32,7 @@ export default {
       return typeof reward === "function" ? reward() : reward;
     },
     title() {
-      return `Galactic Power ${this.config.id}:`;
+      return `은하력 ${this.config.id}:`;
     }
   },
   methods: {
@@ -64,22 +64,16 @@ export default {
     var(--color-pelle--secondary), var(--color-pelle--base),
     var(--color-pelle--secondary), var(--color-pelle--base)
   );
-  background-size: 100% 300%;
   background-clip: text;
+  background-size: 100% 300%;
   animation: a-galactic-power-text-cycle 5s linear infinite;
 
   -webkit-text-fill-color: transparent;
 }
 
 @keyframes a-galactic-power-text-cycle {
-  0% {
-    background-position: 50% 0%;
-  }
-  50% {
-    background-position: 50% 50%;
-  }
-  100% {
-    background-position: 50% 100%;
-  }
+  0% { background-position: 50% 0%; }
+  50% { background-position: 50% 50%; }
+  100% { background-position: 50% 100%; }
 }
 </style>

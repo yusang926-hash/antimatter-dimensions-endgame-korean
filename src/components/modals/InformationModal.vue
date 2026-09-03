@@ -20,7 +20,7 @@ export default {
       </div>
     </div>
     <div class="c-info-body">
-      <strong>한국어판 기준 버전: Endgame Update v1.1 patch-5</strong>
+      <strong>한국어판 기준 버전: Endgame Update v1.2.0</strong>
       <br>
       <br>
       Antimatter Dimensions는 핀란드 개발자 Hevipelle이 만든 방치형 증분 게임입니다. 2016년 개인 프로젝트로

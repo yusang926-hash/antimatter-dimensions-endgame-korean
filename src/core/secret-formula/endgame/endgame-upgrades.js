@@ -22,84 +22,84 @@ const rebuyable = props => {
 
 export const endgameUpgrades = [
   rebuyable({
-    name: "Antimatter Ameilorator",
+    name: "반물질 개선자",
     id: 1,
     initialCost: 1e40,
     costMult: 60,
-    textTemplate: "Delay the Infinity Upgrade 23 Softcap start by a factor of {value}",
+    textTemplate: "무한 업그레이드 23의 소프트캡 시작점을 {value}배 늦춥니다",
     effect: 1.2,
     overflowing: true
   }),
   rebuyable({
-    name: "Infinity Ameliorator",
+    name: "무한 개선자",
     id: 2,
     initialCost: 1e42,
     costMult: 300,
-    textTemplate: "Reduce the Infinity Dimension Compression Softcap by a factor of {value}",
+    textTemplate: "무한 차원 압축 소프트캡을 {value}배로 감소시킵니다",
     effect: 0.99
   }),
   rebuyable({
-    name: "Time Ameliorator",
+    name: "시간 개선자",
     id: 3,
     initialCost: 1e44,
     costMult: 150,
-    textTemplate: "Reduce the Time Dimension Compression Softcap by a factor of {value}",
+    textTemplate: "시간 차원 압축 소프트캡을 {value}배로 감소시킵니다",
     effect: 0.99
   }),
   rebuyable({
-    name: "Darkness Ameliorator",
+    name: "암흑 개선자",
     id: 4,
     initialCost: 1e48,
     costMult: 480,
-    textTemplate: "Increase the Dark Matter hardcap by a factor of {value}",
+    textTemplate: "암흑 물질 하드캡을 {value}배 증가시킵니다",
     effect: 1e25,
     isDecimal: true
   }),
   rebuyable({
-    name: "Celestial Ameliorator",
+    name: "셀레스티얼 개선자",
     id: 5,
     initialCost: 1e56,
     costMult: 120,
-    textTemplate: "Delay the Celestial Matter Softcap start by a factor of {value}",
+    textTemplate: "셀레스티얼 물질 소프트캡 시작점을 {value}배 늦춥니다",
     effect: 2,
     isDecimal: true
   }),
   {
-    name: "Resourceful Rebirth",
+    name: "풍요로운 재탄생",
     id: 6,
     cost: new Decimal(1e45),
-    requirement: () => `Have ${format(DC.E280)} Reality Shards without purchasing the 6th Galaxy Generator Upgrade`,
+    requirement: () => `여섯 번째 은하 생성기 업그레이드를 구매하지 않고 현실 파편을 ${format(DC.E280)}개 보유하세요`,
     hasFailed: () => GalaxyGeneratorUpgrades.RSMult.boughtAmount > 0,
     checkRequirement: () => GalaxyGeneratorUpgrades.RSMult.boughtAmount === 0 && Currency.realityShards.gte(DC.E280) && 
       player.endgames >= 10,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
-    lockEvent: "purchase the 6th Galaxy Generator Upgrade",
+    lockEvent: "여섯 번째 은하 생성기 업그레이드 구매",
     description: () =>
-      `Start with ${format(1e7)} Perk Points, ${formatInt(1000)} Realities,
-      ${format(1e12)} Relic Shards, and both Nameless upgrades unlocked`
+      `퍼크 포인트 ${format(1e7)}개, 현실 ${formatInt(1000)}회, 유물 파편 ${format(1e12)}개를 보유하고
+      The Nameless Ones의 업그레이드 두 개가 모두 해금된 상태로 시작합니다`
   },
   {
-    name: "Catastrophic Clocking",
+    name: "파국적 시간 측정",
     id: 7,
     cost: new Decimal(1e52),
-    requirement: () => `Play for ${formatPostBreak("1e666")} Years`,
+    requirement: () => `${formatPostBreak("1e666")}년 동안 플레이하세요`,
     checkRequirement: () => Time.totalTimePlayed.totalYears.gt(Decimal.pow(10, 666)),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Outside of Celestial Realities, Game Speed is equal to maximum Game Speed this Endgame if you enabled Celestial Matter"
+    description: "셀레스티얼 물질을 활성화했다면 셀레스티얼 현실 밖에서 게임 속도가 이번 엔드게임의 최대 게임 속도와 같아집니다"
   },
   {
-    name: "Endgame Emolument",
+    name: "엔드게임 보상",
     id: 8,
     cost: new Decimal(1e60),
-    requirement: () => `Manually Endgame in under ${formatInt(10)} minutes (real time)`,
+    requirement: () => `현실 시간 ${formatInt(10)}분 이내에 수동으로 엔드게임하세요`,
     hasFailed: () => Time.thisEndgameRealTime.totalMinutes.gte(10),
     checkRequirement: () => Time.bestEndgameRealTime.totalMinutes.lt(10),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `Generate Endgames ${formatInt(10)} times slower than your fastest Endgame (real time)`,
+    description: () => `가장 빠른 엔드게임의 현실 시간보다 ${formatInt(10)}배 느린 속도로 엔드게임을 생성합니다`,
     effect: () => player.disablePostReality ? DC.NUMMAX : new Decimal(player.records.bestEndgame.realTime * 10),
     formatEffect: value => {
-      if (new Decimal(value).gte(9999999999)) return "No Endgame generation";
+      if (new Decimal(value).gte(9999999999)) return "엔드게임 생성 없음";
       let endgames = 1;
       endgames *= ((ExpansionPack.enslavedPack.isBought && !player.disablePostReality)
         ? Math.floor(1 + Math.pow(Math.log10(Math.min(Tesseracts.effectiveCount, 1000) * Math.max(Math.log10(Tesseracts.effectiveCount) - 2, 1) + 1), Math.log10(player.endgames + 1)))
@@ -108,206 +108,206 @@ export const endgameUpgrades = [
       if (DivinityMilestone.firstDivine.isReached && !player.disablePostReality) endgames *= 10;
       endgames *= DivineDimensions.conversionFormula1.toNumber();
       const timeStr = Time.bestEndgameRealTime.totalMilliseconds.lte(100) && !Alpha.isDestroyed
-        ? `${TimeSpan.fromMilliseconds(new Decimal(1000)).toStringShort()} (capped)`
+        ? `${TimeSpan.fromMilliseconds(new Decimal(1000)).toStringShort()} (상한)`
         : (Time.bestEndgameRealTime.totalMilliseconds.lte(33)
-           ? `${TimeSpan.fromMilliseconds(new Decimal(330)).toStringShort()} (capped)`
+           ? `${TimeSpan.fromMilliseconds(new Decimal(330)).toStringShort()} (상한)`
            : `${TimeSpan.fromMilliseconds(new Decimal(value)).toStringShort()}`);
-      return `${quantify("Endgame", endgames)} every ${timeStr}`;
+      return `${timeStr}마다 ${quantify("엔드게임", endgames)}`;
     }
   },
   {
-    name: "Imagination Illumination",
+    name: "상상의 계몽",
     id: 9,
     cost: new Decimal(1e70),
-    requirement: "Finish the 4th Row of Imaginary Upgrades without purchasing Fabrication of Ideals",
+    requirement: "이상의 제작을 구매하지 않고 허수 업그레이드 네 번째 줄을 완료하세요",
     hasFailed: () => ImaginaryUpgrade(15).isBought,
     checkRequirement: () => !ImaginaryUpgrade(15).isBought && ImaginaryUpgrade(16).isBought && ImaginaryUpgrade(17).isBought &&
       ImaginaryUpgrade(18).isBought && ImaginaryUpgrade(19).isBought && ImaginaryUpgrade(20).isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
-    lockEvent: "purchase Fabrication of Ideals",
-    description: "You keep all Imaginary Upgrades on Endgame"
+    lockEvent: "이상의 제작 구매",
+    description: "엔드게임 시 모든 허수 업그레이드를 유지합니다"
   },
   {
-    name: "Celestial Chaos",
+    name: "셀레스티얼 혼돈",
     id: 10,
     cost: new Decimal(1e83),
-    requirement: () => "Complete Effarig, Nameless, V and Ra before pouring anything into Teresa",
+    requirement: () => "Teresa에게 아무것도 붓기 전에 Effarig, The Nameless Ones, V, Ra를 완료하세요",
     hasFailed: () => player.celestials.teresa.pouredAmount.gt(0),
     checkRequirement: () => player.celestials.teresa.pouredAmount.eq(0) &&
       EffarigUnlock.reality.isUnlocked && Enslaved.isCompleted && V.spaceTheorems >= 36 && Ra.totalPetLevel >= 100,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
-    lockEvent: "pour RM into Teresa",
-    description: () => "Record Teresa Antimatter is kept on Endgame"
+    lockEvent: "Teresa에게 리얼리티 머신 붓기",
+    description: () => "엔드게임 시 Teresa의 최고 반물질 기록을 유지합니다"
   },
   {
-    name: "Nonary Neutralization",
+    name: "아홉 단계 무력화",
     id: 11,
     cost: new Decimal(1e50),
-    requirement: () => `Reach ${format(1e50)} Celestial Matter`,
+    requirement: () => `셀레스티얼 물질 ${format(1e50)}개에 도달하세요`,
     checkRequirement: () => Currency.celestialMatter.value.add(1).log10().gte(50),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () =>
-      `Delay the Infinity Challenge 8 Reward Hardcap by ${formatPow(9)},
-      and multiply all Celestial Dimensions by ${formatX(9)}`,
+      `무한 도전 8 보상의 하드캡을 ${formatPow(9)}만큼 늦추고,
+      모든 셀레스티얼 차원에 ${formatX(9)}를 곱합니다`,
     effect: () => player.disablePostReality ? 1 : 9
   },
   {
-    name: "Unstable Undermining",
+    name: "불안정성 약화",
     id: 12,
     cost: new Decimal(1e68),
-    requirement: "Reach the second Galaxy Generator softcap",
+    requirement: "두 번째 은하 생성기 소프트캡에 도달하세요",
     checkRequirement: () => GalaxyGenerator.galaxies.gte(1e60),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `Reduce the Galaxy Generator Instability Magnitude by ${formatInt(1)}`,
+    description: () => `은하 생성기 불안정성 규모를 ${formatInt(1)}만큼 감소시킵니다`,
     effect: () => player.disablePostReality ? 0 : 1
   },
   {
-    name: "Barrier Breaching",
+    name: "장벽 돌파",
     id: 13,
     cost: new Decimal(1e78),
-    requirement: () => `Reach a Glyph Level of ${formatInt(76543)}`,
+    requirement: () => `글리프 레벨 ${formatInt(76543)}에 도달하세요`,
     checkRequirement: () => player.records.bestEndgame.glyphLevel.gte(76543),
     checkEvent: GAME_EVENT.REALITY_RESET_AFTER,
-    description: "Weaken the third Glyph Level Instability"
+    description: "세 번째 글리프 레벨 불안정성을 약화합니다"
   },
   {
-    name: "Stellar Supplimentation",
+    name: "별의 보충",
     id: 14,
     cost: new Decimal(1e84),
-    requirement: () => `Reach ${format(1e40)} Galaxies without purchasing the 6th Galaxy Generator Upgrade`,
+    requirement: () => `여섯 번째 은하 생성기 업그레이드를 구매하지 않고 은하 ${format(1e40)}개에 도달하세요`,
     hasFailed: () => GalaxyGeneratorUpgrades.RSMult.boughtAmount > 0,
     checkRequirement: () => GalaxyGeneratorUpgrades.RSMult.boughtAmount === 0 && GalaxyGenerator.galaxies.gte(1e40) && 
       player.endgames >= 10,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
-    lockEvent: "purchase the 6th Galaxy Generator Upgrade",
-    description: () => `Weaken the second Galaxy Generator Instability Magnitude by ${formatPercents(0.1)}`,
+    lockEvent: "여섯 번째 은하 생성기 업그레이드 구매",
+    description: () => `두 번째 은하 생성기 불안정성 규모를 ${formatPercents(0.1)}만큼 약화합니다`,
     effect: () => player.disablePostReality ? 1 : 0.9
   },
   {
-    name: "Antimatter Amassment",
+    name: "반물질 축적",
     id: 15,
     cost: new Decimal(1e150),
-    requirement: () => `Reach ${format(Decimal.pow(10, 1e33))} Antimatter outside Pelle`,
+    requirement: () => `Pelle 밖에서 반물질 ${format(Decimal.pow(10, 1e33))}개에 도달하세요`,
     hasFailed: () => Pelle.isDoomed,
     checkRequirement: () => Currency.antimatter.value.add(1).log10().gte(1e33) && !Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `Gain a power to the Antimatter Exponent based on Imaginary Machines`,
+    description: () => `허수 머신에 따라 반물질 지수를 거듭제곱합니다`,
     effect: () => player.disablePostReality ? 1 : 1 + (Decimal.pow(Decimal.log10(Decimal.log10(
       player.reality.imaginaryMachines.add(1)).add(1)), 2).min(10).add(Decimal.log10(Decimal.log10(
       player.reality.imaginaryMachines.add(1)).add(1)).sub(Math.sqrt(10)).max(0)).div(200)).toNumber(),
     formatEffect: value => formatPow(value, 2, 4)
   },
   {
-    name: "Currency Collections",
+    name: "재화 수집",
     id: 16,
     cost: new Decimal(1e55),
-    requirement: () => `Have ${format(1e10)} Galactic Power`,
+    requirement: () => `은하력을 ${format(1e10)} 보유하세요`,
     checkRequirement: () => Currency.galacticPower.gte(1e10),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "You can equip a second Currency Path in Endgame Masteries",
+    description: "엔드게임 마스터리에서 두 번째 재화 경로를 장착할 수 있습니다",
     effect: () => player.disablePostReality ? 1 : 2
   },
   {
-    name: "Compression Calculations",
+    name: "압축 계산",
     id: 17,
     cost: new Decimal(1e65),
-    requirement: () => `Have ${format(1e20)} Galactic Power`,
+    requirement: () => `은하력을 ${format(1e20)} 보유하세요`,
     checkRequirement: () => Currency.galacticPower.gte(1e20),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "You can equip a second Compression Path in Endgame Masteries",
+    description: "엔드게임 마스터리에서 두 번째 압축 경로를 장착할 수 있습니다",
     effect: () => player.disablePostReality ? 1 : 2
   },
   {
-    name: "Money Multiplication",
+    name: "재화 증폭",
     id: 18,
     cost: new Decimal(1e75),
-    requirement: () => `Have ${format(1e30)} Galactic Power`,
+    requirement: () => `은하력을 ${format(1e30)} 보유하세요`,
     hasFailed: () => !EndgameUpgrade(16).isBought,
     checkRequirement: () => Currency.galacticPower.gte(1e30) && EndgameUpgrade(16).isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "You can equip a third Currency Path in Endgame Masteries",
+    description: "엔드게임 마스터리에서 세 번째 재화 경로를 장착할 수 있습니다",
     effect: () => player.disablePostReality ? 1 : 3
   },
   {
-    name: "Dimensional Distension",
+    name: "차원 팽창",
     id: 19,
     cost: new Decimal(1e85),
-    requirement: () => `Have ${format(1e40)} Galactic Power`,
+    requirement: () => `은하력을 ${format(1e40)} 보유하세요`,
     hasFailed: () => !EndgameUpgrade(17).isBought,
     checkRequirement: () => Currency.galacticPower.gte(1e40) && EndgameUpgrade(17).isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "You can equip a third Compression Path in Endgame Masteries",
+    description: "엔드게임 마스터리에서 세 번째 압축 경로를 장착할 수 있습니다",
     effect: () => player.disablePostReality ? 1 : 3
   },
   {
-    name: "Omnipotent Opulence",
+    name: "전능한 풍요",
     id: 20,
     cost: new Decimal(1e95),
-    requirement: () => `Have ${format(1e50)} Galactic Power`,
+    requirement: () => `은하력을 ${format(1e50)} 보유하세요`,
     hasFailed: () => !(EndgameUpgrade(18).isBought && EndgameUpgrade(19).isBought),
     checkRequirement: () => Currency.galacticPower.gte(1e50) && EndgameUpgrade(18).isBought && EndgameUpgrade(19).isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "You can equip a fourth Compression and Currency Path in Endgame Masteries",
+    description: "엔드게임 마스터리에서 네 번째 압축 경로와 재화 경로를 장착할 수 있습니다",
     effect: () => player.disablePostReality ? 1 : 4
   },
   {
-    name: "Infinite Improvements",
+    name: "무한한 개선",
     id: 21,
     cost: Decimal.pow(10, 120),
-    requirement: "Have Increased Infinity Purchased",
+    requirement: "증가한 무한을 구매하세요",
     hasFailed: () => !BreakEternityUpgrade.doubleIPUncap.isBought,
     checkRequirement: () => BreakEternityUpgrade.doubleIPUncap.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Remove the x2 Infinity Point Softcap"
+    description: "무한 포인트 두 배 업그레이드의 소프트캡을 제거합니다"
   },
   {
-    name: "Tachyon Transcendence",
+    name: "타키온 초월",
     id: 22,
     cost: Decimal.pow(10, 170),
-    requirement: "Have Galactic Growth Purchased",
+    requirement: "은하 성장을 구매하세요",
     hasFailed: () => !BreakEternityUpgrade.tgThresholdUncap.isBought,
     checkRequirement: () => BreakEternityUpgrade.tgThresholdUncap.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `Apply a power to the Tachyon Galaxy Threshold based on Endgames`,
+    description: () => `엔드게임 횟수에 따라 타키온 은하 요구량을 거듭제곱합니다`,
     effect: () => player.disablePostReality ? 1 : 1 / Math.log10(player.endgames + 1),
     formatEffect: value => formatPow(value, 2, 3)
   },
   {
-    name: "Quaternary Quantification",
+    name: "사차 정량화",
     id: 23,
     cost: Decimal.pow(10, 240),
-    requirement: "Have Tesseract Traversement Purchased",
+    requirement: "테서랙트 횡단을 구매하세요",
     hasFailed: () => !BreakEternityUpgrade.tesseractMultiplier.isBought,
     checkRequirement: () => BreakEternityUpgrade.tesseractMultiplier.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Celestial Points delay the Free Tesseract Softcap",
+    description: "셀레스티얼 포인트가 무료 테서랙트 소프트캡을 늦춥니다",
     effect: () => player.disablePostReality ? 1 : Math.pow(1 + Decimal.log10(Decimal.max(Decimal.log10(player.endgame.celestialPoints.max(1)).div(200), 1)).toNumber(), 2),
     formatEffect: value => formatX(value, 2, 2)
   },
   {
-    name: "Sacrificial Supercharger",
+    name: "희생 과급기",
     id: 24,
     cost: Decimal.pow(10, 330),
-    requirement: () => `Have Sacrifice Supplimentation Purchased`,
+    requirement: () => `희생 보충을 구매하세요`,
     hasFailed: () => !BreakEternityUpgrade.glyphSacrificeUncap.isBought,
     checkRequirement: () => BreakEternityUpgrade.glyphSacrificeUncap.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "All Glyph Sacrifice Values are increased based on Celestial Matter",
+    description: "셀레스티얼 물질에 따라 모든 글리프 희생 수치가 증가합니다",
     effect: () => player.disablePostReality ? 1 : Decimal.pow(Decimal.max(Decimal.log10(Decimal.log10(player.endgame.celestialMatter.add(1)).add(1)).div(2), 1), 1.5).toNumber(),
     formatEffect: value => formatPow(value, 2, 3)
   },
   {
-    name: "Supremacy Surge",
+    name: "패권의 쇄도",
     id: 25,
     cost: Decimal.pow(10, 440),
-    requirement: () => `Have Potency Proliferation Purchased`,
+    requirement: () => `효력 증대를 구매하세요`,
     hasFailed: () => !BreakEternityUpgrade.glyphSlotImprovement.isBought,
     checkRequirement: () => BreakEternityUpgrade.glyphSlotImprovement.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "Glyph Level gains a multiplier based on Antimatter which applies after Instability",
+    description: "반물질에 따라 글리프 레벨에 불안정성 적용 후 계산되는 배율이 적용됩니다",
     effect: () => player.disablePostReality ? 1 : Decimal.min(Decimal.pow(Decimal.max(Decimal.log10(Decimal.log10(player.antimatter.add(1)).add(1)).div(100), 1), 0.05), 1.2).toNumber(),
     formatEffect: value => formatX(value, 2, 4)
   },

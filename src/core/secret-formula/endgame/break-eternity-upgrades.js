@@ -99,7 +99,7 @@ export const breakEternityUpgrades = {
     costIncrease: 1e10,
     maxUpgrades: 10,
     effect: value => Math.pow(2, value),
-    description: () => "무한 동력 변환율을 두 배로 만듭니다",
+    description: () => "무한력 변환율을 두 배로 만듭니다",
     isDisabled: effect => effect.eq(0),
     formatEffect: value => `${formatX(value, 2)}`,
     noLabel: false

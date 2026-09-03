@@ -8,7 +8,7 @@ Endgame 정본의 의미를 유지합니다.
 
 - Endgame 비교 기준
   - 저장소: <https://github.com/Supersonic-Seven/AntimatterDimensionsEndgameUpdate>
-  - 리비전: `05f31bbeb3e1cc634629ad3232f012d47568e025`
+  - 리비전: `796a911c74a8e55e345e2e15480f31ed5b590237` (Endgame Update v1.2.0)
 - ADKorean 번역 참고 기준
   - 저장소: <https://github.com/Jihuu621/ADKorean>
   - 영문 기준: `7767d453ee01d1b2f906dc98e90078140c0bed98`
@@ -24,12 +24,21 @@ Endgame 정본의 의미를 유지합니다.
 4. 저장 필드, 내부 key, enum, CSS 클래스와 Automator 문법은 번역하지 않는다.
 5. ADKorean 문구를 일부 재사용하고 기존 용어 선택을 참고한다.
 6. 보호 토큰이나 구조를 의도적으로 변경할 때는 정확한 해시, 사유와 제거 조건을 기록한다.
+7. `Infinity Power`는 문맥 전체에서 `무한력`으로 통일한다.
+
+## v1.2 동기화
+
+Endgame v1.1 patch-5 기준 `05f31bbeb`부터 v1.2 기준 `796a911c7`까지의 변경 경로 114개를
+검토했습니다. 런타임에서 참조하지 않는 크레딧 음원 2개를 제외한 코드·UI·스타일·이미지 112개 경로를
+반영하고, 기존 한국어판의 저장 호환 마이그레이션과 내부 키를 보존했습니다.
 
 ## 검증
 
 ```sh
 npm run check:ko
+npm run check:ko:structure
 npm run test:localization:ko
+npm run test:v12-regressions
 npm run test:release-safety
 npm run build:release
 ```

@@ -211,7 +211,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse1"
           />
-          Pelle Achievement Enabling
+          Pelle 도전과제 활성화
         </div>
         <div
           v-if="!isCollapsed1"
@@ -231,7 +231,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse2"
           />
-          Pelle Destruction Upgrades
+          Pelle 파괴 업그레이드
         </div>
         <div
           v-if="!isCollapsed2"
@@ -251,7 +251,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse3"
           />
-          Pelle Reality Upgrade Enabling
+          Pelle 현실 업그레이드 활성화
         </div>
         <div
           v-if="!isCollapsed3"
@@ -271,7 +271,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse4"
           />
-          Pelle Imaginary Upgrade Enabling
+          Pelle 허수 업그레이드 활성화
         </div>
         <div
           v-if="!isCollapsed4"
@@ -291,7 +291,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse5"
           />
-          Pelle Celestial Reward Enabling
+          Pelle 셀레스티얼 보상 활성화
         </div>
         <div
           v-if="!isCollapsed5"
@@ -311,7 +311,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse6"
           />
-          Pelle Perk Enabling
+          Pelle 퍼크 활성화
         </div>
         <div
           v-if="!isCollapsed6"
@@ -331,7 +331,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse7"
           />
-          Pelle Alchemy Enabling
+          Pelle 연금술 활성화
         </div>
         <div
           v-if="!isCollapsed7"
@@ -351,7 +351,7 @@ export default {
             class="c-collapse-icon-clickable"
             @click="toggleCollapse8"
           />
-          Pelle Strike Disabling
+          Pelle 타격 비활성화
         </div>
         <div
           v-if="!isCollapsed8"

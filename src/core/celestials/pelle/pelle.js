@@ -54,7 +54,7 @@ const disabledMechanicUnlocks = {
 export const Pelle = {
   symbol: "♅",
   // Suppress the randomness for this form
-  possessiveName: "Pelle's",
+  possessiveName: "Pelle의",
 
   // This is called upon initial Dooming and after every Armageddon when using the modal
   initializeRun() {
@@ -67,16 +67,16 @@ export const Pelle = {
     EventHub.dispatch(GAME_EVENT.DOOM_REALITY_BEFORE);
     if (!Glyphs.unequipAll()) {
       Modal.hideAll();
-      Modal.message.show(`Dooming your Reality will unequip your Glyphs. Some of your
-        Glyphs could not be unequipped due to lack of inventory space.`, 1);
+      Modal.message.show(`현실을 파멸시키면 글리프가 장착 해제됩니다. 인벤토리 공간이 부족하여
+        일부 글리프를 장착 해제할 수 없습니다.`, 1);
       return;
     }
     // Keep glyphs equal to max slot in Pelle.
     Glyphs.autoClean(Glyphs.activeSlotCountInPelle(true));
     if (Glyphs.freeInventorySpace < 5) {
       Modal.hideAll();
-      Modal.message.show(`You must have enough empty unprotected Glyph slots for
-        ${formatInt(5)} additional Glyphs in order to Doom your Reality.`, 1);
+      Modal.message.show(`현실을 파멸시키려면 보호되지 않은 빈 글리프 슬롯이
+        추가로 ${formatInt(5)}개 이상 필요합니다.`, 1);
       return;
     }
     for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.doomedGlyph(type));
@@ -452,28 +452,28 @@ export const Pelle = {
   getSpecialGlyphEffectDescription(type, count = 1, onlyReturnUseful = false) {
     switch (type) {
       case "infinity":
-        return `Infinity Point gain ${formatX(this.calculatePelleInfinity(count), 2)} (based on current IP)`;
+        return `무한 포인트 획득량 ${formatX(this.calculatePelleInfinity(count), 2)} (현재 IP 기반)`;
       case "time":
-        return `Eternity Point gain ${formatX(this.calculatePelleTime(count), 2)}
-          (based on current EP)`;
+        return `영원 포인트 획득량 ${formatX(this.calculatePelleTime(count), 2)}
+          (현재 EP 기반)`;
       case "replication":
-        return `Replication speed ${formatX(this.calculatePelleReplication(count), 2)}
-        (based on ${wordShift.wordCycle(PelleRifts.vacuum.name)})`;
+        return `복제 속도 ${formatX(this.calculatePelleReplication(count), 2)}
+        (${wordShift.wordCycle(PelleRifts.vacuum.name)} 기반)`;
       case "dilation":
-        return `Dilated Time gain ${formatX(this.calculatePelleDilation(count), 2)}
-          (based on Tachyon Galaxies)`;
+        return `팽창된 시간 획득량 ${formatX(this.calculatePelleDilation(count), 2)}
+          (타키온 은하 기반)`;
       case "power":
-        return `Galaxies are ${formatPercents(this.calculatePellePower(count) - 1)} stronger`;
+        return `은하가 ${formatPercents(this.calculatePellePower(count) - 1)} 더 강해집니다`;
       case "companion":
-        return `You feel ${formatPercents(0.34)} better`;
+        return `기분이 ${formatPercents(0.34)} 더 좋아집니다`;
       // Undefined means that there is no glyph equipped, needs to be here since this function is used in
       // both Current Glyph Effects and Glyph Tooltip
       case undefined:
-        return onlyReturnUseful ? null : "No Glyph equipped!";
+        return onlyReturnUseful ? null : "장착한 글리프가 없습니다!";
       default:
         if (onlyReturnUseful) return null;
-        if (this.isGlyphTypeDisabled(type)) return "You cannot equip this Glyph while Doomed!";
-        return "This Glyph has no Pelle-exclusive effect! That sucks.";
+        if (this.isGlyphTypeDisabled(type)) return "파멸한 동안에는 이 글리프를 장착할 수 없습니다!";
+        return "이 글리프에는 Pelle 전용 효과가 없습니다! 안타깝네요.";
     }
   },
 
@@ -597,17 +597,17 @@ export const Pelle = {
   
   get endTabNames() {
     if (player.celestials.pelle.divinities >= 13) {
-      return "Our Newest Celestial Still Traverses This Reality For Scraps Of Power Amusing Confusing Laughter".split(" ");
+      return "우리의 새로운 셀레스티얼은 여전히 이 현실을 떠돌며 남은 힘의 자투리를 찾아다닌다 재미 혼란 웃음".split(" ");
     } else if (player.celestials.pelle.divinities > 0) {
-      return "Thus We Go Again Rebirth Is Inevitable Surge Forward In Ω Your Divine Leadership".split(" ");
+      return "그리하여 우리는 다시 나아간다 재탄생은 이제 필연이다 힘차게 앞으로 나아가라 Ω 너의 신성한 인도로".split(" ");
     } else if (Effarig.isRunning) {
-      return "Congratulations You Have Just Beaten A Dual Celestial Reality Ω Ω Pelle Is Impressed".split(" ");
+      return "축하한다 너는 이제 막 이중 셀레스티얼 현실 하나를 정복했다 Ω Ω Pelle는 깊이 감탄했다".split(" ");
     } else if (Alpha.isDestroyed) {
-      return "Why Still Here All Is Destroyed Nothing Remains Except Ω Ω Generator Filament Stars".split(" ");
+      return "왜 아직도 여기 있나 모두 파괴됐다 다만 남은 것은 Ω Ω 생성기 필라멘트 별들".split(" ");
     } else if (Achievement(191).isUnlocked) {
-      return "Destruction Has Come A New Beginning Has Arrived Ω Ω Ω We'll Meet Again".split(" ");
+      return "파괴가 마침내 찾아왔다 그리고 새로운 시작도 이제 도래했다 Ω Ω Ω 우리는 다시 만난다".split(" ");
     } else {
-      return "It's Not Over We Will Return We'll Ω Ω Ω Ω Soon Meet Again".split(" ");
+      return "아직 끝나지 않았다 우리는 돌아올 것이다 우리는 Ω Ω Ω Ω 곧 다시 만난다".split(" ");
     }
   },
   

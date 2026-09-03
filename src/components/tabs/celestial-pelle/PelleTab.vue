@@ -41,8 +41,8 @@ export default {
         this.completedRows = Achievements.prePelleRows.countWhere(r => r.every(a => a.isUnlocked));
         this.cappedResources = AlchemyResources.all.countWhere(r => r.amount >= 25000);
         this.canEnterPelle = this.completedRows === this.totalRows &&
-          this.cappedResources === this.totalAlchemyResources && !Alpha.isRunning && !LHC.voidRunning && !LHC.nullifiedVoidRunning &&
-          !player.endgame.overcharge.isRunning;
+          this.cappedResources === this.totalAlchemyResources && !Alpha.isRunning && !LHC.voidRunning &&
+          !LHC.nullifiedVoidRunning && !player.endgame.overcharge.isRunning;
       }
       this.hasStrike = PelleStrikes.all.some(s => s.hasStrike);
       this.hasGalaxyGenerator = PelleRifts.recursion.milestones[2].canBeApplied || GalaxyGenerator.spentGalaxies.gt(0);
@@ -76,7 +76,7 @@ export default {
           class="o-pelle-button"
           @click="showModal"
         >
-          Show effects in Doomed Reality
+          파멸한 현실의 효과 보기
         </button>
       </div>
       <br>
@@ -89,7 +89,7 @@ export default {
       class="pelle-doom-button"
       @click="enterDoomModal"
     >
-      Doom<br>Your<br>Reality
+      현실을<br>파멸<br>시키기
       <div class="pelle-icon-container">
         <span class="pelle-icon">{{ symbol }}</span>
       </div>
@@ -98,13 +98,13 @@ export default {
       v-else
       class="pelle-unlock-requirements"
     >
-      You must have {{ formatInt(totalRows) }} rows of Achievements
-      and all of your Glyph Alchemy Resources capped to unlock Pelle, Celestial of Antimatter.
+      반물질의 셀레스티얼 Pelle를 해금하려면 도전과제 {{ formatInt(totalRows) }}개 행을 완료하고
+      모든 글리프 연금술 자원이 상한에 도달해야 합니다.
       <br>
       <br>
-      {{ formatInt(completedRows) }} / {{ formatInt(totalRows) }} Achievement rows completed
+      도전과제 행 완료: {{ formatInt(completedRows) }} / {{ formatInt(totalRows) }}
       <br>
-      {{ formatInt(cappedResources) }} / {{ formatInt(totalAlchemyResources) }} capped Alchemy Resources
+      상한에 도달한 연금술 자원: {{ formatInt(cappedResources) }} / {{ formatInt(totalAlchemyResources) }}
     </div>
   </div>
 </template>

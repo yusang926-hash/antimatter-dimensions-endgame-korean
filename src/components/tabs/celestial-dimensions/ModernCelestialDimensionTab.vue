@@ -54,8 +54,8 @@ export default {
   computed: {
     softcapCollapseDisplay() {
       return this.collapsedInfo
-        ? "Show softcap information"
-        : "Hide softcap information";
+        ? "소프트캡 정보 표시"
+        : "소프트캡 정보 숨기기";
     },
     timeToCapText() {
       return TimeSpan.fromHours(this.timeToCap).toStringShort();
@@ -69,7 +69,7 @@ export default {
       this.conversionExponent = CelestialDimensions.conversionExponent;
       this.dimMultiplier.copyFrom(this.celestialMatter.pow(this.conversionExponent).max(1));
       this.matterPerSecond.copyFrom(CelestialDimension(1).productionPerSecond);
-      this.incomeType = "Celestial Matter";
+      this.incomeType = "셀레스티얼 물질";
       this.totalDimCap.copyFrom(CelestialDimensions.totalDimCap);
       this.creditsClosed = GameEnd.creditsEverClosed;
       this.softcapPow = CelestialDimensions.softcapPow;
@@ -129,84 +129,85 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="maxAll"
       >
-        Max all
+        모두 최대 구매
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         @click="toggleCelestialMatterMultiplier"
       >
-        Toggle Celestial Matter
+        셀레스티얼 물질 효과 전환
       </PrimaryButton>
       <PrimaryButton
         v-if="isAnyAutobuyerUnlocked"
         class="o-primary-btn--subtab-option"
         @click="toggleAllAutobuyers"
       >
-        Toggle all autobuyers
+        모든 자동 구매기 전환
       </PrimaryButton>
     </div>
     <div v-if="!canCrunch || isBroken">
       <div>
-        <p>
+        <div>
           <span v-if="hasEternities">
-            You have <span class="c-celestial-eternity-text">{{ format(eternityPoints, 2) }}</span>
-            {{ pluralize("Celestial Eternity Point", eternityPoints) }}.
+            셀레스티얼 영원 포인트
+            <span class="c-celestial-eternity-text">{{ format(eternityPoints, 2) }}</span>개를 보유하고 있습니다.
           </span>
           <br>
           <span v-if="hasInfinities">
-            You have <span class="c-celestial-infinity-text">{{ format(infinityPoints, 2) }}</span>
-            {{ pluralize("Celestial Infinity Point", infinityPoints) }}.
+            셀레스티얼 무한 포인트
+            <span class="c-celestial-infinity-text">{{ format(infinityPoints, 2) }}</span>개를 보유하고 있습니다.
           </span>
           <br>
-          You have
+          보유량:
           <span :class="instabilityClassObject()">{{ format(celestialMatter, 2, 1) }}</span>
-          <span v-if="unstable"> Unstable</span> <span v-if="isOverflowing">Overflowing</span>
-          <span v-if="isCorrupted"> Corrupted</span> Celestial Matter,
+          <span v-if="unstable"> 불안정한</span> <span v-if="isOverflowing">범람하는</span>
+          <span v-if="isCorrupted"> 오염된</span> 셀레스티얼 물질,
           <br>
           <span>
-            increased by
+            여기에
             <span :class="instabilityClassObject()">{{ formatPow(conversionExponent, 2, 3) }}</span>
+            제곱을 적용하면
           </span>
-          to a
+          게임 속도에
           <span :class="instabilityClassObject()">
-            {{ formatX(dimMultiplier, 2, 1) }}<span v-if="!isEffectActive"> (Disabled)</span>
+            {{ formatX(dimMultiplier, 2, 1) }}<span v-if="!isEffectActive"> (비활성화)</span>
           </span>
-          multiplier to
-          <span>Game Speed.</span>
+          배율을 <span>제공합니다.</span>
           <div v-if="anySoftcapApplicable">
             <div v-if="!collapsedInfo">
               <div v-if="unstable">
-                You <i>would</i> have <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>
-                Celestial Matter, but you don't.
+                소프트캡이 없었다면 <i>셀레스티얼 물질을</i>
+                <span :class="instabilityClassObject()">{{ format(unnerfedCelestialMatter, 2, 1) }}</span>개
+                보유했겠지만, 실제로는 그렇지 않습니다.
                 <br>
-                This is because at <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span> Celestial Matter, your
-                Celestial Matter was softcapped.
+                셀레스티얼 물질 <span :class="instabilityClassObject()">{{ format(softcap, 2, 1) }}</span>개부터
+                소프트캡이 적용되기 때문입니다.
                 <br>
-                Currently, Celestial Matter above this amount is being raised to the power of
-                <span :class="instabilityClassObject()">{{ format(1 / softcapPow, 2, 3) }}</span>.
+                현재 이 값을 초과하는 셀레스티얼 물질에는
+                <span :class="instabilityClassObject()">{{ format(1 / softcapPow, 2, 3) }}</span>제곱이 적용됩니다.
                 <br>
-                The softcap to Celestial Matter is solely based on your Celestial Matter Softcap Magnitude, which is currently
-                <span :class="instabilityClassObject()">{{ format(softcapPow, 2, 3) }}</span>.
+                셀레스티얼 물질 소프트캡은 셀레스티얼 물질 소프트캡 강도에만 따라 결정되며, 현재 강도는
+                <span :class="instabilityClassObject()">{{ format(softcapPow, 2, 3) }}</span>입니다.
               </div>
               <div v-if="isOverflowing">
-                After <span :class="instabilityClassObject()">{{ format(overflow, 2, 1) }}</span> Celestial Matter, your
-                Celestial Matter was softcapped <i>again</i>.
+                셀레스티얼 물질 <span :class="instabilityClassObject()">{{ format(overflow, 2, 1) }}</span>개부터
+                소프트캡이 <i>다시</i> 적용됩니다.
                 <br>
-                Currently, Celestial Matter and the Celestial Matter Softcap start above this amount is being raised to the power of
-                <span :class="instabilityClassObject()">{{ format(1 / overflowMag, 2, 3) }}</span>.
+                현재 이 값을 초과하는 셀레스티얼 물질과 셀레스티얼 물질 소프트캡 시작점에는
+                <span :class="instabilityClassObject()">{{ format(1 / overflowMag, 2, 3) }}</span>제곱이 적용됩니다.
                 <br>
-                The Celestial Matter Overflow is solely based on your Celestial Matter Overflow Magnitude, which is currently
-                <span :class="instabilityClassObject()">{{ format(overflowMag, 2, 3) }}</span>.
+                셀레스티얼 물질 범람은 셀레스티얼 물질 범람 강도에만 따라 결정되며, 현재 강도는
+                <span :class="instabilityClassObject()">{{ format(overflowMag, 2, 3) }}</span>입니다.
               </div>
               <div v-if="isCorrupted">
-                After <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span> Celestial Matter, your
-                Celestial Matter was softcapped <i>once again</i>.
+                셀레스티얼 물질 <span :class="instabilityClassObject()">{{ format(massOverflow, 2, 1) }}</span>개부터
+                소프트캡이 <i>또다시</i> 적용됩니다.
                 <br>
-                Currently, Celestial Matter above this amount is being raised to the power of
-                <span :class="instabilityClassObject()">{{ format(1 / massOverflowMag, 2, 3) }}</span>.
+                현재 이 값을 초과하는 셀레스티얼 물질에는
+                <span :class="instabilityClassObject()">{{ format(1 / massOverflowMag, 2, 3) }}</span>제곱이 적용됩니다.
                 <br>
-                The Celestial Matter Corruption is solely based on your Celestial Matter Corruption Magnitude, which is currently
-                <span :class="instabilityClassObject()">{{ format(massOverflowMag, 2, 3) }}</span>.
+                셀레스티얼 물질 오염은 셀레스티얼 물질 오염 강도에만 따라 결정되며, 현재 강도는
+                <span :class="instabilityClassObject()">{{ format(massOverflowMag, 2, 3) }}</span>입니다.
               </div>
             </div>
             <PrimaryButton
@@ -216,17 +217,17 @@ export default {
               {{ softcapCollapseDisplay }}
             </PrimaryButton>
           </div>
-        </p>
+        </div>
       </div>
       <div v-if="hasRemnant">
-        Remnants of Alpha Decay are raising all Celestial Dimensions to the power of
-        <span class="c-celestial-dim-description__accent-unstable">{{ format(alphaDecayRemnant, 2, 3) }}</span>,
-        which increases to a cap of {{ formatInt(1) }} over {{ timeToCapText }} this Celestial Infinity.
+        Alpha 붕괴의 잔재가 모든 셀레스티얼 차원에
+        <span class="c-celestial-dim-description__accent-unstable">{{ format(alphaDecayRemnant, 2, 3) }}</span>
+        제곱을 적용합니다. 이 값은 상한인 {{ formatInt(1) }}까지 이번 셀레스티얼 무한에서 {{ timeToCapText }}에 걸쳐 증가합니다.
       </div>
       <div>
-        All Celestial Dimensions can be purchased until {{ format(totalDimCap, 2, 2) }} Celestial Points.
+        모든 셀레스티얼 차원은 셀레스티얼 포인트 {{ format(totalDimCap, 2, 2) }}개까지 구매할 수 있습니다.
       </div>
-      <div>You are getting {{ format(matterPerSecond, 2, 0) }} {{ incomeType }} per second.</div>
+      <div>초당 {{ format(matterPerSecond, 2, 0) }} {{ incomeType }}을 획득하고 있습니다.</div>
     </div>
     <div v-if="canCrunch && !isBroken">
       <br>
@@ -236,12 +237,12 @@ export default {
         }"
         @click="celestialCrunch"
       >
-        Celestial Crunch
+        셀레스티얼 크런치
       </button>
       <br>
       <br>
     </div>
-    <CelestialTickspeedRow v-if="isExpanded"/>
+    <CelestialTickspeedRow v-if="isExpanded" />
     <div class="l-dimensions-container">
       <CelestialDimensionRow
         v-for="tier in 8"
@@ -253,11 +254,11 @@ export default {
       v-if="isExpanded"
       class="resets-container"
     >
-      <CelestialDimensionBoostRow v-if="isExpanded"/>
-      <CelestialGalaxyRow v-if="isExpanded"/>
+      <CelestialDimensionBoostRow v-if="isExpanded" />
+      <CelestialGalaxyRow v-if="isExpanded" />
     </div>
     <div v-if="showLockedDimCostNote">
-      Hold shift to see the Celestial Point cost for locked Celestial Dimensions.
+      Shift 키를 누르면 잠긴 셀레스티얼 차원의 셀레스티얼 포인트 비용을 볼 수 있습니다.
     </div>
   </div>
 </template>

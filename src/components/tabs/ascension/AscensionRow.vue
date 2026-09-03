@@ -17,7 +17,7 @@ export default {
       return ["#b67f33", "#b341e0", "#2196f3", "#df5050", "#4980cc", "#00bcd4", "#8051ec", "#1256a3", "#673ab7"];
     },
     currGrad() {
-      const color = this.gradientColors[this.config.id]
+      const color = this.gradientColors[this.config.id];
       return `linear-gradient(90deg, ${color}, black, ${color}, black, ${color}, black, ${color})`;
     },
     ascensionStyle() {
@@ -29,7 +29,6 @@ export default {
         "background-clip": "text",
         "background-size": "300% 100%",
         animation: "a-ascension-shift 10s infinite",
-
         "-webkit-text-fill-color": "transparent",
       };
     },
@@ -59,13 +58,11 @@ export default {
 
 <template>
   <div v-show="isUnlocked">
-    <div
-      :style="ascensionStyle"
-    >
-      Ascension {{ id }}:
+    <div :style="ascensionStyle">
+      승천 {{ id }}:
       {{ name }}
       <br>
-      Effect: {{ description }}.
+      효과: {{ description }}.
     </div>
   </div>
 </template>

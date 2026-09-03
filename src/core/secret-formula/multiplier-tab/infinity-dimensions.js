@@ -9,7 +9,7 @@ export const ID = {
     name: dim => {
       if (dim) return `제${dim} 무한 차원 배율`;
       if (EternityChallenge(7).isRunning) return "제7 반물질 차원 생산량";
-      return "무한 동력 생산량";
+      return "무한력 생산량";
     },
     displayOverride: dim => (dim
       ? formatX(InfinityDimension(dim).multiplier, 2)
@@ -270,7 +270,7 @@ export const ID = {
   },
 
   powerConversion: {
-    name: "무한 동력 변환",
+    name: "무한력 변환",
     powValue: () => InfinityDimensions.powerConversionRate,
     isActive: () => Currency.infinityPower.value.gt(1) && !EternityChallenge(9).isRunning,
     icon: MultiplierTabIcons.IPOW_CONVERSION,
