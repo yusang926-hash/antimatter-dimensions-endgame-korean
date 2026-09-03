@@ -153,7 +153,7 @@ export const breakInfinityUpgrades = {
     maxUpgrades: () => 8 + (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfB.effectOrDefault(0) - 10 : 0),
     description: "무한 이후 틱스피드 업그레이드의 가격 상승률을 줄입니다.",
     afterEC: () => (EternityChallenge(11).completions > 0
-      ? `영원 도전 11 이후: ${formatX(Player.tickSpeedMultDecrease, 2, 2)}`
+      ? `EC11 이후: ${formatX(Player.tickSpeedMultDecrease, 2, 2)}`
       : ""
     ),
     noLabel: true,
@@ -166,7 +166,7 @@ export const breakInfinityUpgrades = {
     maxUpgrades: () => 7 + (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfB.effectOrDefault(0) - 10 : 0),
     description: "무한 이후 반물질 차원의 가격 상승률을 줄입니다.",
     afterEC: () => (EternityChallenge(6).completions > 0
-      ? `영원 도전 6 이후: ${formatX(Player.dimensionMultDecrease, 2, 2)}`
+      ? `EC6 이후: ${formatX(Player.dimensionMultDecrease, 2, 2)}`
       : ""
     ),
     noLabel: true,

@@ -21,10 +21,7 @@ export default {
   },
   computed: {
     descriptionLines() {
-      const description = typeof this.pack.config.description === "function"
-        ? this.pack.config.description()
-        : this.pack.config.description;
-      return String(description).split("\n").map(line => line.trim()).filter(Boolean);
+      return this.pack.config.description.split("\n").map(x => x.trim());
     },
     isLarge() {
       return this.descriptionLines.length >= 10;
@@ -55,7 +52,7 @@ export default {
         "o-expansion-pack-text": true,
         "o-expansion-pack-text__small": this.isLarge
       };
-    },
+    }
   },
   methods: {
     update() {

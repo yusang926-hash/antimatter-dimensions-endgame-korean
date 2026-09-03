@@ -23,7 +23,7 @@ export default {
       return `차원 희생 (${formatX(this.sacrificeBoost, 2, 2)})`;
     },
     sacrificeTooltip() {
-      if (Ascensions.sacA.isUnlocked) return `제8 반물질 차원을 +${formatPow(this.nextPower, 2, 3)}만큼 강화`;
+      return `제8 반물질 차원을 +${formatPow(this.nextPower, 2, 3)}만큼 강화`;
       return `제8 반물질 차원을 ${formatX(this.sacrificeBoost, 2, 2)}만큼 강화`;
     },
   },

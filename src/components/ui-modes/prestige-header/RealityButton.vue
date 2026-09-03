@@ -131,8 +131,9 @@ export default {
     handleClick() {
       if (this.readyToWarp) {
         Modal.message.show(`이 기능은 v2.0에서 이용할 수 있습니다. Antimatter Dimensions: Endgame을 플레이해 주셔서 감사합니다!`, {}, 3);
-        // Requesting a Reality Warp will be enabled when this feature is implemented.
-      } else if (this.canReality) {
+        //requestRealityWarp();
+      }
+      else if (this.canReality) {
         requestManualReality();
       }
     },

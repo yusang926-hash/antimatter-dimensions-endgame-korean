@@ -125,7 +125,7 @@ export const realityUpgrades = [
     checkEvent: GAME_EVENT.ETERNITY_RESET_AFTER,
     canLock: true,
     // There are two locking events - equipping a glyph with too low a level, and equipping a second glyph
-    description: "글리프 슬롯 1개 추가 획득",
+    description: "글리프 슬롯 추가 획득",
     effect: () => 1
   },
   {
@@ -184,7 +184,7 @@ export const realityUpgrades = [
       Array.range(5, 4).every(i => TimeDimension(i).amount.equals(0)),
     checkEvent: GAME_EVENT.ETERNITY_RESET_AFTER,
     canLock: true,
-    lockEvent: "제5 이상의 시간 차원 구매",
+    lockEvent: "제4보다 높은 시간 차원 구매",
     description: () => `영원 자동구매기를 개선하고 시간 차원 및 ${formatX(5)} 영원 포인트 자동구매기 해금`,
     automatorPoints: 10,
     shortDescription: () => `시간 차원 및 ${formatX(5)} 영원 포인트 자동구매기, 영원 자동구매기 개선`,
@@ -348,7 +348,7 @@ export const realityUpgrades = [
     canLock: true,
     lockEvent: "동반자 이외의 글리프 장착",
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
-    description: "글리프 슬롯 1개 추가 획득",
+    description: "글리프 슬롯 추가 획득",
     effect: () => 1
   },
   {

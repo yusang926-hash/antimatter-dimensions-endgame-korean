@@ -59,7 +59,7 @@ export default {
   },
 };
 </script>
-  
+
 <template>
   <div
     v-if="!isHidden && isAvailable"

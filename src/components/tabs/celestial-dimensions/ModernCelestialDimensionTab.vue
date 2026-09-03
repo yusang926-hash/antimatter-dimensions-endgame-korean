@@ -147,7 +147,7 @@ export default {
     </div>
     <div v-if="!canCrunch || isBroken">
       <div>
-        <div>
+        <p>
           <span v-if="hasEternities">
             셀레스티얼 영원 포인트
             <span class="c-celestial-eternity-text">{{ format(eternityPoints, 2) }}</span>개를 보유하고 있습니다.
@@ -217,7 +217,7 @@ export default {
               {{ softcapCollapseDisplay }}
             </PrimaryButton>
           </div>
-        </div>
+        </p>
       </div>
       <div v-if="hasRemnant">
         Alpha 붕괴의 잔재가 모든 셀레스티얼 차원에
@@ -242,7 +242,7 @@ export default {
       <br>
       <br>
     </div>
-    <CelestialTickspeedRow v-if="isExpanded" />
+    <CelestialTickspeedRow v-if="isExpanded"/>
     <div class="l-dimensions-container">
       <CelestialDimensionRow
         v-for="tier in 8"
@@ -254,8 +254,8 @@ export default {
       v-if="isExpanded"
       class="resets-container"
     >
-      <CelestialDimensionBoostRow v-if="isExpanded" />
-      <CelestialGalaxyRow v-if="isExpanded" />
+      <CelestialDimensionBoostRow v-if="isExpanded"/>
+      <CelestialGalaxyRow v-if="isExpanded"/>
     </div>
     <div v-if="showLockedDimCostNote">
       Shift 키를 누르면 잠긴 셀레스티얼 차원의 셀레스티얼 포인트 비용을 볼 수 있습니다.

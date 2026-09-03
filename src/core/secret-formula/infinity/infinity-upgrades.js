@@ -208,7 +208,7 @@ export const infinityUpgrades = {
     cost: () => Math.pow(300, Alpha.isRunning ? AlphaUnlocks.infinity.effects.nerf.effectOrDefault(1) : 1),
     checkRequirement: () => InfinityUpgrade.skipReset3.isBought,
     description: () =>
-      `모든 초기화를 차원 가속 ${formatInt(4)}회와 반물질 은하 1개를 보유한 상태로 시작하며,
+      `모든 초기화를 차원 가속 ${formatInt(4)}회와 반물질 은하 하나를 보유한 상태로 시작하며,
       제8 반물질 차원이 자동으로 해금됩니다`,
   },
   ipOffline: {

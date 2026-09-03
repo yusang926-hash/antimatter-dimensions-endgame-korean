@@ -28,7 +28,7 @@ export default {
       voidMode: 0,
       nullParticles: new Decimal(),
       nullParticlesPerSecond: new Decimal(),
-      nullParticleEffect: new Decimal(),
+      nullParticleEffect: new Decimal()
     };
   },
   computed: {
@@ -67,24 +67,21 @@ export default {
       this.isRunning = LHC.voidRunning || LHC.nullifiedVoidRunning;
       this.highestAntimatter.copyFrom(player.endgame.largeHadronCollider.void.highestAntimatter);
       this.nullMatter.copyFrom(player.endgame.largeHadronCollider.void.nullMatter);
-      const productionLog = Decimal.log10(
-        Decimal.pow(AntimatterDimension(1).productionPerSecond, 0.01).max(1)
-      );
-      this.nullPerSecond.copyFrom(LHC.voidRunning
-        ? productionLog.pow(Decimal.log10(productionLog.max(1)))
-        : DC.D0);
+      this.nullPerSecond.copyFrom(!LHC.voidRunning ? DC.D0 :
+        Decimal.log10(Decimal.pow(AntimatterDimension(1).productionPerSecond, 0.01).max(1)).pow(
+        Decimal.log10(Decimal.log10(Decimal.pow(AntimatterDimension(1).productionPerSecond, 0.01).max(1)).max(1))));
       this.nullified = player.endgame.largeHadronCollider.void.nullified;
       this.voidMode = player.endgame.largeHadronCollider.void.mode;
       this.nullParticles.copyFrom(player.endgame.largeHadronCollider.void.nullParticles);
-      this.nullParticlesPerSecond.copyFrom(LHC.nullifiedVoidRunning ? getNullParticleGainPerSecond() : DC.D0);
+      this.nullParticlesPerSecond.copyFrom(!LHC.nullifiedVoidRunning ? DC.D0 : getNullParticleGainPerSecond());
       this.nullParticleEffect.copyFrom(Currency.nullParticles.value.max(1).log10().div(5).add(1).pow(5));
     },
     formatNullAmount(amount) {
       return amount.gte(DC.NUMMAX) ? Notations.current.infinite : format(amount, 2, 2);
     },
     glitchAnim() {
-      const flux = Math.random() / (this.voidMode === 1 ? 2 : 4);
-      const negFlux = -flux;
+      let flux = Math.random() / (this.voidMode === 1 ? 2 : 4);
+      let negFlux = -flux;
       return {
         "text-shadow": `${negFlux}rem 0 red, ${flux}rem 0 blue`,
       };
@@ -93,8 +90,11 @@ export default {
       if (this.voidMode === 1) {
         if (this.isRunning) exitNullifiedVoid();
         else enterNullifiedVoid();
-      } else if (this.isRunning) exitTheVoid();
-      else enterTheVoid();
+      }
+      else {
+        if (this.isRunning) exitTheVoid();
+        else enterTheVoid();
+      }
     },
     changeMode() {
       if (this.isRunning) return;

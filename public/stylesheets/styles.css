@@ -325,7 +325,7 @@ body {
 }
 
 @font-face {
-  font-family: "Open Sans Condensed", "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+  font-family: "Open Sans Condensed";
   font-style: normal;
   font-weight: 300;
   src:
@@ -350,7 +350,7 @@ body {
 }
 
 @font-face {
-  font-family: Typewriter, "Noto Sans KR", "Malgun Gothic", "Apple SD Gothic Neo", monospace;
+  font-family: Typewriter;
   src: url("BlobEmoji-Bold.ttf"), url("MonospaceTypewriter.ttf");
 }
 
@@ -1174,6 +1174,10 @@ button:focus {
   animation: a-warp-glow 3s infinite;
 }
 
+.c-reality-button--escape {
+  animation: a-escape-glow 3s infinite;
+}
+
 .c-reality-reminder {
   display: flex;
   width: calc(100% - 1rem);
@@ -1236,7 +1240,6 @@ button:focus {
 .c-reality-button--escape {
   color: var(--color-reality-dark);
   border-color: var(--color-reality-dark);
-  animation: a-escape-glow 3s infinite;
   cursor: pointer;
 }
 
@@ -12760,28 +12763,23 @@ kbd {
 @keyframes a-ascension-shift {
   0% {
     background-position: 0% 50%;
-    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white)
-      drop-shadow(-0.3rem -0.3rem 0.1rem white);
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white) drop-shadow(-0.3rem -0.3rem 0.1rem white);
   }
   25% {
     background-position: 25% 50%;
-    filter: drop-shadow(0 0 0.1rem white) drop-shadow(-0.3rem 0.3rem 0.1rem white)
-      drop-shadow(0.3rem -0.3rem 0.1rem white);
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(-0.3rem 0.3rem 0.1rem white) drop-shadow(0.3rem -0.3rem 0.1rem white);
   }
   50% {
     background-position: 50% 50%;
-    filter: drop-shadow(0 0 0.1rem white) drop-shadow(-0.3rem -0.3rem 0.1rem white)
-      drop-shadow(0.3rem 0.3rem 0.1rem white);
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(-0.3rem -0.3rem 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white);
   }
   75% {
     background-position: 75% 50%;
-    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem -0.3rem 0.1rem white)
-      drop-shadow(-0.3rem 0.3rem 0.1rem white);
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem -0.3rem 0.1rem white) drop-shadow(-0.3rem 0.3rem 0.1rem white);
   }
   100% {
     background-position: 100% 50%;
-    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white)
-      drop-shadow(-0.3rem -0.3rem 0.1rem white);
+    filter: drop-shadow(0 0 0.1rem white) drop-shadow(0.3rem 0.3rem 0.1rem white) drop-shadow(-0.3rem -0.3rem 0.1rem white);
   }
 }
 

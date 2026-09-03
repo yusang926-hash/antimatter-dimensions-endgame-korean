@@ -179,7 +179,7 @@ export const dualityUpgrades = [
     hasFailed: () => false,
     checkRequirement: () => Hadrons.timeFactor.times(4).gte(100),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "두 번째 강입자 효과 해금",
+    description: "제2 강입자 효과 해금",
   },
   {
     name: "경이로운 회전",
@@ -189,7 +189,7 @@ export const dualityUpgrades = [
     hasFailed: () => false,
     checkRequirement: () => player.celestials.laitela.singularities.gte("1e44875"),
     checkEvent: GAME_EVENT.SINGULARITY_RESET_BEFORE,
-    description: "세 번째 강입자 효과 해금",
+    description: "제3 강입자 효과 해금",
   },
   {
     name: "비례 평형",
@@ -202,7 +202,7 @@ export const dualityUpgrades = [
     player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)).gte(2.4e9) : Replicanti.galaxies.total.add(player.galaxies).add(
       player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies).gte(2.4e9) && !Pelle.isDoomed,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "네 번째 강입자 효과 해금",
+    description: "제4 강입자 효과 해금",
   },
   {
     name: "지정된 발산",

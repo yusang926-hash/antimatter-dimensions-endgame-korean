@@ -68,13 +68,13 @@ export const endgameUpgrades = [
     name: "풍요로운 재탄생",
     id: 6,
     cost: new Decimal(1e45),
-    requirement: () => `여섯 번째 은하 생성기 업그레이드를 구매하지 않고 현실 파편을 ${format(DC.E280)}개 보유하세요`,
+    requirement: () => `제6 은하 생성기 업그레이드를 구매하지 않고 현실 파편을 ${format(DC.E280)}개 보유하세요`,
     hasFailed: () => GalaxyGeneratorUpgrades.RSMult.boughtAmount > 0,
     checkRequirement: () => GalaxyGeneratorUpgrades.RSMult.boughtAmount === 0 && Currency.realityShards.gte(DC.E280) && 
       player.endgames >= 10,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
-    lockEvent: "여섯 번째 은하 생성기 업그레이드 구매",
+    lockEvent: "제6 은하 생성기 업그레이드 구매",
     description: () =>
       `퍼크 포인트 ${format(1e7)}개, 현실 ${formatInt(1000)}회, 유물 파편 ${format(1e12)}개를 보유하고
       The Nameless Ones의 업그레이드 두 개가 모두 해금된 상태로 시작합니다`
@@ -119,7 +119,7 @@ export const endgameUpgrades = [
     name: "상상의 계몽",
     id: 9,
     cost: new Decimal(1e70),
-    requirement: "이상의 제작을 구매하지 않고 허수 업그레이드 네 번째 줄을 완료하세요",
+    requirement: "이상의 제작을 구매하지 않고 허수 업그레이드 제4 줄을 완료하세요",
     hasFailed: () => ImaginaryUpgrade(15).isBought,
     checkRequirement: () => !ImaginaryUpgrade(15).isBought && ImaginaryUpgrade(16).isBought && ImaginaryUpgrade(17).isBought &&
       ImaginaryUpgrade(18).isBought && ImaginaryUpgrade(19).isBought && ImaginaryUpgrade(20).isBought,
@@ -176,13 +176,13 @@ export const endgameUpgrades = [
     name: "별의 보충",
     id: 14,
     cost: new Decimal(1e84),
-    requirement: () => `여섯 번째 은하 생성기 업그레이드를 구매하지 않고 은하 ${format(1e40)}개에 도달하세요`,
+    requirement: () => `제6 은하 생성기 업그레이드를 구매하지 않고 은하 ${format(1e40)}개에 도달하세요`,
     hasFailed: () => GalaxyGeneratorUpgrades.RSMult.boughtAmount > 0,
     checkRequirement: () => GalaxyGeneratorUpgrades.RSMult.boughtAmount === 0 && GalaxyGenerator.galaxies.gte(1e40) && 
       player.endgames >= 10,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
-    lockEvent: "여섯 번째 은하 생성기 업그레이드 구매",
+    lockEvent: "제6 은하 생성기 업그레이드 구매",
     description: () => `두 번째 은하 생성기 불안정성 규모를 ${formatPercents(0.1)}만큼 약화합니다`,
     effect: () => player.disablePostReality ? 1 : 0.9
   },

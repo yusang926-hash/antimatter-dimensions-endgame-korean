@@ -208,7 +208,8 @@ export default {
         Glyphs.addToInventory(GlyphGenerator.realityGlyph(Decimal.floor(AlchemyResource.reality.amount)));
         if (!ExpansionPack.effarigPack.isBought || player.disablePostReality) AlchemyResource.reality.amount = 0;
         player.reality.glyphs.createdRealityGlyph = true;
-      } else Modal.realityGlyph.show();
+      }
+      else Modal.realityGlyph.show();
     },
     nodeClass(node) {
       const resource = node.resource;

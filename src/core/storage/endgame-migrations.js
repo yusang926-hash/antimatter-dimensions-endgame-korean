@@ -1,4 +1,4 @@
-// Time for spaghetti code
+//Time for spaghetti code
 export function endgameMigration(player) {
   player.dimensionBoosts = new Decimal(player.dimensionBoosts);
   player.galaxies = new Decimal(player.galaxies);
@@ -129,17 +129,17 @@ export function endgameMigration(player) {
     galaxyGenerator.all.push({ isActive: false, lastTick: 0 });
   }
   galaxyGenerator.isActive ??= true;
-  const s1 = player.reality.glyphs.active;
+  let s1 = player.reality.glyphs.active;
   for (let g1 = 0; g1 < s1.length; g1++) {
     if (s1[g1].level) s1[g1].level = new Decimal(s1[g1].level);
   }
   player.reality.glyphs.active = s1;
-  const s2 = player.reality.glyphs.inventory;
+  let s2 = player.reality.glyphs.inventory;
   for (let g2 = 0; g2 < s2.length; g2++) {
     if (s2[g2].level) s2[g2].level = new Decimal(s2[g2].level);
   }
   player.reality.glyphs.inventory = s2;
-  const s3 = player.reality.glyphs.sets;
+  let s3 = player.reality.glyphs.sets;
   for (let a3 = 0; a3 < s3.length; a3++) {
     if (s3[a3].glyphs) {
       for (let g3 = 0; g3 < s3[a3].glyphs.length; g3++) {
@@ -148,12 +148,12 @@ export function endgameMigration(player) {
     }
   }
   player.reality.glyphs.sets = s3;
-  const s4 = player.celestials.teresa.bestAMSet;
+  let s4 = player.celestials.teresa.bestAMSet;
   for (let g4 = 0; g4 < s4.length; g4++) {
     if (s4[g4].level) s4[g4].level = new Decimal(s4[g4].level);
   }
   player.celestials.teresa.bestAMSet = s4;
-  const s5 = player.celestials.v.runGlyphs;
+  let s5 = player.celestials.v.runGlyphs;
   for (let a5 = 0; a5 < s5.length; a5++) {
     if (s5[a5]) {
       for (let g5 = 0; g5 < s5[a5].length; g5++) {
@@ -162,37 +162,37 @@ export function endgameMigration(player) {
     }
   }
   player.celestials.v.runGlyphs = s5;
-  const s6 = player.records.bestReality.RMSet;
+  let s6 = player.records.bestReality.RMSet;
   for (let g6 = 0; g6 < s6.length; g6++) {
     if (s6[g6].level) s6[g6].level = new Decimal(s6[g6].level);
   }
   player.records.bestReality.RMSet = s6;
-  const s7 = player.records.bestReality.RMminSet;
+  let s7 = player.records.bestReality.RMminSet;
   for (let g7 = 0; g7 < s7.length; g7++) {
     if (s7[g7].level) s7[g7].level = new Decimal(s7[g7].level);
   }
   player.records.bestReality.RMminSet = s7;
-  const s8 = player.records.bestReality.glyphLevelSet;
+  let s8 = player.records.bestReality.glyphLevelSet;
   for (let g8 = 0; g8 < s8.length; g8++) {
     if (s8[g8].level) s8[g8].level = new Decimal(s8[g8].level);
   }
   player.records.bestReality.glyphLevelSet = s8;
-  const s9 = player.records.bestReality.bestEPSet;
+  let s9 = player.records.bestReality.bestEPSet;
   for (let g9 = 0; g9 < s9.length; g9++) {
     if (s9[g9].level) s9[g9].level = new Decimal(s9[g9].level);
   }
   player.records.bestReality.bestEPSet = s9;
-  const s10 = player.records.bestReality.speedSet;
+  let s10 = player.records.bestReality.speedSet;
   for (let g10 = 0; g10 < s10.length; g10++) {
     if (s10[g10].level) s10[g10].level = new Decimal(s10[g10].level);
   }
   player.records.bestReality.speedSet = s10;
-  const s11 = player.records.bestReality.iMCapSet;
+  let s11 = player.records.bestReality.iMCapSet;
   for (let g11 = 0; g11 < s11.length; g11++) {
     if (s11[g11].level) s11[g11].level = new Decimal(s11[g11].level);
   }
   player.records.bestReality.iMCapSet = s11;
-  const s12 = player.records.bestReality.laitelaSet;
+  let s12 = player.records.bestReality.laitelaSet;
   for (let g12 = 0; g12 < s12.length; g12++) {
     if (s12[g12].level) s12[g12].level = new Decimal(s12[g12].level);
   }
