@@ -16,8 +16,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  # Public source baseline imported from the fully-audited Korean localization snapshot.
-  LOCALIZATION_AUDIT_BASE: eb4d15f85e69a53dc4e91bae1d2ae894d88b4721
+  # Fully audited Endgame v1.2 Korean source baseline.
+  LOCALIZATION_AUDIT_BASE: ad1385b258707d95ccef45d4ea5d6c853fed7dd2
 
 jobs:
   deploy:
@@ -44,6 +44,9 @@ jobs:
 
       - name: Check all changes since the audited localization baseline
         run: npm run check:ko -- --base=$LOCALIZATION_AUDIT_BASE
+
+      - name: Check localization structure since the audited baseline
+        run: npm run check:ko:structure -- --base=$LOCALIZATION_AUDIT_BASE
 
       - name: Run localization regression tests
         run: npm run test:localization:ko
