@@ -328,8 +328,8 @@ export function ratePerMinute(amount, time) {
 // eslint-disable-next-line max-params
 export function addInfinityTime(time, realTime, ip, infinities) {
   let challenge = "";
-  if (player.challenge.normal.current) challenge = `일반 도전 ${player.challenge.normal.current}`;
-  if (player.challenge.infinity.current) challenge = `무한 도전 ${player.challenge.infinity.current}`;
+  if (player.challenge.normal.current) challenge = `Normal Challenge ${player.challenge.normal.current}`;
+  if (player.challenge.infinity.current) challenge = `Infinity Challenge ${player.challenge.infinity.current}`;
   player.records.recentInfinities.pop();
   player.records.recentInfinities.unshift([time, realTime, ip, infinities, challenge]);
   GameCache.bestRunIPPM.invalidate();
@@ -516,9 +516,7 @@ export function gainedCelestialEternityPoints() {
   let cep = DC.D5.pow(player.records.thisCelestialEternity.maxCIP.plus(
     gainedCelestialInfinityPoints()).add(1).log10().div(308).sub(0.7)).times(totalCEPMult());
 
-  cep = cep.min(DC.E4000).times(cep.div(DC.E4000).max(1).pow(0.1));
-  cep = cep.min(DC.E5000).times(cep.div(DC.E5000).max(1).pow(0.1));
-  cep = cep.min(DC.E6000);
+  cep = cep.min(DC.E4000).times(Decimal.pow10(1000 / 3).pow(cep.max(1).log10().div(4000).max(1).log10()));
 
   return cep.floor();
 }
@@ -726,7 +724,7 @@ export function gameLoop(passedDiff, options = {}) {
   const passDiff = passedDiff === undefined
     ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7) : passedDiff;
   let diff = new Decimal(passDiff);
-  const realDiff = diff === undefined
+  let realDiff = diff === undefined
     ? Math.clamp(thisUpdate - player.lastUpdate, 1, 8.64e7)
     : new Decimal(diff).toNumber();
 
@@ -769,6 +767,16 @@ export function gameLoop(passedDiff, options = {}) {
 
   if (player.introTick === 45000 && player.introFrozen && !ui.$viewModel.quotes.current) {
     Quote.addToQueue(Quotes.elemental.intro3);
+  }
+
+  if (player.flux.fluxTime > 0) {
+    let finaltick = 1;
+    if ((player.flux.fluxTime - realDiff * (player.flux.level - 1) / 1000) < 0) {
+      finaltick = player.flux.fluxTime / (realDiff * (player.flux.level - 1) / 1000);
+    }
+    player.flux.fluxTime = Math.max(player.flux.fluxTime - realDiff * (player.flux.level - 1) / 1000, 0);
+    realDiff = realDiff * (((player.flux.level - 1) * finaltick) + 1);
+    diff = new Decimal(diff).times(((player.flux.level - 1) * finaltick) + 1);
   }
 
   // In certain cases we want to allow the player to interact with the game's settings and tabs, but prevent any actual
@@ -838,8 +846,8 @@ export function gameLoop(passedDiff, options = {}) {
       // This is only called from simulateTime() and is calculated externally in order to avoid weirdness when game
       // speed is directly nerfed
       speedFactor = new Decimal(options.blackHoleSpeedup);
-      if (speedFactor.lt(0)) throw Error("블랙홀 속도 계수가 " + speedFactor.toString() + "이므로 게임이 충돌합니다.")
-      if (speedFactor.eq(0)) console.log("블랙홀 속도 계수가 0입니다! 충돌이 발생할 수 있습니다.")
+      if (speedFactor.lt(0)) throw Error("The Speed Factor of BH is" + speedFactor.toString() + " which will cause game to crash.")
+      if (speedFactor.eq(0)) console.log("The Speed Factor of BH is 0! Will it cause crash?")
     }
 
     if (Enslaved.isStoringGameTime && !fixedSpeedActive) {
@@ -1079,7 +1087,7 @@ export function gameLoop(passedDiff, options = {}) {
 
   // There are some external checks which prevent excessive resource gain with Teresa-25; it may give TP outside of
   // dilation, but the TP gain function is also coded to behave differently if it's active
-  const teresa1 = player.dilation.active && (Ra.unlocks.autoTP.canBeApplied || EndgameMastery(53).isBought);
+  const teresa1 = player.dilation.active && (Ra.unlocks.autoTP.canBeApplied || EndgameMilestone.startRa.isReached);
   const teresa25 = !isInCelestialReality() && Ra.unlocks.unlockDilationStartingTP.canBeApplied;
   if ((teresa1 || teresa25) && !Pelle.isDoomed && !player.disablePostReality) rewardTP();
 
@@ -1133,6 +1141,11 @@ export function gameLoop(passedDiff, options = {}) {
     darkMatterProd = Decimal.min(darkMatterProd, darkMatterThreshold3).times(
       Decimal.pow(Decimal.max(darkMatterProd.div(darkMatterThreshold3), 1), new Decimal(0.1).pow(
       1 - SingularityMilestone.weakenDMSoftcaps.effectOrDefault(0))));
+  }
+  const darkMatterThreshold4 = Laitela.darkMatterOmegaSoftcap;
+  if (darkMatterProd.gt(darkMatterThreshold4)) {
+    darkMatterProd = Decimal.min(darkMatterProd, darkMatterThreshold4).times(
+      Decimal.pow(Decimal.max(darkMatterProd.div(darkMatterThreshold4), 1), new Decimal(0.375)));
   }
   player.celestials.laitela.darkMatter = Alpha.isDestroyed ? new Decimal(darkMatterProd) : Decimal.min(darkMatterProd, Laitela.darkMatterCap);
   player.celestials.laitela.maxDarkMatter = Decimal.max(player.celestials.laitela.darkMatter, player.celestials.laitela.maxDarkMatter);
@@ -1393,7 +1406,7 @@ function laitelaRealityTick(realDiff) {
 
   // Setting entropy to -1 on completion prevents the modal from showing up repeatedly
   if (laitelaInfo.entropy.gte(1)) {
-    let completionText = `${Time.thisRealityRealTime.toStringShort()} 만에 Lai'tela의 현실을 불안정화했습니다.`;
+    let completionText = `Lai'tela's Reality has been destabilized after ${Time.thisRealityRealTime.toStringShort()}.`;
     laitelaInfo.entropy = new Decimal(-1);
     const oldInfo = {
       fastestCompletion: laitelaInfo.fastestCompletion,
@@ -1407,43 +1420,43 @@ function laitelaRealityTick(realDiff) {
       laitelaInfo.difficultyTier++;
       laitelaInfo.fastestCompletion = 300;
       completionText += laitelaBeatText(Laitela.maxAllowedDimension + 1);
-      for (const quote of Laitela.quotes.all) {
+      /*for (const quote of Laitela.quotes.all) {
         if (quote.requirement) {
           quote.show();
         }
-      }
+      }*/
     }
     if (Laitela.realityReward.gt(oldInfo.realityReward)) {
-      completionText += `<br><br>암흑 물질 배율: ${formatX(oldInfo.realityReward, 2, 2)}
+      completionText += `<br><br>Dark Matter Multiplier: ${formatX(oldInfo.realityReward, 2, 2)}
       ➜ ${formatX(Laitela.realityReward, 2, 2)}`;
       if (oldInfo.fastestCompletion === 3600 || oldInfo.fastestCompletion === 300 && oldInfo.difficultyTier > 0) {
         if (Time.thisRealityRealTime.totalSeconds.toNumber() < 30) {
           // First attempt - destabilising
-          completionText += `<br>최단 완료 시간: 없음 ➜ 불안정화
-          <br>활성화된 가장 높은 차원: ${formatInt(8 - oldInfo.difficultyTier)} ➜
+          completionText += `<br>Best Completion Time: None ➜ Destabilized
+          <br>Highest Active Dimension: ${formatInt(8 - oldInfo.difficultyTier)} ➜
           ${formatInt(8 - laitelaInfo.difficultyTier)}`;
         } else {
           // First attempt - not destabilising
-          completionText += `<br>최단 완료 시간: 없음 ➜
+          completionText += `<br>Best Completion Time: None ➜
             ${TimeSpan.fromSeconds(new Decimal(laitelaInfo.fastestCompletion)).toStringShort()}
-            <br>활성화된 가장 높은 차원: ${formatInt(8 - laitelaInfo.difficultyTier)}`;
+            <br>Highest Active Dimension: ${formatInt(8 - laitelaInfo.difficultyTier)}`;
         }
       } else if (Time.thisRealityRealTime.totalSeconds.toNumber() < 30) {
         // Second+ attempt - destabilising
-        completionText += `<br>최단 완료 시간: ${TimeSpan.fromSeconds(new Decimal(oldInfo.fastestCompletion)).toStringShort()}
-          ➜ 불안정화
-          <br>활성화된 가장 높은 차원: ${formatInt(8 - oldInfo.difficultyTier)} ➜
+        completionText += `<br>Best Completion Time: ${TimeSpan.fromSeconds(new Decimal(oldInfo.fastestCompletion)).toStringShort()}
+          ➜ Destabilized
+          <br>Highest Active Dimension: ${formatInt(8 - oldInfo.difficultyTier)} ➜
           ${formatInt(8 - laitelaInfo.difficultyTier)}`;
       } else {
         // Second+ attempt - not destabilising
-        completionText += `<br>최단 완료 시간: ${TimeSpan.fromSeconds(new Decimal(oldInfo.fastestCompletion)).toStringShort()}
+        completionText += `<br>Best Completion Time: ${TimeSpan.fromSeconds(new Decimal(oldInfo.fastestCompletion)).toStringShort()}
         ➜ ${TimeSpan.fromSeconds(new Decimal(laitelaInfo.fastestCompletion)).toStringShort()}
-        <br>활성화된 가장 높은 차원: ${formatInt(8 - oldInfo.difficultyTier)}`;
+        <br>Highest Active Dimension: ${formatInt(8 - oldInfo.difficultyTier)}`;
       }
       player.records.bestReality.laitelaSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
     } else {
-      completionText += ` 배율을 높이려면
-        ${TimeSpan.fromSeconds(new Decimal(laitelaInfo.fastestCompletion)).toStringShort()}보다 빠르게 불안정화해야 합니다.`;
+      completionText += ` You need to destabilize in faster than
+        ${TimeSpan.fromSeconds(new Decimal(laitelaInfo.fastestCompletion)).toStringShort()} to improve your multiplier.`;
     }
     if (Laitela.isFullyDestabilized) SpeedrunMilestones(24).tryComplete();
     Modal.message.show(completionText, {}, 2);
@@ -1452,20 +1465,22 @@ function laitelaRealityTick(realDiff) {
 
 function laitelaBeatText(disabledDim) {
   switch (disabledDim) {
-    case 1: return `<br><br>이제 Lai'tela의 현실에서 모든 차원의 생산이 완전히 비활성화됩니다.
-        현실에는 계속 진입할 수 있지만 더 이상 불안정화할 수 없습니다.
-        현실을 완전히 불안정화한 보상으로 암흑 에너지 획득량에 ${formatX(Math.pow(8, Laitela.hadronizes + 1))}
-        추가 배율도 적용됩니다.`;
-    case 2: return `<br><br>이제 Lai'tela의 현실에서 모든 제2 차원의 생산이 비활성화되지만,
-      보상은 이전보다 ${formatInt(100)}배 강해집니다. 마지막 차원까지 현실을 완전히 불안정화하면
-      암흑 에너지 획득량에 ${formatX(Math.pow(8, Laitela.hadronizes + 1))} 추가 배율이 적용됩니다.`;
-    case 3: return `<br><br>이제 Lai'tela의 현실에서 모든 제3 차원의 생산이 비활성화되지만,
-        보상은 이전보다 ${formatInt(100)}배 강해집니다.`;
-    case 8: return `<br><br>이제 Lai'tela의 현실에서 모든 제8 차원의 생산이 비활성화되지만,
-        보상은 이전보다 ${formatInt(100)}배 강해집니다. 남은 각 차원도 다시 ${formatInt(30)}초 안에
-        불안정화하면 이 강화 효과를 반복해서 얻을 수 있습니다.`;
-    default: return `<br><br>이제 Lai'tela의 현실에서 모든 제${disabledDim} 차원의 생산이
-        비활성화되지만, 보상은 이전보다 ${formatInt(100)}배 강해집니다.`;
+    case 1: return `<br><br>Lai'tela's Reality will now completely disable production from all Dimensions.
+        The Reality can still be entered, but further destabilization is no longer possible.
+        For completely destabilizing the Reality, you also get an additional ${formatX(Math.pow(8, Laitela.hadronizes + 1))}
+        to Dark Energy gain.`;
+    case 2: return `<br><br>Lai'tela's Reality will now disable production from all 2nd Dimensions during
+      future runs, but the reward will be ${formatInt(100)} times stronger than before. Completely destabilizing
+      the Reality for the final Dimension will give you an additional ${formatX(Math.pow(8, Laitela.hadronizes + 1))}
+      to Dark Energy gain.`;
+    case 3: return `<br><br>Lai'tela's Reality will now disable production from all 3rd Dimensions during
+        future runs, but the reward will be ${formatInt(100)} times stronger than before.`;
+    case 8: return `<br><br>Lai'tela's Reality will now disable production from all 8th Dimensions during
+        future runs, but the reward will be ${formatInt(100)} times stronger than before. This boost can be
+        repeated for each remaining Dimension by reaching destabilization within ${formatInt(30)} seconds again.`;
+    default: return `<br><br>Lai'tela's Reality will now disable production from all
+        ${disabledDim}th Dimensions during future runs, but the reward will be
+        ${formatInt(100)} times stronger than before.`;
   }
 }
 
@@ -1587,51 +1602,15 @@ export function gainedDoomedParticles() {
 }
 
 export function quoteCheck() {
-  for (const quote of Teresa.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Effarig.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Enslaved.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of V.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Ra.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Laitela.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Pelle.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Alpha.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
-  for (const quote of Elemental.quotes.all) {
-    if (quote.requirement) {
-      quote.show();
-    }
-  }
+  Teresa.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Effarig.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Enslaved.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  V.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Ra.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Laitela.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Pelle.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Alpha.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
+  Elemental.quotes.all.find(u => !u.isUnlocked && u.requirement)?.show();
 }
 
 // eslint-disable-next-line no-unused-vars
@@ -1754,18 +1733,19 @@ export function simulateTime(seconds, real, fast) {
         asyncEntry: doneSoFar => {
           GameIntervals.stop();
           ui.$viewModel.modal.progressBar = {
-            label: "오프라인 진행 시뮬레이션",
-            info: () => `자리를 비운 동안 얻은 자원을 빠르게 계산하기 위해 낮은 정확도로 게임을 실행하고 있습니다.
-              기술적인 세부 사항은 게임 방법의 "오프라인 진행" 항목에서 확인할 수 있습니다. 게임으로 더 빨리
-              돌아가고 싶다면 "속도 높이기" 버튼을 눌러 남은 시간을 절반의 틱으로 시뮬레이션할 수 있습니다
-              (남은 틱은 최소 ${formatInt(500)}개). "건너뛰기" 버튼은 남은 오프라인 시간을 ${formatInt(10)}틱으로
-              처리합니다.`,
-            progressName: "틱",
+            label: "Offline Progress Simulation",
+            info: () => `The game is being run at a lower accuracy in order to quickly calculate the resources you
+              gained while you were away. See the How To Play entry on "Offline Progress" for technical details. If
+              you are impatient and want to get back to the game sooner, you can click the "Speed up" button to
+              simulate the rest of the time with half as many ticks (down to a minimum of ${formatInt(500)} ticks
+              remaining). The "SKIP" button will instead use all the remaining offline time in ${formatInt(10)}
+              ticks.`,
+            progressName: "Ticks",
             current: doneSoFar,
             max: ticks,
             startTime: Date.now(),
             buttons: [{
-              text: "속도 높이기",
+              text: "Speed up",
               condition: (current, max) => max - current > 500,
               click: () => {
                 const newRemaining = Math.clampMin(Math.floor(progress.remaining / 2), 500);
@@ -1779,7 +1759,7 @@ export function simulateTime(seconds, real, fast) {
               }
             },
             {
-              text: "스킵",
+              text: "SKIP",
               condition: (current, max) => max - current > 10,
               click: () => {
                 // We jump to 10 from the end (condition guarantees there are at least 10 left).
@@ -1843,10 +1823,10 @@ export function browserCheck() {
 
 export function init() {
   // eslint-disable-next-line no-console
-  console.log("🌌 반물질 차원: 엔드게임 업데이트 🌌");
+  console.log("🌌 Antimatter Dimensions: Endgame Update 🌌");
   if (DEV) {
     // eslint-disable-next-line no-console
-    console.log("👨‍💻 개발 모드 👩‍💻");
+    console.log("👨‍💻 Development Mode 👩‍💻");
   }
   ElectronRuntime.initialize();
   SteamRuntime.initialize();

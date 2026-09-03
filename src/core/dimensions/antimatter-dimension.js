@@ -274,7 +274,7 @@ export function buyOneDimension(tier) {
   const cost = dimension.cost;
 
   if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "제8 반물질 차원을 구매";
+    const lockString = "purchase an 8th Antimatter Dimension";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }
@@ -305,7 +305,7 @@ export function buyManyDimension(tier) {
   const cost = dimension.costUntil10;
 
   if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "제8 반물질 차원을 구매";
+    const lockString = "purchase an 8th Antimatter Dimension";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }
@@ -329,7 +329,7 @@ export function buyAsManyAsYouCanBuy(tier) {
   const cost = dimension.cost.times(howMany);
 
   if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "제8 반물질 차원을 구매";
+    const lockString = "purchase an 8th Antimatter Dimension";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }
@@ -379,7 +379,7 @@ export function buyMaxDimension(tier, bulk = Infinity) {
   if (dimension.cost.gt(goal) && Player.isInAntimatterChallenge) return;
 
   if (tier === 8 && DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "제8 반물질 차원을 구매";
+    const lockString = "purchase an 8th Antimatter Dimension";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }
@@ -643,11 +643,11 @@ class AntimatterDimensionState extends DimensionState {
 
   multiplySameCosts() {
     for (const dimension of AntimatterDimensions.all.filter(dim => dim.tier !== this.tier)) {
-      if (dimension.cost.e === this.cost.e) {
+      if (dimension.cost.max(1).log10().floor().eq(this.cost.max(1).log10().floor())) {
         dimension.costBumps = dimension.costBumps.add(1);
       }
     }
-    if (Tickspeed.cost.e === this.cost.e) player.chall9TickspeedCostBumps = player.chall9TickspeedCostBumps.add(1);
+    if (Tickspeed.cost.max(1).log10().floor().eq(this.cost.max(1).log10().floor())) player.chall9TickspeedCostBumps = player.chall9TickspeedCostBumps.add(1);
   }
 
   multiplyIC5Costs() {

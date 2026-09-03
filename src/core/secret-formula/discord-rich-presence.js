@@ -13,7 +13,7 @@ function formatMachines(realPart, imagPart, dualPart) {
   const parts = [];
   if (Decimal.neq(realPart, 0)) parts.push(format(realPart, 2));
   if (Decimal.neq(imagPart, 0)) parts.push(`${format(imagPart, 2, 2)}i`);
-  if (Decimal.neq(dualPart, 0)) parts.push(`${format(dualPart, 2, 2)}ε`);
+  if (Decimal.neq(dualPart, 0)) parts.push(`${format(dualPart, 2, 2)}j`);
   if (Decimal.eq(realPart, 0) && Decimal.eq(imagPart, 0) && Decimal.eq(dualPart, 0)) return format(0);
   return parts.join(" + ");
 }
@@ -39,7 +39,7 @@ export const discordRichPresence = {
    */
   challenges: [
     {
-      name: () => `${Teresa.possessiveName} 현실`,
+      name: () => `${Teresa.possessiveName} Reality`,
       activityToken: () => Teresa.isRunning,
       // Reward is based on antimatter, but EP is more meaningful pre-completion
       resource: () => (Teresa.runCompleted
@@ -47,7 +47,7 @@ export const discordRichPresence = {
         : `${format(player.eternityPoints, 2)} EP`),
     },
     {
-      name: () => `${Effarig.possessiveName} 현실 - ${Effarig.currentStageName}`,
+      name: () => `${Effarig.possessiveName} Reality - ${Effarig.currentStageName}`,
       activityToken: () => Effarig.isRunning,
       resource: () => {
         switch (Effarig.currentStage) {
@@ -62,18 +62,18 @@ export const discordRichPresence = {
       },
     },
     {
-      name: () => `${Enslaved.possessiveName} 현실`,
+      name: () => `${Enslaved.possessiveName} Reality`,
       activityToken: () => Enslaved.isRunning,
       resource: () => `${format(player.eternityPoints, 2)} EP`,
     },
     {
-      name: () => `${V.possessiveName} 현실`,
+      name: () => `${V.possessiveName} Reality`,
       activityToken: () => V.isRunning,
       resource: () => null,
       // V displays achievements normally and its value is standardized outside of its era
     },
     {
-      name: () => `${Ra.possessiveName} 현실`,
+      name: () => `${Ra.possessiveName} Reality`,
       activityToken: () => Ra.isRunning,
       resource: () => null,
       // Ra doesn't have a meaningful in-reality resource to display
@@ -81,19 +81,19 @@ export const discordRichPresence = {
     {
       name: () => {
         const dims = Laitela.maxAllowedDimension;
-        const dimStr = dims ? `D${dims} 최대` : "최종";
-        return `${Laitela.possessiveName} 현실 - ${dimStr}`;
+        const dimStr = dims ? `D${dims} max` : "Final";
+        return `${Laitela.possessiveName} Reality - ${dimStr}`;
       },
       activityToken: () => Laitela.isRunning,
-      resource: () => `엔트로피 ${formatPercents(new Decimal(player.celestials.laitela.entropy).toNumber(), 2, 2)}`,
+      resource: () => `${formatPercents(new Decimal(player.celestials.laitela.entropy).toNumber(), 2, 2)} Entropy`,
     },
     {
-      name: () => "시간 팽창",
+      name: () => "Dilation",
       activityToken: () => player.dilation.active,
       resource: () => `${format(player.antimatter, 2, 1)} AM`,
     },
     {
-      name: token => `영원 도전 ${token}`,
+      name: token => `EC ${token}`,
       // This results in "EC 3x3" (for example) when there are remaining completions, and just "EC 3" if not
       activityToken: () => {
         if (!player.challenge.eternity.current) return false;
@@ -104,12 +104,12 @@ export const discordRichPresence = {
       resource: () => `${format(player.infinityPoints, 2)} IP`,
     },
     {
-      name: token => `무한 도전 ${token}`,
+      name: token => `IC ${token}`,
       activityToken: () => player.challenge.infinity.current,
       resource: () => `${format(player.antimatter, 2, 1)} AM`,
     },
     {
-      name: token => `일반 도전 ${token}`,
+      name: token => `NC ${token}`,
       activityToken: () => player.challenge.normal.current,
       resource: () => `${format(player.antimatter, 2, 1)} AM`,
     },
@@ -133,55 +133,55 @@ export const discordRichPresence = {
    */
   stages: [
     {
-      name: "무한 이전",
+      name: "Pre-Infinity",
       hasReached: () => true,
       mainResource: () => `${format(player.antimatter, 2, 1)} AM`,
       resourceList: [
-        () => quantify("차원 가속", player.dimensionBoosts, 0, 0, formatInt),
-        () => quantify("은하", player.galaxies, 0, 0, formatInt),
+        () => quantify("Boost", player.dimensionBoosts, 0, 0, formatInt),
+        () => quantify("Galaxy", player.galaxies, 0, 0, formatInt),
       ],
     },
     {
-      name: "무한",
+      name: "Infinity",
       hasReached: () => PlayerProgress.infinityUnlocked(),
       mainResource: () => `${format(player.infinityPoints, 2)} IP`,
-      resourceList: [() => quantify("무한", player.infinities, 0, 0, formatInt)],
+      resourceList: [() => quantify("Infinity", player.infinities, 0, 0, formatInt)],
     },
     {
-      name: "무한 돌파",
+      name: "Broken Infinity",
       hasReached: () => player.break,
       mainResource: () => `${format(player.infinityPoints, 2)} IP`,
-      resourceList: [() => quantify("무한", player.infinities, 2, 0, format)],
+      resourceList: [() => quantify("Infinity", player.infinities, 2, 0, format)],
     },
     {
-      name: "영원",
+      name: "Eternity",
       hasReached: () => PlayerProgress.eternityUnlocked(),
       mainResource: () => `${format(player.eternityPoints, 2)} EP`,
-      resourceList: [() => quantify("영원", player.eternities, 0, 0, formatInt)],
+      resourceList: [() => quantify("Eternity", player.eternities, 0, 0, formatInt)],
     },
     {
       // Eternity Challenge era
-      name: "영원",
+      name: "Eternity",
       hasReached: () => player.eternityChalls.eterc1 > 0,
       mainResource: () => `${format(player.eternityPoints, 2)} EP`,
       resourceList: [
-        () => quantify("영원 도전 완료",
+        () => quantify("EC completion",
           Object.values(player.eternityChalls).reduce((sum, c) => sum + c, 0), 0, 0, formatInt)
       ]
     },
     {
-      name: "시간 팽창",
+      name: "Time Dilation",
       hasReached: () => PlayerProgress.dilationUnlocked(),
       mainResource: () => `${format(player.eternityPoints, 2)} EP`,
       resourceList: [() => `${format(player.dilation.dilatedTime, 2, 2)} DT`],
     },
     {
-      name: "현실",
+      name: "Reality",
       hasReached: () => player.realities.gt(0),
       mainResource: () => `${format(player.reality.realityMachines, 2)} RM`,
       resourceList: [
-        () => quantify("현실", player.realities, 0, 0, formatInt),
-        () => `최고 글리프 레벨: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`
+        () => quantify("Reality", player.realities, 0, 0, formatInt),
+        () => `Best Glyph Level: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`
       ]
     },
     {
@@ -189,9 +189,9 @@ export const discordRichPresence = {
       hasReached: () => Teresa.isUnlocked,
       mainResource: () => `${format(player.reality.realityMachines, 2)} RM`,
       resourceList: [
-        () => quantify("현실", player.realities, 0, 0, formatInt),
-        () => `최고 글리프 레벨: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
-        () => `주입량: ${format(player.celestials.teresa.pouredAmount, 2)} RM`
+        () => quantify("Reality", player.realities, 0, 0, formatInt),
+        () => `Best GL: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
+        () => `Poured: ${format(player.celestials.teresa.pouredAmount, 2)} RM`
       ]
     },
     {
@@ -199,8 +199,8 @@ export const discordRichPresence = {
       hasReached: () => TeresaUnlocks.effarig.isUnlocked,
       mainResource: () => `${format(player.reality.realityMachines, 2)} RM`,
       resourceList: [
-        () => `최고 글리프 레벨: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
-        () => quantify("유물 파편", player.celestials.effarig.relicShards, 2, 0, format)
+        () => `Best GL: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
+        () => quantify("Relic Shard", player.celestials.effarig.relicShards, 2, 0, format)
       ]
     },
     {
@@ -208,8 +208,8 @@ export const discordRichPresence = {
       hasReached: () => EffarigUnlock.eternity.isUnlocked,
       mainResource: () => `${format(player.reality.realityMachines, 2)} RM`,
       resourceList: [
-        () => `최고 글리프 레벨: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
-        () => `충전됨: ${format(TimeSpan.fromMilliseconds(new Decimal(player.celestials.enslaved.stored)).totalYears, 2)}년`
+        () => `Best GL: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
+        () => `Charged: ${format(TimeSpan.fromMilliseconds(new Decimal(player.celestials.enslaved.stored)).totalYears, 2)} years`
       ],
     },
     {
@@ -217,16 +217,16 @@ export const discordRichPresence = {
       hasReached: () => Achievement(151).isUnlocked,
       mainResource: () => `${format(player.reality.realityMachines, 2)} RM`,
       resourceList: [
-        () => `최고 글리프 레벨: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
-        () => quantify("V 도전과제", player.celestials.v.runUnlocks.sum(), 0, 0, formatInt)],
+        () => `Best GL: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
+        () => quantify("V-Achievement", player.celestials.v.runUnlocks.sum(), 0, 0, formatInt)],
     },
     {
       name: () => Ra.displayName,
       hasReached: () => VUnlocks.raUnlock.isUnlocked,
       mainResource: () => `${format(player.reality.realityMachines, 2)} RM`,
       resourceList: [
-        () => `최고 글리프 레벨: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
-        () => `Ra 레벨: ${Ra.pets.all.map(p => formatInt(p.level)).join("/")}`],
+        () => `Best GL: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
+        () => `Ra Levels: ${Ra.pets.all.map(p => formatInt(p.level)).join("/")}`],
     },
     {
       // Imaginary Machines unlocked
@@ -235,8 +235,8 @@ export const discordRichPresence = {
       mainResource: () =>
         `${format(player.reality.realityMachines)} RM + ${format(player.reality.imaginaryMachines, 2)} iM`,
       resourceList: [
-        () => `최고 글리프 레벨: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
-        () => `Ra 레벨: ${Ra.pets.all.map(p => formatInt(p.level)).join("/")}`
+        () => `Best GL: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
+        () => `Ra Levels: ${Ra.pets.all.map(p => formatInt(p.level)).join("/")}`
       ],
     },
     {
@@ -245,22 +245,22 @@ export const discordRichPresence = {
       mainResource: () =>
         `${format(player.reality.realityMachines)} RM + ${format(player.reality.imaginaryMachines, 2)} iM`,
       resourceList: [
-        () => `최고 글리프 레벨: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
-        () => quantify("특이점", player.celestials.laitela.singularities, 2, 0, format)],
+        () => `Best GL: ${formatHybridLarge(player.records.bestReality.glyphLevel, 3)}`,
+        () => quantify("Singularity", player.celestials.laitela.singularities, 2, 0, format)],
     },
     {
       // We can't use celestial displayName here like the others because that will cause
       // the text scramble to get put on DRP
       name: "Pelle",
       hasReached: () => Pelle.isDoomed,
-      mainResource: () => quantify("현실 파편", player.celestials.pelle.realityShards, 2),
-      resourceList: [() => quantify("잔재", player.celestials.pelle.remnants, 2)],
+      mainResource: () => quantify("Reality Shard", player.celestials.pelle.realityShards, 2),
+      resourceList: [() => quantify("Remnant", player.celestials.pelle.remnants, 2)],
     },
     {
-      name: "끝",
+      name: "END",
       hasReached: () => GameEnd.endState >= END_STATE_MARKERS.GAME_END,
-      mainResource: () => "끝 반물질",
-      resourceList: [() => "아무것도 남지 않았습니다."],
+      mainResource: () => "END Antimatter",
+      resourceList: [() => "Nothing remains."],
     },
   ]
 };

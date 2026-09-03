@@ -19,12 +19,12 @@ export default {
   },
   computed: {
     sacText() {
-      if (Ascensions.sacA.isUnlocked) return `차원 희생 (+${formatPow(sacrificeBoost, 2, 3)})`;
-      return `차원 희생 (${formatX(sacrificeBoost, 2, 2)})`;
+      if (Ascensions.sacA.isUnlocked) return `Dimensional Sacrifice (+${formatPow(this.sacrificeBoost, 2, 3)})`;
+      return `Dimensional Sacrifice (${formatX(this.sacrificeBoost, 2, 2)})`;
     },
     sacrificeTooltip() {
-      return `제8 반물질 차원을 +${formatPow(this.nextPower, 2, 3)}만큼 강화`;
-      return `제8 반물질 차원을 ${formatX(this.sacrificeBoost, 2, 2)}만큼 강화`;
+      return `Boosts 8th Antimatter Dimension by +${formatPow(this.nextPower, 2, 3)}`;
+      return `Boosts 8th Antimatter Dimension by ${formatX(this.sacrificeBoost, 2, 2)}`;
     },
   },
   methods: {
@@ -62,14 +62,14 @@ export default {
         {{ sacText }}
       </span>
       <span v-else>
-        차원 희생 비활성화됨 ({{ disabledCondition }})
+        Dimensional Sacrifice Disabled ({{ disabledCondition }})
       </span>
     </PrimaryButton>
     <PrimaryButton
       class="o-primary-btn--buy-max"
       @click="maxAll"
     >
-      전체 구매 (M)
+      Max all (M)
     </PrimaryButton>
   </div>
 </template>

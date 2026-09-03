@@ -39,8 +39,8 @@ export default {
       this.best.ip.copyFrom(player.celestials.pelle.records.totalInfinityPoints);
       this.best.ep.copyFrom(player.celestials.pelle.records.totalEternityPoints);
       this.dilationMult = PelleStrikes.dilation.hasStrike ? [500, 10, 5] : [1, 1, 1];
-      this.milestoneMult = (EndgameMilestone.remnantFormula.isReached && !player.disablePostReality) ? [10000, 500, 25] : [1, 1, 1];
-      this.hasMilestone = (EndgameMilestone.remnantFormula.isReached && !player.disablePostReality);
+      this.milestoneMult = (EndgameMastery(61).isBought && !player.disablePostReality) ? [10000, 500, 25] : [1, 1, 1];
+      this.hasMilestone = (EndgameMastery(61).isBought && !player.disablePostReality);
       this.isBuffed = false;
       this.remnants.copyFrom(Pelle.cel.remnants);
       this.remnantsGain.copyFrom(Pelle.remnantsGain);
@@ -53,14 +53,14 @@ export default {
   <div class="c-remnant-factors-container">
     <ExpandingControlBox
       container-class="c-remnant-factors"
-      label="잔재 획득 계수"
+      label="Remnant Gain Factors"
       :style="{ opacity }"
     >
       <template #dropdown>
         <div class="c-remnant-factors-text">
-          최고 반물질: {{ format(best.am, 2, 2) }}<br>
-          최고 무한 포인트: {{ format(best.ip, 2, 2) }}<br>
-          최고 영원 포인트: {{ format(best.ep, 2, 2) }}<br><br>
+          Best AM: {{ format(best.am, 2, 2) }}<br>
+          Best IP: {{ format(best.ip, 2, 2) }}<br>
+          Best EP: {{ format(best.ep, 2, 2) }}<br><br>
           <div class="l-remnant-factors-row">
             <div class="l-remnant-factors-col l-remnant-factors-col--first">
               <div class="l-remnant-factors-item">
@@ -73,16 +73,16 @@ export default {
                 log10(log10(ep){{ dilationMult[2] > 1 ? `*${dilationMult[2]}` : "" }}{{ milestoneMult[2] > 1 ? `*${milestoneMult[2]}` : "" }} + 2)
               </div>
               <div class="l-remnant-factors-item">
-                고정 제수
+                Static divisor
               </div>
               <div class="l-remnant-factors-item">
-                고정 지수
+                Static power
               </div>
               <div class="l-remnant-factors-item">
-                보유 잔재
+                Existing Remnants
               </div>
               <div class="l-remnant-factors-item">
-                최종 획득량
+                Final amount
               </div>
             </div>
             <div class="l-remnant-factors-col">

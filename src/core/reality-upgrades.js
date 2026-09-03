@@ -84,7 +84,7 @@ class RealityUpgradeState extends BitPurchasableMechanicState {
     const realityReached = PlayerProgress.realityUnlocked() || TimeStudy.reality.isBought;
     if (!realityReached || this.isAvailableForPurchase || !this.config.checkRequirement()) return;
     player.reality.upgReqs |= (1 << this.id);
-    GameUI.notify.reality(`현실 업그레이드를 해금했습니다: ${this.config.name}`);
+    GameUI.notify.reality(`You've unlocked a Reality Upgrade: ${this.config.name}`);
     this.hasPlayerLock = false;
   }
 
@@ -131,7 +131,16 @@ class RebuyableRealityUpgradeState extends RebuyableMechanicState {
       1e3,
       this.config.initialCost * this.config.costMult
     ).sub(player.reality.rebuyables[this.id]).toNumber();
-    Currency.realityMachines.subtract(this.cost);
+    Currency.realityMachines.subtract(getHybridCostScaling(
+      player.reality.rebuyables[this.id] - 1,
+      1e30,
+      this.config.initialCost,
+      this.config.costMult,
+      this.config.costMult / 10,
+      DC.E309,
+      1e3,
+      this.config.initialCost * this.config.costMult
+    ));
     return true;
   }
 }

@@ -11,6 +11,7 @@ export default {
       stage: 0,
       quote: "",
       isRunning: false,
+      isDestroyed: false
     };
   },
   computed: {
@@ -45,7 +46,6 @@ export default {
       ${GameDatabase.celestials.descriptions[7].description()}`;
     },
     isDoomed: () => Pelle.isDoomed,
-    isDestroyed: () => Alpha.isDestroyedForDisplay
   },
   watch: {
     isRunning() {
@@ -57,10 +57,11 @@ export default {
       this.stage = Alpha.currentStage;
       this.quote = Alpha.quote;
       this.isRunning = Alpha.isRunning;
+      this.isDestroyed = Alpha.isDestroyedForDisplay;
     },
     startRun() {
       if (this.isDoomed) return;
-      Modal.celestials.show({ name: "Alpha", number: 7 });
+      Modal.celestials.show({ name: "Alpha's", number: 7 });
     }
   }
 };
@@ -72,14 +73,14 @@ export default {
     <br>
     <div>
       <span class="l-alpha-text">
-        Alpha의 각 계층을 완료할 때마다 엔드게임 및 에테리얼 파워 획득량도 {{ formatPercents(0.33) }} 증가합니다.
+        Each Alpha layer beaten also increases Endgame and Ethereal Power gain by {{ formatPercents(0.33) }}
       </span>
     </div>
     <div class="l-alpha-unlocks-and-run">
       <div class="l-alpha-unlocks">
         <div>
           <span class="l-alpha-header">
-            계층
+            Layer
           </span>
           <p
             v-for="(layer, idx) in layers"
@@ -90,7 +91,7 @@ export default {
         </div>
         <div>
           <span class="l-alpha-header">
-            약화
+            Nerf
           </span>
           <p
             v-for="(nerf, idy) in nerfs"
@@ -101,7 +102,7 @@ export default {
         </div>
         <div>
           <span class="l-alpha-header">
-            강화
+            Buff
           </span>
           <p
             v-for="(buff, idz) in buffs"
@@ -114,7 +115,7 @@ export default {
       <div class="l-alpha-run">
         <div class="c-alpha-run-description">
           <span :class="{ 'o-pelle-disabled': isDoomed || isDestroyed }">
-            Alpha의 현실에 진입합니다.
+            Access Alpha's Reality.
           </span>
         </div>
         <div

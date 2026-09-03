@@ -97,7 +97,7 @@ window.formatMachines = function formatMachines(realPart, imagPart, dualPart) {
   const parts = [];
   if (Decimal.neq(realPart, 0)) parts.push(format(realPart, 2));
   if (Decimal.neq(imagPart, 0)) parts.push(`${format(imagPart, 2, 2)}i`);
-  if (Decimal.neq(dualPart, 0)) parts.push(`${format(dualPart, 2, 2)}ε`);
+  if (Decimal.neq(dualPart, 0)) parts.push(`${format(dualPart, 2, 2)}j`);
   // This function is used for just RM and just iM in a few spots, so we have to push both parts conditionally
   // Nonetheless, we also need to special-case both zero so that it doesn't end up displaying as an empty string
   if (Decimal.eq(realPart, 0) && Decimal.eq(imagPart, 0) && Decimal.eq(dualPart, 0)) return format(0);
@@ -188,11 +188,6 @@ const pluralDatabase = new Map([
 window.pluralize = function pluralize(word, amount, plural) {
   if (word === undefined || amount === undefined) throw "Arguments must be defined";
 
-  // Korean nouns do not change form based on quantity. Keeping this check local to
-  // Hangul text preserves the original pluralization behavior for intentional English
-  // strings and internal fallback messages.
-  if (/[가-힣]/u.test(word)) return word;
-
   if (isSingular(amount)) return word;
   const existingPlural = plural ?? pluralDatabase.get(word);
   if (existingPlural !== undefined) return existingPlural;
@@ -215,13 +210,6 @@ window.generatePlural = function generatePlural(word) {
   return word;
 };
 
-// Korean counters attach directly to the preceding number. This deliberately only handles counter-first names which
-// are already passed to the quantify helpers; resource names such as "무한 포인트" retain their existing spacing.
-const KOREAN_COUNTER_NAME = /^(?:개(?:의)?|회|번|줄|초)(?:$|\s)/u;
-function joinQuantityName(number, name) {
-  return KOREAN_COUNTER_NAME.test(name) ? `${number}${name}` : `${number} ${name}`;
-}
-
 /**
  * Returns the formatted value followed by a name, pluralized based on the value input.
  * @param  {string} name                  - name to pluralize and display after {value}
@@ -237,7 +225,7 @@ window.quantify = function quantify(name, value, places, placesUnder1000, format
 
   const number = formatType(value, places, placesUnder1000);
   const plural = pluralize(name, value);
-  return joinQuantityName(number, plural);
+  return `${number} ${plural}`;
 };
 
 /**
@@ -251,7 +239,7 @@ window.quantifyInt = function quantifyInt(name, value) {
 
   const number = formatInt(value);
   const plural = pluralize(name, value);
-  return joinQuantityName(number, plural);
+  return `${number} ${plural}`;
 };
 
 /**
@@ -265,7 +253,7 @@ window.quantifyHybridSmall = function quantifyHybridSmall(name, value) {
 
   const number = formatHybridSmall(value, 3);
   const plural = pluralize(name, value);
-  return joinQuantityName(number, plural);
+  return `${number} ${plural}`;
 };
 
 /**
@@ -279,7 +267,7 @@ window.quantifyHybridLarge = function quantifyHybridLarge(name, value) {
 
   const number = formatHybridLarge(value, 3);
   const plural = pluralize(name, value);
-  return joinQuantityName(number, plural);
+  return `${number} ${plural}`;
 };
 
 /**
@@ -290,9 +278,8 @@ window.quantifyHybridLarge = function quantifyHybridLarge(name, value) {
 window.makeEnumeration = function makeEnumeration(items) {
   if (items.length === 0) return "";
   if (items.length === 1) return items[0];
-  const isKorean = items.some(item => /[가-힣]/u.test(item));
-  if (items.length === 2) return `${items[0]}${isKorean ? " 그리고 " : " and "}${items[1]}`;
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
   const commaSeparated = items.slice(0, items.length - 1).join(", ");
   const last = items[items.length - 1];
-  return `${commaSeparated}${isKorean ? ", 그리고 " : ", and "}${last}`;
+  return `${commaSeparated}, and ${last}`;
 };

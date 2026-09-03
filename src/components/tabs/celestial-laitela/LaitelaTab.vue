@@ -30,7 +30,7 @@ export default {
       isDMCapped: false,
       maxDarkMatter: new Decimal(0),
       darkEnergy: new Decimal(0),
-      matterExtraPurchasePercentage: 0,
+      matterExtraPurchasePercentage: new Decimal(0),
       autobuyersUnlocked: false,
       singularityPanelVisible: false,
       singularitiesUnlocked: false,
@@ -41,6 +41,7 @@ export default {
       darkMatterCap: new Decimal(0),
       softcap1: new Decimal(0),
       softcap2: new Decimal(0),
+      softcapOmega: new Decimal(0),
       hadronsUnlocked: false,
       isUncapped: false,
     };
@@ -59,9 +60,9 @@ export default {
       this.isDMCapped = this.darkMatter.eq(Laitela.darkMatterCap);
       this.maxDarkMatter.copyFrom(Currency.darkMatter.max);
       this.darkEnergy.copyFrom(player.celestials.laitela.darkEnergy);
-      this.matterExtraPurchasePercentage = Laitela.matterExtraPurchaseFactor >= 11
+      this.matterExtraPurchasePercentage.copyFrom(Laitela.matterExtraPurchaseFactor.gte(11)
         ? Laitela.matterExtraPurchaseFactor
-        : Laitela.matterExtraPurchaseFactor - 1;
+        : Laitela.matterExtraPurchaseFactor.sub(1));
       this.autobuyersUnlocked = SingularityMilestone.darkDimensionAutobuyers.canBeApplied ||
         SingularityMilestone.darkDimensionAutobuyers.canBeApplied ||
         SingularityMilestone.autoCondense.canBeApplied ||
@@ -76,6 +77,7 @@ export default {
       this.darkMatterCap.copyFrom(Laitela.darkMatterCap);
       this.softcap1.copyFrom(Laitela.darkMatterSoftcap1);
       this.softcap2.copyFrom(Laitela.darkMatterSoftcap2);
+      this.softcapOmega.copyFrom(Laitela.darkMatterOmegaSoftcap);
       this.hadronsUnlocked = DualityUpgrade(15).isBought;
       this.isUncapped = Alpha.isDestroyed;
 
@@ -86,13 +88,13 @@ export default {
       Laitela.maxAllDMDimensions(8);
     },
     showLaitelaHowTo() {
-      ui.view.h2pForcedTab = GameDatabase.h2p.tabs.filter(tab => tab.alias === "Lai'tela")[0];
+      ui.view.h2pForcedTab = GameDatabase.h2p.tabs.filter(tab => tab.name === "Lai'tela")[0];
       Modal.h2p.show();
     },
     formatContinuumPercentage() {
-      return Laitela.matterExtraPurchaseFactor >= 11
+      return Laitela.matterExtraPurchaseFactor.gte(11)
         ? formatX(this.matterExtraPurchasePercentage, 2, 2)
-        : formatPercents(this.matterExtraPurchasePercentage, 2);
+        : formatDecimalPercents(this.matterExtraPurchasePercentage, 2);
     }
   }
 };
@@ -106,54 +108,60 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="showLaitelaHowTo()"
       >
-        Lai'tela 정보 보기
+        Click for Lai'tela info
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         @click="maxAll"
       >
-        모든 암흑 물질 차원 최대 구매
+        Max all Dark Matter Dimensions
       </PrimaryButton>
     </div>
     <div class="o-laitela-matter-amount">
-      암흑 물질을
+      You have
       <span :style="styleObject">{{ format(darkMatter, 2) }}</span>
-      보유하고 있습니다<span v-if="isDMCapped"> (상한 도달)</span>.
-      <span v-if="!isDMCapped">(평균: {{ format(darkMatterGain, 2, 2) }}/초)</span>
+      Dark Matter<span v-if="isDMCapped"> (capped)</span>.
+      <span v-if="!isDMCapped">(Average: {{ format(darkMatterGain, 2, 2) }}/s)</span>
     </div>
     <div class="o-laitela-matter-amount">
-      역대 암흑 물질 최대치는
+      Your maximum Dark Matter ever is
       <span :style="styleObject">{{ format(maxDarkMatter, 2) }}</span><span v-if="!isDoomed">,
-        연속체 구매 횟수를 {{ formatContinuumPercentage() }} 늘립니다</span>.
+        giving {{ formatContinuumPercentage() }} more purchases from Continuum</span>.
     </div>
     <div class="o-laitela-matter-amount">
-      암흑 물질 차원은 실제 시간 저장의 영향을 받지 않습니다.
+      Dark Matter Dimensions are unaffected by storing real time.
     </div>
     <div
       v-if="maxDarkMatter.gte(softcap1)"
       class="o-laitela-matter-amount"
     >
-      암흑 물질은 {{ format(softcap1, 2) }}부터 점감합니다.
+      Dark Matter is softcapped past {{ format(softcap1, 2) }}.
     </div>
     <div
       v-if="maxDarkMatter.gte(softcap2)"
       class="o-laitela-matter-amount"
     >
-      암흑 물질은 {{ format(softcap2, 2) }}부터 추가로 점감합니다.
+      Dark Matter is further softcapped past {{ format(softcap2, 2) }}.
     </div>
     <div
       v-if="endgameUnlocked"
       class="o-laitela-matter-amount"
     >
-      암흑 물질은 <span v-if="isUncapped">강하게 점감하며</span><span v-if="!isUncapped">최대치가 정해져 있으며</span>
-      그 기준은 {{ format(darkMatterCap, 2) }}입니다.
+      Dark Matter is <span v-if="isUncapped">harshly softcapped</span><span v-if="!isUncapped">hardcapped</span> at
+      {{ format(darkMatterCap, 2) }}.
+    </div>
+    <div
+      v-if="maxDarkMatter.gte(softcapOmega)"
+      class="o-laitela-matter-amount"
+    >
+      Dark Matter is further harshly softcapped past {{ format(softcapOmega, 2) }}.
     </div>
     <h2
       v-if="!singularitiesUnlocked"
       class="c-laitela-singularity-container"
     >
-      {{ singularityWaitTime }} 후 특이점을 해금합니다.
-      (암흑 에너지 {{ format(darkEnergy, 2, 2) }}/{{ format(singularityCap, 2) }})
+      Unlock Singularities in {{ singularityWaitTime }}.
+      ({{ format(darkEnergy, 2, 2) }}/{{ format(singularityCap, 2) }} Dark Energy)
     </h2>
     <SingularityPane v-if="singularitiesUnlocked" />
     <HadronsPane v-if="hadronsUnlocked" />

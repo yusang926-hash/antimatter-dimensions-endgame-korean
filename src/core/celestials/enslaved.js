@@ -8,7 +8,7 @@ export const ENSLAVED_UNLOCKS = {
     id: 0,
     price: TimeSpan.fromYears(new Decimal(1e35)).totalMilliseconds,
     secondaryRequirement: () => true,
-    description: () => `시간 차원에서 얻는 틱스피드 업그레이드의 소프트캡이 ${formatInt(1e5)}만큼 증가합니다`,
+    description: () => `Increase the softcap to Tickspeed upgrades from Time Dimensions by ${formatInt(1e5)}`,
   },
   RUN: {
     id: 1,
@@ -21,15 +21,15 @@ export const ENSLAVED_UNLOCKS = {
     description() {
       const hasLevelRequirement = player.records.bestReality.glyphLevel.gte(5000);
       const hasRarityRequirement = strengthToRarity(player.records.bestReality.glyphStrength) >= 100;
-      return `The Nameless Ones의 현실 해금 (필요: ${hasLevelRequirement ? "[✓]" : "[✗]"} 레벨
-      ${formatInt(5000)} 글리프 및 ${hasRarityRequirement ? "[✓]" : "[✗]"} 희귀도 ${formatRarity(100)} 글리프)`;
+      return `Unlock The Nameless Ones' Reality (requires ${hasLevelRequirement ? "[✓]" : "[✗]"} a level
+      ${formatInt(5000)} Glyph and ${hasRarityRequirement ? "[✓]" : "[✗]"} a ${formatRarity(100)} rarity Glyph)`;
     }
   }
 };
 
 export const Enslaved = {
   displayName: "The Nameless Ones",
-  possessiveName: "The Nameless Ones의",
+  possessiveName: "The Nameless Ones'",
   boostReality: false,
   BROKEN_CHALLENGES: [2, 3, 4, 5, 7, 8, 10, 11, 12],
   nextTickDiff: new Decimal(50),
@@ -118,7 +118,7 @@ export const Enslaved = {
     if (!this.canRelease(autoRelease)) return;
     const maxInversion = player.requirementChecks.reality.slowestBH <= 1e-300;
     if (ImaginaryUpgrade(24).isLockingMechanics && Ra.isRunning && maxInversion) {
-      if (!autoRelease) ImaginaryUpgrade(24).tryShowWarningModal("블랙홀을 방출");
+      if (!autoRelease) ImaginaryUpgrade(24).tryShowWarningModal("discharge your Black Hole");
       return;
     }
     player.requirementChecks.reality.slowestBH = 1;
@@ -163,7 +163,7 @@ export const Enslaved = {
     AutomatorData.recalculateErrors();
     if (AutomatorBackend.state.mode === AUTOMATOR_MODE.RUN && AutomatorData.currentErrors().length) {
       AutomatorBackend.stop();
-      GameUI.notify.error("이 현실에서는 블랙홀을 사용할 수 없습니다! (오토메이터 중지됨)");
+      GameUI.notify.error("This Reality forbids Black Holes! (Automator stopped)");
     }
 
     this.quotes.startRun.show();
@@ -197,14 +197,14 @@ export const Enslaved = {
   },
   feelEternity() {
     if (this.feltEternity) {
-      Modal.message.show(`이 현실의 균열은 이미 드러났습니다. 이번 영원의 시간이 영원 횟수만큼 증폭되며,
-        최대 ${formatX(1e66)}까지 적용됩니다.`,
+      Modal.message.show(`You have already exposed this crack in the Reality. Time in this Eternity is being multiplied
+        by your Eternity count, up to a maximum of ${formatX(1e66)}.`,
       { closeEvent: GAME_EVENT.REALITY_RESET_AFTER }, 1);
     } else {
       EnslavedProgress.feelEternity.giveProgress();
       this.feltEternity = true;
-      Modal.message.show(`이번 영원의 시간이 영원 횟수만큼 증폭되며,
-        최대 ${formatX(1e66)}까지 적용됩니다.`, { closeEvent: GAME_EVENT.REALITY_RESET_AFTER }, 1);
+      Modal.message.show(`Time in this Eternity will be multiplied by your Eternity count,
+        up to a maximum of ${formatX(1e66)}.`, { closeEvent: GAME_EVENT.REALITY_RESET_AFTER }, 1);
     }
   },
   get feltEternity() {
@@ -259,7 +259,7 @@ class EnslavedProgressState extends BitUpgradeState {
     // Bump the last hint time appropriately if the player found the hint
     if (this.hasHint && !this.hasProgress) {
       player.celestials.enslaved.zeroHintTime -= Math.log(2) / Math.log(3) * TimeSpan.fromDays(new Decimal(1)).totalMilliseconds.toNumber();
-      GameUI.notify.success("The Nameless Ones의 현실에서 균열을 발견했습니다!", 10000);
+      GameUI.notify.success("You found a crack in The Nameless Ones' Reality!", 10000);
     }
     player.celestials.enslaved.progressBits |= (1 << this.id);
   }
@@ -276,7 +276,7 @@ export const Tesseracts = {
   },
 
   get canBeBoughtRaw() {
-    const estimate = Currency.infinityPoints.value.gt(Decimal.pow10(6e7)) ? Decimal.round(Decimal.exp(Decimal.lambertw(Decimal.ln(Decimal.pow(Decimal.log10(Currency.infinityPoints.value.add(1)).div(6e7), 2).div(Math.E)).div(Math.E))).times(Math.E).sub(1).div(2).add(3)) : Currency.infinityPoints.value.add(1).log10().div(2e7);
+    const estimate = Currency.infinityPoints.value.gt(Decimal.pow10(6e7)) ? Decimal.round(Decimal.exp(Decimal.lambertw(Decimal.ln(Decimal.pow(Decimal.log10(Currency.infinityPoints.value.add(1)).div(6e7), 2).div(Math.E)).div(Math.E))).times(Math.E).sub(1).div(2).add(3)) : Decimal.floor(Currency.infinityPoints.value.add(1).log10().div(2e7));
     const costValue = Decimal.pow10(new Decimal(2e7).times(Decimal.min(estimate, 3)).times(Decimal.max(estimate.sub(3), 1).factorial()).times(Decimal.pow(2, Decimal.max(estimate.sub(3), 0))));
     if (Currency.infinityPoints.value.gte(costValue)) return estimate;
     return estimate.sub(1);
@@ -287,7 +287,7 @@ export const Tesseracts = {
   },
 
   get rawExtra() {
-    return (this.bought * (SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1) - 1)) + Effects.sum(EndgameMastery(61));
+    return (this.bought * (SingularityMilestone.tesseractMultFromSingularities.effectOrDefault(1) - 1)) + Effects.sum(EndgameMastery(53));
   },
 
   get freeSoftcapStart() {

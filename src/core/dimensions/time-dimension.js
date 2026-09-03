@@ -15,13 +15,13 @@ export function buySingleTimeDimension(tier, auto = false) {
   if (Enslaved.isRunning && dim.bought.gt(0)) return false;
   if (ImaginaryUpgrade(15).isLockingMechanics && EternityChallenge(7).completions > 0) {
     if (!auto) {
-      ImaginaryUpgrade(15).tryShowWarningModal(`해당 영원 도전의 효과로 무한 차원을 생성하는
-        시간 차원을 구매`);
+      ImaginaryUpgrade(15).tryShowWarningModal(`purchase a Time Dimension,
+        which will produce Infinity Dimensions through EC7`);
     }
     return false;
   }
   if (DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "시간 차원을 구매";
+    const lockString = "purchase a Time Dimension";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }
@@ -62,18 +62,21 @@ export function toggleAllTimeDims() {
 }
 
 export function calcHighestPurchaseableTD(tier, currency) {
-  const logC = currency.max(1).log10();
-  const logBase = (TimeDimension(tier)._baseCost.max(1).log10().sub(
-    PelleRifts.paradox.milestones[0].canBeApplied && tier > 4 ? 2250 : 0)).div(
-    PelleRifts.paradox.milestones[0].canBeApplied && tier > 4 ? 2 : 1);
-  let logMult = Math.log10(TimeDimension(tier)._costMultiplier);
+  let logC = currency.max(1).log10();
+  let logBase = TimeDimension(tier)._baseCost.max(1).log10();
+  let logMult = Decimal.log10(TimeDimension(tier)._costMultiplier);
+
+  if (PelleRifts.paradox.milestones[0].canBeApplied && tier > 4) {
+    logC = logC.mul(2);
+    logBase = logBase.sub(2250);
+  }
 
   if (tier > 4 && currency.lt(DC.E6000)) {
     return Decimal.floor(Decimal.max(0, (logC.sub(logBase)).div(logMult).add(1)));
   }
 
   if (currency.gte(DC.E6000)) {
-    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * (tier <= 4 ? 2.2 : 1), 1));
+    logMult = Decimal.log10(Decimal.max(TimeDimension(tier)._costMultiplier * (tier <= 4 ? 2.2 : 1), 1));
     const preInc = Decimal.floor(Decimal.log10(DC.E6000).sub(logBase).div(logMult)).add(1);
     const postInc = Decimal.floor(Decimal.clampMin(((logC.sub(TimeDimension(tier).nextCost(preInc).log10())).div(logMult)).div(
       TimeDimensions.scalingPast1e6000), -1)).add(1);
@@ -86,17 +89,17 @@ export function calcHighestPurchaseableTD(tier, currency) {
 
   if (currency.lt(DC.E1300)) {
     const preInc = Decimal.floor((Decimal.log10(DC.NUMMAX).sub(logBase)).div(logMult)).add(1);
-    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
-    const decCur = logC.sub(preInc.times(logMult));
+    logMult = Decimal.log10(Decimal.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
+    const decCur = logC.sub(preInc.times(logMult).add(logBase));
     const postInc = Decimal.floor(Decimal.clampMin(decCur.div(logMult), -1)).add(1);
     return preInc.add(postInc);
   }
 
   if (currency.lt(DC.E6000)) {
-    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
+    logMult = Decimal.log10(Decimal.max(TimeDimension(tier)._costMultiplier * 1.5, 1));
     const preInc = Decimal.floor((Decimal.log10(DC.E1300).sub(logBase)).div(logMult)).add(1);
-    logMult = Math.log10(Math.max(TimeDimension(tier)._costMultiplier * 2.2, 1));
-    const decCur = logC.sub(preInc.times(logMult));
+    logMult = Decimal.log10(Decimal.max(TimeDimension(tier)._costMultiplier * 2.2, 1));
+    const decCur = logC.sub(preInc.times(logMult).add(logBase));
     const postInc = Decimal.floor(Decimal.clampMin(decCur.div(logMult), -1)).add(1);
     return preInc.add(postInc);
   }
@@ -118,13 +121,13 @@ export function buyMaxTimeDimension(tier, portionToSpend = 1, isMaxAll = false) 
   }
   if (ImaginaryUpgrade(15).isLockingMechanics && EternityChallenge(7).completions > 0) {
     if (!isMaxAll) {
-      ImaginaryUpgrade(15).tryShowWarningModal(`해당 영원 도전의 효과로 무한 차원을 생성하는
-        시간 차원을 구매`);
+      ImaginaryUpgrade(15).tryShowWarningModal(`purchase a Time Dimension,
+        which will produce Infinity Dimensions through EC7`);
     }
     return false;
   }
   if (DualityUpgrade(15).isLockingMechanics) {
-    const lockString = "시간 차원을 구매";
+    const lockString = "purchase a Time Dimension";
     DualityUpgrade(15).tryShowWarningModal(lockString);
     return false;
   }

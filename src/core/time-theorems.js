@@ -48,16 +48,17 @@ export class TimeTheoremPurchaseType {
     if (!this.canAfford) return false;
     let purchased = false;
     const amount = (Alpha.isRunning && Alpha.currentStage < 15) ? Decimal.min(this.bulkPossible, new Decimal(38).sub(this.amount)) : this.bulkPossible;
+    const single = (Alpha.isRunning && Alpha.currentStage < 15) ? Decimal.min(1, new Decimal(38).sub(this.amount)) : DC.D1;
     const buyFn = cost => ((Perk.ttFree.canBeApplied && !player.disablePostReality) ? this.currency.gte(cost) : this.currency.purchase(cost));
     // This will sometimes buy one too few for EP, so we just have to buy 1 after.
-    if (bulk && buyFn(this.bulkCost(amount.sub(1)))) {
-      Currency.timeTheorems.add(amount.sub(1));
-      this.add(amount.sub(1));
+    if (bulk && buyFn(this.bulkCost(amount.sub(single)))) {
+      Currency.timeTheorems.add(amount.sub(single));
+      this.add(amount.sub(single));
       purchased = true;
     }
     if (buyFn(this.cost)) {
-      Currency.timeTheorems.add(1);
-      this.add(1);
+      Currency.timeTheorems.add(single);
+      this.add(single);
       purchased = true;
     }
     if (purchased) player.requirementChecks.reality.noPurchasedTT = false;
@@ -113,8 +114,8 @@ TimeTheoremPurchaseType.ep = new class extends TimeTheoremPurchaseType {
 export const TimeTheorems = {
   checkForBuying(auto) {
     if (PlayerProgress.realityUnlocked() || TimeDimension(1).bought) return true;
-    if (!auto) Modal.message.show(`시간 정리를 구매하려면 먼저 시간 차원을 최소 ${formatInt(1)}개 구매해야 합니다.`,
-      { closeEvent: GAME_EVENT.REALITY_RESET_AFTER });
+    if (!auto) Modal.message.show(`You need to buy at least ${formatInt(1)} Time Dimension before you can purchase
+      Time Theorems.`, { closeEvent: GAME_EVENT.REALITY_RESET_AFTER });
     return false;
   },
 

@@ -18,6 +18,7 @@ export default {
       tachyonsUnlocked: false,
       realityUnlocked: false,
       animatedThemeUnlocked: false,
+      alphaUnlocked: false,
       etherealExtended: false,
       lhcUnlocked: false,
       bigCrunch: false,
@@ -31,6 +32,7 @@ export default {
       isBlackHoleUnlocked: false,
       blobHole: false,
       isS11Unlocked: false,
+      alpha: false,
       stars: false,
       hadrons: false
     };
@@ -74,6 +76,9 @@ export default {
     blobHole(newValue) {
       player.options.animations.blobHole = newValue;
     },
+    alpha(newValue) {
+      player.options.brightAlpha = newValue;
+    },
     stars(newValue) {
       player.options.animations.stars = newValue;
     },
@@ -94,6 +99,7 @@ export default {
       this.isS11Active = Theme.currentName() === "S11";
       this.isS11Unlocked = Themes.available().map(t => t.name).includes("S11");
       this.isBlackHoleUnlocked = BlackHoles.areUnlocked;
+      this.alphaUnlocked = Alpha.isUnlocked;
       this.etherealExtended = player.endgame.ethereal.isExtended;
       this.lhcUnlocked = ExpansionPack.alphaPack.isBought;
 
@@ -106,6 +112,7 @@ export default {
       this.background = options.background;
       this.blobSnowflakes = options.blobSnowflakes;
       this.blobHole = options.blobHole;
+      this.alpha = player.options.brightAlpha;
       this.stars = options.stars;
       this.hadrons = options.hadrons;
     },
@@ -120,45 +127,45 @@ export default {
 <template>
   <ModalWrapperOptions class="c-modal-options__large">
     <template #header>
-      애니메이션 설정
+      Animation Options
     </template>
     <div class="c-modal-options__button-container">
       <ModalOptionsToggleButton
         v-if="infinityUnlocked"
         v-model="bigCrunch"
-        text="빅 크런치:"
+        text="Big Crunch:"
       />
       <ModalOptionsToggleButton
         v-if="eternityUnlocked"
         v-model="eternity"
-        text="영원:"
+        text="Eternity:"
       />
       <ModalOptionsToggleButton
         v-if="dilationUnlocked"
         v-model="dilation"
-        text="시간 팽창:"
+        text="Dilation:"
       />
       <ModalOptionsToggleButton
         v-if="tachyonsUnlocked"
         v-model="tachyonParticles"
-        text="타키온 입자:"
+        text="Tachyon particles:"
       />
       <ModalOptionsToggleButton
         v-if="realityUnlocked"
         v-model="reality"
-        text="현실:"
+        text="Reality:"
       />
       <ModalOptionsToggleButton
         v-if="isS11Unlocked && isBlackHoleUnlocked"
         v-model="blobHole"
-        text="블롭홀 항상 사용:"
+        text="Always use Blobhole:"
       />
       <div v-if="!isS11Active">
         <ModalOptionsToggleButton
           v-if="animatedThemeUnlocked"
           v-model="background"
           onclick="Themes.find(Theme.currentName()).set();"
-          text="배경:"
+          text="Background:"
         />
       </div>
       <div v-else>
@@ -166,14 +173,14 @@ export default {
           v-if="animatedThemeUnlocked"
           v-model="background"
           onclick="Themes.find(Theme.currentName()).set();"
-          text="블롭 눈:"
+          text="Blobsnow:"
         />
       </div>
       <div
         v-if="isS11Active"
         class="c-blobflake-slider o-primary-btn o-primary-btn--modal-option o-primary-btn--slider"
       >
-        <b>{{ quantifyInt("블롭 눈송이", parseInt(blobSnowflakes)) }}</b>
+        <b>{{ quantifyInt("Blobflake", parseInt(blobSnowflakes)) }}</b>
         <SliderComponent
           class="o-primary-btn--slider__slider"
           v-bind="sliderProps"
@@ -182,14 +189,19 @@ export default {
         />
       </div>
       <ModalOptionsToggleButton
+        v-if="alphaUnlocked"
+        v-model="alpha"
+        text="Brighter Alpha:"
+      />
+      <ModalOptionsToggleButton
         v-if="etherealExtended"
         v-model="stars"
-        text="별:"
+        text="Stars:"
       />
       <ModalOptionsToggleButton
         v-if="lhcUnlocked"
         v-model="hadrons"
-        text="강입자:"
+        text="Hadrons:"
       />
     </div>
   </ModalWrapperOptions>

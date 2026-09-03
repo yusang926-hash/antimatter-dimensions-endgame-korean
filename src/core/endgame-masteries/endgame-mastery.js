@@ -3,14 +3,14 @@ import { EndgameMasteriesState } from "./endgame-masteries";
 export const EndgameMasteries = {};
 
 EndgameMasteries.pathList = [
-  { path: ENDGAME_MASTERY_PATH.ANTIMATTER_DIM_COMPRESSION, masteries: [81, 91, 101], name: "반물질 차원 압축" },
-  { path: ENDGAME_MASTERY_PATH.INFINITY_DIM_COMPRESSION, masteries: [82, 92, 102], name: "무한 차원 압축" },
-  { path: ENDGAME_MASTERY_PATH.TIME_DIM_COMPRESSION, masteries: [83, 93, 103], name: "시간 차원 압축" },
-  { path: ENDGAME_MASTERY_PATH.CELESTIAL_DIM_COMPRESSION, masteries: [84, 94, 104], name: "셀레스티얼 차원 압축" },
-  { path: ENDGAME_MASTERY_PATH.INFINITY_POINTS, masteries: [141, 151], name: "무한 포인트" },
-  { path: ENDGAME_MASTERY_PATH.ETERNITY_POINTS, masteries: [142, 152], name: "영원 포인트" },
-  { path: ENDGAME_MASTERY_PATH.REALITY_MACHINES, masteries: [143, 153], name: "리얼리티 머신" },
-  { path: ENDGAME_MASTERY_PATH.IMAGINARY_MACHINES, masteries: [144, 154], name: "허수 머신" },
+  { path: ENDGAME_MASTERY_PATH.ANTIMATTER_DIM_COMPRESSION, masteries: [81, 91, 101], name: "AD Compression" },
+  { path: ENDGAME_MASTERY_PATH.INFINITY_DIM_COMPRESSION, masteries: [82, 92, 102], name: "ID Compression" },
+  { path: ENDGAME_MASTERY_PATH.TIME_DIM_COMPRESSION, masteries: [83, 93, 103], name: "TD Compression" },
+  { path: ENDGAME_MASTERY_PATH.CELESTIAL_DIM_COMPRESSION, masteries: [84, 94, 104], name: "CD Compression" },
+  { path: ENDGAME_MASTERY_PATH.INFINITY_POINTS, masteries: [141, 151], name: "IP" },
+  { path: ENDGAME_MASTERY_PATH.ETERNITY_POINTS, masteries: [142, 152], name: "EP" },
+  { path: ENDGAME_MASTERY_PATH.REALITY_MACHINES, masteries: [143, 153], name: "RM" },
+  { path: ENDGAME_MASTERY_PATH.IMAGINARY_MACHINES, masteries: [144, 154], name: "iM" },
 ];
 
 EndgameMasteries.paths = EndgameMasteries.pathList.mapToObject(e => e.path, e => e.masteries);
@@ -108,22 +108,12 @@ export class EndgameMasteryState extends EndgameMasteriesState {
       Achievement(147).unlock();
       applyRUPG10();
     }
-    if (id === 61) {
-      for (const achievement of Achievements.preEndgame) {
-        achievement.unlock();
-      }
-    }
     if (id === 71) {
       for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
       for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
       for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
       for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
       for (const type of BASIC_GLYPH_TYPES) Glyphs.addToInventory(GlyphGenerator.endgameGlyph(type));
-    }
-    if (id === 112) {
-      player.reality.perks = new Set([0, 10, 12, 13, 14, 15, 16, 17, 30, 31, 40, 41, 42, 43, 44, 45, 46, 51, 52, 53, 54, 55,
-        56, 57, 60, 61, 62, 70, 71, 72, 73, 80, 81, 82, 83, 100, 101, 102, 103, 104, 105, 106, 107, 201, 202, 203, 204, 205]);
-      Achievement(146).unlock();
     }
   }
 }

@@ -10,7 +10,7 @@ export const Teresa = {
     return (ExpansionPack.teresaPack.isBought && !player.disablePostReality) ? DC.BEMAX : new Decimal(1e24);
   },
   displayName: "Teresa",
-  possessiveName: "Teresa의",
+  possessiveName: "Teresa's",
   get isUnlocked() {
     if (EndgameMilestone.celestialEarlyUnlock.isReached) return true;
     return Achievement(147).isUnlocked;
@@ -132,17 +132,17 @@ class PerkShopUpgradeState extends RebuyableMechanicState {
       if (GameCache.glyphInventorySpace.value === 0) {
         // Refund the perk point if they didn't actually get a glyph
         Currency.perkPoints.add(1);
-        GameUI.notify.error("인벤토리에 빈 공간이 없습니다!");
+        GameUI.notify.error("You have no empty inventory space!");
       } else {
         Glyphs.addToInventory(GlyphGenerator.musicGlyph());
-        GameUI.notify.success("음악 글리프를 생성했습니다");
+        GameUI.notify.success("Created a Music Glyph");
       }
     }
     // Fill the inventory with music glyphs
     if (this.id === 5 && (!Pelle.isDoomed || PelleDestructionUpgrade.teresaShop.canBeApplied)) {
       const toCreate = GameCache.glyphInventorySpace.value;
       for (let count = 0; count < toCreate; count++) Glyphs.addToInventory(GlyphGenerator.musicGlyph());
-      if (!PerkShopUpgrade.musicGlyph.isCharged) GameUI.notify.success(`${quantifyInt("음악 글리프", toCreate)}를 생성했습니다`);
+      if (!PerkShopUpgrade.musicGlyph.isCharged) GameUI.notify.success(`Created ${quantifyInt("Music Glyph", toCreate)}`);
     }
   }
 
@@ -173,6 +173,22 @@ class PerkShopUpgradeState extends RebuyableMechanicState {
     player.celestials.teresa.charged.delete(this.id);
     if (this.id === 0) {
       GameCache.staticGlyphWeights.invalidate();
+    }
+  }
+}
+
+export function tryChargeAllPerkUpgrades() {
+  if (Teresa.chargesLeft < 5) return;
+  const upgrades = [
+    PerkShopUpgrade.glyphLevel,
+    PerkShopUpgrade.rmMult,
+    PerkShopUpgrade.bulkDilation,
+    PerkShopUpgrade.autoSpeed,
+    PerkShopUpgrade.musicGlyph
+  ];
+  for (const upgrade of upgrades) {
+    if (upgrade.canCharge) {
+      upgrade.charge();
     }
   }
 }

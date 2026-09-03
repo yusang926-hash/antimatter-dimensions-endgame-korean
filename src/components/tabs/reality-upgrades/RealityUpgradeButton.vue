@@ -73,7 +73,7 @@ export default {
       this.isRebuyable = upgrade.isRebuyable;
       this.isBought = !upgrade.isRebuyable && upgrade.isBought;
       this.isPossible = upgrade.isPossible;
-      this.isAutoUnlocked = (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMastery(53).isBought) && !player.disablePostReality;
+      this.isAutoUnlocked = (Ra.unlocks.instantECAndRealityUpgradeAutobuyers.canBeApplied || EndgameMilestone.startRa.isReached) && !player.disablePostReality;
       this.canBeLocked = upgrade.config.canLock && !this.isAvailableForPurchase;
       this.hasRequirementLock = upgrade.hasPlayerLock;
       if (this.isRebuyable) this.isAutobuyerOn = Autobuyer.realityUpgrade(upgrade.id).isActive;
@@ -106,7 +106,7 @@ export default {
           <br>
           <DescriptionDisplay
             :config="requirementConfig"
-            label="요구 조건:"
+            label="Requirement:"
             class="c-reality-upgrade-btn__requirement"
           />
         </template>
@@ -119,7 +119,7 @@ export default {
             v-if="!isBought"
             :config="config"
             br
-            name="리얼리티 머신"
+            name="Reality Machine"
           />
         </template>
         <b v-if="automatorPoints && !isBought">
@@ -143,7 +143,7 @@ export default {
     <PrimaryToggleButton
       v-if="isRebuyable && isAutoUnlocked"
       v-model="isAutobuyerOn"
-      label="자동:"
+      label="Auto:"
       class="l--spoon-btn-group__little-spoon-reality-btn o-primary-btn--reality-upgrade-toggle"
     />
   </div>

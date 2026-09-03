@@ -14,7 +14,8 @@ export default {
       autobuyersOn: false,
       showContinuum: false,
       disableContinuum: false,
-      allAutobuyersDisabled: false
+      allAutobuyersDisabled: false,
+      antimatterAutobuyersBuyMax: false,
     };
   },
   watch: {
@@ -40,13 +41,21 @@ export default {
       this.showContinuum = Laitela.isUnlocked;
       this.disableContinuum = player.auto.disableContinuum;
       this.allAutobuyersDisabled = Autobuyers.unlocked.every(autobuyer => !autobuyer.isActive);
+      this.antimatterAutobuyersBuyMax = Autobuyer.antimatterDimension.zeroIndexed.every(
+        autobuyer => autobuyer.mode === AUTOBUYER_MODE.BUY_10
+      );
     },
     toggleAllAutobuyers() {
       for (const autobuyer of Autobuyers.unlocked) {
         autobuyer.isActive = this.allAutobuyersDisabled;
       }
+    },
+    toggleAntimatterSingles() {
+      for (const autobuyer of Autobuyer.antimatterDimension.zeroIndexed) {
+        autobuyer.mode = this.antimatterAutobuyersBuyMax ? AUTOBUYER_MODE.BUY_SINGLE : AUTOBUYER_MODE.BUY_10;
+      }
     }
-  }
+  },
 };
 </script>
 
@@ -54,30 +63,36 @@ export default {
   <div class="c-subtab-option-container">
     <PrimaryToggleButton
       v-model="autobuyersOn"
-      on="자동 구매기 일시 정지"
-      off="자동 구매기 재개"
+      on="Pause autobuyers"
+      off="Resume autobuyers"
       class="o-primary-btn--subtab-option"
     />
     <PrimaryButton
       class="o-primary-btn--subtab-option"
       @click="toggleAllAutobuyers()"
     >
-      모든 자동 구매기 {{ allAutobuyersDisabled ? "활성화" : "비활성화" }}
+      {{ allAutobuyersDisabled ? "Enable" : "Disable" }} all autobuyers
+    </PrimaryButton>
+    <PrimaryButton
+      class="o-primary-btn--subtab-option"
+      @click="toggleAntimatterSingles()"
+    >
+      Set AD autobuyers to buy {{ antimatterAutobuyersBuyMax ? "singles" : "max" }}
     </PrimaryButton>
     <span v-if="false">
       <PrimaryButton
         v-if="showContinuum"
         class="o-primary-btn--subtab-option"
       >
-        연속체가 비활성화됨
+        Continuum is disabled
       </PrimaryButton>
     </span>
     <span v-else>
       <PrimaryToggleButton
         v-if="showContinuum"
         v-model="disableContinuum"
-        on="연속체 활성화"
-        off="연속체 비활성화"
+        on="Enable Continuum"
+        off="Disable Continuum"
         class="o-primary-btn--subtab-option"
       />
     </span>

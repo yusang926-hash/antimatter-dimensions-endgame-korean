@@ -51,26 +51,15 @@ export default {
     },
     points() {
       const rawText = this.layer.currency;
-      return rawText === "RM" && this.hasIM ? "iM 상한" : rawText;
+      return rawText === "RM" && this.hasIM ? "iM Cap" : rawText;
     },
     condition() {
       return this.layer.condition();
     },
     plural() {
-      return {
-        Realities: "현실",
-        Eternities: "영원",
-        Infinities: "무한",
-      }[this.layer.plural];
+      return this.layer.plural;
     },
     singular() {
-      return {
-        Reality: "현실",
-        Eternity: "영원",
-        Infinity: "무한",
-      }[this.layer.name];
-    },
-    singularKey() {
       return this.layer.name;
     },
     getRuns() {
@@ -81,17 +70,17 @@ export default {
   methods: {
     update() {
       this.runs = this.clone(this.getRuns());
-      this.hasEmptyRecord = this.runs[0][0] === Number.MAX_VALUE;
+      this.hasEmptyRecord = this.runs[0][0].gte(Number.MAX_VALUE);
       this.runs.push(this.averageRun);
       this.isRealityUnlocked = PlayerProgress.current.isRealityUnlocked;
-      this.shown = player.shownRuns[this.singularKey];
+      this.shown = player.shownRuns[this.singular];
       this.resourceType = player.options.statTabResources;
       this.showRate = this.resourceType === RECENT_PRESTIGE_RESOURCE.RATE;
       this.hasChallenges = this.runs.map(r => this.challengeText(r)).some(t => t);
       this.hasIM = MachineHandler.currentIMCap.gt(0);
 
       // We have 4 different "useful" stat pairings we could display, but this ends up being pretty boilerplatey
-      const names = [this.points, `${this.points} 획득 속도`, this.plural, `${this.singular} 속도`];
+      const names = [this.points, `${this.points} Rate`, this.plural, `${this.singular} Rate`];
       switch (this.resourceType) {
         case RECENT_PRESTIGE_RESOURCE.ABSOLUTE_GAIN:
           this.selectedResources = [0, 2];
@@ -132,9 +121,9 @@ export default {
     },
     infoArray(run, index) {
       let name;
-      if (index === 0) name = "최근";
-      else if (index === 10) name = "평균";
-      else name = `${formatInt(index + 1)}회 전`;
+      if (index === 0) name = "Last";
+      else if (index === 10) name = "Average";
+      else name = `${formatInt(index + 1)} ago`;
 
       const cells = [name, this.gameTime(run)];
       if (this.hasRealTime) cells.push(this.realTime(run));
@@ -156,10 +145,10 @@ export default {
       return cells;
     },
     infoCol() {
-      const cells = ["진행", this.hasRealTime ? "게임 시간" : "진행 시간"];
-      if (this.hasRealTime) cells.push("실제 시간");
+      const cells = ["Run", this.hasRealTime ? "Game Time" : "Time in Run"];
+      if (this.hasRealTime) cells.push("Real Time");
       cells.push(...this.resourceTitles);
-      if (this.hasChallenges) cells.push("도전");
+      if (this.hasChallenges) cells.push("Challenge");
 
       for (let index = 0; index < this.layer.extra?.length && cells.length <= this.longestRow; index++) {
         if (!this.layer.showExtra[index]()) continue;
@@ -193,30 +182,16 @@ export default {
       const time = run[1];
       const rpm = ratePerMinute(amount, time);
       return Decimal.lt(rpm, 1)
-        ? `시간당 ${format(Decimal.mul(rpm, 60), 2, 2)}`
-        : `분당 ${format(rpm, 2, 2)}`;
+        ? `${format(Decimal.mul(rpm, 60), 2, 2)} per hour`
+        : `${format(rpm, 2, 2)} per min`;
     },
     challengeText(run) {
       // Special-case Nameless reality in order to keep this column small and not force a linebreak
       const rawText = run[4];
-      const legacyCelestialNames = {
-        테레사: "Teresa",
-        에파리그: "Effarig",
-        "이름없는 자들": "The Nameless Ones",
-        "이름 없는 자들": "The Nameless Ones",
-        라: "Ra",
-        라이텔라: "Lai'tela"
-      };
-      if (legacyCelestialNames[rawText]) return legacyCelestialNames[rawText];
-      if (typeof rawText !== "string") return rawText;
-      if (rawText === "The Nameless Ones") return "The Nameless Ones";
-      if (rawText === "Time Dilation") return "시간 팽창";
-      if (rawText.startsWith("Dilated EC ")) return rawText.replace("Dilated EC ", "팽창한 영원 도전 ");
-      if (rawText.startsWith("Eternity Challenge ")) return rawText.replace("Eternity Challenge ", "영원 도전 ");
-      return rawText;
+      return rawText === "The Nameless Ones" ? "Nameless" : rawText;
     },
     toggleShown() {
-      player.shownRuns[this.singularKey] = !player.shownRuns[this.singularKey];
+      player.shownRuns[this.singular] = !player.shownRuns[this.singular];
     },
     cellStyle(col, isHeader) {
       let width;
@@ -261,7 +236,7 @@ export default {
         <i :class="dropDownIconClass" />
       </span>
       <span>
-        <h3>최근 {{ formatInt(10) }}회 {{ plural }}:</h3>
+        <h3>Last {{ formatInt(10) }} {{ plural }}:</h3>
       </span>
     </div>
     <div v-show="shown">
@@ -279,15 +254,15 @@ export default {
         :key="index"
       >
         <span
-          v-if="run[0] === Number.MAX_VALUE"
+          v-if="run[0].gte(Number.MAX_VALUE)"
           class="c-empty-row"
         >
           <i v-if="index === 10">
-            {{ plural }} 기록이 없어 평균을 계산할 수 없습니다.
+            An average cannot be calculated with no {{ plural }}.
           </i>
           <i v-else>
-            아직 {{ formatInt(index + 1) }}번째
-            {{ index === 0 ? singular : plural }} 기록이 없습니다.
+            You have not done {{ formatInt(index + 1) }}
+            {{ index === 0 ? singular : plural }} yet.
           </i>
         </span>
         <span

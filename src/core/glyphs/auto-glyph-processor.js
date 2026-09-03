@@ -92,7 +92,7 @@ export const AutoGlyphProcessor = {
       case AUTO_GLYPH_SCORE.ALCHEMY_VALUE:
         return AlchemyResource[glyph.type].isUnlocked
           ? new Decimal(GlyphSacrificeHandler.glyphRefinementGain(glyph))
-          : new Decimal(Number.NEGATIVE_INFINITY);
+          : new Decimal(-Infinity);
       default:
         throw new Error("Unknown glyph score mode in score assignment");
     }
@@ -171,33 +171,33 @@ export const AutoGlyphProcessor = {
   filterModeName(id) {
     switch (id) {
       case AUTO_GLYPH_SCORE.LOWEST_SACRIFICE:
-        return "총 글리프 희생량이 가장 낮음";
+        return "Lowest Total Glyph Sacrifice";
       case AUTO_GLYPH_SCORE.EFFECT_COUNT:
-        return "효과 개수";
+        return "Number of Effects";
       case AUTO_GLYPH_SCORE.RARITY_THRESHOLD:
-        return "희귀도 기준치";
+        return "Rarity Threshold";
       case AUTO_GLYPH_SCORE.SPECIFIED_EFFECT:
-        return "지정 효과";
+        return "Specified Effect";
       case AUTO_GLYPH_SCORE.EFFECT_SCORE:
-        return "효과 점수";
+        return "Effect Score";
       case AUTO_GLYPH_SCORE.LOWEST_ALCHEMY:
-        return "가장 낮은 연금술 자원";
+        return "Lowest Alchemy Resource";
       case AUTO_GLYPH_SCORE.ALCHEMY_VALUE:
-        return "정제 가치";
+        return "Refinement Value";
       default:
-        return "올바르지 않은 글리프 필터 모드";
+        return "Invalid Glyph filter mode";
     }
   },
   trashModeDesc(id) {
     switch (id) {
       case AUTO_GLYPH_REJECT.SACRIFICE:
-        return "항상 희생";
+        return "Always sacrifice";
       case AUTO_GLYPH_REJECT.REFINE:
-        return "항상 정제";
+        return "Always refine";
       case AUTO_GLYPH_REJECT.REFINE_TO_CAP:
-        return "상한까지 정제한 뒤 희생";
+        return "Refine to cap, then sacrifice";
       default:
-        return "올바르지 않은 글리프 처리 모드";
+        return "Invalid Glyph trash mode";
     }
   }
 };
@@ -254,7 +254,7 @@ function getGlyphLevelSources() {
       exp: new Decimal(0.5),
     },
     repl: {
-      name: "복제자",
+      name: "Replicanti",
       value: replBase,
       coeff: replCoeff,
       exp: replPow,
@@ -266,7 +266,7 @@ function getGlyphLevelSources() {
       exp: dtPow,
     },
     eternities: {
-      name: "영원",
+      name: "Eternities",
       value: eterBase,
       // These are copied from Reality Upgrade 18's gameDB entry
       coeff: new Decimal(0.45),

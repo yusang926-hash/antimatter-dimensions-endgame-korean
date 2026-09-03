@@ -73,7 +73,7 @@ export default {
       return DilationUpgrade.ttGenerator;
     },
     baseGalaxyText() {
-      return `기본: ${formatHybridLarge(this.baseGalaxies, 3)}`;
+      return `${formatHybridLarge(this.baseGalaxies, 3)} Base`;
     },
     hasMaxText: () => PlayerProgress.realityUnlocked() && !Pelle.isDoomed,
     allRebuyables() {
@@ -111,7 +111,7 @@ export default {
       this.baseGalaxies.copyFrom(player.dilation.baseTachyonGalaxies);
       this.totalGalaxies.copyFrom(player.dilation.totalTachyonGalaxies);
       this.hasPelleDilationUpgrades = PelleRifts.paradox.milestones[0].canBeApplied;
-      if (this.baseGalaxies.lt(500) && DilationUpgrade.doubleGalaxies.isBought) {
+      if ((this.baseGalaxies.lt(500) || Alpha.isDestroyed) && DilationUpgrade.doubleGalaxies.isBought) {
         this.tachyonGalaxyGain = DilationUpgrade.doubleGalaxies.effectValue;
       } else {
         this.tachyonGalaxyGain = 1;
@@ -120,8 +120,8 @@ export default {
       this.maxDT.copyFrom(player.records.thisReality.maxDT);
 
       const estimateText = getDilationTimeEstimate(this.maxDT);
-      if (this.dilatedTimeIncome.lte(0)) this.toMaxTooltip = "팽창된 시간 획득 없음";
-      else this.toMaxTooltip = estimateText.startsWith("<") ? "현재 증가 중" : estimateText;
+      if (this.dilatedTimeIncome.lte(0)) this.toMaxTooltip = "No DT gain";
+      else this.toMaxTooltip = estimateText.startsWith("<") ? "Currently Increasing" : estimateText;
 
       this.isEndgameUnlocked = PlayerProgress.endgameUnlocked();
       this.scaleStart.copyFrom(DilationUpgradeScaling.PRIMARY_SCALING);
@@ -135,9 +135,9 @@ export default {
 <template>
   <div class="l-dilation-tab">
     <span>
-      타키온 입자를
+      You have
       <span class="c-dilation-tab__tachyons">{{ format(tachyons, 2, 1) }}</span>
-      {{ pluralize("개", tachyons) }} 보유하고 있습니다.
+      {{ pluralize("Tachyon Particle", tachyons) }}.
     </span>
     <div
       @mouseover="isHovering = true"
@@ -146,38 +146,38 @@ export default {
       <DilationButton />
     </div>
     <span>
-      팽창된 시간을
+      You have
       <span class="c-dilation-tab__dilated-time">{{ format(dilatedTime, 2, 1) }}</span>
-      보유하고 있습니다.
+      Dilated Time.
       <span class="c-dilation-tab__dilated-time-income">{{ dilatedTimeGainText }}/s</span>
     </span>
     <span>
-      다음
+      Next
       <span v-if="tachyonGalaxyGain > 1">{{ formatHybridLarge(tachyonGalaxyGain, 3) }}</span>
-      {{ pluralize("타키온 은하", tachyonGalaxyGain) }} 획득 기준:
+      {{ pluralize("Tachyon Galaxy", tachyonGalaxyGain) }} at
       <span
         class="c-dilation-tab__galaxy-threshold"
         :ach-tooltip="galaxyTimeEstimate"
       >{{ format(galaxyThreshold, 2, 1) }}</span>
-      팽창된 시간, 총
+      Dilated Time, gained total of
       <span
         class="c-dilation-tab__galaxies"
         :ach-tooltip="baseGalaxyText"
       >{{ formatHybridLarge(totalGalaxies, 3) }}</span>
-      {{ pluralize("타키온 은하", totalGalaxies) }} 획득
+      {{ pluralize("Tachyon Galaxy", totalGalaxies) }}
     </span>
     <span v-if="hasMaxText">
-      이번 현실에서 도달한 최대 팽창된 시간은
+      Your maximum Dilated Time reached this Reality is
       <span
         v-tooltip="toMaxTooltip"
         class="max-accent"
       >{{ format(maxDT, 2, 1) }}</span>.
     </span>
     <span v-if="isEndgameUnlocked">
-      팽창된 시간 {{ format(scaleStart, 2, 1) }} 이후에는 모든 반복 구매 팽창 업그레이드의 비용이 더 빠르게 증가합니다.
+      Past {{ format(scaleStart, 2, 1) }} Dilated Time, all rebuyable Dilation Upgrades will scale faster.
     </span>
     <span v-if="viewSoftcap">
-      팽창된 시간에 소프트캡이 적용되었습니다. 이 효과는 팽창된 시간 {{ format(softcapStart, 2, 1) }}부터 시작됩니다.
+      Dilated Time has been softcapped. This effect started at {{ format(softcapStart, 2, 1) }} Dilated Time.
     </span>
     <div class="l-dilation-upgrades-grid">
       <div

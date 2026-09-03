@@ -186,7 +186,7 @@ export default {
       };
     },
     showAlchemyHowTo() {
-      ui.view.h2pForcedTab = GameDatabase.h2p.tabs.filter(tab => tab.tab === "reality/alchemy")[0];
+      ui.view.h2pForcedTab = GameDatabase.h2p.tabs.filter(tab => tab.name === "Glyph Alchemy")[0];
       Modal.h2p.show();
     },
     toggleAllReactions() {
@@ -197,6 +197,19 @@ export default {
     },
     resetAlchemy() {
       for (const res of AlchemyResources.all) res.amount = 0;
+    },
+    createRealityGlyph() {
+      if (ExpansionPack.effarigPack.isBought && !player.disablePostReality) {
+        if (GameCache.glyphInventorySpace.value === 0) {
+          Modal.message.show("No available inventory space; Sacrifice some Glyphs to free up space.",
+            { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
+          return;
+        }
+        Glyphs.addToInventory(GlyphGenerator.realityGlyph(Decimal.floor(AlchemyResource.reality.amount)));
+        if (!ExpansionPack.effarigPack.isBought || player.disablePostReality) AlchemyResource.reality.amount = 0;
+        player.reality.glyphs.createdRealityGlyph = true;
+      }
+      else Modal.realityGlyph.show();
     },
     nodeClass(node) {
       const resource = node.resource;
@@ -227,27 +240,27 @@ export default {
         class="o-primary-btn--subtab-option"
         @click="showAlchemyHowTo"
       >
-        연금술 정보 보기
+        Click for alchemy info
       </PrimaryButton>
       <PrimaryButton
         v-if="!isDoomed"
         class="o-primary-btn--subtab-option"
         @click="toggleAllReactions"
       >
-        모든 반응 {{ allReactionsDisabled ? "활성화" : "비활성화" }}
+        {{ allReactionsDisabled ? "Enable" : "Disable" }} all reactions
       </PrimaryButton>
       <PrimaryButton
         v-if="realityCreationVisible"
         :class="realityGlyphCreationClass"
-        onclick="Modal.realityGlyph.show()"
+        @click="createRealityGlyph"
       >
-        현실 글리프 생성 보기
+        View Reality Glyph creation
       </PrimaryButton>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         @click="resetAlchemy"
       >
-        모든 연금술 자원 강제 초기화
+        Force-reset all Alchemy resources
       </PrimaryButton>
     </div>
     <AlchemyResourceInfo
@@ -255,12 +268,12 @@ export default {
       :resource="infoResource"
     />
     <br>
-    이제 글리프 탭의 글리프 필터를 사용해 글리프를 정제할 수 있습니다.
+    Glyphs can now be refined using your Glyph filter in the Glyphs tab.
     <br>
-    글리프를 정제하면 해당 글리프의 역대 최고 정제 가치의
-    {{ formatX(capFactor) }}까지만 자원을 얻습니다.
+    When refining a Glyph, it will only give you resources up to a cap
+    of {{ formatX(capFactor) }} its highest refinement value.
     <span v-if="reactionsAvailable">
-      반응은 현실에 도달할 때마다 한 번씩 일어나며 저장한 현실 시간의 증폭에는 영향을 받지 않습니다.
+      Reactions trigger once every time you Reality, unaffected by amplification from stored real time.
     </span>
     <div
       class="l-alchemy-circle"

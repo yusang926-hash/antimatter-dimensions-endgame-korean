@@ -6,7 +6,7 @@ export default {
       type: Object,
       required: true
     },
-    parentKey: {
+    parentName: {
       type: String,
       required: true
     }
@@ -16,7 +16,8 @@ export default {
       isAvailable: false,
       hasNotification: false,
       isCurrentSubtab: false,
-      tabName: ""
+      tabName: "",
+      universe: 0
     };
   },
   computed: {
@@ -25,19 +26,21 @@ export default {
         "o-tab-btn": true,
         "o-tab-btn--secondary": true,
         "o-subtab-btn--active": this.isCurrentSubtab,
-        "o-tab-btn--infinity": this.parentKey === "infinity",
-        "o-tab-btn--eternity": this.parentKey === "eternity",
-        "o-tab-btn--reality": this.parentKey === "reality",
-        "o-tab-btn--celestial": this.parentKey === "celestials",
-        "o-tab-btn--endgame": this.parentKey === "endgame",
-        "o-tab-btn--cd-expansion": this.parentKey === "cdexpansion",
-        "o-tab-btn--divinity": this.parentKey === "divinity",
-        "o-tab-btn--universes": this.parentKey === "universes"
+        "o-tab-btn--infinity": this.parentName === "Infinity",
+        "o-tab-btn--eternity": this.parentName === "Eternity",
+        "o-tab-btn--reality": this.parentName === "Reality",
+        "o-tab-btn--celestial": this.parentName === "Celestials",
+        "o-tab-btn--endgame": this.parentName === "Endgame",
+        "o-tab-btn--cd-expansion": this.parentName === "CD Expansion",
+        "o-tab-btn--divinity": this.parentName === "Divinity",
+        "o-tab-btn--universes": this.parentName === "Universes" && this.universe === 0,
+        "o-tab-btn--universes__transient": this.parentName === "Universes" && this.universe === 1
       };
     },
   },
   methods: {
     update() {
+      this.universe = 0;
       this.isAvailable = this.subtab.isAvailable;
       this.hasNotification = this.subtab.hasNotification;
       this.isCurrentSubtab = this.subtab.isOpen && Theme.currentName() !== "S9";

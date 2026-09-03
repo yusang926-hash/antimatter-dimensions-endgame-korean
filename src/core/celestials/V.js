@@ -82,17 +82,17 @@ class VRunUnlockState extends GameMechanicState {
     Decimal.gte(playerData.runRecords[this.id], this.conditionValue)) {
       if (!V.isFlipped && this.config.isHard) break;
       this.completions++;
-      GameUI.notify.success(`V 도전과제 '${this.config.name}'의
-        ${formatInt(this.completions)}단계를 해금했습니다`);
+      GameUI.notify.success(`You have unlocked V-Achievement
+        '${this.config.name}' tier ${formatInt(this.completions)}`);
 
       V.updateTotalRunUnlocks();
 
-      for (const quote of V.quotes.all) {
+      /*for (const quote of V.quotes.all) {
         // Quotes without requirements will be shown in other ways
         if (quote.requirement) {
           quote.show();
         }
-      }
+      }*/
     }
   }
 }
@@ -187,7 +187,7 @@ export const VUpgrade = mapGameDataToObject(
 
 export const V = {
   displayName: "V",
-  possessiveName: "V의",
+  possessiveName: "V's",
   spaceTheorems: 0,
   checkForUnlocks() {
     for (const unl of VUnlocks.all) {
@@ -211,7 +211,7 @@ export const V = {
   },
   unlockCelestial() {
     player.celestials.v.unlockBits |= (1 << VUnlocks.vAchievementUnlock.id);
-    GameUI.notify.success("도전과제의 셀레스티얼 V를 해금했습니다!", 10000);
+    GameUI.notify.success("You have unlocked V, The Celestial Of Achievements!", 10000);
     V.quotes.unlock.show();
   },
   initializeRun() {
@@ -225,8 +225,8 @@ export const V = {
       if (i < 6) sum += player.celestials.v.runUnlocks[i];
       else sum += player.celestials.v.runUnlocks[i] * 2;
     }
-    this.spaceTheorems = player.disablePostReality ? 0 : sum * (ExpansionPack.vPack.isBought ? 2 : 1) *
-      Ra.unlocks.spaceTheoremBoost.effectOrDefault(1) * Effects.product(ResurgenceUpgrade.synergy3);
+    this.spaceTheorems = player.disablePostReality ? 0 : new Decimal(sum).times(ExpansionPack.vPack.isBought ? 2 : 1).times(
+      Ra.unlocks.spaceTheoremBoost.effectOrDefault(1)).times(Effects.product(ResurgenceUpgrade.synergy3)).toNumber();
   },
   reset() {
     player.celestials.v = {
@@ -268,6 +268,6 @@ EventHub.logic.on(GAME_EVENT.TAB_CHANGED, () => {
 });
 
 EventHub.logic.on(GAME_EVENT.GAME_TICK_AFTER, () => {
-  if (EndgameMastery(51).isBought) GameDatabase.celestials.v.mainUnlock.realities.requirement = 100;
-  if (!EndgameMastery(51).isBought) GameDatabase.celestials.v.mainUnlock.realities.requirement = 1250;
+  if (EndgameMilestone.vReduction.isReached) GameDatabase.celestials.v.mainUnlock.realities.requirement = 100;
+  if (!EndgameMilestone.vReduction.isReached) GameDatabase.celestials.v.mainUnlock.realities.requirement = 1250;
 });

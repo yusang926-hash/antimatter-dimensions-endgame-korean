@@ -41,13 +41,13 @@ export default {
       const first = this.nextAscension?.id === 0;
       const next = this.nextAscension;
 
-      if (first) return `${TimeSpan.fromMilliseconds(this.timeToNextAscension)} 후 첫 승천에 도달합니다.`;
+      if (first) return `You will reach the first Ascension in ${TimeSpan.fromMilliseconds(this.timeToNextAscension)}.`;
       return next === undefined
-        ? "더 이상 도달할 승천이 없습니다!"
-        : `${TimeSpan.fromMilliseconds(this.timeToNextAscension)} 후 다음 승천에 도달합니다.`;
+        ? "There are no more Ascensions to be reached!"
+        : `You will reach the next Ascension in ${TimeSpan.fromMilliseconds(this.timeToNextAscension)}.`;
     },
     nextHintDisplay() {
-      return `다음 승천은 ${this.nextAscension?.config.name}입니다.`;
+      return `The next Ascension is the ${this.nextAscension?.config.name}.`;
     },
     runButtonOuterClass() {
       return {
@@ -72,8 +72,8 @@ export default {
     },
     symbol() {
       return this.isRunning
-        ? `과충전 종료: ${this.currEnergyName} ${formatInt(this.pending)} 획득 (다음: 영원 포인트 ${format(this.nextAt, 2)})`
-        : "과충전 진입";
+        ? `Exit the Overcharge Gain ${formatInt(this.pending)} ${this.currEnergyName} (Next at ${format(this.nextAt, 2)} Eternity Points)`
+        : "Enter the Overcharge";
     },
     currEnergy() {
       if (this.currentLevel === 4) return this.temporalEnergy;
@@ -82,10 +82,10 @@ export default {
       return this.infiniteEnergy;
     },
     currEnergyName() {
-      if (this.currentLevel === 4) return "시간 에너지";
-      if (this.currentLevel === 3) return "복합 에너지";
-      if (this.currentLevel === 2) return "영원 에너지";
-      return "무한 에너지";
+      if (this.currentLevel === 4) return "Temporal Energy";
+      if (this.currentLevel === 3) return "Complex Energy";
+      if (this.currentLevel === 2) return "Eternal Energy";
+      return "Infinite Energy";
     }
   },
   methods: {
@@ -125,13 +125,11 @@ export default {
     },
     increaseLevel() {
       if (this.isRunning) return;
-      if (this.currentLevel >= this.highestUnlockedLevel) return;
-      player.endgame.overcharge.level++;
+      player.endgame.overcharge.level = Math.min(player.endgame.overcharge.level + 1, this.highestUnlockedLevel);
     },
     decreaseLevel() {
       if (this.isRunning) return;
-      if (this.currentLevel <= 1) return;
-      player.endgame.overcharge.level--;
+      player.endgame.overcharge.level = Math.max(player.endgame.overcharge.level - 1, 1);
     }
   }
 };
@@ -142,17 +140,17 @@ export default {
     <div class="l-endgame-milestone-grid">
       <div>
         <span class="c-ascension-description-text">
-          신성 에너지 {{ format(divineEnergy, 2, 2) }} 보유 중. +{{ format(divineEnergyPerSecond, 2, 2) }}/초
+          You have {{ format(divineEnergy, 2, 2) }} Divine Energy. +{{ format(divineEnergyPerSecond, 2, 2) }}/s
         </span>
       </div>
       <div>
         <span class="c-ascension-description-text">
-          다음 승천에 도달하는 시간은 신성 에너지의 양에 따라 감소합니다.
+          The time to reach the next Ascension will lower based on your Divine Energy amount.
         </span>
       </div>
       <div>
         <span class="c-ascension-description-text">
-          현재 승천 단계는 {{ formatInt(ascension) }}입니다.
+          Your current Ascension is {{ formatInt(ascension) }}.
         </span>
       </div>
       <div
@@ -176,8 +174,8 @@ export default {
     <br>
     <br>
     <div
-      v-if="hasOvercharge"
       class="c-overcharge-position"
+      v-if="hasOvercharge"
     >
       <div
         :class="runButtonOuterClass"
@@ -195,8 +193,8 @@ export default {
     </div>
     <br>
     <div
-      v-if="hasOvercharge"
       class="c-subtab-option-container"
+      v-if="hasOvercharge"
     >
       <PrimaryButton
         class="o-primary-btn--subtab-option"
@@ -204,7 +202,7 @@ export default {
       >
         -
       </PrimaryButton>
-      <span class="c-ascension-text">{{ currentLevel }}</span>
+      <span class="c-ascension-basic-text">{{ currentLevel }}</span>
       <PrimaryButton
         class="o-primary-btn--subtab-option"
         @click="increaseLevel"
@@ -214,16 +212,16 @@ export default {
     </div>
     <br>
     <div v-if="highestUnlockedLevel >= 1">
-      <span class="c-ascension-description-text">무한 에너지 {{ infiniteEnergy }} 보유 중.</span>
+      <span class="c-ascension-description-text">You have {{ infiniteEnergy }} Infinite Energy.</span>
     </div>
     <div v-if="highestUnlockedLevel >= 2">
-      <span class="c-ascension-description-text">영원 에너지 {{ eternalEnergy }} 보유 중.</span>
+      <span class="c-ascension-description-text">You have {{ eternalEnergy }} Eternal Energy.</span>
     </div>
     <div v-if="highestUnlockedLevel >= 3">
-      <span class="c-ascension-description-text">복합 에너지 {{ complexEnergy }} 보유 중.</span>
+      <span class="c-ascension-description-text">You have {{ complexEnergy }} Complex Energy.</span>
     </div>
     <div v-if="highestUnlockedLevel >= 4">
-      <span class="c-ascension-description-text">시간 에너지 {{ temporalEnergy }} 보유 중.</span>
+      <span class="c-ascension-description-text">You have {{ temporalEnergy }} Temporal Energy.</span>
     </div>
   </div>
 </template>
@@ -231,6 +229,35 @@ export default {
 <style scoped>
 .c-ascension-description-text {
   font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg,
+    var(--color-pelle--secondary), var(--color-pelle--base),
+    var(--color-pelle--secondary), var(--color-pelle--base),
+    var(--color-pelle--secondary), var(--color-pelle--base),
+    var(--color-pelle--secondary), var(--color-pelle--base),
+    var(--color-pelle--secondary), var(--color-pelle--base)
+  );
+  background-size: 300% 100%;
+  background-clip: text;
+  animation: a-ascension-description-cycle 5s linear infinite;
+
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes a-ascension-description-cycle {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.c-ascension-basic-text {
+  font-size: 2.5rem;
   font-weight: bold;
   color: var(--color-pelle--secondary);
 }

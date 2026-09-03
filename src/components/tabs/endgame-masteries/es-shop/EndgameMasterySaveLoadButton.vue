@@ -28,7 +28,7 @@ export default {
     update() {
       this.name = player.endgameMasteries.presets[this.saveslot - 1].name;
       this.displayName = this.name === "" ? this.saveslot : this.name;
-      this.canEndgame = Pelle.isDoomed && Currency.antimatter.gte(new Decimal(1e9000000000000000));
+      this.canEndgame = Pelle.isDoomed && Currency.antimatter.gte(new Decimal("1e9000000000000000"));
     },
     nicknameBlur(event) {
       const newName = event.target.value.slice(0, 4).trim();
@@ -52,8 +52,8 @@ export default {
     save() {
       this.hideContextMenu();
       this.preset.masteries = GameCache.currentMasteryTree.value.exportString;
-      const presetName = this.name ? `마스터리 프리셋 "${this.name}"` : "마스터리 프리셋";
-      GameUI.notify.endgame(`저장 완료: ${presetName} (${this.saveslot}번 슬롯)`);
+      const presetName = this.name ? `Mastery preset "${this.name}"` : "Mastery preset";
+      GameUI.notify.endgame(`${presetName} saved in slot ${this.saveslot}`);
     },
     load() {
       this.hideContextMenu();
@@ -65,10 +65,10 @@ export default {
         combinedTree.attemptBuyArray(combinedTree.parseMasteryImport(this.preset.masteries), true);
         EndgameMasteryTree.commitToGameState(combinedTree.purchasedMasteries, false);
 
-        const presetName = this.name ? `마스터리 프리셋 "${this.name}"` : "마스터리 프리셋";
-        GameUI.notify.endgame(`불러오기 완료: ${presetName} (${this.saveslot}번 슬롯)`);
+        const presetName = this.name ? `Mastery preset "${this.name}"` : "Mastery preset";
+        GameUI.notify.endgame(`${presetName} loaded from slot ${this.saveslot}`);
       } else {
-        Modal.message.show("이 엔드게임 마스터리 목록에는 현재 엔드게임 마스터리가 없습니다.");
+        Modal.message.show("This Endgame Mastery list currently contains no Endgame Masteries.");
       }
     },
     respecAndLoad() {
@@ -82,13 +82,13 @@ export default {
     deletePreset() {
       this.hideContextMenu();
       if (this.preset.masteries) Modal.masteryString.show({ id: this.saveslot - 1, deleting: true });
-      else Modal.message.show("이 엔드게임 마스터리 목록에는 현재 엔드게임 마스터리가 없습니다.");
+      else Modal.message.show("This Endgame Mastery list currently contains no Endgame Masteries.");
     },
     handleExport() {
       this.hideContextMenu();
       copyToClipboard(this.preset.masteries);
-      const presetName = this.name ? `마스터리 프리셋 "${this.name}"` : "마스터리 프리셋";
-      GameUI.notify.endgame(`클립보드로 내보내기 완료: ${presetName} (${this.saveslot}번 슬롯)`);
+      const presetName = this.name ? `Mastery preset "${this.name}"` : "Mastery preset";
+      GameUI.notify.endgame(`${presetName} exported from slot ${this.saveslot} to your clipboard`);
     },
     edit() {
       Modal.masteryString.show({ id: this.saveslot - 1 });
@@ -110,7 +110,7 @@ export default {
     </template>
     <template #menu>
       <div class="l-es-save-load-btn__menu c-es-save-load-btn__menu">
-        <span ach-tooltip="사용자 지정 이름 설정 (ASCII 문자 최대 4자)">
+        <span ach-tooltip="Set a custom name (up to 4 ASCII characters)">
           <input
             type="text"
             size="4"
@@ -125,26 +125,26 @@ export default {
           class="l-es-save-load-btn__menu-item c-es-save-load-btn__menu-item"
           @click="edit"
         >
-          편집
+          Edit
         </div>
         <div
           class="l-es-save-load-btn__menu-item c-es-save-load-btn__menu-item"
           @click="handleExport"
         >
-          내보내기
+          Export
         </div>
         <div
           class="l-es-save-load-btn__menu-item c-es-save-load-btn__menu-item"
           @click="save"
         >
-          저장
+          Save
         </div>
         <div class="l-es-save-load-btn__menu-item">
           <div
             class="c-es-save-load-btn__menu-item"
             @click="load"
           >
-            불러오기
+            Load
           </div>
           <div class="c-es-save-load-btn__menu-item__hover-options">
             <div
@@ -154,7 +154,7 @@ export default {
               }"
               @click="respecAndLoad"
             >
-              재분배 후 불러오기
+              Respec and Load
             </div>
           </div>
         </div>
@@ -162,7 +162,7 @@ export default {
           class="l-es-save-load-btn__menu-item c-es-save-load-btn__menu-item"
           @click="deletePreset"
         >
-          삭제
+          Delete
         </div>
       </div>
     </template>

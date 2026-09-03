@@ -93,12 +93,12 @@ export default {
       this.runUnlocked = EffarigUnlock.run.isUnlocked;
       this.isRunning = Effarig.isRunning;
       this.vIsFlipped = V.isFlipped;
-      this.relicShardRarityAlwaysMax = (Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied || EndgameMastery(53).isBought) && !player.disablePostReality;
+      this.relicShardRarityAlwaysMax = (Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied || EndgameMilestone.startRa.isReached) && !player.disablePostReality;
       this.hasSecondShop = Achievement(227).isUnlocked;
     },
     startRun() {
       if (this.isDoomed) return;
-      Modal.celestials.show({ name: "Effarig", number: 1 });
+      Modal.celestials.show({ name: "Effarig's", number: 1 });
     },
     createCursedGlyph() {
       Glyphs.giveCursedGlyph();
@@ -113,43 +113,43 @@ export default {
     <div class="l-effarig-shop-and-run">
       <div class="l-effarig-shop">
         <div class="c-effarig-relics">
-          유물 파편을 {{ quantify("개", relicShards, 2, 0) }} 보유하고 있습니다.
+          You have {{ quantify("Relic Shard", relicShards, 2, 0) }}.
           <br>
           <span v-if="relicShardRarityAlwaysMax">
-            새 글리프의 희귀도가 +{{ formatPercents(shardRarityBoost, 2) }} 증가합니다.
+            The rarity of new Glyphs is being increased by +{{ formatPercents(shardRarityBoost, 2) }}.
           </span>
           <span v-else>
-            새 글리프마다 희귀도가
+            Each new Glyph will have its rarity increased
             <br>
-            +{{ formatPercents(0) }}에서 +{{ formatPercents(shardRarityBoost, 2) }} 사이의 무작위 값만큼 증가합니다.
+            by a random value between +{{ formatPercents(0) }} and +{{ formatPercents(shardRarityBoost, 2) }}.
           </span>
           <span v-if="shardPower > 1">
             <br>
-            글리프 희생 획득량도 {{ formatPow(shardPower, 0, 2) }}만큼 증가합니다.
+            Glyph Sacrifice gain is also being raised to {{ formatPow(shardPower, 0, 2) }}.
           </span>
           <span v-if="shardMaxRarityIncrease > 0">
             <br>
-            글리프 희귀도 상한도 +{{ formatPercents(shardMaxRarityIncrease, 2) }} 증가합니다.
+            The Glyph Rarity cap is also being increased by +{{ formatPercents(shardMaxRarityIncrease, 2) }}.
           </span>
         </div>
         <div class="c-effarig-relic-description">
-          다음 현실에서 유물 파편을 {{ quantify("개", shardsGained, 2) }} 획득합니다.
-          ({{ format(currentShardsRate, 2) }}/분)
+          You will gain {{ quantify("Relic Shard", shardsGained, 2) }} next Reality
+          ({{ format(currentShardsRate, 2) }}/min).
           <span v-if="amplification !== 0">
             <br>
-            현재 현실의 증폭으로 인해
+            Due to amplification of your current Reality,
             <br>
-            실제로 유물 파편을 총
-            {{ quantify("개", amplifiedShards, 2) }} 획득합니다. ({{ format(amplifiedShardsRate, 2) }}/분)
+            you will actually gain a total of
+            {{ quantify("Relic Shard", amplifiedShards, 2) }} ({{ format(amplifiedShardsRate, 2) }}/min).
           </span>
         </div>
         <div class="c-effarig-relic-description">
           <br>
-          영원 포인트가 많을수록 유물 파편 획득량이 조금 증가하고,
+          More Eternity Points slightly increases Relic Shards
           <br>
-          서로 다른 글리프 효과가 많을수록 유물 파편 획득량이
+          gained. More distinct Glyph effects significantly
           <br>
-          크게 증가합니다.
+          increases Relic Shards gained.
         </div>
         <EffarigUnlockButton
           v-for="(unlock, i) in shopUnlocks"
@@ -165,7 +165,7 @@ export default {
           class="c-effarig-shop-button c-effarig-shop-button--available"
           @click="createCursedGlyph"
         >
-          저주받은 글리프 획득...
+          Get a Cursed Glyph...
         </button>
       </div>
       <div
@@ -174,7 +174,7 @@ export default {
       >
         <div class="c-effarig-run-description">
           <span :class="{ 'o-pelle-disabled': isDoomed }">
-            Effarig의 현실에 진입합니다.
+            Enter Effarig's Reality.
           </span>
         </div>
         <div

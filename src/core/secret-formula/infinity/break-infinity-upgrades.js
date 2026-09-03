@@ -16,11 +16,11 @@ function rebuyable(config) {
         const afterECText = config.afterEC ? config.afterEC() : "";
         return (Alpha.isRunning && Alpha.currentStage >= 6)
           ? (value === config.maxUpgrades()
-          ? `현재: ${formatX(20 - value)} ${afterECText}`
-          : `현재: ${formatX(20 - value)} | 다음: ${formatX(20 - value - 1)}`)
+          ? `Currently: ${formatX(20 - value)} ${afterECText}`
+          : `Currently: ${formatX(20 - value)} | Next: ${formatX(20 - value - 1)}`)
           : (value === config.maxUpgrades()
-          ? `현재: ${formatX(10 - value)} ${afterECText}`
-          : `현재: ${formatX(10 - value)} | 다음: ${formatX(10 - value - 1)}`);
+          ? `Currently: ${formatX(10 - value)} ${afterECText}`
+          : `Currently: ${formatX(10 - value)} | Next: ${formatX(10 - value - 1)}`);
       }),
     formatCost: value => format(value, 2, 0),
     noLabel,
@@ -32,11 +32,11 @@ export const breakInfinityUpgrades = {
   totalAMMult: {
     id: "totalMult",
     cost: () => 1e4 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: "누적된 반물질 생산량에 따라 반물질 차원에 배율이 적용됩니다.",
+    description: "Antimatter Dimensions gain a multiplier based on total antimatter produced",
     effect: () => Decimal.pow(player.records.totalEndgameAntimatter.add(1).log10().add(1), 1.5),
     formatEffect: value => formatX(value, 2, 2),
     charged: {
-      description: "총 반물질과 Teresa 레벨에 따라 반물질 차원을 거듭제곱합니다",
+      description: "Antimatter Dimensions gain a power based on total Antimatter and Teresa level",
       effect: () => Decimal.pow(player.records.totalEndgameAntimatter.add(1).log10().add(1).log10().times(
         Ra.pets.teresa.level).add(1), 0.2).toNumber(),
       formatEffect: value => formatPow(value, 4, 4)
@@ -45,11 +45,11 @@ export const breakInfinityUpgrades = {
   currentAMMult: {
     id: "currentMult",
     cost: () => 5e4 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: "현재 보유 중인 반물질 양에 따라 반물질 차원에 배율이 적용됩니다.",
+    description: "Antimatter Dimensions gain a multiplier based on current antimatter",
     effect: () => Decimal.pow(Currency.antimatter.value.add(1).log10().add(1), 1.5),
     formatEffect: value => formatX(value, 2, 2),
     charged: {
-      description: "현재 반물질과 Teresa 레벨에 따라 반물질 차원을 거듭제곱합니다",
+      description: "Antimatter Dimensions gain a power based on current Antimatter and Teresa level",
       effect: () => Decimal.pow(Currency.antimatter.value.add(1).log10().add(1).log10().times(
         Ra.pets.teresa.level).add(1), 0.2).toNumber(),
       formatEffect: value => formatPow(value, 4, 4)
@@ -58,10 +58,10 @@ export const breakInfinityUpgrades = {
   galaxyBoost: {
     id: "postGalaxy",
     cost: () => 5e11 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: () => `모든 은하들이 ${formatPercents(0.5)} 더 강해집니다.`,
+    description: () => `All Galaxies are ${formatPercents(0.5)} stronger`,
     effect: 1.5,
     charged: {
-      description: "Teresa 레벨에 따라 모든 은하가 강해집니다",
+      description: "All Galaxies are stronger based on Teresa level",
       effect: () => Decimal.pow(Ra.pets.teresa.level, 2).add(50).div(100).add(1).toNumber(),
       formatEffect: value => `${value >= 11 ? formatX(value, 2, 2) : formatPercents(value - 1, 2, 2)}`
     }
@@ -69,11 +69,11 @@ export const breakInfinityUpgrades = {
   infinitiedMult: {
     id: "infinitiedMult",
     cost: () => 1e5 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: "반물질 차원에 무한 횟수에 따라 배율이 적용됩니다.",
+    description: "Antimatter Dimensions gain a multiplier based on Infinities",
     effect: () => Currency.infinitiesTotal.value.add(1).pLog10().times(25).add(1),
     formatEffect: value => formatX(value, 2, 2),
     charged: {
-      description: "무한 횟수와 Teresa 레벨에 따라 반물질 차원을 거듭제곱합니다",
+      description: "Antimatter Dimensions gain a power based on Infinities and Teresa level",
       effect: () => Decimal.pow(Currency.infinitiesTotal.value.add(1).log10().add(1).log10().times(
         Ra.pets.teresa.level).add(1), 0.5).toNumber(),
       formatEffect: value => formatPow(value, 4, 4)
@@ -82,11 +82,11 @@ export const breakInfinityUpgrades = {
   achievementMult: {
     id: "achievementMult",
     cost: () => 1e6 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: "완료한 도전과제 수에 따라 반물질 차원에 배율을 적용합니다",
+    description: "Antimatter Dimensions gain a multiplier based on Achievements completed",
     effect: () => Math.max(Math.pow((Achievements.effectiveCount - 30), 4) / 20, 1),
     formatEffect: value => formatX(value, 2, 2),
     charged: {
-      description: "완료한 도전과제 수와 Teresa 레벨에 따라 반물질 차원을 거듭제곱합니다",
+      description: "Antimatter Dimensions gain a power based on Achievements completed and Teresa level",
       effect: () => Math.pow(Achievements.effectiveCount * Ra.pets.teresa.level + 1, 0.25),
       formatEffect: value => formatPow(value, 4, 4)
     }
@@ -94,7 +94,7 @@ export const breakInfinityUpgrades = {
   slowestChallengeMult: {
     id: "challengeMult",
     cost: () => 5e6 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: "가장 느린 도전 기록의 속도에 따라 반물질 차원에 배율을 적용합니다",
+    description: "Antimatter Dimensions gain a multiplier based on how fast your slowest challenge run is",
     effect: () => Alpha.isDestroyed
       ? new Decimal(300).div(Time.worstChallenge.totalMinutes)
       : Decimal.clampMin(new Decimal(300).div(Time.worstChallenge.totalMinutes.clampMin(0.001)), 1),
@@ -102,7 +102,7 @@ export const breakInfinityUpgrades = {
     hasCap: true,
     cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.D2E5,
     charged: {
-      description: "하드론화 횟수와 Teresa 레벨에 따라 반물질 차원을 거듭제곱합니다",
+      description: "Antimatter Dimensions gain a power based on Hadronizes and Teresa level",
       effect: () => Decimal.pow(Laitela.hadronizes * Ra.pets.teresa.level + 1, 0.25),
       formatEffect: value => formatPow(value, 4, 4)
     }
@@ -110,24 +110,18 @@ export const breakInfinityUpgrades = {
   infinitiedGen: {
     id: "infinitiedGeneration",
     cost: () => 1e7 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: "가장 빠른 무한 기록에 따라 무한을 자동으로 생산합니다.",
+    description: "Passively generate Infinities based on your fastest Infinity",
     effect: () => player.records.bestInfinity.time,
     formatEffect: value => {
-      if (value === DC.BEMAX && !Pelle.isDoomed) return "무한 생성 없음";
-      let infinities = DC.D1;
-      infinities = infinities.timesEffectsOf(
-        RealityUpgrade(5),
-        RealityUpgrade(7),
-        Ra.unlocks.continuousTTBoost.effects.infinity
-      );
-      infinities = infinities.times(getAdjustedGlyphEffect("infinityinfmult"));
+      if (value === DC.BEMAX && !Pelle.isDoomed) return "No Infinity generation";
+      const infinities = gainedInfinities();
       const timeStr = Time.bestInfinity.totalMilliseconds.lte(50) && !Alpha.isDestroyed
-        ? `${TimeSpan.fromMilliseconds(new Decimal(100)).toStringShort()} (상한)`
+        ? `${TimeSpan.fromMilliseconds(new Decimal(100)).toStringShort()} (capped)`
         : `${Time.bestInfinity.times(new Decimal(2)).toStringShort()}`;
-      return `${timeStr}마다 ${quantify("무한", infinities)}`;
+      return `${quantify("Infinity", infinities)} every ${timeStr}`;
     },
     charged: {
-      description: "Teresa 레벨에 따라 무한 횟수를 거듭제곱합니다",
+      description: "Infinities gain a power based on Teresa level",
       effect: () => Math.pow(Ra.pets.teresa.level + 1, 1.5),
       formatEffect: value => formatPow(value, 4, 4)
     }
@@ -135,9 +129,9 @@ export const breakInfinityUpgrades = {
   autobuyMaxDimboosts: {
     id: "autobuyMaxDimboosts",
     cost: () => 2e7 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: "차원 가속 자동구매기의 최대 구매 모드를 해금합니다",
+    description: "Unlock the buy max Dimension Boost Autobuyer mode",
     charged: {
-      description: "Teresa 레벨에 따라 차원 쇄도가 강해집니다",
+      description: "Dimension Surges are stronger based on Teresa Level",
       effect: () => Math.pow(Ra.pets.teresa.level + 1, 0.5),
       formatEffect: value => `${value >= 11 ? formatX(value, 2, 2) : formatPercents(value - 1, 2, 2)}`
     }
@@ -145,9 +139,9 @@ export const breakInfinityUpgrades = {
   autobuyerSpeed: {
     id: "autoBuyerUpgrade",
     cost: () => 1e15 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
-    description: "일반 도전으로 해금되거나 강화된 자동구매기가 두 배 빠르게 작동합니다",
+    description: "Autobuyers unlocked or improved by Normal Challenges work twice as fast",
     charged: {
-      description: "Teresa 레벨에 따라 연속체 구매량에 배율을 적용합니다",
+      description: "Multiply Continuum purchases based on Teresa Level",
       effect: () => Math.pow(Ra.pets.teresa.level + 1, 2),
       formatEffect: value => formatX(value, 2, 2)
     }
@@ -157,9 +151,9 @@ export const breakInfinityUpgrades = {
     initialCost: () => 1e6 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     costIncrease: 5,
     maxUpgrades: () => 8 + (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfB.effectOrDefault(0) - 10 : 0),
-    description: "무한 이후 틱스피드 업그레이드의 가격 상승률을 줄입니다.",
+    description: "Reduce post-infinity Tickspeed Upgrade cost multiplier scaling",
     afterEC: () => (EternityChallenge(11).completions > 0
-      ? `영원 도전 11 이후: ${formatX(Player.tickSpeedMultDecrease, 2, 2)}`
+      ? `After EC11: ${formatX(Player.tickSpeedMultDecrease, 2, 2)}`
       : ""
     ),
     noLabel: true,
@@ -170,9 +164,9 @@ export const breakInfinityUpgrades = {
     initialCost: () => 1e7 * (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfA.effectOrDefault(1) : 1),
     costIncrease: 5e3,
     maxUpgrades: () => 7 + (Alpha.isRunning ? AlphaUnlocks.breakInfinity.effects.nerfB.effectOrDefault(0) - 10 : 0),
-    description: "무한 이후 반물질 차원의 가격 상승률을 줄입니다.",
+    description: "Reduce post-infinity Antimatter Dimension cost multiplier scaling",
     afterEC: () => (EternityChallenge(6).completions > 0
-      ? `영원 도전 6 이후: ${formatX(Player.dimensionMultDecrease, 2, 2)}`
+      ? `After EC6: ${formatX(Player.dimensionMultDecrease, 2, 2)}`
       : ""
     ),
     noLabel: true,
@@ -185,14 +179,14 @@ export const breakInfinityUpgrades = {
     maxUpgrades: () => 10,
     effect: value => Player.bestRunIPPM.times(value / 10),
     description: () => {
-      let generation = `${formatInt(10 * player.infinityRebuyables[2])}%`;
+      let generation = `Generate ${formatInt(10 * player.infinityRebuyables[2])}%`;
       if (!BreakInfinityUpgrade.ipGen.isCapped) {
         generation += ` ➜ ${formatInt(10 * (1 + player.infinityRebuyables[2]))}%`;
       }
-      return `마지막 10번의 무한 중 가장 높은 IP/분 기록의 ${generation} 속도로 IP를 생산합니다.`;
+      return `${generation} of your best IP/min from your last 10 Infinities`;
     },
     isDisabled: effect => effect.eq(0),
-    formatEffect: value => `${format(value, 2, 1)} IP/분`,
+    formatEffect: value => `${format(value, 2, 1)} IP/min`,
     noLabel: false
   })
 };

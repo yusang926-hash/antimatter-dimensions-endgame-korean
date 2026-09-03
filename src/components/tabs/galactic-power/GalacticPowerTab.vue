@@ -25,10 +25,10 @@ export default {
       const first = this.nextPow?.id === 1;
       const next = GalacticPower.nextPowerUnlockGP;
 
-      if (first) return `첫 은하력 효과는 은하력 ${format(next)}에서 해금됩니다.`;
+      if (first) return `The first Galactic Power unlocks at ${format(next)} Galactic Power.`;
       return next === undefined
-        ? "모든 은하력 효과 해금 완료"
-        : `다음 은하력 효과는 은하력 ${format(next)}에서 해금됩니다.`;
+        ? "All Galactic Powers unlocked"
+        : `Next Galactic Power unlocks at ${format(next)} Galactic Power.`;
     },
     galacticPowerAmountStyle() {
       return {
@@ -57,20 +57,20 @@ export default {
 <template>
   <div class="l-endgame-milestone-grid">
     <div>
-      <span class="c-galactic-power-description-text">은하력 </span>
+      <span class="c-galactic-power-description-text">You have </span>
       <span :style="galacticPowerAmountStyle">{{ format(galacticPower, 2, 2) }}</span>
-      <span class="c-galactic-power-description-text"> 보유 중. </span>
-      <span :style="galacticPowerAmountStyle">+{{ format(galacticPowerPerSecond, 2, 2) }}/초</span>
+      <span class="c-galactic-power-description-text"> Galactic Power. </span>
+      <span :style="galacticPowerAmountStyle">+{{ format(galacticPowerPerSecond, 2, 2) }}/s</span>
     </div>
     <div>
       <span class="c-galactic-power-description-text">
-        은하력 획득량은 주로 총 은하 수에 따라 결정되며,
-        현재 셀레스티얼 물질과 허수 기계의 양에 따라서도 증가합니다.
+        Galactic Power income is significantly based on total Galaxies,
+        but is also increased based on current Celestial Matter and Imaginary Machine amounts.
       </span>
     </div>
     <div v-if="isDoomed">
       <span class="c-galactic-power-description-text">
-        Pelle의 제한으로 멸망한 동안에는 은하력을 생산할 수 없습니다!
+        Pelle has restricted you from producing Galactic Power while Doomed!
       </span>
     </div>
     <div
@@ -93,11 +93,28 @@ export default {
 
 <style scoped>
 .c-galactic-power-description-text {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
-  background: linear-gradient(var(--color-pelle--secondary), var(--color-pelle--base));
+  background: linear-gradient(
+    var(--color-pelle--secondary), var(--color-pelle--base),
+    var(--color-pelle--secondary), var(--color-pelle--base)
+  );
+  background-size: 100% 300%;
   background-clip: text;
+  animation: a-galactic-power-description-cycle 5s linear infinite;
 
   -webkit-text-fill-color: transparent;
+}
+
+@keyframes a-galactic-power-description-cycle {
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 50% 100%;
+  }
 }
 </style>

@@ -11,7 +11,7 @@ export const GlyphSelection = {
 
   get choiceCount() {
     let mastery = 1;
-    if (EndgameMastery(53).isBought && !Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied && !player.disablePostReality) mastery *= 2;
+    if (EndgameMilestone.startRa.isReached && !Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.canBeApplied && !player.disablePostReality) mastery *= 2;
     return Effects.max(1, Perk.firstPerk) * mastery *
       Ra.unlocks.extraGlyphChoicesAndRelicShardRarityAlwaysMax.effectOrDefault(1);
   },
@@ -145,7 +145,7 @@ export function requestManualReality() {
     return;
   }
   if (GameCache.glyphInventorySpace.value === 0) {
-    Modal.message.show("인벤토리에 빈 공간이 없습니다. 글리프를 Shift+클릭해 제거하여 공간을 확보하세요.",
+    Modal.message.show("No available inventory space; free up space by shift-clicking Glyphs to get rid of them.",
       { closeEvent: GAME_EVENT.GLYPHS_CHANGED });
     return;
   }
@@ -297,14 +297,14 @@ function updateRealityRecords(realityProps) {
   }
   player.records.bestReality.time = Decimal.min(player.records.thisReality.time, player.records.bestReality.time);
   if (player.records.thisReality.realTime < player.records.bestReality.realTime) {
-    player.records.bestReality.realTime = player.records.thisReality.realTime;
+    player.records.bestReality.realTime = Math.max(player.records.thisReality.realTime, 1);
     player.records.bestReality.speedSet = Glyphs.copyForRecords(Glyphs.active.filter(g => g !== null));
   }
 }
 
 function giveRealityRewards(realityProps) {
   const multiplier = new Decimal(realityProps.simulatedRealities).add(1).toNumber();
-  const realityAndPPMultiplier = multiplier + binomialDistribution(multiplier, Achievement(154).effectOrDefault(0));
+  const realityAndPPMultiplier = new Decimal(multiplier + binomialDistribution(multiplier, Achievement(154).effectOrDefault(0)));
   const gainedRM = Currency.realityMachines.gte(MachineHandler.hardcapRM) ? DC.D0 : realityProps.gainedRM;
   Currency.realityMachines.add(gainedRM.times(multiplier));
   updateRealityRecords(realityProps);
@@ -313,7 +313,7 @@ function giveRealityRewards(realityProps) {
     realityProps.gainedGlyphLevel.actualLevel, realityAndPPMultiplier, multiplier,
     MachineHandler.projectedIMCap);
   Currency.realities.add(realityAndPPMultiplier);
-  Currency.perkPoints.add(realityAndPPMultiplier);
+  Currency.perkPoints.add(realityAndPPMultiplier.toNumber());
   if (TeresaUnlocks.effarig.canBeApplied) {
     Currency.relicShards.add(realityProps.gainedShards.times(multiplier));
   }
@@ -332,11 +332,11 @@ function giveRealityRewards(realityProps) {
     const current = Teresa.runRewardMultiplier;
     const newMultiplier = Teresa.rewardMultiplier(player.antimatter);
     const isHigher = newMultiplier.gt(current);
-    const modalText = `Teresa의 현실을 완료했습니다! ${isHigher
-      ? `더 많은 반물질을 획득하여 글리프 희생 배수가
-      ${format(current, 2, 2)}에서 ${format(newMultiplier, 2, 2)}로 증가했습니다`
-      : `이번 진행에서 더 많은 반물질을 획득하지 못했으므로
-      Teresa의 글리프 희생 배수가 증가하지 않았습니다`}`;
+    const modalText = `You have completed Teresa's Reality! ${isHigher
+      ? `Since you gained more Antimatter, you increased your
+      Glyph Sacrifice multiplier from ${format(current, 2, 2)} to ${format(newMultiplier, 2, 2)}`
+      : `You did not gain more Antimatter during this run, so the Glyph Sacrifice multiplier
+      from Teresa did not increase`}.`;
     Modal.message.show(modalText, {}, 2);
     if (Currency.antimatter.gt(player.celestials.teresa.bestRunAM)) {
       player.celestials.teresa.bestRunAM = Currency.antimatter.value;
@@ -485,19 +485,20 @@ export function beginProcessReality(realityProps) {
       asyncEntry: doneSoFar => {
         GameIntervals.stop();
         ui.$viewModel.modal.progressBar = {
-          label: "증폭된 현실 시뮬레이션",
-          info: () => `게임이 방금 완료한 현실을 ${formatInt(glyphsToProcess)}회 더 반복했을 때 얻을 모든 자원을
-            계산하고 있습니다. 남은 글리프가 ${formatInt(glyphsToSample)}개보다 많을 때 "빠른 글리프 처리"를
-            누르면 남은 글리프를 모두 자동 희생하여 계산 속도가 빨라집니다. "글리프 건너뛰기"를 누르면
-            글리프 관련 자원을 모두 무시하고 다른 자원을 지급한 뒤 시뮬레이션을 종료합니다.
-            ${Ra.unlocks.unlockGlyphAlchemy.canBeApplied ? `두 버튼 중 하나를 눌러 시뮬레이션을 가속하면
-            글리프 연금술의 자원은 갱신되지 않습니다.` : ""}`,
-          progressName: "현실",
+          label: "Simulating Amplified Reality",
+          info: () => `The game is currently calculating all the resources you would gain from repeating the
+            Reality you just completed ${formatInt(glyphsToProcess)} more times. Pressing "Quick Glyphs" with
+            more than ${formatInt(glyphsToSample)} Glyphs remaining will speed up the calculation by automatically
+            sacrificing all the remaining Glyphs you would get. Pressing "Skip Glyphs" will ignore all resources
+            related to Glyphs and stop the simulation after giving all other resources.
+            ${Ra.unlocks.unlockGlyphAlchemy.canBeApplied ? `Pressing either button to speed up
+            simulation will not update any resources within Glyph Alchemy.` : ""}`,
+          progressName: "Realities",
           current: doneSoFar,
           max: glyphsToProcess,
           startTime: Date.now(),
           buttons: [{
-            text: "빠른 글리프 처리",
+            text: "Quick Glyphs",
             condition: (current, max) => max - current > glyphsToSample,
             click: () => {
               // This changes the simulating function to one that just takes a representative sample of 10000 random
@@ -513,7 +514,7 @@ export function beginProcessReality(realityProps) {
             }
           },
           {
-            text: "글리프 건너뛰기",
+            text: "Skip Glyphs",
             condition: () => true,
             click: () => {
               // Shortcut to the end since we're ignoring all glyph-related resources
@@ -614,9 +615,7 @@ export function finishProcessReality(realityProps) {
   }
 
   let celestialRunState;
-  if (!(Alpha.isRunning && Alpha.currentStage === 27 || Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ENDGAME)) {
-    celestialRunState = clearCelestialRuns();
-  }
+  celestialRunState = clearCelestialRuns();
   recalculateAllGlyphs();
   Glyphs.updateMaxGlyphCount(true);
 
@@ -657,7 +656,7 @@ export function finishProcessReality(realityProps) {
   player.records.bestEternity.realTime = 999999999999;
   if (!PelleUpgrade.keepEternityUpgrades.canBeApplied) player.eternityUpgrades.clear();
   player.totalTickGained = DC.D0;
-  if (!PelleUpgrade.keepEternityChallenges.canBeApplied || (LHC.voidRunning && !NullUpgrade.limerick3.isBought)) player.eternityChalls = {};
+  if (!PelleUpgrade.keepEternityChallenges.canBeApplied && !(LHC.voidRunning && NullUpgrade.limerick3.isBought)) player.eternityChalls = {};
   player.reality.unlockedEC = 0;
   player.reality.lastAutoEC = 0;
   player.challenge.eternity.current = 0;
@@ -760,7 +759,8 @@ export function finishProcessReality(realityProps) {
 
   if (realityProps.restoreCelestialState || player.options.retryCelestial) restoreCelestialRuns(celestialRunState);
 
-  if (Pelle.isDoomed && PelleUpgrade.keepAutobuyers.canBeApplied && Autobuyer.bigCrunch.hasMaxedInterval) {
+  if ((Pelle.isDoomed && PelleUpgrade.keepAutobuyers.canBeApplied && Autobuyer.bigCrunch.hasMaxedInterval) ||
+     (LHC.voidRunning && NullUpgrade.alwaysBroken.isBought)) {
     player.break = true;
   }
 
@@ -834,23 +834,25 @@ export function clearCelestialRuns() {
     laitela: player.celestials.laitela.run,
     alpha: player.celestials.alpha.run
   };
-  player.celestials.teresa.run = false;
-  player.celestials.effarig.run = false;
-  // Nameless forces all tabs to be visible, but exiting via the header might leave the player on a tab which is
-  // otherwise normally hidden - in that case we force them to the Nameless tab. We could scan for the lowest-index tab
-  // and subtab, but all other things being equal the Nameless tab makes the most sense. The run flag is toggled
-  // *before* the check because otherwise isHidden will always evaluate to false due to still being in Nameless.
-  if (Enslaved.isRunning) {
-    player.celestials.enslaved.run = false;
-    if (Tabs.current.isHidden || Tabs.current._currentSubtab.isHidden) Tab.celestials.enslaved.show();
-    // We specifically revalidate here and nowhere else because Nameless changes the unlock state of the BLACK HOLE
-    // command, which changes the validity of existing scripts when entering/exiting
-    AutomatorData.recalculateErrors();
+  if (!(Alpha.isRunning && Alpha.currentStage === 27 || Effarig.isRunning && Effarig.currentStage === EFFARIG_STAGES.ENDGAME)) {
+    player.celestials.teresa.run = false;
+    player.celestials.effarig.run = false;
+    // Nameless forces all tabs to be visible, but exiting via the header might leave the player on a tab which is
+    // otherwise normally hidden - in that case we force them to the Nameless tab. We could scan for the lowest-index tab
+    // and subtab, but all other things being equal the Nameless tab makes the most sense. The run flag is toggled
+    // *before* the check because otherwise isHidden will always evaluate to false due to still being in Nameless.
+    if (Enslaved.isRunning) {
+      player.celestials.enslaved.run = false;
+      if (Tabs.current.isHidden || Tabs.current._currentSubtab.isHidden) Tab.celestials.enslaved.show();
+      // We specifically revalidate here and nowhere else because Nameless changes the unlock state of the BLACK HOLE
+      // command, which changes the validity of existing scripts when entering/exiting
+      AutomatorData.recalculateErrors();
+    }
+    player.celestials.v.run = false;
+    player.celestials.ra.run = false;
+    player.celestials.laitela.run = false;
+    player.celestials.alpha.run = false;
   }
-  player.celestials.v.run = false;
-  player.celestials.ra.run = false;
-  player.celestials.laitela.run = false;
-  player.celestials.alpha.run = false;
   return saved;
 }
 

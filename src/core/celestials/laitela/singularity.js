@@ -143,7 +143,7 @@ export const SingularityMilestones = {
           // For never-completed repeatable milestones, this is zero and will cause NaN bugs if we don't set it to 1
           const prev = Decimal.clampMin(m.previousGoal, 1);
           const part = Decimal.clamp(new Decimal(Decimal.log10(Currency.singularities.value.div(prev))).div(Decimal.log10(m.nextGoal.div(prev))), 0, 1);
-          return (m.completions.toNumber() + part) / 20;
+          return m.completions.add(part).div(20);
         };
         break;
       case SINGULARITY_MILESTONE_SORT.PERCENT_COMPLETIONS:
@@ -286,14 +286,14 @@ export const Singularity = {
 
     EventHub.dispatch(GAME_EVENT.SINGULARITY_RESET_BEFORE);
 
-    Currency.darkEnergy.reset();
+    if (!DivinityMilestone.hadronEmpowerment.isReached) Currency.darkEnergy.reset();
     Currency.singularities.add(this.singularitiesGained);
 
-    for (const quote of Laitela.quotes.all) {
+    /*for (const quote of Laitela.quotes.all) {
       if (quote.requirement) {
         quote.show();
       }
-    }
+    }*/
 
     EventHub.dispatch(GAME_EVENT.SINGULARITY_RESET_AFTER);
   }
@@ -304,8 +304,8 @@ EventHub.logic.on(GAME_EVENT.GAME_LOAD, () => SingularityMilestones.lastNotified
 EventHub.logic.on(GAME_EVENT.SINGULARITY_RESET_AFTER, () => {
   const newMilestones = SingularityMilestones.unnotifiedMilestones.length;
   if (newMilestones === 0) return;
-  if (newMilestones === 1) GameUI.notify.blackHole(`특이점 마일스톤에 도달했습니다!`);
-  else if (newMilestones > 100) GameUI.notify.blackHole(`특이점 마일스톤을 100개 넘게 달성했습니다!`);
-  else GameUI.notify.blackHole(`특이점 마일스톤 ${formatInt(newMilestones)}개에 도달했습니다!`);
+  if (newMilestones === 1) GameUI.notify.blackHole(`You reached a Singularity milestone!`);
+  else if (newMilestones > 100) GameUI.notify.blackHole(`You reached over 100 Singularity milestones!`);
+  else GameUI.notify.blackHole(`You reached ${formatInt(newMilestones)} Singularity milestones!`);
   SingularityMilestones.lastNotified = Currency.singularities.value;
 });

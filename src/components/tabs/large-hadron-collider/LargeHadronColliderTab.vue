@@ -27,22 +27,23 @@ export default {
       nullified: false,
       voidMode: 0,
       nullParticles: new Decimal(),
-      nullParticlesPerSecond: new Decimal()
+      nullParticlesPerSecond: new Decimal(),
+      nullParticleEffect: new Decimal()
     };
   },
   computed: {
     hadronSpeedText() {
-      if (this.hadronSpeed === 0) return `하드론이 정지해 있습니다`;
-      if (this.hadronSpeed >= 1000) return `하드론이 ${formatHybridLarge(this.hadronSpeed, 3)} m/s로 움직이고 있습니다`;
-      return `하드론이 ${format(this.hadronSpeed, 3, 3)} m/s로 움직이고 있습니다`;
+      if (this.hadronSpeed === 0) return `Your Hadrons are stationary`;
+      if (this.hadronSpeed >= 1000) return `Your Hadrons are moving at ${formatHybridLarge(this.hadronSpeed, 3)} m/s`;
+      return `Your Hadrons are moving at ${format(this.hadronSpeed, 3, 3)} m/s`;
     },
     modeDisplay() {
       return this.voidMode === 0
-        ? "공허 모드: 일반"
-        : "공허 모드: 무효화";
+        ? "Void Mode: Normal"
+        : "Void Mode: Nullified";
     },
     voidText() {
-      return this.isRunning ? "[공허에서 나가기.]" : "[공허에 진입하기.]";
+      return this.isRunning ? "[Exit the Void.]" : "[Enter the Void.]";
     },
     runButtonOuterClass() {
       return {
@@ -73,6 +74,7 @@ export default {
       this.voidMode = player.endgame.largeHadronCollider.void.mode;
       this.nullParticles.copyFrom(player.endgame.largeHadronCollider.void.nullParticles);
       this.nullParticlesPerSecond.copyFrom(!LHC.nullifiedVoidRunning ? DC.D0 : getNullParticleGainPerSecond());
+      this.nullParticleEffect.copyFrom(Currency.nullParticles.value.max(1).log10().div(5).add(1).pow(5));
     },
     formatNullAmount(amount) {
       return amount.gte(DC.NUMMAX) ? Notations.current.infinite : format(amount, 2, 2);
@@ -111,38 +113,38 @@ export default {
       >
         {{ hadronSpeedText }}
         <br>
-        대형 강입자 충돌기가 현재 {{ formatInt(accelPower) }} GWh의 전력을 소비하고 있습니다.
+        The Large Hadron Collider is currently consuming {{ formatInt(accelPower) }} GWh of power
       </div>
       <AcceleratorsPanel v-if="hasAccelerator" />
       <div
         v-if="!hasAccelerator"
         class="c-large-hadron-collider-description"
       >
-        반물질 {{ format(Decimal.pow10(1e200), 2, 2) }} 도달 필요
+        Reach {{ format(Decimal.pow10(1e200), 2, 2) }} Antimatter
       </div>
       <div
         class="c-large-hadron-collider-entropy"
         v-if="canSeeEntropy1"
       >
-        우주의 과도한 엔트로피 때문에 반물질이 {{ format(amSoftcap, 2, 2) }} 이후로 붕괴하며,
-        {{ format(amHardcap, 2, 2) }}를 초과할 수 없습니다.
+        Excess Entropy in the universe has caused your Antimatter to decay past {{ format(amSoftcap, 2, 2) }},
+        and has restricted it from exceeding {{ format(amHardcap, 2, 2) }}.
       </div>
       <div
         class="c-large-hadron-collider-entropy"
         v-if="canSeeEntropy2"
       >
-        반물질이 {{ format(amSoftcap2, 2, 2) }}를 넘으면 붕괴가 훨씬 강해집니다.
+        The Antimatter decay is significantly stronger past {{ format(amSoftcap2, 2, 2) }}.
       </div>
     </div>
     <br>
     <br>
     <div v-if="highestAntimatter.gt(10)">
-      <span class="c-void-antimatter-amount">[공허 안에서의 반물질 최고 기록: {{ format(highestAntimatter, 2, 1) }}.]</span>
+      <span class="c-void-antimatter-amount">[Your highest Antimatter inside The Void is {{ format(highestAntimatter, 2, 1) }}.]</span>
       <br>
-      <span class="c-null">[무효 물질 보유량: {{ formatNullAmount(nullMatter) }}. +{{ formatNullAmount(nullPerSecond) }}/초]</span>
+      <span class="c-null">[You have {{ formatNullAmount(nullMatter) }} Null Matter. +{{ formatNullAmount(nullPerSecond) }}/s]</span>
     </div>
     <div v-if="nullified">
-      <span class="c-null">[무효 입자 보유량: {{ format(nullParticles, 2, 2) }}. +{{ format(nullParticlesPerSecond, 2, 2) }}/초]</span>
+      <span class="c-null">[You have {{ format(nullParticles, 2, 2) }} Null Particles. +{{ format(nullParticlesPerSecond, 2, 2) }}/s]</span>
     </div>
     <div class="l-void-run">
       <div
@@ -165,18 +167,18 @@ export default {
       {{ modeDisplay }}
     </PrimaryButton>
     <div v-if="voidMode === 0">
-      공허에 진입하면 엔드게임이 강제로 초기화되고 현실 이후의 모든 기능이 비활성화됩니다.
+      Entering The Void will force an Endgame reset and disable all Reality and beyond mechanics.
       <br>
-      반물질이 서서히 붕괴하며, 붕괴한 반물질에서 무효 물질을 얻습니다.
+      Your Antimatter will slowly decay and you will gain Null Matter from the decayed Antimatter.
       <span v-if="nullified">
         <br>
-        다중우주를 무효화했으므로 공허 안에서 ANR 특전과 수동 EP 생성이 다시 활성화됩니다.
+        Since you Nullified the Multiverse, the ANR Perk and Passive EP Generation are reenabled inside The Void.
       </span>
     </div>
     <div v-if="voidMode === 1">
-      무효화 모드로 공허에 진입하면 엔드게임이 강제로 초기화되고 반물질에 {{ format(0.01, 2, 2) }}제곱이 적용됩니다.
+      Entering The Void in Nullified Mode will force an Endgame reset and Dilate your Antimatter by {{ format(0.01, 2, 2) }}.
       <br>
-      반물질에 따라 무효 입자를 생성하며, 일반 모드의 공허 안에서 반물질 차원을 강화합니다.
+      You will generate Null Particles based on your Antimatter, which empower Antimatter Dimensions while inside The Void in normal mode (Currently: {{ formatPow(nullParticleEffect, 2, 3) }}).
     </div>
     <NullUpgradesTabComponent />
   </div>

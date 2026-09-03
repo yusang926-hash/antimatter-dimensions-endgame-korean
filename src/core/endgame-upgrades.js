@@ -76,7 +76,7 @@ class EndgameUpgradeState extends BitPurchasableMechanicState {
     const endgameReached = PlayerProgress.endgameUnlocked() && EndgameMastery.endgameUpgrades.isBought;
     if (!endgameReached || this.isAvailableForPurchase || !this.config.checkRequirement()) return;
     player.endgame.upgReqs |= (1 << this.id);
-    GameUI.notify.endgame(`엔드게임 업그레이드를 해금했습니다: ${this.config.name}`);
+    GameUI.notify.endgame(`You've unlocked a Endgame Upgrade: ${this.config.name}`);
     this.hasPlayerLock = false;
   }
 
@@ -111,7 +111,16 @@ class RebuyableEndgameUpgradeState extends RebuyableMechanicState {
       1e3,
       this.config.initialCost * this.config.costMult
     ).sub(player.endgame.rebuyables[this.id]).toNumber();
-    Currency.celestialPoints.subtract(this.cost);
+    Currency.celestialPoints.subtract(getHybridCostScaling(
+      player.endgame.rebuyables[this.id] - 1,
+      1e100,
+      this.config.initialCost,
+      this.config.costMult,
+      this.config.costMult / 10,
+      DC.E309,
+      1e3,
+      this.config.initialCost * this.config.costMult
+    ));
     return true;
   }
 }

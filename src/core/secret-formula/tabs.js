@@ -1,14 +1,14 @@
 export const tabs = [
   {
     key: "dimensions",
-    name: "차원",
+    name: "Dimensions",
     hideAt: 2.9,
     id: 0,
     hidable: true,
     subtabs: [
       {
         key: "antimatter",
-        name: "반물질 차원",
+        name: "Antimatter Dimensions",
         symbol: "Ω",
         component: "AntimatterDimensionsTab",
         id: 0,
@@ -16,7 +16,7 @@ export const tabs = [
       },
       {
         key: "infinity",
-        name: "무한 차원",
+        name: "Infinity Dimensions",
         hideAt: 2.7,
         symbol: "∞",
         component: "InfinityDimensionsTab",
@@ -30,7 +30,7 @@ export const tabs = [
       },
       {
         key: "time",
-        name: "시간 차원",
+        name: "Time Dimensions",
         hideAt: 2.6,
         symbol: "Δ",
         component: "TimeDimensionsTab",
@@ -40,7 +40,7 @@ export const tabs = [
       },
       {
         key: "celestial",
-        name: "셀레스티얼 차원",
+        name: "Celestial Dimensions",
         hideAt: 2.5,
         symbol: "✯",
         component: "CelestialDimensionsTab",
@@ -50,7 +50,7 @@ export const tabs = [
       },
       {
         key: "divine",
-        name: "신성 차원",
+        name: "Divine Dimensions",
         hideAt: 2.5,
         symbol: "<i class='fas fa-crown'></i>",
         component: "DivineDimensionsTab",
@@ -62,14 +62,14 @@ export const tabs = [
   },
   {
     key: "options",
-    name: "옵션",
+    name: "Options",
     hideAt: 1.6,
     id: 1,
     hidable: false,
     subtabs: [
       {
         key: "saving",
-        name: "세이브",
+        name: "Saving",
         symbol: "<i class='fas fa-save'></i>",
         component: "OptionsSavingTab",
         id: 0,
@@ -77,7 +77,7 @@ export const tabs = [
       },
       {
         key: "visual",
-        name: "비주얼",
+        name: "Visual",
         symbol: "<i class='fas fa-palette'></i>",
         component: "OptionsVisualTab",
         id: 1,
@@ -85,7 +85,7 @@ export const tabs = [
       },
       {
         key: "gameplay",
-        name: "게임플레이",
+        name: "Gameplay",
         symbol: "<i class='fas fa-wrench'></i>",
         component: "OptionsGameplayTab",
         id: 2,
@@ -95,14 +95,14 @@ export const tabs = [
   },
   {
     key: "statistics",
-    name: "통계",
+    name: "Statistics",
     hideAt: 1.7,
     id: 2,
     hidable: true,
     subtabs: [
       {
         key: "statistics",
-        name: "통계",
+        name: "Statistics",
         symbol: "<i class='fas fa-clipboard-list'></i>",
         component: "StatisticsTab",
         id: 0,
@@ -110,7 +110,7 @@ export const tabs = [
       },
       {
         key: "challenges",
-        name: "도전 기록",
+        name: "Challenge records",
         symbol: "<i class='fas fa-stopwatch'></i>",
         component: "ChallengeRecordsTab",
         condition: () =>
@@ -123,7 +123,7 @@ export const tabs = [
       },
       {
         key: "prestige runs",
-        name: "최근 프레스티지 기록",
+        name: "Past Prestige Runs",
         symbol: "<i class='fas fa-list-ol'></i>",
         component: "PastPrestigeRunsTab",
         condition: () => PlayerProgress.endgameUnlocked() || PlayerProgress.infinityUnlocked(),
@@ -132,7 +132,7 @@ export const tabs = [
       },
       {
         key: "multipliers",
-        name: "배율 분석",
+        name: "Multiplier Breakdown",
         symbol: "<i class='fas fa-calculator'></i>",
         component: "MultiplierBreakdownTab",
         condition: () => false && (PlayerProgress.endgameUnlocked() || PlayerProgress.infinityUnlocked()),
@@ -141,7 +141,7 @@ export const tabs = [
       },
       {
         key: "glyph sets",
-        name: "글리프 세트 기록",
+        name: "Glyph Set Records",
         symbol: "<i class='fas fa-ellipsis-h'></i>",
         component: "GlyphSetRecordsTab",
         condition: () => PlayerProgress.endgameUnlocked() || PlayerProgress.realityUnlocked(),
@@ -150,7 +150,7 @@ export const tabs = [
       },
       {
         key: "speedrun milestones",
-        name: "스피드런 마일스톤",
+        name: "Speedrun Milestones",
         symbol: "<i class='fas fa-flag-checkered'></i>",
         component: "SpeedrunMilestonesTab",
         condition: () => player.speedrun.isActive,
@@ -159,7 +159,7 @@ export const tabs = [
       },
       {
         key: "speedrun records",
-        name: "스피드런 기록",
+        name: "Speedrun Records",
         symbol: "<i class='fas fa-ranking-star'></i>",
         component: "PreviousSpeedrunTab",
         condition: () => Object.keys(player.speedrun.previousRuns).length > 0,
@@ -168,7 +168,7 @@ export const tabs = [
       },
       {
         key: "stored time",
-        name: "저장된 시간",
+        name: "Stored Time",
         symbol: "<i class='fas fa-clock'></i>",
         component: "StoredTimeTab",
         id: 7,
@@ -178,14 +178,14 @@ export const tabs = [
   },
   {
     key: "achievements",
-    name: "도전과제",
+    name: "Achievements",
     hideAt: 1.9,
     id: 3,
     hidable: true,
     subtabs: [
       {
         key: "normal",
-        name: "일반 도전과제",
+        name: "Achievements",
         symbol: "<i class='fas fa-trophy'></i>",
         component: "NormalAchievementsTab",
         id: 0,
@@ -193,7 +193,7 @@ export const tabs = [
       },
       {
         key: "secret",
-        name: "비밀 도전과제",
+        name: "Secret Achievements",
         symbol: "<i class='fas fa-question'></i>",
         component: "SecretAchievementTab",
         id: 1,
@@ -203,7 +203,7 @@ export const tabs = [
   },
   {
     key: "automation",
-    name: "자동화",
+    name: "Automation",
     id: 4,
     hideAt: 2.1,
     condition: () => PlayerProgress.endgameUnlocked() || player.records.totalAntimatter.gte(1e40),
@@ -211,7 +211,7 @@ export const tabs = [
     subtabs: [
       {
         key: "autobuyers",
-        name: "자동구매기",
+        name: "Autobuyers",
         symbol: "<i class='fas fa-cog'></i>",
         component: "AutobuyersTab",
         id: 0,
@@ -219,7 +219,7 @@ export const tabs = [
       },
       {
         key: "automator",
-        name: "오토메이터",
+        name: "Automator",
         symbol: "<i class='fas fa-code'></i>",
         component: "AutomatorTab",
         condition: () => PlayerProgress.endgameUnlocked() || PlayerProgress.realityUnlocked(),
@@ -230,7 +230,7 @@ export const tabs = [
   },
   {
     key: "challenges",
-    name: "도전",
+    name: "Challenges",
     hideAt: 2,
     condition: () =>
       PlayerProgress.endgameUnlocked() ||
@@ -242,7 +242,7 @@ export const tabs = [
     subtabs: [
       {
         key: "normal",
-        name: "일반 도전",
+        name: "Challenges",
         symbol: "Ω",
         component: "NormalChallengesTab",
         id: 0,
@@ -250,7 +250,7 @@ export const tabs = [
       },
       {
         key: "infinity",
-        name: "무한 도전",
+        name: "Infinity Challenges",
         symbol: "∞",
         component: "infinity-challenges-tab",
         condition: () => PlayerProgress.endgameUnlocked() || PlayerProgress.realityUnlocked() || PlayerProgress.hasBroken() || Pelle.isDoomed,
@@ -259,7 +259,7 @@ export const tabs = [
       },
       {
         key: "eternity",
-        name: "영원 도전",
+        name: "Eternity Challenges",
         symbol: "Δ",
         component: "eternity-challenges-tab",
         condition: () =>
@@ -274,7 +274,7 @@ export const tabs = [
   },
   {
     key: "infinity",
-    name: "무한",
+    name: "Infinity",
     hideAt: 2.2,
     UIClass: "o-tab-btn--infinity",
     before: "InfinityPointsHeader",
@@ -284,7 +284,7 @@ export const tabs = [
     subtabs: [
       {
         key: "upgrades",
-        name: "무한 업그레이드",
+        name: "Infinity Upgrades",
         symbol: "<i class='fas fa-arrow-up'></i>",
         component: "InfinityUpgradesTab",
         condition: () =>
@@ -297,7 +297,7 @@ export const tabs = [
       },
       {
         key: "break",
-        name: "무한 돌파",
+        name: "Break Infinity",
         symbol: "∝",
         component: "BreakInfinityTab",
         condition: () =>
@@ -310,7 +310,7 @@ export const tabs = [
       },
       {
         key: "replicanti",
-        name: "복제자",
+        name: "Replicanti",
         symbol: "Ξ",
         component: "ReplicantiTab",
         condition: () =>
@@ -325,7 +325,7 @@ export const tabs = [
   },
   {
     key: "eternity",
-    name: "영원",
+    name: "Eternity",
     hideAt: 1.8,
     UIClass: "o-tab-btn--eternity",
     condition: () =>
@@ -338,7 +338,7 @@ export const tabs = [
     subtabs: [
       {
         key: "studies",
-        name: "시간 연구",
+        name: "Time Studies",
         symbol: "<i class='fas fa-book'></i>",
         component: "TimeStudiesTab",
         id: 0,
@@ -346,7 +346,7 @@ export const tabs = [
       },
       {
         key: "upgrades",
-        name: "영원 업그레이드",
+        name: "Eternity Upgrades",
         symbol: "<i class='fas fa-arrow-up'></i>",
         component: "EternityUpgradesTab",
         id: 1,
@@ -354,7 +354,7 @@ export const tabs = [
       },
       {
         key: "milestones",
-        name: "영원 마일스톤",
+        name: "Eternity Milestones",
         symbol: "<i class='fas fa-star'></i>",
         component: "EternityMilestonesTab",
         id: 2,
@@ -362,7 +362,7 @@ export const tabs = [
       },
       {
         key: "dilation",
-        name: "시간 팽창",
+        name: "Time Dilation",
         symbol: "Ψ",
         component: "TimeDilationTab",
         condition: () => PlayerProgress.endgameUnlocked() || PlayerProgress.dilationUnlocked() || PlayerProgress.realityUnlocked(),
@@ -373,7 +373,7 @@ export const tabs = [
   },
   {
     key: "reality",
-    name: "현실",
+    name: "Reality",
     hideAt: 2.3,
     UIClass: "o-tab-btn--reality",
     condition: () => PlayerProgress.endgameUnlocked() || PlayerProgress.realityUnlocked() || TimeStudy.reality.isBought,
@@ -382,7 +382,7 @@ export const tabs = [
     subtabs: [
       {
         key: "glyphs",
-        name: "글리프",
+        name: "Glyphs",
         symbol: "<i class='fas fa-clone'></i>",
         component: "GlyphsTab",
         id: 0,
@@ -390,7 +390,7 @@ export const tabs = [
       },
       {
         key: "upgrades",
-        name: "현실 업그레이드",
+        name: "Reality Upgrades",
         symbol: "<i class='fas fa-arrow-up'></i>",
         component: "RealityUpgradesTab",
         id: 1,
@@ -398,7 +398,7 @@ export const tabs = [
       },
       {
         key: "imag_upgrades",
-        name: "허수 업그레이드",
+        name: "Imaginary Upgrades",
         symbol: "<i class='fas fa-level-up-alt'></i>",
         component: "ImaginaryUpgradesTab",
         condition: () => PlayerProgress.endgameUnlocked() || MachineHandler.isIMUnlocked,
@@ -407,7 +407,7 @@ export const tabs = [
       },
       {
         key: "dual_upgrades",
-        name: "이중성 업그레이드",
+        name: "Duality Upgrades",
         symbol: "<i class='fas fa-arrow-trend-up'></i>",
         component: "DualityUpgradesTab",
         condition: () => MachineHandler.isDMUnlocked,
@@ -416,7 +416,7 @@ export const tabs = [
       },
       {
         key: "perks",
-        name: "퍼크",
+        name: "Perks",
         symbol: "<i class='fas fa-project-diagram'></i>",
         component: "PerksTab",
         id: 4,
@@ -424,7 +424,7 @@ export const tabs = [
       },
       {
         key: "hole",
-        name: "블랙홀",
+        name: "Black Hole",
         symbol: "<i class='fas fa-circle'></i>",
         component: "BlackHoleTab",
         condition: () => PlayerProgress.endgameUnlocked() || PlayerProgress.realityUnlocked(),
@@ -433,7 +433,7 @@ export const tabs = [
       },
       {
         key: "alchemy",
-        name: "글리프 연금술",
+        name: "Glyph Alchemy",
         symbol: "<i class='fas fa-vial'></i>",
         component: "AlchemyTab",
         condition: () => PlayerProgress.endgameUnlocked() || Ra.unlocks.unlockGlyphAlchemy.canBeApplied,
@@ -444,7 +444,7 @@ export const tabs = [
   },
   {
     key: "celestials",
-    name: "셀레스티얼",
+    name: "Celestials",
     hideAt: 2.4,
     UIClass: "o-tab-btn--celestial",
     condition: () => PlayerProgress.endgameUnlocked() || Teresa.isUnlocked,
@@ -453,7 +453,7 @@ export const tabs = [
     subtabs: [
       {
         key: "celestial-navigation",
-        name: "셀레스티얼 네비게이션",
+        name: "Celestial Navigation",
         symbol: "<i class='fas fa-map-marked-alt'></i>",
         component: "CelestialNavigationTab",
         id: 0,
@@ -535,7 +535,7 @@ export const tabs = [
   },
   {
     key: "shop",
-    name: "상점",
+    name: "Shop",
     newUIClass: "shop",
     hideAt: 1.5,
     condition: () => Cloud.isAvailable,
@@ -544,7 +544,7 @@ export const tabs = [
     subtabs: [
       {
         key: "shop",
-        name: "상점",
+        name: "Shop",
         symbol: "$",
         component: "ShopTab",
         id: 0,
@@ -554,7 +554,7 @@ export const tabs = [
   },
   {
     key: "endgame",
-    name: "엔드게임",
+    name: "Endgame",
     hideAt: 2.4,
     UIClass: "o-tab-btn--endgame",
     id: 11,
@@ -563,7 +563,7 @@ export const tabs = [
     subtabs: [
       {
         key: "endgame",
-        name: "엔드게임",
+        name: "Endgame",
         symbol: "∮",
         component: "EndgameTab",
         id: 0,
@@ -571,7 +571,7 @@ export const tabs = [
       },
       {
         key: "break-eternity",
-        name: "영원 돌파",
+        name: "Break Eternity",
         symbol: "∇",
         component: "BreakEternityTab",
         id: 1,
@@ -579,7 +579,7 @@ export const tabs = [
       },
       {
         key: "pelle-destruction",
-        name: "Pelle 파괴",
+        name: "Pelle Destruction",
         symbol: "♆",
         component: "PelleDestructionTab",
         id: 2,
@@ -587,7 +587,7 @@ export const tabs = [
       },
       {
         key: "expansion-packs",
-        name: "확장팩",
+        name: "Expansion Packs",
         symbol: "<i class='fas fa-expand-arrows-alt'></i>",
         component: "ExpansionPacksTab",
         id: 3,
@@ -595,7 +595,7 @@ export const tabs = [
       },
       {
         key: "masteries",
-        name: "엔드게임 마스터리",
+        name: "Endgame Masteries",
         symbol: "<i class='fas fa-trophy'></i>",
         component: "EndgameMasteriesTab",
         id: 4,
@@ -603,7 +603,7 @@ export const tabs = [
       },
       {
         key: "milestones",
-        name: "엔드게임 마일스톤",
+        name: "Endgame Milestones",
         symbol: "<i class='fas fa-star'></i>",
         component: "EndgameMilestonesTab",
         id: 5,
@@ -611,7 +611,7 @@ export const tabs = [
       },
       {
         key: "upgrades",
-        name: "엔드게임 업그레이드",
+        name: "Endgame Upgrades",
         symbol: "<i class='fas fa-arrow-up'></i>",
         component: "EndgameUpgradesTab",
         condition: () => EndgameUpgrades.isUnlocked,
@@ -620,7 +620,7 @@ export const tabs = [
       },
       {
         key: "power",
-        name: "은하력",
+        name: "Galactic Power",
         symbol: "Ω",
         component: "GalacticPowerTab",
         condition: () => GalacticPower.isUnlocked,
@@ -629,7 +629,7 @@ export const tabs = [
       },
       {
         key: "ethereal",
-        name: "에테리얼",
+        name: "The Ethereal",
         symbol: "<i class='fas fa-meteor'></i>",
         component: "EtherealTab",
         condition: () => Ethereal.isUnlocked,
@@ -638,7 +638,7 @@ export const tabs = [
       },
       {
         key: "hypercubes",
-        name: "하이퍼큐브",
+        name: "Hypercubes",
         symbol: "<i class='fas fa-cubes'></i>",
         component: "HypercubesTab",
         condition: () => DualityUpgrade(25).isBought,
@@ -647,7 +647,7 @@ export const tabs = [
       },
       {
         key: "collider",
-        name: "대형 강입자 충돌기",
+        name: "Large Hadron Collider",
         symbol: "<i class='fas fa-atom'></i>",
         component: "LargeHadronColliderTab",
         condition: () => ExpansionPack.alphaPack.isBought,
@@ -656,7 +656,7 @@ export const tabs = [
       },
       {
         key: "ascension",
-        name: "승천",
+        name: "Ascension",
         symbol: "⤴",
         component: "AscensionTab",
         condition: () => Ascension.isUnlocked,
@@ -667,7 +667,7 @@ export const tabs = [
   },
   {
     key: "cdexpansion",
-    name: "셀레스티얼 차원 확장",
+    name: "CD Expansion",
     hideAt: 2.4,
     UIClass: "o-tab-btn--cd-expansion",
     id: 12,
@@ -676,7 +676,7 @@ export const tabs = [
     subtabs: [
       {
         key: "celestial-infinity",
-        name: "셀레스티얼 무한 업그레이드",
+        name: "Celestial Infinity Upgrades",
         symbol: "<i class='fas fa-infinity'></i>",
         component: "CelestialInfinityUpgradesTab",
         id: 0,
@@ -684,7 +684,7 @@ export const tabs = [
       },
       {
         key: "celestial-break-infinity",
-        name: "셀레스티얼 무한 돌파",
+        name: "Celestial Break Infinity",
         symbol: "<i class='fab fa-skyatlas'></i>",
         component: "CelestialBreakInfinityTab",
         condition: () => CelestialInfinityUpgrade.all.filter(u => u.isBought).length === CelestialInfinityUpgrade.all.length ||
@@ -694,7 +694,7 @@ export const tabs = [
       },
       {
         key: "celestial-eternity",
-        name: "셀레스티얼 영원 업그레이드",
+        name: "Celestial Eternity Upgrades",
         symbol: "<i class='fas fa-hourglass-start'></i>",
         component: "CelestialEternityUpgradesTab",
         condition: () => PlayerProgress.celestialEternityUnlocked(),
@@ -703,7 +703,7 @@ export const tabs = [
       },
       {
         key: "celestial-eternity-plus",
-        name: "셀레스티얼 영원+ 업그레이드",
+        name: "Celestial Eternity+ Upgrades",
         symbol: "<i class='fas fa-hourglass-end'></i>",
         component: "CelestialEternityPlusUpgradesTab",
         condition: () => Currency.celestialEternityPoints.gte("1e1000"),
@@ -714,7 +714,7 @@ export const tabs = [
   },
   {
     key: "divinity",
-    name: "신성",
+    name: "Divinity",
     hideAt: 2.4,
     UIClass: "o-tab-btn--divinity",
     id: 13,
@@ -723,7 +723,7 @@ export const tabs = [
     subtabs: [
       {
         key: "milestones",
-        name: "신성 마일스톤",
+        name: "Divinity Milestones",
         symbol: "<i class='fas fa-star'></i>",
         component: "DivinityMilestonesTab",
         id: 0,
@@ -731,7 +731,7 @@ export const tabs = [
       },
       {
         key: "upgrades",
-        name: "신성 업그레이드",
+        name: "Divinity Upgrades",
         symbol: "<i class='fas fa-arrow-up'></i>",
         component: "DivinityUpgradesTab",
         condition: () => DivinityUpgrades.isUnlocked,
@@ -740,7 +740,7 @@ export const tabs = [
       },
       {
         key: "resurgence",
-        name: "재기 업그레이드",
+        name: "Resurgence Upgrades",
         symbol: "<i class='fas fa-bolt-lightning'></i>",
         component: "ResurgenceUpgradesTab",
         condition: () => ResurgenceUpgrades.isUnlocked,
@@ -751,7 +751,7 @@ export const tabs = [
   },
   {
     key: "universes",
-    name: "우주",
+    name: "Universes",
     hideAt: 2.4,
     UIClass: "o-tab-btn--universes",
     id: 14,
@@ -760,8 +760,8 @@ export const tabs = [
     subtabs: [
       {
         key: "transient",
-        name: "천이 우주",
-        symbol: "NYI",
+        name: "Transient Universe",
+        symbol: "<i class='fas fa-stopwatch-20'></i>",
         component: "TransientUniverseTab",
         id: 0,
         hidable: true,

@@ -25,166 +25,166 @@ const rebuyable = props => {
 
 export const imaginaryUpgrades = [
   rebuyable({
-    name: "시간 강화기",
+    name: "Temporal Intensifier",
     id: 1,
     initialCost: 3,
     costMult: 60,
-    textTemplate: "시간 증폭기 배율 +{value}",
+    textTemplate: "Increase Temporal Amplifier multiplier by +{value}",
     effect: 0.15,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.temporalIntensifier.canBeApplied
   }),
   rebuyable({
-    name: "복제 강화기",
+    name: "Replicative Intensifier",
     id: 2,
     initialCost: 4,
     costMult: 60,
-    textTemplate: "복제 증폭기 배율 +{value}",
+    textTemplate: "Increase Replicative Amplifier multiplier by +{value}",
     effect: 0.15,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.replicativeIntensifier.canBeApplied
   }),
   rebuyable({
-    name: "영원 강화기",
+    name: "Eternal Intensifier",
     id: 3,
     initialCost: 1,
     costMult: 40,
-    textTemplate: "영원 증폭기 배율 +{value}",
+    textTemplate: "Increase Eternal Amplifier multiplier by +{value}",
     effect: 0.4,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.eternalIntensifier.canBeApplied
   }),
   rebuyable({
-    name: "초광속 강화기",
+    name: "Superluminal Intensifier",
     id: 4,
     initialCost: 5,
     costMult: 80,
-    textTemplate: "초광속 증폭기 배율 +{value}",
+    textTemplate: "Increase Superluminal Amplifier multiplier by +{value}",
     effect: 0.15,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.superluminalIntensifier.canBeApplied
   }),
   rebuyable({
-    name: "무한 강화기",
+    name: "Boundless Intensifier",
     id: 5,
     initialCost: 1,
     costMult: 30,
-    textTemplate: "무한 증폭기 배율 +{value}",
+    textTemplate: "Increase Boundless Amplifier multiplier by +{value}",
     effect: 0.6,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.boundlessIntensifier.canBeApplied
   }),
   rebuyable({
-    name: "타원형 물질성",
+    name: "Elliptic Materiality",
     id: 6,
     initialCost: 1e4,
     costMult: 500,
-    description: () => `리얼리티 머신 최대치를 ${formatX(1e100 ** Effects.product(EndgameMastery(153)))}만큼 증가`,
+    description: () => `Increase the Reality Machine cap by ${formatX(1e100 ** Effects.product(EndgameMastery(153)))}`,
     effect: 1e100,
     formatEffect: value => `${formatX(EndgameMastery(153).isBought ? value.powEffectsOf(EndgameMastery(153)) : value)}`,
     isDecimal: true,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.ellipticMateriality.canBeApplied
   }),
   rebuyable({
-    name: "룬의 보장",
+    name: "Runic Assurance",
     id: 7,
     initialCost: 2e5,
     costMult: 500,
-    description: () => `글리프 불안정 시작 레벨을 ${formatInt(200)}만큼 늦춤`,
+    description: () => `Delay Glyph Instability starting level by ${formatInt(200)}`,
     effect: 200,
-    formatEffect: value => `+${formatInt(value)} 레벨`,
+    formatEffect: value => `+${formatInt(value)} levels`,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.runicAssurance.canBeApplied
   }),
   rebuyable({
-    name: "쌍곡 무한각형",
+    name: "Hyperbolic Apeirogon",
     id: 8,
     initialCost: 1e7,
     costMult: 800,
-    description: () => `무한 차원에 ${format("1e100000")} 배율 적용`,
+    description: () => `Multiply Infinity Dimensions by ${format("1e100000")}`,
     effect: DC.E100000,
     formatEffect: value => `${formatX(value)}`,
     isDecimal: true,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.hyperbolicApeirogon.canBeApplied
   }),
   rebuyable({
-    name: "우주 필라멘트",
+    name: "Cosmic Filament",
     id: 9,
     initialCost: 1e9,
     costMult: 1000,
-    description: () => `은하의 성능 증가`,
+    description: () => `Increase Galaxy strength`,
     effect: 0.03,
     formatEffect: value => `+${formatPercents(value)}`,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.cosmicFilament.canBeApplied
   }),
   rebuyable({
-    name: "엔트로피 응축",
+    name: "Entropic Condensing",
     id: 10,
     initialCost: 8e9,
     costMult: 2000,
-    description: () => `특이점 획득량 증가`,
+    description: () => `Increase Singularity gain`,
     effect: 1,
     formatEffect: value => `${formatX((EndgameMastery(131).isBought && !player.disablePostReality) ? Decimal.pow(1 + value, value) : new Decimal(1 + value), 2)}`,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.entropicCondensing.canBeApplied
   }),
   {
-    name: "간섭의 의혹",
+    name: "Suspicion of Interference",
     id: 11,
     cost: new Decimal(5e7),
-    requirement: () => `유물 파편 총 ${format(1e90)}개
-      (현재 ${format(player.celestials.effarig.relicShards, 2)}개 보유)`,
+    requirement: () => `${format(1e90)} total Relic Shards
+      (You have ${format(player.celestials.effarig.relicShards, 2)})`,
     hasFailed: () => false,
     checkRequirement: () => player.celestials.effarig.relicShards.gte(1e90),
     checkEvent: GAME_EVENT.REALITY_RESET_AFTER,
-    description: "총 반물질에 따라 시간 차원의 지수 증가",
+    description: "Time Dimension power based on total antimatter",
     effect: () => player.disablePostReality ? 1 : 1 + Decimal.log10(player.records.totalEndgameAntimatter.add(10).log10()).div(100).toNumber(),
     formatEffect: value => `${formatPow(value, 0, 4)}`,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.suspicionOfInterference.canBeApplied
   },
   {
-    name: "환상의 결과",
+    name: "Consequences of Illusions",
     id: 12,
     cost: new Decimal(5e7),
-    requirement: () => `글리프 레벨 요소 하나의 가중치를 ${formatInt(100)}으로 설정하여
-    레벨 ${formatInt(9000)} 글리프 생성`,
+    requirement: () => `Make a level ${formatInt(9000)} Glyph with a single Glyph level factor weight at
+    ${formatInt(100)}`,
     hasFailed: () => false,
     checkRequirement: () => Object.values(player.celestials.effarig.glyphWeights).some(w => w === 100) &&
       gainedGlyphLevel().actualLevel.gte(9000),
     checkEvent: GAME_EVENT.REALITY_RESET_BEFORE,
-    description: "반복 구매한 허수 업그레이드 수에 따라 무료 차원 가속 획득",
+    description: "Gain free Dimboosts based on Imaginary rebuyable count",
     effect: () => player.disablePostReality ? 0 : 2e4 * ImaginaryUpgrades.totalRebuyables,
     formatEffect: value => `${format(value, 1)}`,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.consequencesOfIllusions.canBeApplied
   },
   {
-    name: "정보의 덧없음",
+    name: "Transience of Information",
     id: 13,
     cost: new Decimal(5e7),
-    requirement: () => `The Nameless Ones의 현실에서 예상 리얼리티 머신
-      ${format(Number.MAX_VALUE, 2)}개 도달`,
+    requirement: () => `Reach ${format(Number.MAX_VALUE, 2)} projected Reality Machines within
+      The Nameless Ones' Reality`,
     hasFailed: () => !Enslaved.isRunning,
     // This is for consistency with the UI, which displays an amplified "projected RM" value on the reality button
     checkRequirement: () => Enslaved.isRunning &&
       MachineHandler.uncappedRM.times(simulatedRealityCount(false) + 1).gte(Number.MAX_VALUE),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "구매한 허수 업그레이드 수에 따라 허수 머신 최대치 증가",
+    description: "Increase Imaginary Machine Cap based on Imaginary Upgrades purchased",
     effect: () => player.disablePostReality ? 1 : Math.pow(1 + ImaginaryUpgrades.totalRebuyables / 20 + ImaginaryUpgrades.totalSinglePurchase / 2, EndgameMastery(154).effectOrDefault(1)),
     formatEffect: value => `${formatX(value, 2, 1)}`,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.transienceOfInformation.canBeApplied
   },
   {
-    name: "침입의 회상",
+    name: "Recollection of Intrusion",
     id: 14,
     cost: new Decimal(3.5e8),
     formatCost: x => format(x, 1),
-    requirement: () => `영원 도전 5에서 틱스피드 초당 ${format("1e75000000000")} 도달`,
+    requirement: () => `Reach a tickspeed of ${format("1e75000000000")} / sec within Eternity Challenge 5`,
     hasFailed: () => false,
     checkRequirement: () => EternityChallenge(5).isRunning && Tickspeed.perSecond.log10().gte(7.5e10),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `모든 차원의 구매당 배율을 ${formatPow(1.5, 0, 1)}로 제곱`,
+    description: () => `Raise all Dimension per-purchase multipliers to ${formatPow(1.5, 0, 1)}`,
     effect: () => player.disablePostReality ? 1 : 1.5,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.recollectionOfIntrusion.canBeApplied
   },
   {
-    name: "이상의 조작",
+    name: "Fabrication of Ideals",
     id: 15,
     cost: new Decimal(1e9),
-    requirement: () => `제1 무한 차원을 한 번도 보유하지 않고
-      반물질 ${format("1e1500000000000")} 도달`,
+    requirement: () => `Reach ${format("1e1500000000000")} antimatter without
+      ever having any 1st Infinity Dimensions`,
     hasFailed: () => player.requirementChecks.reality.maxID1.gt(0),
     checkRequirement: () => player.requirementChecks.reality.maxID1.eq(0) && player.antimatter.add(1).log10().gte(1.5e12),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
@@ -194,182 +194,182 @@ export const imaginaryUpgrades = [
     // - Purchasing any ID (edge case: this is acceptable for ID2-8 inside EC2 or EC10)
     // - Purchasing any TD with any amount of EC7 completions (edge case: acceptable within EC1 or EC10)
     // - Entering EC7 with any amount of purchased TD
-    description: () => `차원의 셀레스티얼 Lai'tela ${
-      Pelle.isDoomed ? "해금" : "해금 및 반물질 차원의 연속체 전환"
-    }`,
+    description: () => `${
+      Pelle.isDoomed ? "Unlock" : "Convert Antimatter Dimensions to Continuum and unlock"
+    } Lai'tela, Celestial of Dimensions`,
   },
   {
-    name: "질량 없는 운동량",
+    name: "Massless Momentum",
     id: 16,
     cost: new Decimal(3.5e9),
     formatCost: x => format(x, 1),
-    requirement: () => `Lai'tela의 현실을 ${formatInt(30)}초 이내에 두 번 불안정화`,
+    requirement: () => `Destabilize Lai'tela's Reality in under ${formatInt(30)} seconds twice`,
     hasFailed: () => false,
     checkRequirement: () => Laitela.maxAllowedDimension <= 6,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "제2 암흑 물질 차원 해금",
+    description: "Unlock the 2nd Dark Matter Dimension",
   },
   {
-    name: "카이랄 진동",
+    name: "Chiral Oscillation",
     id: 17,
     cost: new Decimal(6e9),
-    requirement: () => `한 번에 특이점을 최소 ${formatInt(20)}개 자동 응축`,
+    requirement: () => `Automatically condense at least ${formatInt(20)} Singularities at once`,
     hasFailed: () => false,
     checkRequirement: () => Singularity.singularitiesGained.gte(20) &&
       Currency.darkEnergy.gte(Singularity.cap.times(SingularityMilestone.autoCondense.effectOrDefault(Infinity))),
     checkEvent: GAME_EVENT.SINGULARITY_RESET_BEFORE,
-    description: "제3 암흑 물질 차원 해금",
+    description: "Unlock the 3rd Dark Matter Dimension",
   },
   {
-    name: "차원 대칭",
+    name: "Dimensional Symmetry",
     id: 18,
     cost: new Decimal(1.5e10),
     formatCost: x => format(x, 1),
-    requirement: () => `모든 종류의 은하 총 ${formatInt(80000)}개 보유`,
+    requirement: () => `Have ${formatInt(80000)} total Galaxies`,
     hasFailed: () => false,
     checkRequirement: () => GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
       player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)).gte(80000) : Replicanti.galaxies.total.add(player.galaxies).add(
       player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies).gte(80000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "제4 암흑 물질 차원 해금",
+    description: "Unlock the 4th Dark Matter Dimension",
   },
   {
-    name: "결정론적 복사",
+    name: "Deterministic Radiation",
     id: 19,
     cost: new Decimal(2.8e10),
     formatCost: x => format(x, 1),
-    requirement: () => `이번 현실에서 시간 연구를 ${formatInt(8)}개보다 많이 보유하지 않고
-      틱스피드 연속체 ${formatInt(3.85e6)} 도달`,
+    requirement: () => `Reach ${formatInt(3.85e6)} Tickspeed Continuum without ever having more than
+      ${formatInt(8)} Time Studies in this Reality`,
     hasFailed: () => player.requirementChecks.reality.maxStudies > 8,
     checkRequirement: () => player.requirementChecks.reality.maxStudies <= 8 &&
       Tickspeed.continuumValue.gte(3.85e6),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
-    lockEvent: () => `시간 연구를 ${formatInt(8)}개보다 많이 구매`,
-    description: "암흑 물질 소멸 해금"
+    lockEvent: () => `purchase more than ${formatInt(8)} Time Studies`,
+    description: "Unlock Dark Matter Annihilation"
   },
   {
-    name: "진공 가속",
+    name: "Vacuum Acceleration",
     id: 20,
     cost: new Decimal(3e12),
-    requirement: () => `연속체 증가량 최소 ${formatPercents(1)} 달성`,
+    requirement: () => `Have a Continuum increase of at least ${formatPercents(1)}`,
     hasFailed: () => false,
-    checkRequirement: () => Laitela.matterExtraPurchaseFactor >= 2,
+    checkRequirement: () => Laitela.matterExtraPurchaseFactor.gte(2),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `반복 구매 가능한 허수 업그레이드의 자동구매기를 해금하고 허수 머신을
-      ${formatInt(10)}배 빠르게 생산`,
+    description: () => `Unlock Autobuyers for repeatable Imaginary Upgrades and generate Imaginary Machines
+      ${formatInt(10)} times faster`,
     effect: () => player.disablePostReality ? 1 : 10,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.vacuumAcceleration.canBeApplied
   },
   {
-    name: "실존 제거",
+    name: "Existential Elimination",
     id: 21,
     cost: new Decimal(1e13),
-    requirement: () => `현실 내내 연속체를 비활성화한 채 반물질 ${format("1e7400000000000")} 도달`,
+    requirement: () => `Reach ${format("1e7400000000000")} antimatter with Continuum disabled for the entire Reality`,
     hasFailed: () => !player.requirementChecks.reality.noContinuum,
     checkRequirement: () => player.requirementChecks.reality.noContinuum &&
       Currency.antimatter.value.add(1).log10().gte(7.4e12),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
-    lockEvent: "연속체 활성화",
-    description: "허수 머신에 따라 소멸 배율 획득량 증가",
+    lockEvent: "enable Continuum",
+    description: "Annihilation multiplier gain is improved based on Imaginary Machines",
     effect: () => player.disablePostReality ? 1 : Decimal.clampMin(Decimal.pow(Decimal.log10(Currency.imaginaryMachines.value.add(1)).sub(10), 3), 1).toNumber(),
     formatEffect: value => `${formatX(value, 2, 1)}`,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.existentialElimination.canBeApplied
   },
   {
-    name: "완전 종결",
+    name: "Total Termination",
     id: 22,
     cost: new Decimal(1.5e14),
     formatCost: x => format(x, 1),
-    requirement: () => `저주받은 글리프를 최소 ${formatInt(4)}개 장착하고 Effarig의 현실에서
-      반물질 ${format("1e150000000000")} 도달`,
+    requirement: () => `Reach ${format("1e150000000000")} antimatter in Effarig's Reality with
+      at least ${formatInt(4)} Cursed Glyphs equipped`,
     // Note: 4 cursed glyphs is -12 glyph count, but equipping a positive glyph in the last slot is allowed
     hasFailed: () => !Effarig.isRunning || player.requirementChecks.reality.maxGlyphs > -10,
     checkRequirement: () => Effarig.isRunning && player.requirementChecks.reality.maxGlyphs < -10 &&
       Currency.antimatter.value.add(1).log10().gte(1.5e11),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `모든 글리프 희생 총량이 ${format(1e100)}으로 증가`,
+    description: () => `All Glyph Sacrifice totals are increased to ${format(1e100)}`,
     effect: () => player.disablePostReality ? DC.D0 : new Decimal(1e100),
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.totalTermination.canBeApplied
   },
   {
-    name: "평면 정화",
+    name: "Planar Purification",
     id: 23,
     cost: new Decimal(6e14),
-    requirement: () => `글리프를 최대 ${formatInt(0)}개 장착하고 Ra의 현실에서
-      글리프 레벨 ${formatInt(20000)} 도달`,
+    requirement: () => `Reach Glyph level ${formatInt(20000)} in Ra's Reality with
+      at most ${formatInt(0)} Glyphs equipped`,
     hasFailed: () => !Ra.isRunning || player.requirementChecks.reality.maxGlyphs > 0,
     checkRequirement: () => Ra.isRunning && player.requirementChecks.reality.maxGlyphs <= 0 &&
       gainedGlyphLevel().actualLevel.gte(20000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: "테서랙트 수에 따라 무료 차원 가속 수 증가",
+    description: "Increase free Dimboost count based on Tesseract count",
     effect: () => player.disablePostReality ? 1 : Math.floor(0.25 * Math.pow(Tesseracts.effectiveCount, 2)),
     formatEffect: value => `${formatX(value)}`,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.planarPurification.canBeApplied
   },
   {
-    name: "절대 무효화",
+    name: "Absolute Annulment",
     id: 24,
     cost: new Decimal(6e14),
     // We unfortunately don't have the UI space to be more descriptive on this button without causing text overflow,
     // so hopefully the additional modals (from the upgrade lock) will mostly communicate the idea that this is under
     // the same conditions as hard V's Post-destination
-    requirement: () => `블랙홀을 완전히 반전시킨 채 Ra의 현실에서
-      반물질 은하 ${formatInt(13000)}개 보유`,
+    requirement: () => `Have ${formatInt(13000)} Antimatter Galaxies in Ra's Reality
+      with a fully inverted Black Hole`,
     hasFailed: () => !Ra.isRunning || player.requirementChecks.reality.slowestBH > 1e-300,
     checkRequirement: () => Ra.isRunning && player.requirementChecks.reality.slowestBH <= 1e-300 &&
       player.galaxies.gte(13000),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
     // Three locking events: uninvert, discharge, and entering (but not auto-completing) EC12
-    description: "특이점 수에 따라 무료 차원 가속의 성능 증가",
+    description: "Increase free Dimboost strength based on Singularity count",
     effect: () => player.disablePostReality ? DC.D1 : Decimal.pow(player.celestials.laitela.singularities, 300),
     formatEffect: value => `${formatX(value, 2, 1)}`,
     isDisabledInDoomed: () => !PelleImaginaryUpgrade.absoluteAnnulment.canBeApplied
   },
   {
-    name: "편재하는 소멸",
+    name: "Omnipresent Obliteration",
     id: 25,
     cost: new Decimal(1.6e15),
     formatCost: x => format(x, 1),
-    requirement: () => `모든 차원을 비활성화하고 빈 글리프 슬롯을 최소 ${formatInt(4)}개 남긴 채
-      Lai'tela의 현실에서 현실 도달`,
+    requirement: () => `Reach Reality in Lai'tela's Reality with all Dimensions disabled and
+      at least ${formatInt(4)} empty Glyph slots`,
     hasFailed: () => !Laitela.isRunning || Laitela.maxAllowedDimension !== 0 ||
       Glyphs.activeWithoutCompanion.length > 1,
     checkRequirement: () => Laitela.isRunning && Laitela.maxAllowedDimension === 0 &&
       Glyphs.activeWithoutCompanion.length <= 1 && TimeStudy.reality.isBought,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     canLock: true,
-    lockEvent: "동반자 이외의 글리프를 추가 장착",
-    description: "반물질의 셀레스티얼 Pelle 해금",
+    lockEvent: "equip another non-Companion Glyph",
+    description: "Unlock Pelle, Celestial of Antimatter",
   },
   {
-    name: "특이점 비축",
+    name: "Singularity Stockpile",
     id: 26,
     cost: new Decimal(1e50),
-    requirement: () => `특이점 ${format(DC.E100, 2)}개 도달`,
+    requirement: () => `Reach ${format(DC.E100, 2)} Singularities`,
     hasFailed: () => false,
     checkRequirement: () => Currency.singularities.value.gte(1e100),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `제5 암흑 물질 차원을 해금하고 암흑 물질 최대치를 ${formatPostBreak("1e1000")}으로 증가`,
+    description: () => `Unlock the 5th Dark Matter Dimension, raise Dark Matter cap to ${formatPostBreak("1e1000")}`,
   },
   {
-    name: "긴급한 멸종",
+    name: "Exigent Extinction",
     id: 27,
     cost: new Decimal(1e100),
-    requirement: () => `Pelle에서 글리프를 한 번도 장착하지 않고 반물질 ${format(DC.E9E15)} 도달`,
+    requirement: () => `Reach ${format(DC.E9E15)} Antimatter in Pelle without ever equipping Glyphs`,
     hasFailed: () => !Pelle.isDoomed || player.requirementChecks.endgame.noGlyphsDoomed === false,
     checkRequirement: () => Currency.antimatter.value.add(1).log10().gte(9e15) && Pelle.isDoomed &&
       player.requirementChecks.endgame.noGlyphsDoomed === true,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `제6 암흑 물질 차원을 해금하고 암흑 물질 최대치를 ${formatPostBreak("1e4000")}으로 증가`,
+    description: () => `Unlock the 6th Dark Matter Dimension, raise Dark Matter cap to ${formatPostBreak("1e4000")}`,
   },
   {
-    name: "연금술적 소멸",
+    name: "Alchemical Annihilation",
     id: 28,
     cost: new Decimal(1e150),
-    requirement: () => `연금술 자원을 하나도 보유하지 않고 Pelle 해금`,
+    requirement: () => `Unlock Pelle without having any Alchemy Resources`,
     hasFailed: () => player.celestials.ra.alchemy[0].amount > 0 ||
       player.celestials.ra.alchemy[1].amount > 0 ||
       player.celestials.ra.alchemy[2].amount > 0 ||
@@ -384,31 +384,31 @@ export const imaginaryUpgrades = [
       player.celestials.ra.alchemy[4].amount === 0 &&
       player.celestials.ra.alchemy[5].amount === 0,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `제7 암흑 물질 차원을 해금하고 암흑 물질 최대치를 ${formatPostBreak("1e20000")}으로 증가`,
+    description: () => `Unlock the 7th Dark Matter Dimension, raise Dark Matter cap to ${formatPostBreak("1e20000")}`,
   },
   {
-    name: "은하 학살",
+    name: "Galactic Genocide",
     id: 29,
     cost: new Decimal(1e200),
-    requirement: () => `모든 종류의 은하 총 ${format(1e75, 2, 2)}개 보유`,
+    requirement: () => `Have a total of ${format(1e75, 2, 2)} Galaxies`,
     hasFailed: () => false,
     checkRequirement: () => GalacticPowers.galacticAscension.isUnlocked ? Replicanti.galaxies.total.max(1).times(player.galaxies.max(1)).times(
       player.dilation.totalTachyonGalaxies.max(1)).times(GalacticPower.freeGalaxies.max(1)).times(GalaxyGenerator.galaxies.max(1)).gte(1e75) :
       Replicanti.galaxies.total.add(player.galaxies).add(player.dilation.totalTachyonGalaxies).add(GalacticPower.freeGalaxies).add(GalaxyGenerator.galaxies).gte(1e75),
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
-    description: () => `제8 암흑 물질 차원을 해금하고 암흑 물질 최대치를 ${formatPostBreak("1e100000")}으로 증가`,
+    description: () => `Unlock the 8th Dark Matter Dimension, raise Dark Matter cap to ${formatPostBreak("1e100000")}`,
   },
   {
-    name: "시작의 개시",
+    name: "Inception Initiation",
     id: 30,
     cost: DC.NUMMAX,
-    requirement: () => `Pelle의 모든 약화와 스트라이크 비활성화`,
+    requirement: () => `Disable all Nerfs and Strikes in Pelle`,
     hasFailed: () => !PelleStrikeUpgrade.pelleStrike1.isAvailableForPurchase,
     checkRequirement: () => PelleStrikeUpgrade.all.filter(u => u.canBeApplied).length >= 5,
     checkEvent: GAME_EVENT.GAME_TICK_AFTER,
     description: () => {
-      if (ImaginaryUpgrade(30).isBought) return "어둠의 셀레스티얼 Alpha 해금";
-      return "???의 셀레스티얼 ??? 해금";
+      if (ImaginaryUpgrade(30).isBought) return "Unlock Alpha, Celestial of Darkness";
+      return "Unlock ???, Celestial of ???";
     },
   },
 ];

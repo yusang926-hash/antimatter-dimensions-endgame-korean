@@ -33,7 +33,7 @@ class AcceleratorMilestoneState extends GameMechanicState {
   }
 
   get formattedEffect() {
-    if (this.canBeApplied) return this.config.formatEffect(this.effectValue);
+    if (this.canBeApplied && this.config.formatEffect) return this.config.formatEffect(this.effectValue);
     return false;
   }
 }
@@ -132,7 +132,7 @@ class AcceleratorState extends GameMechanicState {
 
   toggle() {
     const active = Accelerators.all.filter(a => a.isActive).length;
-    if (!this.isActive && active === 1) GameUI.notify.error(`가속기는 동시에 1개만 활성화할 수 있습니다!`);
+    if (!this.isActive && active === 1) GameUI.notify.error(`You can only have 1 Accelerator active at the same time!`);
     else this.accelerator.active = !this.accelerator.active;
   }
 
@@ -147,7 +147,7 @@ class AcceleratorState extends GameMechanicState {
       return;
     }
     if (!this.isActive || this.isMaxed) return;
-    if (Pelle.isDoomed && this.config.key === "potency") return;
+    if (Pelle.isDoomed && this.name === "Potency Accelerator") return;
 
     // Don't drain resources if you only have 1 of it.
     if (this.fillCurrency.value.lte(1)) return;
@@ -278,6 +278,7 @@ class PowerCoreState extends GameMechanicState {
 LHC.powerCores = new PowerCoreState();
 
 export function enterTheVoid() {
+  if (player.endgame.overcharge.isRunning) return;
   player.disablePostReality = true;
   Endgame.resetNoReward();
   disChargeAllPerkUpgrades();
@@ -321,6 +322,7 @@ export function exitTheVoid() {
 };
 
 export function enterNullifiedVoid() {
+  if (player.endgame.overcharge.isRunning) return;
   Endgame.resetNoReward();
   player.endgame.largeHadronCollider.void.isRunning = true;
 };
