@@ -81,8 +81,8 @@ export default {
       return `별 파워 ${format(this.nextGeneration, 2, 2)}에서 새로운 별 파워 보상을 얻습니다`;
     },
     starTexts() {
-      const arr = [];
-      const starName = ["붉은", "주황", "노란", "초록", "파란", "보라", "흰", "검은", "회색"];
+      let arr = [];
+      let starName = ["붉은", "주황", "노란", "초록", "파란", "보라", "흰", "검은", "회색"];
       for (let t = 0; t < 9; t++) {
         if (Ethereal.starGeneration(t).neq(0)) {
           arr.push(`별 파워가 현재 초당 ${formatDecimalPercents(this.starGen[t], 2)}만큼의 대기 중인 ${starName[t]} 별을 생성하고 있습니다`);
@@ -109,7 +109,7 @@ export default {
       this.starPower.copyFrom(Ethereal.starPower);
       this.starPowerPerSecond.copyFrom(getStarPowerGainPerSecond());
       this.starBoost.copyFrom(Ethereal.allStarBoost);
-      this.nextGeneration.copyFrom(Ethereal.nextGeneration ?? new Decimal(Infinity));
+      this.nextGeneration.copyFrom(!Ethereal.nextGeneration ? new Decimal(Infinity) : Ethereal.nextGeneration);
       this.allGenerationsUnlocked = this.nextGeneration.eq(Infinity);
       this.starGen = [];
       for (let t = 0; t < 9; t++) {
@@ -281,9 +281,9 @@ export default {
   font-size: 3rem;
   font-weight: bold;
   background: linear-gradient(90deg, cyan, blue, cyan, blue, cyan, blue, cyan);
-  text-shadow: 0 0 1.5rem #0000ff;
-  background-clip: text;
   background-size: 300% 100%;
+  background-clip: text;
+  text-shadow: 0 0 1.5rem #0000ff;
   animation: a-ethereal-gradient-cycle 5s linear infinite;
 
   -webkit-text-fill-color: transparent;
@@ -294,9 +294,15 @@ export default {
 }
 
 @keyframes a-ethereal-gradient-cycle {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 50% 50%; }
-  100% { background-position: 100% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
 }
 
 @keyframes a-ethereal-text-glow {

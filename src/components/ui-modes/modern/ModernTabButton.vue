@@ -19,7 +19,7 @@ export default {
       showSubtabs: false,
       hasNotification: false,
       tabName: "",
-      uiClass: "",
+      uiClass: ""
     };
   },
   computed: {
@@ -42,9 +42,7 @@ export default {
       this.subtabVisibilities = this.tab.subtabs.map(x => x.isAvailable);
       this.showSubtabs = this.isAvailable && this.subtabVisibilities.length >= 1;
       this.hasNotification = this.tab.hasNotification;
-      this.uiClass = typeof this.tab.config.UIClass === "function"
-        ? this.tab.config.UIClass()
-        : this.tab.config.UIClass;
+      this.uiClass = (typeof this.tab.config.UIClass === "function") ? this.tab.config.UIClass() : this.tab.config.UIClass;
       if (this.tabPosition < Pelle.endTabNames.length) {
         this.tabName = Pelle.transitionText(
           this.tab.name,
@@ -61,7 +59,7 @@ export default {
   },
 };
 </script>
-
+  
 <template>
   <div
     v-if="!isHidden && isAvailable"

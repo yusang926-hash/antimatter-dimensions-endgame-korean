@@ -466,14 +466,13 @@ export const ReplicantiUpgrade = {
         costGain = costGain.times(Decimal.pow(this.costIncrease, Decimal.pow(this.costExponent, affordableAboveThreshold)));
       }
       this.baseCost = costGain;
-      this.value = this.decimalNearestPercent(N.times(0.01).add(this.value)).min(this.cap);
+      this.value = this.decimalNearestPercent(N.times(0.01).add(this.value)).min(this.cap);;
     }
 
     // Rounding errors suck
     nearestPercent(x) {
       return Math.round(100 * x) / 100;
     }
-
     decimalNearestPercent(x) {
       return Decimal.round(x.times(100)).div(100);
     }
@@ -707,7 +706,7 @@ export const ReplicantiUpgrade = {
     }
 
     baseCostAfterCount(countNum) {
-      const count = new Decimal(countNum);
+      let count = new Decimal(countNum);
       const logBase = 170;
       const logBaseIncrease = EternityChallenge(6).isRunning ? 2 : 25;
       const logCostScaling = EternityChallenge(6).isRunning ? 2 : 5;
@@ -721,8 +720,7 @@ export const ReplicantiUpgrade = {
         // So, the difference between successive scales goes 5, 5, 5, 255, 55, 55, ...
         const extraIncrements = 5;
         const numDistant = count.sub(distantReplicatedGalaxyStart);
-        logCost = logCost.add(new Decimal(logDistantScaling).times(numDistant)
-          .times(numDistant.add(2 * extraIncrements).sub(1)).div(2));
+        logCost = logCost.add(new Decimal(logDistantScaling).times(numDistant).times(numDistant.add(2 * extraIncrements).sub(1)).div(2));
       }
       if (count.gt(remoteReplicatedGalaxyStart)) {
         const logRemoteScaling = 5;

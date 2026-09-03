@@ -23,9 +23,8 @@ export default {
     update() {
       this.isDarker = Alpha.isRunning;
       this.hasSeenIntro = player.hasSeenIntro;
-      if (!this.hasSeenIntro) this.opacity = 1.1;
-      else if (this.isDarker) this.opacity = player.options.brightAlpha ? 0.2 : 0.5;
-      else this.opacity = (GameEnd.endState - END_STATE_MARKERS.FADE_AWAY) / 2;
+      this.opacity = !this.hasSeenIntro ? 1.1 :
+        (this.isDarker ? (player.options.brightAlpha ? 0.2 : 0.5) : (GameEnd.endState - END_STATE_MARKERS.FADE_AWAY) / 2);
       this.forceStars = player.introTick > 35000 && player.introTick <= 45000;
       this.forceDark = player.introTick > 45000 && player.introTick <= 60000;
     }

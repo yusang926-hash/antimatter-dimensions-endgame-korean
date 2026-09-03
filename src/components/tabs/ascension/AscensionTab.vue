@@ -117,7 +117,7 @@ export default {
       if (this.isDoomed) return;
       if (this.isRunning) {
         exitOvercharge();
-        const pendEnergy = [null, "bi", "eter", "chall", "ts"][this.currentLevel];
+        let pendEnergy = [null, "bi", "eter", "chall", "ts"][this.currentLevel];
         player.endgame.overcharge.completions[pendEnergy] += this.pending;
         return;
       }
@@ -174,8 +174,8 @@ export default {
     <br>
     <br>
     <div
-      v-if="hasOvercharge"
       class="c-overcharge-position"
+      v-if="hasOvercharge"
     >
       <div
         :class="runButtonOuterClass"
@@ -193,8 +193,8 @@ export default {
     </div>
     <br>
     <div
-      v-if="hasOvercharge"
       class="c-subtab-option-container"
+      v-if="hasOvercharge"
     >
       <PrimaryButton
         class="o-primary-btn--subtab-option"
@@ -240,6 +240,7 @@ export default {
   background-size: 300% 100%;
   background-clip: text;
   animation: a-ascension-description-cycle 5s linear infinite;
+
   -webkit-text-fill-color: transparent;
 }
 

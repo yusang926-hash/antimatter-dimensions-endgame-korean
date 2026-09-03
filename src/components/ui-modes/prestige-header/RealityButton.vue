@@ -61,7 +61,7 @@ export default {
       return quantify("유물 파편", this.shardsGained, 2);
     },
     warpMessage() {
-      return "Pelle의 영역에 진입";
+      return false ? "현실을 저주하기" : "Pelle의 영역에 진입";
     },
     classObject() {
       return {
@@ -76,7 +76,7 @@ export default {
   methods: {
     percentToNextGlyphLevelText() {
       const glyphState = getGlyphLevelInputs();
-      const level = glyphState.actualLevel;
+      let level = glyphState.actualLevel;
       const decimalPoints = this.glyphLevel.gt(1000) ? 0 : 1;
       return `${formatDecimalPercents(Decimal.min(((level.sub(Decimal.floor(level)))), 0.999), decimalPoints)}`;
     },
