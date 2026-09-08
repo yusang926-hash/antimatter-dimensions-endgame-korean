@@ -218,7 +218,7 @@ export const normalTimeStudies = [
     requirement: [82],
     reqType: TS_REQUIREMENT_TYPE.AT_LEAST_ONE,
     description: "무한 차원이 가장 빠른 영원 달성 기록에 따라서 증폭된다.",
-    effect: () => DC.D2.pow(new Decimal(60).div(Time.bestEternity.totalSeconds)),
+    effect: () => DC.D2.pow(new Decimal(60).div(Time.bestEternityRealTime.totalSeconds)),
     cap: () => Alpha.isDestroyed ? DC.BEMAX : DC.C2P30,
     formatEffect: value => formatX(value, 2, 1)
   },

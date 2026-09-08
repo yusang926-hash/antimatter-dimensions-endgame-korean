@@ -26,16 +26,16 @@
       "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
     "src/components/modals/InformationModal.vue": {
-      "beforeContentSha256": "c56c15d5a4ffa4180359602ed9802780654229e32c91a7fe857a662764c54287",
-      "afterContentSha256": "17cdba24a2fadbb8467edddaf9b0aa39b44d10d6deb27252d621a2c6d1b5bb5c",
-      "reason": "정보 모달의 한국어판 기준 버전만 Endgame v1.2.0으로 갱신하며 링크와 동작은 유지",
-      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+      "beforeContentSha256": "17cdba24a2fadbb8467edddaf9b0aa39b44d10d6deb27252d621a2c6d1b5bb5c",
+      "afterContentSha256": "e280b4b12d91fcf5f62bc6652cbff82ebe25fb27d861d1861881e99fd19c8976",
+      "reason": "한국어판 기준 버전 v1.2-patch-8 및 작은 업데이트 날짜 2026-09-08을 표시; 게임 로직 변경 없음",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
     },
     "src/components/tabs/celestial-dimensions/ModernCelestialDimensionTab.vue": {
-      "beforeContentSha256": "da710da376bdc073ec1614b520714019285225360b8ef5caeaa212ad9fee0711",
-      "afterContentSha256": "73caf8f9f1814331f62ef8c232e6856e4ed5c1c1051e2d2b4e4d25f00d40659d",
-      "reason": "한국어 어순과 무복수형 표시에 맞춰 문장을 재배치하며 수치·조건·구매 로직은 유지",
-      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+      "beforeContentSha256": "73caf8f9f1814331f62ef8c232e6856e4ed5c1c1051e2d2b4e4d25f00d40659d",
+      "afterContentSha256": "b34cf24c9d6269fdbcd94ce0f0367c20f94e9e11806d9724b5c4a370491f83e6",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
     },
     "src/components/tabs/endgame/ExpansionPacksContainer.vue": {
       "beforeContentSha256": "27f1a2253566d34cb3c24db12a5628824bd1d67f090385ff051a0513756c9cc6",
@@ -102,6 +102,30 @@
       "afterContentSha256": "e14304b79a7ab4fb53ff135ed2f6a9e0bf148c8f14abc2be265be531f89ef716",
       "reason": "번역 DB와 저장 키를 분리하고 구 한국어 저장을 보존한 채 v106 호환 마이그레이션을 한 번 실행",
       "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/core/celestials/pelle/galaxy-generator.js": {
+      "beforeContentSha256": "14dc92194dda2e76116f1a147f9214d7467478c5a5f6d34f1652979c091c02be",
+      "afterContentSha256": "75f1d4af7f6bb518eea64154493f4fd9a0c5f0a668ac2cb9c0be44c6609a118e",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/celestials/teresa.js": {
+      "beforeContentSha256": "a8f2f6ee9121c35ca97425b50cabad495c1eb453b842625a0501075b916f218f",
+      "afterContentSha256": "73c7d07aac81c4fcfc76be8aa790154e0de5a96f94cbc66d934b004e83246c36",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/reality.js": {
+      "beforeContentSha256": "000df2143ba94c2f76895777e62ec04dfd4c8bb58bc13b3502b703c8d70822da",
+      "afterContentSha256": "9f61cf73e8d283d2c6d7dba7610fcfedbb735008741abdc658b3a6e627345b43",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/secret-formula/endgame/expansion-packs.js": {
+      "beforeContentSha256": "6f77dd90db9fa2592b51ba0680137db1eeea62a0decd97829d47d3ab5bbae8cf",
+      "afterContentSha256": "d2d46e1fd064d935e609ae10afdf7761a80f57d9e679b680fda04f4d9b27b335",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
     }
   },
   "historicalStructureDiff": {
@@ -143,10 +167,10 @@
       "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
     "src/components/tabs/celestial-dimensions/ModernCelestialDimensionTab.vue": {
-      "beforeCanonicalSha256": "74ed6c18f3925f8f7b6746961e1b4f591528bd474135d12afc904c8aa8c25503",
-      "afterCanonicalSha256": "5ca6d6a7b8ab9d725b7dacb075656843f026b31d49907623a98db8c0b534f5f6",
-      "reason": "한국어 어순과 무복수형 표시에 필요한 템플릿 재배치만 적용하며 계산과 구매 로직은 유지",
-      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+      "beforeCanonicalSha256": "5ca6d6a7b8ab9d725b7dacb075656843f026b31d49907623a98db8c0b534f5f6",
+      "afterCanonicalSha256": "ca52ec488507a3fc392c77d7fccb7dd5ebb873e567fa601d1c8c5ea346716410",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
     },
     "src/components/tabs/celestial-laitela/LaitelaTab.vue": {
       "beforeCanonicalSha256": "4d55f28921c111c760eef574ec222ad4d4d255aabb03d033f4cc56981bdcae41",
@@ -203,10 +227,10 @@
       "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
     "src/core/endgame.js": {
-      "beforeCanonicalSha256": "587eecd32facfa1eb64de4863e265dc56c865e12eb8f5e49bfd9c3a11a316cc4",
-      "afterCanonicalSha256": "624c4dbfbf98f6d17728d325d71e1f485e90ff8457f1519ec00c38b4a4955870",
-      "reason": "v1.2 최근 현실 기록의 여덟 필드 Decimal tuple에 reset 초기값을 맞춤",
-      "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+      "beforeCanonicalSha256": "624c4dbfbf98f6d17728d325d71e1f485e90ff8457f1519ec00c38b4a4955870",
+      "afterCanonicalSha256": "29881dc3a43fa31b15cf737d5bbc044b07c42813e287ef8b57fb2bdbf86becde",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
     },
     "src/core/event-hub.js": {
       "beforeCanonicalSha256": "0fbc11478df270ea17d3a629b6003fbb7ba3e43284d8f3ccd5f47e4073c1f52d",
@@ -255,6 +279,78 @@
       "afterCanonicalSha256": "89d2a37b17ae8d18365d92bf7c2a91b1ea89baf239dae8f98a73cf7e6e1c8ea8",
       "reason": "오프라인·완료·최근 기록·진단의 사용자 표시 문자열만 한국어화하며 게임 루프와 수식은 유지",
       "removeAfter": "이 감사를 마친 Endgame v1.2 한국어 오버레이 커밋이 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
+    "src/components/modals/InformationModal.vue": {
+      "beforeCanonicalSha256": "4e14fe3e7aa338c40f32331ef6586a2e679047dd7f1f1cde60675983849045b8",
+      "afterCanonicalSha256": "b26aafc4af58fb856a85c3621b11cb789184de00ce55005d82e13af8457025dc",
+      "reason": "한국어판 기준 버전 v1.2-patch-8 및 작은 업데이트 날짜 2026-09-08을 표시; 게임 로직 변경 없음",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/autobuyers/celestial-crunch-autobuyer.js": {
+      "beforeCanonicalSha256": "c002c3a1bc24c3e33da0b933b271b6b02f0357f60b02c61d4777a2c75643ad49",
+      "afterCanonicalSha256": "553cce89316516a786bafb0b362c9a76c21abb1c4de248ecb2ed53ed5504ff29",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/autobuyers/celestial-dimboost-autobuyer.js": {
+      "beforeCanonicalSha256": "162f6fc9b5c8c476abbaa4f546759c15a51b3700fdaf03f4d2b289c7ce266210",
+      "afterCanonicalSha256": "3706461cf0fc8ee8f7b5c84a1e4f77fab28ea525598701560f656e1d8f53e74d",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/autobuyers/celestial-eternity-autobuyer.js": {
+      "beforeCanonicalSha256": "f6a8edf353ea1c83340f319ed2924faff3c26a0675f35340c699fabbe4bcd989",
+      "afterCanonicalSha256": "cec39b14938c2f8c9210812c041945815c2c1e53d7c980921ce6fb10988da235",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/autobuyers/celestial-galaxy-autobuyer.js": {
+      "beforeCanonicalSha256": "73ce2110b7ed17861f603e51c2975c6661369cf3c45262aba63f3cce23880e5a",
+      "afterCanonicalSha256": "0d4a21ec9b3993131b3e0cf544c05c3139e0f81f87b99e6f7b648ee9b6f2b828",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/autobuyers/singularity-autobuyer.js": {
+      "beforeCanonicalSha256": "47d6a953b3c715e263d3b5f37df45832adbb447827f9f07c9c43655f7a6ac897",
+      "afterCanonicalSha256": "d72e4127efd57a01804b11ee8d803b9fdb4ef84ab511b62301afb5504ac31805",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/celestials/laitela/singularity.js": {
+      "beforeCanonicalSha256": "41d87a010f6315414277fdfc3ae7b4e7517e91817071869591b3c78d3cfb817a",
+      "afterCanonicalSha256": "288c58ead8fb50a093f2632fb10b89dcc845af6215de0af5900d5c2554d1fab9",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/celestials/pelle/galaxy-generator.js": {
+      "beforeCanonicalSha256": "696d7abf405c6c0fd20665c5458281ffce32ccd6aa361c8e24391da9ee9b2323",
+      "afterCanonicalSha256": "324dc85fde4eddceaf253c57ea2a186c99b3baad1e9376955af0476b64ad3ebe",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/celestials/teresa.js": {
+      "beforeCanonicalSha256": "b61f3841565d308cf291526d2bdea8f1a9d49465e17c8da2c321ddc6cfb8f622",
+      "afterCanonicalSha256": "20e95362d5dcbc30d91e082a9bf1a7b88fc6706f5141eb8d31fbb631722b44d2",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/reality.js": {
+      "beforeCanonicalSha256": "84f39a018788e38c44422628df2f85a963e50035877151d82b4c44b3270db8ff",
+      "afterCanonicalSha256": "9a407abc788f2d50ad7057fa47ac9c903a500500a6e9a2de41cf5d2d41bfb0a0",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/secret-formula/endgame/expansion-packs.js": {
+      "beforeCanonicalSha256": "ef81c8fed003f248e6c2fd29a88d9d9e8ea1130e52630211ab64f8c64e03137f",
+      "afterCanonicalSha256": "8695201ff585c96ef9cb82242bf09f6b7ea0b5098c20c22c07e76fea9b591fbb",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
+    },
+    "src/core/secret-formula/eternity/time-studies/normal-time-studies.js": {
+      "beforeCanonicalSha256": "59ab8eae7cd6e09dfee23d531ce74fabbdf4feacc745e02bb709a5cea62e6bdf",
+      "afterCanonicalSha256": "dac852f4144ea39aad2049dd7d6c8e214c361718daf00dc9cb3a0a84f53e9148",
+      "reason": "Endgame 정본 796a911c7..b7d4bfd2f의 공식 패치와 동일한 변경만 반영; 기존 한국어·세이브 호환 코드를 보존",
+      "removeAfter": "v1.2-patch-8 배포 검증을 완료하고 LOCALIZATION_AUDIT_BASE를 해당 배포 커밋까지 갱신한 뒤"
     }
   }
 }

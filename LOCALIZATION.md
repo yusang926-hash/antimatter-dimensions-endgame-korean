@@ -8,7 +8,7 @@ Endgame 정본의 의미를 유지합니다.
 
 - Endgame 비교 기준
   - 저장소: <https://github.com/Supersonic-Seven/AntimatterDimensionsEndgameUpdate>
-  - 리비전: `796a911c74a8e55e345e2e15480f31ed5b590237` (Endgame Update v1.2.0)
+  - 리비전: `b7d4bfd2fbd66a3c4f8b73a6a9a7f79536165745` (Endgame Update v1.2-patch-8, 한국어 패치 반영일 2026-09-08)
 - ADKorean 번역 참고 기준
   - 저장소: <https://github.com/Jihuu621/ADKorean>
   - 영문 기준: `7767d453ee01d1b2f906dc98e90078140c0bed98`
@@ -31,6 +31,15 @@ Endgame 정본의 의미를 유지합니다.
 Endgame v1.1 patch-5 기준 `05f31bbeb`부터 v1.2 기준 `796a911c7`까지의 변경 경로 114개를
 검토했습니다. 런타임에서 참조하지 않는 크레딧 음원 2개를 제외한 코드·UI·스타일·이미지 112개 경로를
 반영하고, 기존 한국어판의 저장 호환 마이그레이션과 내부 키를 보존했습니다.
+
+## v1.2-patch-8 동기화
+
+`796a911c7..b7d4bfd2f`의 변경 파일 13개를 모두 반영했습니다. 게임 로직 변경은 원본 패치와 동일하며,
+기존 한국어 번역과 저장 호환 처리를 유지했습니다. Teresa 확장팩의 퍼크 상점 유지 설명을 번역하고,
+정보 창 버전 옆에 한국어 패치 반영일을 작게 표시합니다.
+
+CI는 직전 검증 완료 배포 `b23a2b07ea79764bcdb739ca453fff22ba2f4397`을 고정 감사 기준으로 사용하며,
+대조한 원본 수정과 표시 변경만 정확한 구조·보호 토큰 해시로 허용합니다.
 
 ## 검증
 

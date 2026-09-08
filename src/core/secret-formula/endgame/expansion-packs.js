@@ -6,6 +6,7 @@ export const expansionPacks = {
     get description() {
       return ` Teresa의 용기 상한을 제거합니다.
         이제 Teresa의 용기가 리얼리티 머신 획득량뿐 아니라 리얼리티 머신 상한에도 영향을 줍니다.
+        엔드게임 시 퍼크 상점 업그레이드를 유지합니다.
         Teresa 탭에서 충전된 퍼크 업그레이드를 해금합니다.
         리얼리티 머신을 Teresa에게 자동으로 붓습니다.`;
     },
@@ -22,7 +23,7 @@ export const expansionPacks = {
         글리프 연금술 상한의 기본값이 역대 최고 글리프 레벨의 삼분의 일로 증가합니다(현재: ${formatHybridLarge(player.records.bestEndgame.glyphLevel.div(3), 3)}).
         엔드게임 시 연금술 자원을 유지하며, 현실 글리프를 만들어도 현실 자원이 소모되지 않습니다.
         Effarig의 상점이 완료된 상태로 시작합니다.
-        Effarig의 현실 각 단계가 가장 빠른 엔드게임 시간의 십분의 일이 지나면 자동으로 완료됩니다(현재 단계당 ${TimeSpan.fromMilliseconds(new Decimal(player.records.bestEndgame.realTime).times(10)).toStringShort()}).`;
+        Effarig의 현실 각 단계가 가장 빠른 엔드게임 시간의 십분의 일이 지나면 자동으로 완료됩니다(현재 단계당 ${TimeSpan.fromMilliseconds(new Decimal(player.records.bestEndgame.realTime).div(10)).toStringShort()}).`;
     },
     cost: Decimal.pow(10, 1e50),
     formatCost: value => formatPostBreak(value, 2, 0)

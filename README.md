@@ -6,7 +6,7 @@ GitHub 포크를 기반으로 SameMa가 번역하고 유지보수하는 비공�
 
 - 플레이하기: <https://gyeol0710.github.io/antimatter-dimensions-endgame-korean/>
 - 한국어 패치 소스: <https://github.com/gyeol0710/antimatter-dimensions-endgame-korean>
-- 기준 버전: Endgame Update v1.2.0
+- 기준 버전: Endgame Update v1.2-patch-8 · 한국어 패치 업데이트: 2026-09-08
 
 > **스포일러 안내:** 후반부 콘텐츠와 관련된 이름은 `████`로 가렸습니다.
 
