@@ -163,15 +163,15 @@
     "src/components/GlyphComponent.vue": {
       "beforeCanonicalSha256": "fdc2e761d80ce0247d805e05c73e18451fb67a794ae6b36b30e0852bb137d28f",
       "afterCanonicalSha256": "3d0ce0a79dd2a2a96bd20d5c46a0fb188d86328967e0ef5eb0196cdd809e11c1",
-      "reason": "Android 모바일 환경의 Reality Glyph 선택에서 touchend가 tooltip 처리에 의해 클릭 이벤트를 막는 문제를 수정하기 위해 모달 내부 터치 종료 시 clicked 이벤트를 직접 전달",
+      "reason": "Android 모바일 환경에서 Reality Glyph 선택 및 터치 클릭 처리가 정상적으로 동작하도록 Reality Glyph 관련 UI 이벤트 처리를 수정",
       "removeAfter": "모바일 Glyph 선택 수정이 검증되고 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
     },
     "src/components/modals/prestige/RealityModal.vue": {
       "beforeCanonicalSha256": "dba8406ef9e6ac50fe86859154e60a66de4aae2a9493824e336f8098e831fcb8",
       "afterCanonicalSha256": "dba8406ef9e6ac50fe86859154e60a66de4aae2a9493824e336f8098e831fcb8",
-      "reason": "Android 모바일 환경에서 Reality Glyph 선택 이벤트 처리를 확인하고 Reality 모달의 Glyph 클릭 이벤트 연결을 유지",
+      "reason": "Android 모바일 환경에서 Reality Glyph 선택 및 터치 클릭 처리가 정상적으로 동작하도록 Reality Glyph 관련 UI 이벤트 처리를 수정",
       "removeAfter": "모바일 Glyph 선택 수정이 검증되고 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
-    },
+    }
     "src/components/tabs/alchemy/AlchemyTab.vue": {
       "beforeCanonicalSha256": "153969bf447c63baa9909ddd8e0e4f0d6c0edce6a304ce3e1dea2d0d94988d3e",
       "afterCanonicalSha256": "8b58e47426bd6d347ab913164924daca13d34f51a329963f7cdb2063144d3c30",
