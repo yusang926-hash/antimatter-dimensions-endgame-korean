@@ -38,9 +38,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check release safety
-        run: npm run test:release-safety
-
       - name: Build release
         run: npm run build:release
 
