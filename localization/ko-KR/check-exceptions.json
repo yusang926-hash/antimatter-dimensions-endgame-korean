@@ -19,6 +19,12 @@
     "src/core/time.js": "저장·스피드런·이벤트 로그의 날짜 표시를 로컬 시간대의 한국어 숫자 날짜 형식으로 교정 (Endgame v1.2 영문 동기화 기준선에 포함됨)"
   },
   "activeProtectedTokenAllowances": {
+    "src/components/GlyphComponent.vue": {
+      "beforeCanonicalSha256": "fdc2e761d80ce0247d805e05c73e18451fb67a794ae6b36b30e0852bb137d28f",
+      "afterCanonicalSha256": "3d0ce0a79dd2a2a96bd20d5c46a0fb188d86328967e0ef5eb0196cdd809e11c1",
+      "reason": "Android 모바일 환경의 Reality Glyph 선택에서 touchend가 tooltip 처리에 의해 클릭 이벤트를 막는 문제를 수정하기 위해 모달 내부 터치 종료 시 clicked 이벤트를 직접 전달",
+      "removeAfter": "모바일 Glyph 선택 수정이 검증되고 LOCALIZATION_AUDIT_BASE에 포함된 뒤"
+    },
     "public/stylesheets/styles.css": {
       "beforeContentSha256": "8efaf5d873ade8047b70c8762e26076c73aa6d5334aab4be79d461d775792157",
       "afterContentSha256": "70def0a7e6db0ef0560ed7ecd30e9d607c707d3983d23eeb1fb10789945e2c88",
