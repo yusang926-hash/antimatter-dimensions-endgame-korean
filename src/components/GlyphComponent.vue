@@ -748,12 +748,7 @@ export default {
     touchEnd(e) {
       if (this.isInModal) {
         e.preventDefault();
-        e.stopPropagation();
-
-        if (!this.suppressTooltip) {
-          this.$emit("clicked", this.glyph.id);
-        }
-
+        this.$emit("clicked", this.glyph.id);
         this.suppressTooltip = false;
         this.isTouched = false;
         return;
@@ -765,7 +760,10 @@ export default {
       } else if (!this.suppressTooltip) {
         e.preventDefault();
         this.showTooltip();
-        this.moveTooltipTo(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+        this.moveTooltipTo(
+          e.changedTouches[0].clientX,
+          e.changedTouches[0].clientY
+        );
       }
 
       this.suppressTooltip = false;
