@@ -163,7 +163,7 @@ export default {
         :is-in-modal="true"
         :ignore-modified-level="true"
         :show-sacrifice="canSacrifice"
-        @click.native="select(index)"
+        @clicked="select(index)"
       />
     </div>
     <div v-if="!firstReality">
