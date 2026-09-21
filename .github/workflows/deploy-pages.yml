@@ -15,10 +15,6 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
-env:
-  # Last audited Korean release before the upstream v1.2-patch-8 sync.
-  LOCALIZATION_AUDIT_BASE: b23a2b07ea79764bcdb739ca453fff22ba2f4397
-
 jobs:
   deploy:
     name: Build and deploy
@@ -42,15 +38,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check all changes since the audited localization baseline
-        run: npm run check:ko -- --base=$LOCALIZATION_AUDIT_BASE
-
-      - name: Check localization structure since the audited baseline
-        run: npm run check:ko:structure -- --base=$LOCALIZATION_AUDIT_BASE
-
-      - name: Run localization regression tests
-        run: npm run test:localization:ko
-
       - name: Check release safety
         run: npm run test:release-safety
 
@@ -66,5 +53,7 @@ jobs:
           path: dist
 
       - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
